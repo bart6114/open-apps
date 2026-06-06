@@ -1,5 +1,6 @@
 ---
 import type { OpenSourceApp } from "../../data/types";
+import Icon from "../icons/Icon.astro";
 
 interface Props {
   app: OpenSourceApp;
@@ -12,115 +13,121 @@ const label =
   app.labels?.find((l) => l === "new" || l === "hot" || l === "mature") ??
   app.labels?.[0];
 
-const labelClass = label === "new" ? "badge-new" : label === "hot" ? "badge-hot" : label === "mature" ? "badge-mature" : "";
+const labelClass = label === "new"
+  ? "badge-new"
+  : label === "hot"
+    ? "badge-hot"
+    : label === "mature"
+      ? "badge-mature"
+      : "";
 
-const statusLabel = app.status ?? "unknown";
-const statusTone =
-  app.status === "active"
-    ? "text-emerald-700 dark:text-emerald-400"
-    : app.status === "quiet"
-      ? "text-amber-700 dark:text-amber-400"
-      : app.status === "stale" || app.status === "archived"
-        ? "text-ink-500 dark:text-ink-500"
-        : "text-ink-500 dark:text-ink-500";
+// Initials for placeholder logo (first 2 letters of any word in name).
+const initials = app.name
+  .split(/\s+/)
+  .map((w) => w[0])
+  .filter(Boolean)
+  .slice(0, 2)
+  .join("")
+  .toUpperCase();
 
-function formatStars(n?: number) {
-  if (!n) return "0";
-  if (n >= 1000) {
-    const k = (n / 1000).toFixed(n >= 10000 ? 0 : 1);
-    return `${k.replace(/\.0$/, "")}k`;
-  }
-  return String(n);
-}
+// Show up to 3 platforms; overflow as +N.
+const visiblePlatforms = app.platforms.slice(0, 3);
+const platformOverflow = app.platforms.length - visiblePlatforms.length;
 
-function formatAdded(iso?: string) {
-  if (!iso) return null;
-  const d = new Date(iso);
-  const now = new Date();
-  const days = Math.floor(
-    (now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24),
-  );
-  if (days < 1) return "Added today";
-  if (days < 7) return `Added ${days}d ago`;
-  if (days < 30) return `Added ${Math.floor(days / 7)}w ago`;
-  return `Added ${d.toLocaleString("en-US", { month: "short", year: "numeric" })}`;
-}
-
-const addedLabel = formatAdded(app.addedAt);
+// Show up to 3 stack chips (primary + first 2 secondary).
+const allStacks = [app.stack, ...(app.stacks ?? [])].filter(Boolean);
+const visibleStacks = allStacks.slice(0, 3);
+const stackOverflow = allStacks.length - visibleStacks.length;
 ---
 
 <article
-  class="card card-hover group flex h-full flex-col gap-2.5 p-4"
+  class="card card-hover group relative flex h-full flex-col gap-3 p-4"
 >
-  <header class="flex items-start justify-between gap-2">
-    <div class="flex min-w-0 items-center gap-2.5">
+  {/* Top row: logo + name + label badge. Logo is optional —
+      falls back to a clean initials placeholder. */}
+  <header class="flex items-start gap-3">
+    {app.logoUrl ? (
+      <img
+        src={app.logoUrl}
+        alt={`${app.name} logo`}
+        width="40"
+        height="40"
+        loading="lazy"
+        class="h-10 w-10 shrink-0 rounded-md border border-ink-200 object-cover dark:border-ink-800"
+      />
+    ) : (
       <span
         aria-hidden="true"
-        class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-ink-200 bg-ink-50 text-2xs font-semibold text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300"
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-ink-200 bg-ink-50 text-2xs font-semibold text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300"
       >
-        {app.name
-          .split(/\s+/)
-          .map((p) => p[0])
-          .slice(0, 2)
-          .join("")
-          .toUpperCase()}
+        {initials}
       </span>
+    )}
+
+    <div class="flex min-w-0 flex-1 flex-col gap-0.5">
       <h3
-        class="m-0 truncate text-[0.95rem] font-semibold text-ink-900 group-hover:underline dark:text-ink-100"
+        class="m-0 truncate text-[0.9375rem] font-semibold tracking-tight text-ink-900 group-hover:underline dark:text-ink-100"
       >
-        <a href={app.repoUrl} target="_blank" rel="noopener noreferrer" class="text-inherit no-underline">
+        <a
+          href={app.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-inherit no-underline"
+        >
           {app.name}
         </a>
       </h3>
+      <span class="truncate text-2xs text-ink-500 dark:text-ink-400">
+        {app.category}
+      </span>
     </div>
-    {label && <span class={`badge ${labelClass}`}>{label.toUpperCase()}</span>}
+
+    {label && (
+      <span class={`badge ${labelClass} shrink-0`}>
+        {label.toUpperCase()}
+      </span>
+    )}
   </header>
 
+  {/* Description */}
   <p
     class="m-0 line-clamp-2 text-[0.8125rem] leading-relaxed text-ink-500 dark:text-ink-400"
   >
     {app.description}
   </p>
 
+  {/* Platform chips */}
   <div class="flex flex-wrap items-center gap-1.5">
-    <span class="badge">{app.stack}</span>
-    <span class="badge">{app.category}</span>
-    {app.platforms.slice(0, 2).map((p) => <span class="badge">{p}</span>)}
-    {app.platforms.length > 2 && (
-      <span class="badge">+{app.platforms.length - 2}</span>
+    {visiblePlatforms.map((p) => (
+      <span class="chip">
+        <Icon name={p} size={12} />
+        <span>{p}</span>
+      </span>
+    ))}
+    {platformOverflow > 0 && (
+      <span class="chip text-ink-400 dark:text-ink-500">+{platformOverflow}</span>
     )}
   </div>
 
-  <footer
-    class="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-ink-100 pt-2.5 text-2xs text-ink-500 dark:border-ink-900 dark:text-ink-400"
-  >
-    <span class="inline-flex items-center gap-1">
-      <svg
-        viewBox="0 0 16 16"
-        width="11"
-        height="11"
-        aria-hidden="true"
-        fill="currentColor"
-      >
-        <path
-          d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
-        ></path>
-      </svg>
-      <span class="font-mono text-ink-700 dark:text-ink-300">{formatStars(app.stars)}</span>
-    </span>
-    {app.license && (
-      <>
-        <span class="text-ink-300 dark:text-ink-700">·</span>
-        <span class="font-mono">{app.license}</span>
-      </>
+  {/* Stack chips */}
+  <div class="mt-auto flex flex-wrap items-center gap-1.5">
+    {visibleStacks.map((s) => (
+      <span class="chip chip-stack">
+        <Icon name={s} size={12} />
+        <span>{s}</span>
+      </span>
+    ))}
+    {stackOverflow > 0 && (
+      <span class="chip chip-stack text-ink-400 dark:text-ink-500">+{stackOverflow}</span>
     )}
-    <span class="text-ink-300 dark:text-ink-700">·</span>
-    <span class={statusTone}>{statusLabel}</span>
-    {addedLabel && (
-      <>
-        <span class="text-ink-300 dark:text-ink-700">·</span>
-        <span>{addedLabel}</span>
-      </>
-    )}
-  </footer>
+  </div>
 </article>
+
+<style>
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-md border border-ink-200 bg-white px-1.5 py-0.5 text-2xs font-medium text-ink-700 transition-colors dark:border-ink-800 dark:bg-ink-950 dark:text-ink-300;
+  }
+  .chip-stack {
+    @apply bg-ink-50 dark:bg-ink-900/60;
+  }
+</style>

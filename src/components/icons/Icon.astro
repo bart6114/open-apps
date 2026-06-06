@@ -1,0 +1,158 @@
+---
+// Single icon registry. Renders a monochrome SVG by name, using
+// `currentColor` so chips inherit the chip's text color.
+//
+// Add new icons by extending the ICONS map below. Keep paths square
+// (24x24 viewBox) and stroke/fill rules consistent so they line up
+// next to each other in a chip row.
+
+interface IconDef {
+  /** body — a single SVG path or compound <path> markup. Should sit on
+   *  a 24x24 viewBox. Use stroke="currentColor" / fill="currentColor" so
+   *  the icon inherits the chip text color. */
+  body: string;
+  /** true = stroked / outline icon; false = filled / solid icon. */
+  outline: boolean;
+}
+
+const ICONS: Record<string, IconDef> = {
+  // ── Tech stacks ────────────────────────────────────────────────────
+  flutter: {
+    outline: true,
+    body: `<path d="M14.5 2.5 8 9H4l4-4h6.5m0 6.5L9 14l-3-3 6.5-6.5H18l-3.5 3.5m0 6.5L8 21l-3-3 6.5-6.5H18l-3.5 3.5Z" fill="currentColor"/>`,
+  },
+  dart: {
+    outline: true,
+    body: `<path d="M3 3l8.5 8.5L21 2v9L11 21H2v-9l1-1 8 8 1-1-8-8 1-1h6.5L5 4H3Z" fill="currentColor"/>`,
+  },
+  "react-native": {
+    outline: true,
+    body: `<circle cx="12" cy="12" r="1.6" fill="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="currentColor" stroke-width="1"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="currentColor" stroke-width="1" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="currentColor" stroke-width="1" transform="rotate(120 12 12)"/>`,
+  },
+  react: {
+    outline: true,
+    body: `<circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M12 4c-3 0-5 1.5-5 3.5S9 11 12 11s5 .5 5-3.5S15 4 12 4Zm0 16c-3 0-5-1.5-5-3.5S9 13 12 13s5 .5 5 3.5S15 20 12 20Z" fill="none" stroke="currentColor" stroke-width="1"/>`,
+  },
+  kotlin: {
+    outline: true,
+    body: `<path d="M2 2h10L2 12V2Zm10 0h10L2 22h10l10-10V2H12Z" fill="currentColor"/>`,
+  },
+  swift: {
+    outline: true,
+    body: `<path d="M20 4c-2 4-7 9-12 9-3 0-4-2-3-4 0 0 2 1 4 1 4 0 8-3 11-6Zm-9 16c4 0 7-2 7-2s-3-2-7-2-7 1-7 1 3 3 7 3Z" fill="currentColor"/>`,
+  },
+  java: {
+    outline: true,
+    body: `<path d="M9 2c-1 2 0 4 2 5 1 0 2 1 1 2-1 1-3 1-4 0 0 1 1 3 4 3 2 0 4-1 3-3 0-2-3-2-3-4 0-1 1-2 1-3H9Zm6 9c-2 0-4 1-3 3 0 1 2 2 4 2-1 1-2 1-3 0 0 2 2 3 4 3s4-1 4-3c0-2-3-2-3-4 0-1 1-1 1-1h-4Z" fill="currentColor"/>`,
+  },
+  typescript: {
+    outline: true,
+    body: `<rect x="2" y="2" width="20" height="20" rx="2" fill="currentColor"/><path d="M7 8h10v2h-4v8H11v-8H7V8Zm10 5c-1 0-2 0-2 1s1 1 2 1c2 0 3-1 3-2 0-2-4-2-4-3 0-1 1-1 2-1s2 0 2 1h2c0-2-2-3-4-3s-4 1-4 3c0 2 4 2 4 3 0 1-1 0-1 0Z" fill="#fff"/>`,
+  },
+  firebase: {
+    outline: true,
+    body: `<path d="M5 19l-2-3 4-9 1 1-3 11Zm2 0 3-9 2 4-3 5h-2Zm5-1 5-5-3-3-3 3 1 5Zm-1-7 3-7 5 9-3 1-5-3Z" fill="currentColor"/>`,
+  },
+  node: {
+    outline: true,
+    body: `<path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm-1 14.5L7 14v-1.5l4 2.5V16.5Zm5-1.5-4 2.5V15.5l4-2.5V15Z" fill="currentColor"/>`,
+  },
+  python: {
+    outline: true,
+    body: `<path d="M11 2c-3 0-4 1-4 3v3h5v1H5c-2 0-3 2-3 4v2c0 2 1 3 3 3h2v-3c0-2 1-3 3-3h6c2 0 3-1 3-3V5c0-2-1-3-4-3h-4Zm-1 2h2v2h-2V4Z" fill="currentColor"/><path d="M13 22c3 0 4-1 4-3v-3h-5v-1h7c2 0 3-2 3-4V9c0-2-1-3-3-3h-2v3c0 2-1 3-3 3H8c-2 0-3 1-3 3v4c0 2 1 3 4 3h4Zm1-2h-2v-2h2v2Z" fill="currentColor"/>`,
+  },
+  mongodb: {
+    outline: true,
+    body: `<path d="M12 2c-3 4-5 7-5 11 0 4 2 7 5 9 3-2 5-5 5-9 0-4-2-7-5-11Zm0 5c2 3 3 5 3 8 0 1-1 2-3 2s-3-1-3-2c0-3 1-5 3-8Z" fill="currentColor"/>`,
+  },
+  graphql: {
+    outline: true,
+    body: `<path d="M12 2 2 7v10l10 5 10-5V7l-10-5Zm-7 14 2-1v-6L5 10v6Zm9 0 2 1V10l-2-1v6Z" fill="currentColor" opacity=".4"/><path d="M12 2 2 7l3 2 7-2 7 2 3-2-10-5Zm0 5L5 9v6l7 3 7-3V9l-7-2Z" fill="currentColor" opacity=".7"/><path d="M12 2 5 9l4 7 3-3-3-3 3-2 3 2-3 3 3 3 4-7-7-7Z" fill="currentColor"/>`,
+  },
+  tensorflow: {
+    outline: true,
+    body: `<path d="M3 20l9-7 9 7H3Zm9-7V4l-7 6 3 3h4Z" fill="currentColor"/>`,
+  },
+  solidity: {
+    outline: true,
+    body: `<path d="M4 7l4-4 4 4-4 4-4-4Zm8 0 4-4 4 4-4 4-4-4Zm-4 4 4-4 4 4-4 4-4-4Zm-4 4 4-4 4 4-4 4-4-4Zm8 0 4-4 4 4-4 4-4-4Z" fill="currentColor"/>`,
+  },
+  rust: {
+    outline: true,
+    body: `<path d="M12 2a3 3 0 0 0-3 3 3 3 0 0 0 1 2.2V9H8V8a3 3 0 0 0-2-2.8V4h8v1.2A3 3 0 0 0 12 2Zm-4 9v2a3 3 0 0 0-2 2.8V17h12v-1.2A3 3 0 0 0 16 13v-2H8Zm-2 8v3h2v-3H6Zm10 0v3h2v-3h-2Z" fill="currentColor"/>`,
+  },
+  "blockchain-wallet": {
+    outline: true,
+    body: `<path d="M3 6h18v3H3V6Zm0 5h18v8H3v-8Zm14 2v4h2v-4h-2Z" fill="currentColor"/>`,
+  },
+
+  // ── Platforms ──────────────────────────────────────────────────────
+  ios: {
+    outline: true,
+    body: `<path d="M16 4c0 2-1 3-3 3-1-2 1-4 3-3Zm-1 4c2 0 3 1 3 3 0 4-3 9-5 9-1 0-2-1-3-1s-2 1-3 1-3-3-3-7c0-3 2-5 4-5 1 0 2 1 3 1s1-1 4-1Z" fill="currentColor"/>`,
+  },
+  android: {
+    outline: true,
+    body: `<path d="M5 11c0-1 1-2 2-2h10c1 0 2 1 2 2v6H5v-6Zm-1 0v5h2v-5H4Zm14 0v5h2v-5h-2ZM8 8c-1-2-1-3 0-3 1 1 1 1 1 2H8Zm8 0c0-1 0-1 1-2 1 0 1 1 0 3h-1Z" fill="currentColor"/>`,
+  },
+  web: {
+    outline: true,
+    body: `<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.4"/><ellipse cx="12" cy="12" rx="4" ry="9" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.4"/>`,
+  },
+  desktop: {
+    outline: true,
+    body: `<rect x="2" y="4" width="20" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.4"/>`,
+  },
+  macos: {
+    outline: true,
+    body: `<path d="M3 5h18v11H3V5Zm5 13h8M9 19c1 2 5 2 6 0" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="10.5" r="2.5" fill="currentColor"/>`,
+  },
+  windows: {
+    outline: true,
+    body: `<path d="M3 5l8-1v8H3V5Zm0 9h8v7l-8-1v-6Zm9-10l9-1v9h-9V4Zm0 10h9v9l-9-1v-8Z" fill="currentColor"/>`,
+  },
+  linux: {
+    outline: true,
+    body: `<path d="M12 2c-3 0-4 3-4 6 0 2 1 4 1 5l-2 3c-1 1 0 3 1 3l2-1c1 1 1 2 2 2s1-1 2-2l2 1c1 0 2-2 1-3l-2-3c0-1 1-3 1-5 0-3-1-6-4-6Zm-1 4a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm2 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z" fill="currentColor"/>`,
+  },
+  chromeos: {
+    outline: true,
+    body: `<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6" stroke="currentColor" stroke-width="1.4"/>`,
+  },
+  embedded: {
+    outline: true,
+    body: `<rect x="4" y="6" width="16" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="8" y="10" width="8" height="4" fill="currentColor"/><path d="M2 10v4M22 10v4M9 12h6" stroke="currentColor" stroke-width="1.4"/>`,
+  },
+};
+
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+  title?: string;
+}
+
+const { name, size = 14, class: className = "", title } = Astro.props;
+
+// Normalize the name to a lookup key. Case-insensitive, spaces → dash.
+const key = name.toLowerCase().trim().replace(/\s+/g, "-");
+const def = ICONS[key];
+
+// If we don't know the icon, fall back to a small filled dot so the
+// chip still has visual weight. Better than a missing-glyph blank.
+const fallback = `<circle cx="12" cy="12" r="4" fill="currentColor"/>`;
+const body = def?.body ?? fallback;
+const stroke = def?.outline
+  ? `fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"`
+  : `fill="currentColor"`;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  aria-hidden={title ? undefined : "true"}
+  role={title ? "img" : undefined}
+  class={className}
+  set:html={`${title ? `<title>${title}</title>` : ""}<g ${stroke}>${body}</g>`}
+/>
