@@ -11,8 +11,13 @@ const navItems = [
 ];
 const githubUrl =
   "https://github.com/tortuvshin/open-source-flutter-apps";
-const starsBadgeUrl =
-  "https://img.shields.io/github/stars/tortuvshin/open-source-flutter-apps?style=flat&label=stars&color=18181b&labelColor=transparent";
+// Shields badge with no `label=` param so the rendered image is just
+// the number (e.g. "4k"), not "stars 4k". The button context already
+// says "GitHub", so the label is redundant.
+const starsBadgeLight =
+  "https://img.shields.io/github/stars/tortuvshin/open-source-flutter-apps?style=flat&color=18181b";
+const starsBadgeDark =
+  "https://img.shields.io/github/stars/tortuvshin/open-source-flutter-apps?style=flat&color=fafafa";
 ---
 
 <header
@@ -50,68 +55,65 @@ const starsBadgeUrl =
     </nav>
 
     <div class="ml-auto flex items-center gap-2">
-      {/* GitHub stars badge — render via <img> so it loads on
-          every page without a JS roundtrip. The badge updates
-          itself as the repo gains stars. */}
+      {/* Single GitHub button. Star count badge is rendered as an
+          <img> on the right side of the same anchor so it stays
+          up-to-date without any JS. */}
       <a
         href={githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Star on GitHub"
-        title="Star this project on GitHub"
-        class="hidden sm:inline-flex h-9 items-center gap-1.5 rounded-md border border-ink-200 px-2.5 text-[0.8125rem] font-medium text-ink-700 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:text-ink-300 dark:hover:border-ink-700 dark:hover:bg-ink-900/40"
+        aria-label="View on GitHub — star count shown on the right"
+        title="View on GitHub"
+        class="inline-flex h-9 items-center divide-x divide-ink-200 overflow-hidden rounded-md border border-ink-200 text-[0.875rem] font-medium transition-colors hover:border-ink-300 hover:bg-ink-50 dark:divide-ink-800 dark:border-ink-800 dark:hover:border-ink-700 dark:hover:bg-ink-900/40"
       >
-        <svg
-          viewBox="0 0 16 16"
-          width="14"
-          height="14"
-          aria-hidden="true"
-          fill="currentColor"
-        >
-          <path
-            d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
+        <span class="flex items-center gap-1.5 px-2.5 py-1.5 text-ink-900 dark:text-ink-100">
+          <svg
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+            fill="currentColor"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"
+            />
+          </svg>
+          <span>GitHub</span>
+        </span>
+        <span class="flex items-center gap-1 bg-ink-50 px-2 py-1.5 text-ink-700 dark:bg-ink-900/60 dark:text-ink-300">
+          <svg
+            viewBox="0 0 16 16"
+            width="11"
+            height="11"
+            aria-hidden="true"
+            fill="currentColor"
+            class="text-amber-500"
+          >
+            <path
+              d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
+            />
+          </svg>
+          <img
+            src={starsBadgeLight}
+            alt=""
+            width="32"
+            height="14"
+            loading="lazy"
+            decoding="async"
+            class="h-[14px] w-auto dark:hidden"
           />
-        </svg>
-        <img
-          src={starsBadgeUrl}
-          alt=""
-          width="56"
-          height="14"
-          loading="lazy"
-          decoding="async"
-          class="h-[14px] w-auto dark:hidden"
-        />
-        <img
-          src={starsBadgeUrl.replace("18181b", "fafafa")}
-          alt=""
-          width="56"
-          height="14"
-          loading="lazy"
-          decoding="async"
-          class="h-[14px] w-auto hidden dark:inline"
-        />
+          <img
+            src={starsBadgeDark}
+            alt=""
+            width="32"
+            height="14"
+            loading="lazy"
+            decoding="async"
+            class="h-[14px] w-auto hidden dark:inline"
+          />
+        </span>
       </a>
       <ThemeToggle />
-      <a
-        href={githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub repository"
-        class="hidden lg:inline-flex h-9 items-center gap-1.5 rounded-md border border-ink-200 px-2.5 text-[0.875rem] font-medium text-ink-900 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:text-ink-100 dark:hover:border-ink-700 dark:hover:bg-ink-900/40"
-      >
-        <svg
-          viewBox="0 0 16 16"
-          width="16"
-          height="16"
-          aria-hidden="true"
-          fill="currentColor"
-        >
-          <path
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"
-          />
-        </svg>
-        <span>GitHub</span>
-      </a>
     </div>
   </div>
 </header>
