@@ -30,13 +30,16 @@ const detailHref = `/apps/${app.slug}`;
 
 const isCurated = !!app.curation;
 
-const projectTypeLabel = {
-  "real-app": "Real app",
-  "production": "Production",
-  "reference": "Reference",
-  "demo": "Demo",
-  "template": "Template",
-}[app.projectType ?? ""] ?? null;
+const projectTypeLabel = (() => {
+  switch (app.projectType) {
+    case "real-app": return "Real app";
+    case "production": return "Production";
+    case "reference": return "Reference";
+    case "demo": return "Demo";
+    case "template": return "Template";
+    default: return null;
+  }
+})();
 
 function formatStars(n: number): string {
   if (n >= 1000) {

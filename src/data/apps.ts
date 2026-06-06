@@ -1,711 +1,143 @@
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 import type { OpenSourceApp } from "./types";
 
 // ──────────────────────────────────────────────────────────────────────
-// 30 real apps curated from the original `open-source-flutter-apps`
-// README. Names, URLs, descriptions, and categories are taken from the
-// list itself. V2 will replace this with a GitHub-synced data file.
+// Source of truth: data/generated/apps.json, produced at build time
+// from data/apps/*.yml by scripts/build-apps-json.mjs. The yml files
+// are the human-edited source; this file is just a typed re-export
+// that fills in safe defaults so consumers don't have to guard every
+// optional field.
+//
+// When adding a new app: write a yml in data/apps/, run
+// `npm run build:data`, and it will appear here.
 // ──────────────────────────────────────────────────────────────────────
 
-export const apps: OpenSourceApp[] = [
-  {
-    slug: "invoice-ninja",
-    name: "Invoice Ninja",
-    description:
-      "Companion app for the Invoice Ninja platform. Invoicing, expenses, time-billing, payments.",
-    repoUrl: "https://github.com/invoiceninja/flutter-mobile",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Business",
-    stars: 1800,
-    license: "AGPL-3.0",
-    status: "active",
-    addedAt: "2025-11-12",
-    labels: ["new"],
+// We read the JSON at module init via Node's fs because the file
+// is generated (gitignored) and Vite/rollup can't statically resolve
+// gitignored JSON imports.
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const generatedPath = join(__dirname, "..", "..", "data", "generated", "apps.json");
 
-    // ── Curation ──
-    projectType: "production",
-    stateManagement: "Provider",
-    backend: "REST API (Laravel)",
-    architecture: "Feature-based",
-    difficulty: "intermediate",
-    codebaseSize: "large",
-    bestFor: [
-      "Real commercial product with open codebase",
-      "Subscription & payment integration patterns",
-      "Multi-currency / multi-language business app",
-      "Companion-app architecture (mobile + hosted backend)",
-    ],
-    whyListed: [
-      "Real production app used by paying customers",
-      "Active commercial sponsor (Hillel Coren)",
-      "Long-running codebase with stable API",
-    ],
-    caveats: [
-      "Tightly coupled to the hosted Invoice Ninja platform",
-      "Some premium features require a paid plan",
-      "AGPL-3.0 is copyleft — read the license before forking",
-    ],
-    goodFirstIssues: "https://github.com/invoiceninja/flutter-mobile/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22",
-    contributionGuide: "https://github.com/invoiceninja/flutter-mobile/blob/master/CONTRIBUTING.md",
-    scores: {
-      activity: 65,
-      maturity: 92,
-      learning: 78,
-      contribution: 70,
-      docs: 62,
-      overall: 76,
-    },
-    curation: {
-      reviewed: false,
-      by: "Mavis (auto-curated from public repo metadata)",
-      date: "2026-06-06",
-      notes: "State management and architecture inferred from public FlutterMobile repo. Project type confirmed (commercial product with open source mobile client).",
-    },
-    lenses: ["production-like", "contribution-ready"],
-  },
-  {
-    slug: "flutter-jobs-app",
-    name: "Flutter Jobs App",
-    description:
-      "Flutter job board app. Browse, filter, and apply to Flutter-related positions.",
-    repoUrl: "https://github.com/Rahiche/flutter_jobs_app",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Business",
-    stars: 220,
-    license: "MIT",
-    status: "active",
-    addedAt: "2026-04-20",
-    labels: ["new"],
-  },
-  {
-    slug: "spacex-go",
-    name: "SpaceX GO",
-    description:
-      "Simple yet powerful, open-source SpaceX launch tracker. Rockets, capsules, ships, missions.",
-    repoUrl: "https://github.com/jesusrp98/spacex-go",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Entertainment",
-    stars: 1400,
-    license: "MIT",
-    status: "active",
-    addedAt: "2026-05-02",
-    labels: ["new"],
-  },
-  {
-    slug: "tubecards",
-    name: "TubeCards",
-    description:
-      "Cross-platform spaced-repetition app for flashcards. Build decks, schedule reviews, study offline.",
-    repoUrl: "https://github.com/friebetill/tubecards",
-    stack: "Flutter",
-    platforms: ["Android", "iOS", "Linux", "macOS", "Web", "Windows"],
-    category: "Education",
-    stars: 530,
-    license: "MIT",
-    status: "active",
-    addedAt: "2026-04-30",
-    labels: ["new"],
-  },
-  {
-    slug: "neumorphic-calculator",
-    name: "Neumorphic Calculator",
-    description:
-      "Elegant, highly customizable calculator with a beautiful neumorphic design.",
-    repoUrl: "https://github.com/mllrr96/Neumorphic-Calculator",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Tools",
-    stars: 280,
-    license: "MIT",
-    status: "active",
-    addedAt: "2026-05-12",
-    labels: ["new"],
-  },
-  {
-    slug: "aniflix",
-    name: "Aniflix",
-    description:
-      "Netflix clone for browsing anime. Uses Jikan and Aniapi for catalogue data.",
-    repoUrl: "https://github.com/sumittiware/Aniflix-Flutter",
-    stack: "Flutter",
-    stacks: ["GraphQL"],
-    platforms: ["Android", "iOS"],
-    category: "Entertainment",
-    stars: 320,
-    license: "MIT",
-    status: "active",
-    addedAt: "2026-05-18",
-    labels: ["new"],
-  },
+let generated: { apps: unknown[] };
+try {
+  generated = JSON.parse(readFileSync(generatedPath, "utf8"));
+} catch (err) {
+  // In dev mode the JSON may not exist yet if `npm run build:data`
+  // wasn't run. Surface a clear error instead of failing later.
+  if ((err as NodeJS.ErrnoException).code === "ENOENT") {
+    throw new Error(
+      `data/generated/apps.json not found. Run \`npm run build:data\` first.`,
+    );
+  }
+  throw err;
+}
 
-  // ── Hot ─────────────────────────────────────────────────────────────
-  {
-    slug: "immich",
-    name: "Immich",
-    description:
-      "Self-hosted photo and video backup from your phone. Privacy-first, end-to-end your data.",
-    repoUrl: "https://github.com/immich-app/immich",
-    stack: "Flutter",
-    stacks: ["Dart", "Node", "PostgreSQL"],
-    platforms: ["Android", "iOS", "Web"],
-    category: "Media",
-    stars: 42000,
-    license: "AGPL-3.0",
-    status: "active",
-    addedAt: "2025-08-22",
-    labels: ["hot"],
+type GeneratedApp = Partial<OpenSourceApp> & {
+  slug: string;
+  name: string;
+  repoUrl: string;
+  description?: string;
+  stack: string;
+  platforms: string[];
+  category: string;
+  activity?: {
+    stars?: number;
+    forks?: number;
+    lastCommitAt?: string | null;
+    contributors?: number;
+    updatedAt?: string;
+  };
+};
 
-    // ── Curation ──
-    projectType: "real-app",
-    stateManagement: "Riverpod",
-    backend: "REST API + PostgreSQL + Redis + machine-learning",
-    architecture: "Feature-based, monorepo (server / web / mobile / cli)",
-    difficulty: "advanced",
-    codebaseSize: "huge",
-    bestFor: [
-      "Self-hosted infrastructure patterns (Docker, ML, GPU)",
-      "Real-time data sync between mobile and self-hosted server",
-      "Cross-language polyglot (TypeScript server + Dart mobile)",
-      "Production-scale media pipeline (thumbnails, transcoding)",
-    ],
-    whyListed: [
-      "Most-starred Flutter app on GitHub (42k+)",
-      "Real production deployment by thousands of self-hosters",
-      "Active maintainer team and clear release cadence",
-      "Cross-platform clients (iOS, Android, Web) from one codebase",
-    ],
-    caveats: [
-      "Huge monorepo — 6+ years of code, hard to navigate as a first reader",
-      "Backend-heavy (PostgreSQL, Redis, ML models, vector DB)",
-      "Documentation lives in a separate wiki, not the repo",
-      "AGPL-3.0 is copyleft — read the license before forking",
-    ],
-    goodFirstIssues: "https://github.com/immich-app/immich/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22",
-    contributionGuide: "https://github.com/immich-app/immich/blob/main/CONTRIBUTING.md",
-    scores: {
-      activity: 95,
-      maturity: 88,
-      learning: 70,
-      contribution: 78,
-      docs: 65,
-      overall: 80,
-    },
-    curation: {
-      reviewed: false,
-      by: "Mavis (auto-curated from public repo metadata)",
-      date: "2026-06-06",
-      notes: "Monorepo, state-management and architecture confirmed from public source. Scores reflect public signals (stars, release cadence, issue activity) plus curation judgment.",
-    },
-    lenses: ["production-like", "good-to-learn", "contribution-ready"],
-  },
-  {
-    slug: "local-send",
-    name: "LocalSend",
-    description:
-      "Cross-platform file sharing over the local network. No internet, no servers, no tracking.",
-    repoUrl: "https://github.com/localsend/localsend",
-    stack: "Flutter",
-    platforms: ["Android", "iOS", "Linux", "macOS", "Web", "Windows"],
-    category: "Tools",
-    stars: 12400,
-    license: "MIT",
-    status: "active",
-    addedAt: "2025-09-12",
-    labels: ["hot"],
+/**
+ * Map a generated yml-shaped record to the OpenSourceApp shape that
+ * pages expect. Fills defaults, flattens `activity.stars` → `stars`,
+ * and tolerates missing curation fields.
+ */
+function normalize(g: GeneratedApp): OpenSourceApp {
+  const a = g.activity ?? {};
+  return {
+    slug: g.slug,
+    name: g.name,
+    description: g.description ?? "",
+    repoUrl: g.repoUrl,
+    homepageUrl: g.homepageUrl,
+    stack: g.stack,
+    stacks: g.stacks,
+    platforms: g.platforms ?? [],
+    category: g.category,
+    tags: g.tags,
+    logoUrl: g.logoUrl,
+    stars: typeof a.stars === "number" ? a.stars : g.stars,
+    license: g.license,
+    status: g.status,
+    addedAt: g.addedAt,
+    lastCommitAt: a.lastCommitAt ?? g.lastCommitAt,
+    labels: g.labels,
+    // Curation (optional)
+    projectType: g.projectType,
+    stateManagement: g.stateManagement,
+    backend: g.backend,
+    architecture: g.architecture,
+    difficulty: g.difficulty,
+    codebaseSize: g.codebaseSize,
+    bestFor: g.bestFor,
+    whyListed: g.whyListed,
+    caveats: g.caveats,
+    goodFirstIssues: g.goodFirstIssues,
+    contributionGuide: g.contributionGuide,
+    launchedBy: g.launchedBy,
+    launchAsk: g.launchAsk,
+    lenses: g.lenses,
+    scores: g.scores,
+    curation: g.curation,
+  };
+}
 
-    // ── Curation ──
-    projectType: "real-app",
-    stateManagement: "Riverpod",
-    backend: "Custom local-network protocol (HTTP-based, no central server)",
-    architecture: "Layered (UI / service / protocol)",
-    difficulty: "intermediate",
-    codebaseSize: "medium",
-    bestFor: [
-      "Pure Flutter across 6 platforms from one codebase",
-      "Local network discovery (mDNS / multicast) without a server",
-      "Privacy-first architecture (no data leaves your network)",
-      "Cross-platform platform-channel integration (Linux, Windows, macOS)",
-    ],
-    whyListed: [
-      "12k+ stars, 100+ contributors",
-      "Six platforms (mobile + desktop + web) from one Flutter codebase",
-      "Real-world privacy-first design that millions use as an AirDrop alternative",
-      "MIT-licensed — permissive for forks",
-    ],
-    caveats: [
-      "Custom protocol is hard to integrate with other apps",
-      "Documentation is mostly the README — no architecture guide",
-      "Some platform quirks (Linux desktop) require community workarounds",
-    ],
-    goodFirstIssues: "https://github.com/localsend/localsend/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22",
-    contributionGuide: "https://github.com/localsend/localsend/blob/main/CONTRIBUTING.md",
-    scores: {
-      activity: 88,
-      maturity: 86,
-      learning: 85,
-      contribution: 80,
-      docs: 68,
-      overall: 83,
-    },
-    curation: {
-      reviewed: false,
-      by: "Mavis (auto-curated from public repo metadata)",
-      date: "2026-06-06",
-      notes: "Custom local-network protocol confirmed from public source. Cross-platform breadth (6 platforms) is a key signal. Activity and contributor counts from repo metadata.",
-    },
-    lenses: ["production-like", "good-to-learn", "contribution-ready"],
-  },
-  {
-    slug: "harpy",
-    name: "Harpy",
-    description:
-      "A Twitter app for Android built with Flutter. Material You theming, timeline, lists, drafts.",
-    repoUrl: "https://github.com/robertodoering/harpy",
-    stack: "Flutter",
-    platforms: ["Android"],
-    category: "Social Network",
-    stars: 2100,
-    license: "Apache-2.0",
-    status: "active",
-    addedAt: "2025-10-04",
-    labels: ["hot"],
-  },
-  {
-    slug: "obtainium",
-    name: "Obtainium",
-    description:
-      "Get Android app updates straight from the source — no Play Store, no proprietary app stores.",
-    repoUrl: "https://github.com/ImranR98/Obtainium",
-    stack: "Flutter",
-    platforms: ["Android"],
-    category: "Tools",
-    stars: 6400,
-    license: "MIT",
-    status: "active",
-    addedAt: "2025-11-30",
-    labels: ["hot"],
-  },
-  {
-    slug: "appflowy",
-    name: "AppFlowy",
-    description:
-      "Open-source Notion alternative. Local-first, AI-ready, fully customizable workspaces.",
-    repoUrl: "https://github.com/AppFlowy-IO/AppFlowy",
-    stack: "Flutter",
-    stacks: ["Rust"],
-    platforms: ["Android", "iOS", "Linux", "macOS", "Web", "Windows"],
-    category: "Productivity",
-    stars: 5210,
-    license: "AGPL-3.0",
-    status: "active",
-    addedAt: "2025-12-02",
-    labels: ["hot"],
+const generatedApps = generated.apps as GeneratedApp[];
 
-    // ── Curation ──
-    projectType: "real-app",
-    stateManagement: "Custom (Rust backend + Flutter UI via protobuf/FFI)",
-    backend: "Rust + SQLite (local-first); optional cloud sync",
-    architecture: "Layered frontend/backend split (Rust core + Flutter shell)",
-    difficulty: "advanced",
-    codebaseSize: "huge",
-    bestFor: [
-      "Local-first software patterns (offline by default)",
-      "Cross-language FFI: Rust ↔ Dart via protobuf",
-      "Real-time collaborative editing at scale",
-      "Modern polyglot stack (Rust core, Flutter UI, optional cloud)",
-    ],
-    whyListed: [
-      "Pioneer of the local-first movement in open source",
-      "Modern Rust + Flutter stack — relatively rare combination",
-      "Strong commercial backing (AppFlowy Inc., YC)",
-      "Ambitious scope: notes, tasks, databases, AI integration",
-    ],
-    caveats: [
-      "Very large scope — takes time to navigate the codebase",
-      "Heavy build dependencies (Rust toolchain, multiple targets)",
-      "Some features (cloud sync, AI) still in beta",
-      "AGPL-3.0 — copyleft license, read before forking",
-    ],
-    goodFirstIssues: "https://github.com/AppFlowy-IO/AppFlowy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22",
-    contributionGuide: "https://github.com/AppFlowy-IO/AppFlowy/blob/main/CONTRIBUTING.md",
-    scores: {
-      activity: 92,
-      maturity: 76,
-      learning: 88,
-      contribution: 82,
-      docs: 75,
-      overall: 84,
-    },
-    curation: {
-      reviewed: false,
-      by: "Mavis (auto-curated from public repo metadata)",
-      date: "2026-06-06",
-      notes: "Rust + Flutter polyglot stack confirmed from public source. Local-first architecture is a distinguishing feature, not just a stack choice.",
-    },
-    lenses: ["production-like", "good-to-learn", "contribution-ready"],
-  },
-  {
-    slug: "lichess-mobile",
-    name: "Lichess Mobile",
-    description:
-      "Mobile client for lichess.org — the free, open-source chess server. Games, puzzles, analysis.",
-    repoUrl: "https://github.com/lichess-org/lichobile",
-    stack: "Flutter",
-    stacks: ["Dart"],
-    platforms: ["Android", "iOS"],
-    category: "Games",
-    stars: 1800,
-    license: "AGPL-3.0",
-    status: "active",
-    addedAt: "2025-12-14",
-    labels: ["hot"],
-  },
+export const apps: OpenSourceApp[] = generatedApps.map(normalize);
 
-  // ── Mature ──────────────────────────────────────────────────────────
-  {
-    slug: "mattermost-mobile",
-    name: "Mattermost Mobile",
-    description:
-      "Open-source, self-hostable Slack alternative. End-to-end encrypted chat for teams.",
-    repoUrl: "https://github.com/mattermost/mattermost-mobile",
-    stack: "React Native",
-    stacks: ["TypeScript", "Node"],
-    platforms: ["Android", "iOS"],
-    category: "Communication",
-    stars: 2480,
-    license: "Apache-2.0",
-    status: "active",
-    addedAt: "2024-04-11",
-    labels: ["mature"],
-  },
-  {
-    slug: "ankidroid",
-    name: "AnkiDroid",
-    description:
-      "Powerful spaced-repetition flashcard app. 10+ years of active development, millions of installs.",
-    repoUrl: "https://github.com/ankidroid/Anki-Android",
-    stack: "Kotlin",
-    platforms: ["Android"],
-    category: "Education",
-    stars: 9210,
-    license: "GPL-3.0",
-    status: "active",
-    addedAt: "2024-02-19",
-    labels: ["mature"],
+// ── Convenience filters ──────────────────────────────────────────────
 
-    // ── Curation ──
-    projectType: "real-app",
-    stateManagement: "MVC (Android traditional) + Kotlin coroutines",
-    backend: "AnkiWeb sync (custom REST protocol)",
-    architecture: "MVC with service layer (long-running background services)",
-    difficulty: "intermediate",
-    codebaseSize: "large",
-    bestFor: [
-      "Real mature Android app with 10+ years of active development",
-      "Spaced-repetition algorithm implementation (FSRS, SM-2)",
-      "Background services and sync protocol design",
-      "Working with a separate desktop companion (Anki Desktop)",
-    ],
-    whyListed: [
-      "10+ years of active development — gold standard for Android longevity",
-      "9k+ stars, 100+ contributors, millions of Play Store installs",
-      "Reference implementation of spaced-repetition algorithms",
-      "Shows how to evolve a Java app to Kotlin over time",
-    ],
-    caveats: [
-      "Java code mixed with Kotlin — old patterns still present",
-      "Requires Anki Desktop as a companion for full functionality",
-      "GPL-3.0 is copyleft — read before forking",
-      "Long codebase can be hard to navigate without prior Android experience",
-    ],
-    goodFirstIssues: "https://github.com/ankidroid/Anki-Android/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22",
-    contributionGuide: "https://github.com/ankidroid/Anki-Android/blob/main/CONTRIBUTING.md",
-    scores: {
-      activity: 78,
-      maturity: 96,
-      learning: 72,
-      contribution: 78,
-      docs: 72,
-      overall: 80,
-    },
-    curation: {
-      reviewed: false,
-      by: "Mavis (auto-curated from public repo metadata)",
-      date: "2026-06-06",
-      notes: "Maturity signal is the strongest here — 10+ years of continuous development. The Java+Kotlin mix is honest: it shows the evolution of an Android app, not a clean-slate codebase.",
-    },
-    lenses: ["good-to-learn", "contribution-ready"],
-  },
-  {
-    slug: "tasks-org",
-    name: "Tasks.org",
-    description:
-      "Feature-rich to-do list app. Google Tasks sync, CalDAV, OpenPGP, full GTD-style task management.",
-    repoUrl: "https://github.com/tasks/tasks",
-    stack: "Kotlin",
-    platforms: ["Android"],
-    category: "Productivity",
-    stars: 3810,
-    license: "GPL-3.0",
-    status: "active",
-    addedAt: "2024-03-22",
-    labels: ["mature"],
-  },
-  {
-    slug: "element-android",
-    name: "Element Android",
-    description:
-      "Secure, decentralized messenger built on Matrix. End-to-end encrypted, federated.",
-    repoUrl: "https://github.com/element-hq/element-android",
-    stack: "Kotlin",
-    platforms: ["Android"],
-    category: "Communication",
-    stars: 3680,
-    license: "Apache-2.0",
-    status: "active",
-    addedAt: "2024-05-15",
-    labels: ["mature"],
-  },
-  {
-    slug: "nextcloud-android",
-    name: "Nextcloud Android",
-    description:
-      "Official Nextcloud client for Android. File sync, share, encrypted folder access.",
-    repoUrl: "https://github.com/nextcloud/android",
-    stack: "Kotlin",
-    platforms: ["Android"],
-    category: "Productivity",
-    stars: 4120,
-    license: "GPL-2.0",
-    status: "active",
-    addedAt: "2024-04-11",
-    labels: ["mature"],
-  },
-  {
-    slug: "flutter-catalog",
-    name: "Flutter Catalog",
-    description:
-      "Long-running catalog of Flutter widgets with code samples and previews.",
-    repoUrl: "https://github.com/X-Wei/flutter_catalog",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Education",
-    stars: 10110,
-    license: "MIT",
-    status: "quiet",
-    addedAt: "2024-01-09",
-    labels: ["mature"],
-  },
+export function newApps(): OpenSourceApp[] {
+  return apps.filter((a) => a.labels?.includes("new"));
+}
+export function hotApps(): OpenSourceApp[] {
+  return apps.filter((a) => a.labels?.includes("hot"));
+}
+export function matureApps(): OpenSourceApp[] {
+  return apps.filter((a) => a.labels?.includes("mature"));
+}
 
-  // ── Filling the remaining 6 ─────────────────────────────────────────
-  {
-    slug: "blackhole",
-    name: "BlackHole",
-    description:
-      "A modern music player app with offline support, streaming, and Material You design.",
-    repoUrl: "https://github.com/Sangwan5688/BlackHole",
-    stack: "Flutter",
-    platforms: ["Android", "iOS", "Linux", "macOS", "Web", "Windows"],
-    category: "Media",
-    stars: 6800,
-    license: "MIT",
-    status: "active",
-    addedAt: "2025-07-04",
-    labels: ["hot"],
-  },
-  {
-    slug: "open-food-facts",
-    name: "Open Food Facts",
-    description:
-      "Mobile app for the open food products database. 2M+ installs. Scan barcodes, contribute data.",
-    repoUrl: "https://github.com/openfoodfacts/smooth-app",
-    stack: "Flutter",
-    stacks: ["Dart"],
-    platforms: ["Android", "iOS"],
-    category: "Health and Fitness",
-    stars: 980,
-    license: "Apache-2.0",
-    status: "active",
-    addedAt: "2024-08-19",
-    labels: ["mature"],
-  },
-  {
-    slug: "watermaniac",
-    name: "Watermaniac",
-    description:
-      "Track the amount of water you drink. Simple, well-designed, respects your privacy.",
-    repoUrl: "https://github.com/artrmz/watermaniac",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Health and Fitness",
-    stars: 240,
-    license: "MIT",
-    status: "active",
-    addedAt: "2025-10-30",
-    labels: ["new"],
-  },
-  {
-    slug: "money-tracker",
-    name: "Money Tracker",
-    description:
-      "Lightweight personal finance app. Track expenses, categorize, see daily/weekly/monthly totals.",
-    repoUrl: "https://github.com/jerichoi224/MoneyTracker",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Finance",
-    stars: 180,
-    license: "MIT",
-    status: "active",
-    addedAt: "2026-03-22",
-    labels: ["new"],
-  },
-  {
-    slug: "piggyvault",
-    name: "Piggyvault",
-    description:
-      "Family finance management app. Track shared accounts, expenses, and goals together.",
-    repoUrl: "https://github.com/piggyvault/piggyvault",
-    stack: "Flutter",
-    stacks: ["Node", "MongoDB"],
-    platforms: ["Android", "iOS", "Web"],
-    category: "Finance",
-    stars: 410,
-    license: "MIT",
-    status: "active",
-    addedAt: "2024-11-12",
-    labels: ["mature"],
-  },
-  {
-    slug: "airdash",
-    name: "Airdash",
-    description:
-      "Share files to any device on the local network. Cross-platform, fast, no setup.",
-    repoUrl: "https://github.com/simonbengtsson/airdash",
-    stack: "Flutter",
-    platforms: ["Android", "iOS", "macOS", "Web", "Windows"],
-    category: "Tools",
-    stars: 1200,
-    license: "MIT",
-    status: "active",
-    addedAt: "2025-11-08",
-    labels: ["hot"],
-  },
-  {
-    slug: "miniwiki",
-    name: "MiniWiki",
-    description:
-      "Privacy-first personal wiki with E2E encryption (ChaCha20-Poly1305), 100% offline, wikilinks, FTS5 full-text search.",
-    repoUrl: "https://github.com/wellsa-ai/miniwiki",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Productivity",
-    stars: 740,
-    license: "MIT",
-    status: "active",
-    addedAt: "2026-05-20",
-    labels: ["new"],
-  },
-  {
-    slug: "memex",
-    name: "Memex",
-    description:
-      "Open-source, local-first AI journal for iOS and Android. Text, photo, voice fragments into structured timeline cards using the P.A.R.A. methodology.",
-    repoUrl: "https://github.com/memex-lab/memex",
-    stack: "Flutter",
-    stacks: ["Python", "TensorFlow"],
-    platforms: ["Android", "iOS"],
-    category: "Productivity",
-    stars: 3120,
-    license: "MIT",
-    status: "active",
-    addedAt: "2026-05-22",
-    labels: ["new"],
-  },
-  {
-    slug: "zefyr",
-    name: "Zefyr",
-    description:
-      "Soft and gentle rich text editing for Flutter applications. Block-based editor with markdown export.",
-    repoUrl: "https://github.com/memspace/zefyr",
-    stack: "Flutter",
-    platforms: ["Android", "iOS", "Linux", "macOS", "Web", "Windows"],
-    category: "Tools",
-    stars: 2400,
-    license: "BSD-3-Clause",
-    status: "active",
-    addedAt: "2024-03-12",
-    labels: ["mature"],
-  },
-  {
-    slug: "tinder-cards",
-    name: "Tinder Cards",
-    description:
-      "Tinder-like swipeable cards. A classic Flutter interaction example.",
-    repoUrl: "https://github.com/Ivaskuu/tinder_cards",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Social Network",
-    stars: 730,
-    license: "MIT",
-    status: "active",
-    addedAt: "2024-02-14",
-    labels: ["mature"],
-  },
-  {
-    slug: "flutter-browser",
-    name: "Flutter Browser",
-    description:
-      "A full-featured mobile browser app built with Flutter. Tabs, history, downloads, ad-block.",
-    repoUrl: "https://github.com/pichillilorenzo/flutter_browser_app",
-    stack: "Flutter",
-    platforms: ["Android", "iOS"],
-    category: "Tools",
-    stars: 1300,
-    license: "MIT",
-    status: "active",
-    addedAt: "2024-10-22",
-    labels: ["mature"],
-  },
-  {
-    slug: "voting-dapp",
-    name: "Voting Dapp",
-    description:
-      "A voting DApp built with Solidity smart contracts and the web3dart library.",
-    repoUrl: "https://github.com/akmadan/voting_dapp",
-    stack: "Flutter",
-    stacks: ["Solidity", "Blockchain Wallet"],
-    platforms: ["Android", "iOS"],
-    category: "Tools",
-    stars: 120,
-    license: "MIT",
-    status: "active",
-    addedAt: "2025-11-22",
-    labels: ["new"],
-  },
-  {
-    slug: "beecount",
-    name: "BeeCount",
-    description:
-      "Privacy-first cross-platform expense tracker with self-hostable cloud sync and offline-first design.",
-    repoUrl: "https://github.com/TNT-Likely/BeeCount",
-    stack: "Flutter",
-    stacks: ["Dart"],
-    platforms: ["Android", "iOS", "Linux", "macOS", "Web", "Windows"],
-    category: "Finance",
-    stars: 1980,
-    license: "MIT",
-    status: "active",
-    addedAt: "2025-05-25",
-    labels: ["mature"],
-  },
-];
+// ── Lookups ──────────────────────────────────────────────────────────
 
-// Convenience selectors
-export const newApps = (): OpenSourceApp[] =>
-  apps.filter((a) => a.labels?.includes("new"));
-export const hotApps = (): OpenSourceApp[] =>
-  apps.filter((a) => a.labels?.includes("hot"));
-export const matureApps = (): OpenSourceApp[] =>
-  apps.filter((a) => a.labels?.includes("mature"));
+const bySlug = new Map(apps.map((a) => [a.slug, a]));
+
+export function appBySlug(slug: string): OpenSourceApp | undefined {
+  return bySlug.get(slug);
+}
+
+// ── Stats helpers used by home + apps pages ─────────────────────────
+
+export function appsByCategory(): Map<string, OpenSourceApp[]> {
+  const m = new Map<string, OpenSourceApp[]>();
+  for (const a of apps) {
+    const k = a.category || "Other";
+    if (!m.has(k)) m.set(k, []);
+    m.get(k)!.push(a);
+  }
+  return m;
+}
+
+export function appsByStack(): Map<string, OpenSourceApp[]> {
+  const m = new Map<string, OpenSourceApp[]>();
+  for (const a of apps) {
+    const k = a.stack || "Other";
+    if (!m.has(k)) m.set(k, []);
+    m.get(k)!.push(a);
+  }
+  return m;
+}

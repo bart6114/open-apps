@@ -118,12 +118,20 @@ function parseYaml(text) {
           i++;
           continue;
         }
+        // Nested mapping can be either:
+        //   "  key: value"        → flat
+        //   "  - value"           → list (we already handled that above)
+        // So we only consume `  key: value` lines.
         const nestedMatch = nextRaw.match(/^ {2}([A-Za-z_][\w-]*):\s*(.*)$/);
         if (!nestedMatch) break;
         const [, nKey, nValRaw] = nestedMatch;
         const nVal = nValRaw.trim();
         if (nVal === "" || nVal === "null") {
           nested[nKey] = null;
+        } else if (nVal === "true") {
+          nested[nKey] = true;
+        } else if (nVal === "false") {
+          nested[nKey] = false;
         } else {
           nested[nKey] = isNaN(+nVal) ? nVal : +nVal;
         }
