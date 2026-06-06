@@ -139,3 +139,45 @@ const starsBadgeDark =
     history.replaceState(null, "", id);
   });
 </script>
+
+<script>
+  // Show a count badge next to the "Watching" nav link on every page,
+  // driven by the local watchlist. Keep this lightweight — it's a
+  // tiny DOM update, not a full filter pipeline.
+  (function () {
+    const KEY = "open-apps:watchlist";
+    function read() {
+      try {
+        const raw = localStorage.getItem(KEY);
+        if (!raw) return [];
+        const arr = JSON.parse(raw);
+        return Array.isArray(arr) ? arr : [];
+      } catch {
+        return [];
+      }
+    }
+    function paint() {
+      const link = document.querySelector('nav[aria-label="Primary"] a[href*="watched=1"]');
+      if (!link) return;
+      const n = read().length;
+      let badge = link.querySelector(".watchlist-badge");
+      if (n === 0) {
+        if (badge) badge.remove();
+        return;
+      }
+      if (!badge) {
+        badge = document.createElement("span");
+        badge.className =
+          "watchlist-badge ml-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-ink-900 px-1 text-[10px] font-semibold text-white dark:bg-ink-100 dark:text-ink-900";
+        badge.setAttribute("aria-label", `${n} apps in watchlist`);
+        link.appendChild(badge);
+      }
+      badge.textContent = String(n);
+    }
+    paint();
+    window.addEventListener("open-apps:watchlist:change", paint);
+    window.addEventListener("storage", (e) => {
+      if (e.key === KEY) paint();
+    });
+  })();
+</script>
