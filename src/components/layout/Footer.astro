@@ -1,0 +1,100 @@
+---
+const githubUrl =
+  "https://github.com/tortuvshin/open-source-flutter-apps";
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-16 border-t border-ink-200 bg-white text-ink-500 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-400">
+  <div
+    class="mx-auto grid max-w-wide grid-cols-2 gap-8 px-5 py-12 md:grid-cols-4 sm:px-7"
+  >
+    <div class="col-span-2 md:col-span-1">
+      <div
+        class="mb-2 inline-flex items-center gap-2 text-[0.95rem] font-semibold text-ink-900 dark:text-ink-100"
+      >
+        <span
+          aria-hidden="true"
+          class="inline-block h-3.5 w-3.5 rounded bg-ink-900 dark:bg-ink-100"
+        ></span>
+        <span>Open Source Apps</span>
+      </div>
+      <p class="m-0 max-w-[34ch] text-sm leading-relaxed text-ink-500 dark:text-ink-400">
+        A static, community-curated directory of real open-source application
+        codebases.
+      </p>
+    </div>
+
+    <div>
+      <h4
+        class="mb-3 text-2xs font-semibold uppercase tracking-wider text-ink-900 dark:text-ink-100"
+      >
+        Discover
+      </h4>
+      <ul class="m-0 flex list-none flex-col gap-2 p-0">
+        <li><a href="#new" class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100">New</a></li>
+        <li><a href="#hot" class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100">Hot</a></li>
+        <li><a href="#mature" class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100">Mature</a></li>
+        <li><a href="#stacks" class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100">By stack</a></li>
+        <li><a href="#categories" class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100">By category</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4
+        class="mb-3 text-2xs font-semibold uppercase tracking-wider text-ink-900 dark:text-ink-100"
+      >
+        Project
+      </h4>
+      <ul class="m-0 flex list-none flex-col gap-2 p-0">
+        <li>
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100"
+            >GitHub</a
+          >
+        </li>
+        <li><a href="#contributors" class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100">Contributors</a></li>
+        <li><a href="#about" class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100">Why this exists</a></li>
+        <li>
+          <a
+            href={`${githubUrl}/blob/main/CONTRIBUTING.md`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100"
+            >Submit an app</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h4
+        class="mb-3 text-2xs font-semibold uppercase tracking-wider text-ink-900 dark:text-ink-100"
+      >
+        About
+      </h4>
+      <ul class="m-0 flex list-none flex-col gap-2 p-0">
+        <li><a href="#about" class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100">Why this exists</a></li>
+        <li><a href="#original" class="text-sm transition-colors hover:text-ink-900 dark:hover:text-ink-100">Original collection</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-ink-200 dark:border-ink-800">
+    <div
+      class="mx-auto flex max-w-wide flex-wrap items-center gap-3 px-5 py-4 text-2xs text-ink-500 sm:px-7 dark:text-ink-400"
+    >
+      <span>© {year} Open Source Apps. Content under CC BY-SA 4.0.</span>
+      <span class="text-ink-300 dark:text-ink-700">·</span>
+      <a
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="transition-colors hover:text-ink-900 dark:hover:text-ink-100"
+        >View on GitHub</a
+      >
+    </div>
+  </div>
+</footer>

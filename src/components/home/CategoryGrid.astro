@@ -1,0 +1,51 @@
+---
+import type { Category } from "../../data/categories";
+import SectionHeader from "../layout/SectionHeader.astro";
+import Container from "../layout/Container.astro";
+
+interface Props {
+  categories: Category[];
+}
+
+const { categories } = Astro.props;
+---
+
+<section
+  id="categories"
+  class="section border-b border-ink-200 dark:border-ink-800"
+>
+  <Container>
+    <SectionHeader
+      eyebrow="Categories"
+      title="Browse by category"
+      description="Find apps by what they do, not by which stack they use."
+    />
+
+    <div
+      class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {
+        categories.map((cat) => (
+          <a
+            href={`#category-${cat.slug}`}
+            class="card card-hover group flex items-start justify-between gap-3 p-4 no-underline"
+          >
+            <div class="flex min-w-0 flex-col gap-1">
+              <h3 class="m-0 text-[0.95rem] font-semibold tracking-tight text-ink-900 group-hover:underline dark:text-ink-100">
+                {cat.name}
+              </h3>
+              <p class="m-0 text-2xs leading-relaxed text-ink-500 dark:text-ink-400">
+                {cat.blurb}
+              </p>
+            </div>
+            {typeof cat.count === "number" && (
+              <span class="shrink-0 text-2xs font-mono text-ink-400 dark:text-ink-500">
+                {cat.count} apps
+              </span>
+            )}
+          </a>
+        ))
+      }
+    </div>
+  </Container>
+</section>

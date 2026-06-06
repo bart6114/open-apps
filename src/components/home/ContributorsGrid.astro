@@ -1,0 +1,66 @@
+---
+import type { Contributor } from "../../data/contributors";
+import SectionHeader from "../layout/SectionHeader.astro";
+import Container from "../layout/Container.astro";
+
+interface Props {
+  contributors: Contributor[];
+}
+
+const { contributors } = Astro.props;
+---
+
+<section
+  id="contributors"
+  class="section border-b border-ink-200 dark:border-ink-800"
+>
+  <Container>
+    <SectionHeader
+      eyebrow="Community"
+      title="Thanks to every contributor."
+      description="This directory exists because people keep discovering, submitting, reviewing, and maintaining open-source app references."
+    />
+
+    <ul
+      class="grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-3 list-none p-0 m-0"
+    >
+      {
+        contributors.map((c) => (
+          <li class="flex flex-col items-center gap-1.5 text-center">
+            <a
+              href={c.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${c.name ?? c.username} on GitHub`}
+              class="block"
+            >
+              <img
+                src={c.avatarUrl}
+                alt={`${c.name ?? c.username} avatar`}
+                loading="lazy"
+                width="48"
+                height="48"
+                class="h-12 w-12 rounded-full border border-ink-200 object-cover transition-transform hover:scale-105 dark:border-ink-800"
+              />
+            </a>
+            <a
+              href={c.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block max-w-full truncate text-2xs text-ink-500 transition-colors hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+            >
+              {c.username}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p
+      class="mt-6 text-2xs text-ink-500 dark:text-ink-400 m-0"
+      aria-hidden="true"
+    >
+      Showing all {contributors.length} contributors.
+    </p>
+  </Container>
+</section>

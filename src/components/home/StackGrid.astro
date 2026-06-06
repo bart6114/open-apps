@@ -1,0 +1,63 @@
+---
+import type { Stack } from "../../data/stacks";
+import SectionHeader from "../layout/SectionHeader.astro";
+import Container from "../layout/Container.astro";
+
+interface Props {
+  stacks: Stack[];
+}
+
+const { stacks } = Astro.props;
+
+const statusLabel: Record<Stack["status"], string> = {
+  live: "Live",
+  expanding: "Expanding",
+  planned: "Planned",
+};
+
+const statusTone: Record<Stack["status"], string> = {
+  live: "text-emerald-700 dark:text-emerald-400",
+  expanding: "text-ink-500 dark:text-ink-400",
+  planned: "text-ink-400 dark:text-ink-600",
+};
+---
+
+<section id="stacks" class="section border-b border-ink-200 dark:border-ink-800">
+  <Container>
+    <SectionHeader
+      eyebrow="Stacks"
+      title="Browse by stack"
+      description="Pick a stack to see real apps built with it."
+    />
+
+    <div
+      class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {
+        stacks.map((stack) => (
+          <a
+            href={`#stack-${stack.slug}`}
+            class="card card-hover group flex flex-col gap-1.5 p-4 no-underline"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="m-0 text-[0.95rem] font-semibold tracking-tight text-ink-900 group-hover:underline dark:text-ink-100">
+                {stack.name}
+              </h3>
+              <span class={`text-2xs font-medium uppercase tracking-wider ${statusTone[stack.status]}`}>
+                {statusLabel[stack.status]}
+              </span>
+            </div>
+            <p class="m-0 text-2xs leading-relaxed text-ink-500 dark:text-ink-400">
+              {stack.blurb}
+            </p>
+            {typeof stack.count === "number" && (
+              <span class="mt-1 text-2xs font-mono text-ink-400 dark:text-ink-500">
+                {stack.count} apps
+              </span>
+            )}
+          </a>
+        ))
+      }
+    </div>
+  </Container>
+</section>
