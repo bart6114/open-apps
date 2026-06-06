@@ -101,6 +101,30 @@ export default {
         lg: '0.5rem',
         xl: '0.75rem',
       },
+      keyframes: {
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'gradient-shift': {
+          '0%, 100%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+        },
+        'subtle-bob': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-2px)' },
+        },
+      },
+      animation: {
+        'fade-in-up': 'fade-in-up 0.6s ease-out both',
+        'fade-in': 'fade-in 0.8s ease-out both',
+        'gradient-shift': 'gradient-shift 8s ease-in-out infinite',
+        'subtle-bob': 'subtle-bob 3s ease-in-out infinite',
+      },
     },
   },
   plugins: [],
