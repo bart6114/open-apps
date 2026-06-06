@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Shopping"
 # Original submitter: Ray Li
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 339
+  forks: 74
+  monthlyCommits: []
+  lastCommitAt: 2026-04-16
+  totalCommitsKnown: 68
   updatedAt: 2026-06-06

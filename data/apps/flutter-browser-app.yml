@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Tools"
 # Original submitter: Lorenzo Pichilli
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 586
+  forks: 204
+  monthlyCommits: []
+  lastCommitAt: 2024-10-25
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06

@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Productivity"
 # Original submitter: Memex Lab
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 339
+  forks: 27
+  monthlyCommits: []
+  lastCommitAt: 2026-06-05
+  totalCommitsKnown: 100
   updatedAt: 2026-06-06

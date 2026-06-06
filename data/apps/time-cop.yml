@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Productivity"
 # Original submitter: Kenton Hamaluik
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 876
+  forks: 170
+  monthlyCommits: []
+  lastCommitAt: 2025-01-24
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06

@@ -10,9 +10,8 @@ category: "Social Network"
 # Original submitter: Sonu Sharma
 activity:
   stars: 4226
-  forks: 0  # populated by GitHub Actions on next refresh
+  forks: 1160
+  monthlyCommits: []
   lastCommitAt: 2024-07-31
-  monthlyCommits: []  # populated by GitHub Actions on next refresh
-  contributors: 0  # populated by GitHub Actions on next refresh
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06
-  # Seeded from GitHub search on 2026-06-06.

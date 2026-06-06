@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Shopping"
 # Original submitter: LaCoro
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 64
+  forks: 25
+  monthlyCommits: []
+  lastCommitAt: 2024-04-04
+  totalCommitsKnown: 100
   updatedAt: 2026-06-06

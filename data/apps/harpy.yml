@@ -8,8 +8,9 @@ stack: Flutter
 platforms: [Android, iOS]
 category: "Social Network"
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 2073
+  forks: 202
+  monthlyCommits: []
+  lastCommitAt: 2024-08-01
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06

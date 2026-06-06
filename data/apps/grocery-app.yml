@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Shopping"
 # Original submitter: Widle
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 1138
+  forks: 515
+  monthlyCommits: []
+  lastCommitAt: 2023-04-07
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06

@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Productivity"
 # Original submitter: Burhanuddin Rashid
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 1265
+  forks: 275
+  monthlyCommits: []
+  lastCommitAt: 2026-02-12
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06

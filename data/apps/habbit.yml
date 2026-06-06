@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Productivity"
 # Original submitter: Li Zhong
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 141
+  forks: 21
+  monthlyCommits: []
+  lastCommitAt: 2019-01-27
+  totalCommitsKnown: 53
   updatedAt: 2026-06-06

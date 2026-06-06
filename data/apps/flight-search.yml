@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Travel"
 # Original submitter: Marcin Szałek
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 1000
+  forks: 224
+  monthlyCommits: []
+  lastCommitAt: 2021-07-10
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06

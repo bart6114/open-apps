@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Tools"
 # Original submitter: Alex
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 102744
+  forks: 5799
+  monthlyCommits: []
+  lastCommitAt: 2026-06-06
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06

@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Productivity"
 # Original submitter: Matthew Tory
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 619
+  forks: 220
+  monthlyCommits: []
+  lastCommitAt: 2024-01-24
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06

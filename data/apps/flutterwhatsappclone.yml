@@ -9,8 +9,9 @@ platforms: [Android, iOS]
 category: "Social Network"
 # Original submitter: Pawan Kumar
 activity:
-  stars: 0
-  forks: 0
-  lastCommitAt: null  # populated by GitHub Actions on first refresh
-  contributors: 0
+  stars: 1759
+  forks: 677
+  monthlyCommits: []
+  lastCommitAt: 2024-05-14
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06
