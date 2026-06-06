@@ -39,8 +39,8 @@ export const stacks: Stack[] = [
     status: "planned",
   },
   {
-    slug: "ionic-capacitor",
-    name: "Ionic / Capacitor",
+    slug: "capacitor",
+    name: "Capacitor",
     blurb: "Hybrid mobile apps built on web standards.",
     status: "planned",
   },

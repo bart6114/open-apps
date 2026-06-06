@@ -32,29 +32,38 @@ const initials = app.name
 
 // Resolve a logo URL for this app, in order of preference:
 //   1. Explicit `logoUrl` on the app
-//   2. Derived from `repoUrl` if it's a github.com URL
-//      (uses GitHub's opengraph endpoint which returns the repo's
-//      social preview image, or auto-generates one with the repo name)
-//   3. None — falls back to the initials placeholder
+//   2. GitHub owner avatar (extracted from `repoUrl`) — gives every
+//      app a unique visual anchor based on the maintainer.
+//   3. Initials placeholder.
 let logoUrl: string | null = app.logoUrl ?? null;
+let owner: string | null = null;
 if (!logoUrl && app.repoUrl.includes("github.com/")) {
-  // Strip "https://github.com/" prefix and any trailing path.
   const m = app.repoUrl.match(/github\.com\/([^/]+)\/([^/?#]+)/);
   if (m) {
-    const owner = m[1];
+    owner = m[1];
     const repo = m[2].replace(/\.git$/, "");
-    logoUrl = `https://opengraph.githubassets.com/preview/${owner}/${repo}`;
+    logoUrl = `https://avatars.githubusercontent.com/${owner}?v=4&s=80`;
   }
 }
 
 // Show up to 3 platforms; overflow as +N.
-const visiblePlatforms = app.platforms.slice(0, 3);
+const visiblePlatforms = app.platforms.slice(0, 4);
 const platformOverflow = app.platforms.length - visiblePlatforms.length;
 
 // Show up to 3 stack chips (primary + first 2 secondary).
 const allStacks = [app.stack, ...(app.stacks ?? [])].filter(Boolean);
 const visibleStacks = allStacks.slice(0, 3);
 const stackOverflow = allStacks.length - visibleStacks.length;
+
+// Star count formatted compactly.
+function formatStars(n: number): string {
+  if (n >= 1000) {
+    const k = n / 1000;
+    return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
+  }
+  return n.toString();
+}
+const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null;
 ---
 
 <article
@@ -66,12 +75,12 @@ const stackOverflow = allStacks.length - visibleStacks.length;
     {logoUrl ? (
       <img
         src={logoUrl}
-        alt={`${app.name} logo`}
+        alt={`${app.name} avatar`}
         width="40"
         height="40"
         loading="lazy"
         decoding="async"
-        class="h-10 w-10 shrink-0 rounded-md border border-ink-200 object-cover dark:border-ink-800"
+        class="h-10 w-10 shrink-0 rounded-md border border-ink-200 bg-white object-cover dark:border-ink-800 dark:bg-ink-900"
       />
     ) : (
       <span
@@ -96,13 +105,21 @@ const stackOverflow = allStacks.length - visibleStacks.length;
         </a>
       </h3>
       <span class="truncate text-2xs text-ink-500 dark:text-ink-400">
-        {app.category}
+        {owner ? (
+          <>
+            <span class="text-ink-400 dark:text-ink-500">@</span>{owner}
+            <span class="mx-1 text-ink-300 dark:text-ink-700">·</span>
+            {app.category}
+          </>
+        ) : (
+          app.category
+        )}
       </span>
     </div>
 
     {label && (
-      <span class={`badge ${labelClass} shrink-0`}>
-        {label.toUpperCase()}
+      <span class={`badge ${labelClass} shrink-0 text-[10px] leading-none`}>
+        {label}
       </span>
     )}
   </header>
@@ -114,11 +131,28 @@ const stackOverflow = allStacks.length - visibleStacks.length;
     {app.description}
   </p>
 
+  {/* Metadata row: stars + license */}
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-2xs text-ink-500 dark:text-ink-400">
+    {starsLabel && (
+      <span class="inline-flex items-center gap-1">
+        <svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" fill="currentColor">
+          <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
+        </svg>
+        <span class="font-mono">{starsLabel}</span>
+      </span>
+    )}
+    {app.license && (
+      <span class="inline-flex items-center gap-1">
+        <span class="font-mono uppercase tracking-wide text-[10px]">{app.license}</span>
+      </span>
+    )}
+  </div>
+
   {/* Platform chips */}
   <div class="flex flex-wrap items-center gap-1.5">
     {visiblePlatforms.map((p) => (
       <span class="chip">
-        <Icon name={p} category="platform" size={12} />
+        <Icon name={p} category="platform" size={11} />
         <span>{p}</span>
       </span>
     ))}
@@ -131,7 +165,7 @@ const stackOverflow = allStacks.length - visibleStacks.length;
   <div class="mt-auto flex flex-wrap items-center gap-1.5">
     {visibleStacks.map((s) => (
       <span class="chip chip-stack">
-        <Icon name={s} category="stack" size={12} />
+        <Icon name={s} category="stack" size={11} />
         <span>{s}</span>
       </span>
     ))}

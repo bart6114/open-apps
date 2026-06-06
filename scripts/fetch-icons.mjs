@@ -44,9 +44,18 @@ const ICONS = [
   { file: "tensorflow.svg",   target: "stacks/tensorflow.svg",   label: "TensorFlow" },
   { file: "solidity.svg",     target: "stacks/solidity.svg",     label: "Solidity" },
   { file: "rust-light.svg",   target: "stacks/rust.svg",         label: "Rust" },
+  // Android as a stack (used by the StackGrid). The platforms/android.svg
+  // is the same upstream file, but the StackGrid renders from the stacks
+  // category so we keep a separate copy.
+  { file: "android.svg",      target: "stacks/android.svg",      label: "Android (stack)" },
+  // iOS as a stack uses the same apple variants as the platform iOS chip.
+  // The Icon component is theme-aware for `ios` and looks for apple-dark +
+  // apple-light in the active category directory.
+  { file: "apple-dark.svg",   target: "stacks/apple-dark.svg",   label: "iOS / Apple (dark, stack)" },
+  { file: "apple-light.svg",  target: "stacks/apple-light.svg",  label: "iOS / Apple (light, stack)" },
   // Hand-rolled (no upstream equivalent)
   { file: null,               target: "stacks/ionic.svg",        label: "Ionic (custom shield)",        custom: true },
-  { file: null,               target: "stacks/capacitor.svg",    label: "Capacitor (custom schematic)", custom: true },
+  { file: null,               target: "stacks/capacitor.svg",    label: "Capacitor (hand-rolled brand)", custom: true },
 
   // ── Platforms (developer-icons has android/apple/linux) ──────────
   { file: "android.svg",      target: "platforms/android.svg",   label: "Android" },

@@ -92,7 +92,7 @@ export default {
         '2xs': ['0.6875rem', { lineHeight: '1rem' }],
       },
       maxWidth: {
-        container: '1100px',
+        container: '1140px',
         wide: '1400px',
         narrow: '720px',
       },
