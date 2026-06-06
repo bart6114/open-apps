@@ -14,6 +14,13 @@ category: Business
 homepageUrl: https://invoiceninja.com
 license: AGPL-3.0
 status: active
+labels: [new]
+projectType: production
+stateManagement: Provider
+backend: REST API (Laravel)
+architecture: Feature-based
+difficulty: intermediate
+codebaseSize: large
 bestFor:
   - Real commercial product with open codebase
   - Subscription & payment integration patterns
@@ -27,6 +34,15 @@ caveats:
   - Tightly coupled to the hosted Invoice Ninja platform
   - Some premium features require a paid plan
   - AGPL-3.0 is copyleft — read the license before forking
+goodFirstIssues: https://github.com/invoiceninja/flutter-mobile/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+contributionGuide: https://github.com/invoiceninja/flutter-mobile/blob/master/CONTRIBUTING.md
+scores:
+  activity: 65
+  maturity: 92
+  learning: 78
+  contribution: 70
+  docs: 62
+  overall: 76
 
 # Auto-updated daily by .github/workflows/update-apps.yml.
 # Don't edit by hand — the next workflow run will overwrite it.
