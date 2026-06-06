@@ -23,6 +23,8 @@ const SOURCE = "https://raw.githubusercontent.com/xandemon/developer-icons/main/
 //   file   = filename in the developer-icons repo
 //   target = relative path under public/icons/ where we save it
 //   label  = friendly name for logging
+//   custom = true → do not download, expect the SVG to already be
+//            authored by hand under public/icons/<target>.
 const ICONS = [
   // ── Tech stacks (developer-icons provides most) ───────────────────
   { file: "flutter.svg",      target: "stacks/flutter.svg",      label: "Flutter" },
@@ -42,6 +44,8 @@ const ICONS = [
   { file: "tensorflow.svg",   target: "stacks/tensorflow.svg",   label: "TensorFlow" },
   { file: "solidity.svg",     target: "stacks/solidity.svg",     label: "Solidity" },
   { file: "rust-light.svg",   target: "stacks/rust.svg",         label: "Rust" },
+  // Hand-rolled (no upstream equivalent)
+  { file: null,               target: "stacks/ionic.svg",        label: "Ionic / Capacitor (custom)", custom: true },
 
   // ── Platforms (developer-icons has android/apple/linux) ──────────
   { file: "android.svg",      target: "platforms/android.svg",   label: "Android" },
@@ -93,6 +97,14 @@ async function main() {
   for (const it of queue) {
     const dest = join(OUT_BASE, it.target);
     try {
+      if (it.custom) {
+        // Hand-rolled SVG. Verify it exists, then move on.
+        if (!(await exists(dest))) {
+          throw new Error(`expected custom SVG at ${dest}`);
+        }
+        console.log(`  ✎ ${it.label.padEnd(36)} ${it.target}`);
+        continue;
+      }
       const wasDownloaded = await download(`${SOURCE}/${it.file}`, dest);
       if (wasDownloaded) {
         downloaded++;
