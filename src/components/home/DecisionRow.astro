@@ -1,7 +1,6 @@
 ---
 import type { OpenSourceApp } from "../../data/types";
 import Icon from "../icons/Icon.astro";
-import ScoreBars from "./ScoreBars.astro";
 import {
   getOwnerAndRepoFromRepoUrl,
   getOwnerAvatarUrl,
@@ -243,53 +242,5 @@ const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null
     </div>
   </dl>
 
-  {/* Scores row */}
-  <div>
-    <ScoreBars scores={app.scores} />
-  </div>
-
-  {/* Best for + caveats */}
-  {(app.bestFor?.length || app.caveats?.length || app.whyListed?.length) && (
-    <div class="flex flex-col gap-1.5 border-t border-ink-200 pt-3 text-2xs dark:border-ink-800">
-      {app.bestFor && app.bestFor.length > 0 && (
-        <div class="flex items-baseline gap-2">
-          <span class="shrink-0 font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">
-            Best for
-          </span>
-          <span class="text-ink-700 dark:text-ink-300">
-            {app.bestFor.slice(0, 3).join(" · ")}
-            {app.bestFor.length > 3 && (
-              <span class="text-ink-400 dark:text-ink-500"> +{app.bestFor.length - 3}</span>
-            )}
-          </span>
-        </div>
-      )}
-      {app.whyListed && app.whyListed.length > 0 && (
-        <div class="flex items-baseline gap-2">
-          <span class="shrink-0 font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">
-            Why listed
-          </span>
-          <span class="text-ink-700 dark:text-ink-300">
-            {app.whyListed.slice(0, 2).join(" · ")}
-            {app.whyListed.length > 2 && (
-              <span class="text-ink-400 dark:text-ink-500"> +{app.whyListed.length - 2}</span>
-            )}
-          </span>
-        </div>
-      )}
-      {app.caveats && app.caveats.length > 0 && (
-        <div class="flex items-baseline gap-2">
-          <span class="shrink-0 font-medium uppercase tracking-wider text-amber-700 dark:text-amber-400">
-            Caveats
-          </span>
-          <span class="text-ink-700 dark:text-ink-300">
-            {app.caveats.slice(0, 2).join(" · ")}
-            {app.caveats.length > 2 && (
-              <span class="text-ink-400 dark:text-ink-500"> +{app.caveats.length - 2}</span>
-            )}
-          </span>
-        </div>
-      )}
-    </div>
-  )}
+  {/* Scores row — kept off the list to avoid bloat. See detail page. */}
 </article>

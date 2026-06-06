@@ -402,43 +402,6 @@ const initialChips = activeFilterChips(initialFilters);
             : "",
         ].join("");
 
-        // Scores
-        const hasScores = a.scores && Object.values(a.scores).some((v) => typeof v === "number");
-        const scoresHtml = hasScores
-          ? SCORE_DIMS.map(({ key, label }) => {
-              const v = (a.scores as any)[key] as number | undefined;
-              const tier = typeof v === "number" ? scoreTier(v) : 0;
-              const isOverall = key === "overall";
-              const cells = [0, 1, 2, 3]
-                .map((i) =>
-                  `<div class="flex-1 rounded-sm ${i < tier ? (isOverall ? "bg-ink-700 dark:bg-ink-200" : "bg-ink-500 dark:bg-ink-400") : "bg-ink-200 dark:bg-ink-800"}"></div>`,
-                )
-                .join("");
-              return `<div class="inline-flex items-center gap-1.5"><dt class="${isOverall ? "font-semibold text-ink-700 dark:text-ink-200" : "text-ink-500 dark:text-ink-400"}">${label}</dt>${typeof v === "number" ? `<dd class="font-mono ${isOverall ? "text-ink-900 dark:text-ink-100" : "text-ink-700 dark:text-ink-300"}">${Math.round(v)}</dd>` : ""}<dd class="flex h-1.5 w-10 gap-px">${cells}</dd></div>`;
-            }).join("")
-          : `<span class="text-ink-400 dark:text-ink-500">Scores not yet curated</span>`;
-
-        // Curation lines
-        const curationLines: string[] = [];
-        if (a.bestFor && a.bestFor.length > 0) {
-          const shown = a.bestFor.slice(0, 3).join(" · ");
-          const more = a.bestFor.length > 3 ? ` <span class="text-ink-400 dark:text-ink-500">+${a.bestFor.length - 3}</span>` : "";
-          curationLines.push(`<div class="flex items-baseline gap-2"><span class="shrink-0 font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Best for</span><span class="text-ink-700 dark:text-ink-300">${esc(shown)}${more}</span></div>`);
-        }
-        if (a.whyListed && a.whyListed.length > 0) {
-          const shown = a.whyListed.slice(0, 2).join(" · ");
-          const more = a.whyListed.length > 2 ? ` <span class="text-ink-400 dark:text-ink-500">+${a.whyListed.length - 2}</span>` : "";
-          curationLines.push(`<div class="flex items-baseline gap-2"><span class="shrink-0 font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Why listed</span><span class="text-ink-700 dark:text-ink-300">${esc(shown)}${more}</span></div>`);
-        }
-        if (a.caveats && a.caveats.length > 0) {
-          const shown = a.caveats.slice(0, 2).join(" · ");
-          const more = a.caveats.length > 2 ? ` <span class="text-ink-400 dark:text-ink-500">+${a.caveats.length - 2}</span>` : "";
-          curationLines.push(`<div class="flex items-baseline gap-2"><span class="shrink-0 font-medium uppercase tracking-wider text-amber-700 dark:text-amber-400">Caveats</span><span class="text-ink-700 dark:text-ink-300">${esc(shown)}${more}</span></div>`);
-        }
-        const curationHtml = curationLines.length
-          ? `<div class="flex flex-col gap-1.5 border-t border-ink-200 pt-3 text-2xs dark:border-ink-800">${curationLines.join("")}</div>`
-          : "";
-
         return `
           <article class="decision-row group relative flex flex-col gap-3 rounded-lg border border-ink-200 bg-white p-4 transition-colors hover:border-ink-300 hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_-2px_rgba(0,0,0,0.06)] dark:border-ink-800 dark:bg-ink-950 dark:hover:border-ink-700 dark:hover:shadow-[0_1px_2px_rgba(0,0,0,0.4),0_4px_12px_-2px_rgba(0,0,0,0.3)]" data-slug="${esc(a.slug)}">
             <header class="flex items-start gap-3">
@@ -480,8 +443,6 @@ const initialChips = activeFilterChips(initialFilters);
                 <dd class="font-mono">${licenseBits}</dd>
               </div>
             </dl>
-            <dl class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-2xs" aria-label="App scores">${scoresHtml}</dl>
-            ${curationHtml}
           </article>
         `;
       }
