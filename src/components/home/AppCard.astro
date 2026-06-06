@@ -1,6 +1,10 @@
 ---
 import type { OpenSourceApp } from "../../data/types";
 import Icon from "../icons/Icon.astro";
+import {
+  getOwnerAndRepoFromRepoUrl,
+  getOwnerAvatarUrl,
+} from "../../lib/repo";
 
 interface Props {
   app: OpenSourceApp;
@@ -30,23 +34,14 @@ const initials = app.name
   .join("")
   .toUpperCase();
 
-// Resolve a logo URL for this app, in order of preference:
+// Resolve a logo URL for this app:
 //   1. Explicit `logoUrl` on the app
-//   2. GitHub owner avatar (extracted from `repoUrl`) — gives every
-//      app a unique visual anchor based on the maintainer.
+//   2. GitHub owner avatar (extracted from `repoUrl`)
 //   3. Initials placeholder.
-let logoUrl: string | null = app.logoUrl ?? null;
-let owner: string | null = null;
-if (!logoUrl && app.repoUrl.includes("github.com/")) {
-  const m = app.repoUrl.match(/github\.com\/([^/]+)\/([^/?#]+)/);
-  if (m) {
-    owner = m[1];
-    const repo = m[2].replace(/\.git$/, "");
-    logoUrl = `https://avatars.githubusercontent.com/${owner}?v=4&s=80`;
-  }
-}
+const { owner } = getOwnerAndRepoFromRepoUrl(app.repoUrl);
+const logoUrl = app.logoUrl ?? getOwnerAvatarUrl(owner, 80);
 
-// Show up to 3 platforms; overflow as +N.
+// Show up to 4 platforms; overflow as +N.
 const visiblePlatforms = app.platforms.slice(0, 4);
 const platformOverflow = app.platforms.length - visiblePlatforms.length;
 
@@ -64,14 +59,22 @@ function formatStars(n: number): string {
   return n.toString();
 }
 const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null;
+
+const detailHref = `/apps/${app.slug}`;
 ---
 
 <article
   class="card card-hover group relative flex h-full flex-col gap-3 p-4"
 >
-  {/* Top row: logo + name + label badge. Logo is optional —
-      falls back to a clean initials placeholder. */}
-  <header class="flex items-start gap-3">
+  {/* Stretched link: covers the whole card. Goes to the detail page. */}
+  <a
+    href={detailHref}
+    class="absolute inset-0 z-0 rounded-lg"
+    aria-label={`Open ${app.name} details`}
+  ></a>
+
+  {/* Top row: logo + name + label badge. */}
+  <header class="relative z-10 flex items-start gap-3">
     {logoUrl ? (
       <img
         src={logoUrl}
@@ -95,11 +98,13 @@ const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null
       <h3
         class="m-0 truncate text-[0.9375rem] font-semibold tracking-tight text-ink-900 group-hover:underline dark:text-ink-100"
       >
+        {/* Name is its own link to the GitHub repo (not the detail page).
+            Stacks above the stretched link via z-index. */}
         <a
           href={app.repoUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-inherit no-underline"
+          class="relative z-10 text-inherit no-underline"
         >
           {app.name}
         </a>
@@ -107,7 +112,14 @@ const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null
       <span class="truncate text-2xs text-ink-500 dark:text-ink-400">
         {owner ? (
           <>
-            <span class="text-ink-400 dark:text-ink-500">@</span>{owner}
+            <a
+              href={`https://github.com/${owner}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="relative z-10 text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+            >
+              <span class="text-ink-400 dark:text-ink-500">@</span>{owner}
+            </a>
             <span class="mx-1 text-ink-300 dark:text-ink-700">·</span>
             {app.category}
           </>
@@ -126,13 +138,13 @@ const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null
 
   {/* Description */}
   <p
-    class="m-0 line-clamp-2 text-[0.8125rem] leading-relaxed text-ink-500 dark:text-ink-400"
+    class="relative z-10 m-0 line-clamp-2 text-[0.8125rem] leading-relaxed text-ink-500 dark:text-ink-400"
   >
     {app.description}
   </p>
 
   {/* Metadata row: stars + license */}
-  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-2xs text-ink-500 dark:text-ink-400">
+  <div class="relative z-10 flex flex-wrap items-center gap-x-3 gap-y-1 text-2xs text-ink-500 dark:text-ink-400">
     {starsLabel && (
       <span class="inline-flex items-center gap-1">
         <svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" fill="currentColor">
@@ -149,7 +161,7 @@ const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null
   </div>
 
   {/* Platform chips */}
-  <div class="flex flex-wrap items-center gap-1.5">
+  <div class="relative z-10 flex flex-wrap items-center gap-1.5">
     {visiblePlatforms.map((p) => (
       <span class="chip">
         <Icon name={p} category="platform" size={11} />
@@ -162,7 +174,7 @@ const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null
   </div>
 
   {/* Stack chips */}
-  <div class="mt-auto flex flex-wrap items-center gap-1.5">
+  <div class="relative z-10 mt-auto flex flex-wrap items-center gap-1.5">
     {visibleStacks.map((s) => (
       <span class="chip chip-stack">
         <Icon name={s} category="stack" size={11} />

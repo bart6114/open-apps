@@ -1,0 +1,290 @@
+---
+import type { OpenSourceApp } from "../../data/types";
+import { apps } from "../../data/apps";
+import Container from "../layout/Container.astro";
+import Icon from "../icons/Icon.astro";
+import AppCard from "../home/AppCard.astro";
+import { getOwnerAndRepoFromRepoUrl } from "../../lib/repo";
+
+export function getStaticPaths() {
+  return apps.map((app) => ({
+    params: { slug: app.slug },
+    props: { app },
+  }));
+}
+
+interface Props {
+  app: OpenSourceApp;
+}
+
+const { app } = Astro.props;
+
+const { owner, repo } = getOwnerAndRepoFromRepoUrl(app.repoUrl);
+
+// Initials placeholder fallback
+const initials = app.name
+  .split(/\s+/)
+  .map((w) => w[0])
+  .filter(Boolean)
+  .slice(0, 2)
+  .join("")
+  .toUpperCase();
+
+// Owner avatar URL
+const ownerAvatar = owner
+  ? `https://avatars.githubusercontent.com/${owner}?v=4&s=160`
+  : null;
+
+// Label for the primary label badge (new / hot / mature)
+const primaryLabel =
+  app.labels?.find((l) => l === "new" || l === "hot" || l === "mature") ??
+  app.labels?.[0];
+
+const labelClass = primaryLabel === "new"
+  ? "badge-new"
+  : primaryLabel === "hot"
+    ? "badge-hot"
+    : primaryLabel === "mature"
+      ? "badge-mature"
+      : "";
+
+// All stacks (primary + secondary) for chips
+const allStacks = [app.stack, ...(app.stacks ?? [])].filter(Boolean);
+
+// Related apps: same primary stack, excluding this one. If < 3,
+//  fall back to apps in the same category.
+let related: OpenSourceApp[] = apps
+  .filter((a) => a.slug !== app.slug && a.stack === app.stack)
+  .slice(0, 4);
+
+if (related.length < 3) {
+  const more = apps
+    .filter(
+      (a) =>
+        a.slug !== app.slug &&
+        !related.some((r) => r.slug === a.slug) &&
+        a.category === app.category,
+    )
+    .slice(0, 4 - related.length);
+  related = [...related, ...more];
+}
+
+// Date formatting helper
+function formatDate(iso?: string): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function formatStars(n?: number): string | null {
+  if (typeof n !== "number") return null;
+  if (n >= 1000) {
+    const k = n / 1000;
+    return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
+  }
+  return n.toString();
+}
+
+const starsLabel = formatStars(app.stars);
+---
+
+<Container>
+  <article class="pt-10 sm:pt-14">
+    {/* Breadcrumb */}
+    <nav class="text-2xs text-ink-500 dark:text-ink-400" aria-label="Breadcrumb">
+      <a href="/apps" class="hover:text-ink-900 dark:hover:text-ink-100">Apps</a>
+      <span class="mx-1.5 text-ink-300 dark:text-ink-700">/</span>
+      <span class="text-ink-700 dark:text-ink-300">{app.name}</span>
+    </nav>
+
+    {/* Header */}
+    <header class="mt-5 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+      <div class="flex items-start gap-4">
+        {ownerAvatar ? (
+          <img
+            src={ownerAvatar}
+            alt={`${owner} avatar`}
+            width="64"
+            height="64"
+            class="h-16 w-16 shrink-0 rounded-lg border border-ink-200 bg-white object-cover dark:border-ink-800 dark:bg-ink-900"
+          />
+        ) : (
+          <span
+            aria-hidden="true"
+            class="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border border-ink-200 bg-ink-50 text-base font-semibold text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300"
+          >
+            {initials}
+          </span>
+        )}
+        <div class="flex min-w-0 flex-col gap-1">
+          <h1 class="m-0 text-[1.75rem] sm:text-[2rem] font-semibold tracking-[-0.02em] leading-[1.1] text-ink-900 dark:text-ink-100">
+            {app.name}
+          </h1>
+          <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-2xs text-ink-500 dark:text-ink-400">
+            {owner && (
+              <a
+                href={`https://github.com/${owner}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono hover:text-ink-900 dark:hover:text-ink-100"
+              >
+                @{owner}
+              </a>
+            )}
+            {owner && repo && (
+              <>
+                <span class="text-ink-300 dark:text-ink-700">·</span>
+                <span class="font-mono">{repo}</span>
+              </>
+            )}
+            <span class="text-ink-300 dark:text-ink-700">·</span>
+            <span>{app.category}</span>
+            {app.status && (
+              <>
+                <span class="text-ink-300 dark:text-ink-700">·</span>
+                <span class="capitalize">{app.status}</span>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div class="flex shrink-0 flex-wrap items-center gap-2 sm:flex-col sm:items-end sm:gap-2">
+        {primaryLabel && (
+          <span class={`badge ${labelClass} text-[10px] leading-none`}>
+            {primaryLabel}
+          </span>
+        )}
+        <a
+          href={app.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary"
+        >
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z" />
+          </svg>
+          View on GitHub
+        </a>
+        {app.homepageUrl && (
+          <a
+            href={app.homepageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-outline"
+          >
+            Homepage
+            <span aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+    </header>
+
+    {/* Description */}
+    <p class="mt-6 max-w-[68ch] text-[0.9375rem] sm:text-base leading-relaxed text-ink-700 dark:text-ink-200 m-0">
+      {app.description}
+    </p>
+
+    {/* Metadata grid */}
+    <dl class="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-ink-200 bg-ink-200 text-2xs sm:grid-cols-2 lg:grid-cols-4 dark:border-ink-800 dark:bg-ink-800">
+      <div class="flex flex-col gap-1 bg-white p-4 dark:bg-ink-950">
+        <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Primary stack</dt>
+        <dd class="text-ink-900 dark:text-ink-100">
+          <span class="chip chip-stack">
+            <Icon name={app.stack} category="stack" size={11} />
+            <span>{app.stack}</span>
+          </span>
+        </dd>
+      </div>
+      <div class="flex flex-col gap-1 bg-white p-4 dark:bg-ink-950">
+        <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Platforms</dt>
+        <dd class="flex flex-wrap gap-1 text-ink-900 dark:text-ink-100">
+          {app.platforms.map((p) => (
+            <span class="chip">
+              <Icon name={p} category="platform" size={11} />
+              <span>{p}</span>
+            </span>
+          ))}
+        </dd>
+      </div>
+      <div class="flex flex-col gap-1 bg-white p-4 dark:bg-ink-950">
+        <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">License</dt>
+        <dd class="font-mono text-ink-900 dark:text-ink-100">{app.license ?? "—"}</dd>
+      </div>
+      <div class="flex flex-col gap-1 bg-white p-4 dark:bg-ink-950">
+        <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Stars</dt>
+        <dd class="font-mono text-ink-900 dark:text-ink-100">
+          {starsLabel ?? "—"}
+        </dd>
+      </div>
+      {allStacks.length > 1 && (
+        <div class="flex flex-col gap-1 bg-white p-4 sm:col-span-2 dark:bg-ink-950">
+          <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Also uses</dt>
+          <dd class="flex flex-wrap gap-1 text-ink-900 dark:text-ink-100">
+            {app.stacks?.map((s) => (
+              <span class="chip chip-stack">
+                <Icon name={s} category="stack" size={11} />
+                <span>{s}</span>
+              </span>
+            ))}
+          </dd>
+        </div>
+      )}
+      {app.addedAt && (
+        <div class="flex flex-col gap-1 bg-white p-4 dark:bg-ink-950">
+          <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Added</dt>
+          <dd class="font-mono text-ink-900 dark:text-ink-100">{formatDate(app.addedAt)}</dd>
+        </div>
+      )}
+      {app.lastCommitAt && (
+        <div class="flex flex-col gap-1 bg-white p-4 dark:bg-ink-950">
+          <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Last commit</dt>
+          <dd class="font-mono text-ink-900 dark:text-ink-100">{formatDate(app.lastCommitAt)}</dd>
+        </div>
+      )}
+    </dl>
+
+    {/* Tags */}
+    {app.tags && app.tags.length > 0 && (
+      <div class="mt-4 flex flex-wrap items-center gap-1.5">
+        <span class="text-2xs font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Tags</span>
+        {app.tags.map((t) => (
+          <a
+            href={`/apps?q=${encodeURIComponent(t)}`}
+            class="chip hover:border-ink-300 dark:hover:border-ink-700"
+          >
+            {t}
+          </a>
+        ))}
+      </div>
+    )}
+
+    {/* Related apps */}
+    {related.length > 0 && (
+      <section class="mt-14 sm:mt-16">
+        <header class="mb-5 flex items-end justify-between gap-4">
+          <div>
+            <span class="text-2xs font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Related</span>
+            <h2 class="mt-1 text-[1.25rem] font-semibold tracking-tight text-ink-900 dark:text-ink-100 m-0">
+              More on {app.stack}
+            </h2>
+          </div>
+          <a
+            href={`/apps?stack=${encodeURIComponent(app.stack)}`}
+            class="hidden shrink-0 text-2xs font-medium text-ink-500 hover:text-ink-900 sm:inline dark:text-ink-400 dark:hover:text-ink-100"
+          >
+            View all →
+          </a>
+        </header>
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {related.map((r) => <AppCard app={r} />)}
+        </div>
+      </section>
+    )}
+  </article>
+</Container>
