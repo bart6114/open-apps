@@ -30,6 +30,23 @@ const initials = app.name
   .join("")
   .toUpperCase();
 
+// Resolve a logo URL for this app, in order of preference:
+//   1. Explicit `logoUrl` on the app
+//   2. Derived from `repoUrl` if it's a github.com URL
+//      (uses GitHub's opengraph endpoint which returns the repo's
+//      social preview image, or auto-generates one with the repo name)
+//   3. None — falls back to the initials placeholder
+let logoUrl: string | null = app.logoUrl ?? null;
+if (!logoUrl && app.repoUrl.includes("github.com/")) {
+  // Strip "https://github.com/" prefix and any trailing path.
+  const m = app.repoUrl.match(/github\.com\/([^/]+)\/([^/?#]+)/);
+  if (m) {
+    const owner = m[1];
+    const repo = m[2].replace(/\.git$/, "");
+    logoUrl = `https://opengraph.githubassets.com/preview/${owner}/${repo}`;
+  }
+}
+
 // Show up to 3 platforms; overflow as +N.
 const visiblePlatforms = app.platforms.slice(0, 3);
 const platformOverflow = app.platforms.length - visiblePlatforms.length;
@@ -46,13 +63,14 @@ const stackOverflow = allStacks.length - visibleStacks.length;
   {/* Top row: logo + name + label badge. Logo is optional —
       falls back to a clean initials placeholder. */}
   <header class="flex items-start gap-3">
-    {app.logoUrl ? (
+    {logoUrl ? (
       <img
-        src={app.logoUrl}
+        src={logoUrl}
         alt={`${app.name} logo`}
         width="40"
         height="40"
         loading="lazy"
+        decoding="async"
         class="h-10 w-10 shrink-0 rounded-md border border-ink-200 object-cover dark:border-ink-800"
       />
     ) : (
@@ -100,7 +118,7 @@ const stackOverflow = allStacks.length - visibleStacks.length;
   <div class="flex flex-wrap items-center gap-1.5">
     {visiblePlatforms.map((p) => (
       <span class="chip">
-        <Icon name={p} size={12} />
+        <Icon name={p} category="platform" size={12} />
         <span>{p}</span>
       </span>
     ))}
@@ -113,7 +131,7 @@ const stackOverflow = allStacks.length - visibleStacks.length;
   <div class="mt-auto flex flex-wrap items-center gap-1.5">
     {visibleStacks.map((s) => (
       <span class="chip chip-stack">
-        <Icon name={s} size={12} />
+        <Icon name={s} category="stack" size={12} />
         <span>{s}</span>
       </span>
     ))}
