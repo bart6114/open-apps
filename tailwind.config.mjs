@@ -29,6 +29,37 @@ export default {
         DEFAULT: '#1f6feb',
         muted: '#388bfd1a',
       },
+      // A tiny accent palette used only for status badges
+      // (new / hot / mature / activity). Everything else stays
+      // in the ink grayscale.
+      emerald: {
+        50: '#ecfdf5',
+        300: '#6ee7b7',
+        400: '#34d399',
+        700: '#047857',
+        800: '#065f46',
+        950: '#022c22',
+      },
+      orange: {
+        50: '#fff7ed',
+        300: '#fdba74',
+        400: '#fb923c',
+        700: '#c2410c',
+        800: '#9a3412',
+        950: '#431407',
+      },
+      blue: {
+        50: '#eff6ff',
+        300: '#93c5fd',
+        400: '#60a5fa',
+        700: '#1d4ed8',
+        800: '#1e40af',
+        950: '#172554',
+      },
+      amber: {
+        400: '#fbbf24',
+        700: '#b45309',
+      },
     },
     extend: {
       fontFamily: {
