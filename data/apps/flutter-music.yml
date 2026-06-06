@@ -1,0 +1,17 @@
+# Flutter Music — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "flutter-music"
+name: "Flutter Music"
+repoUrl: "https://github.com/o-ifeanyi/musicPlayer"
+description: "A Flutter music player to play songs"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Media"
+# Original submitter: o-ifeanyi
+activity:
+  stars: 154
+  forks: 22
+  monthlyCommits: []
+  lastCommitAt: 2023-02-19
+  totalCommitsKnown: 58
+  updatedAt: 2026-06-06

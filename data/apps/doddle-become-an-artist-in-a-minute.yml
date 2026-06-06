@@ -1,0 +1,16 @@
+# Doddle- (become an artist in a minute) — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "doddle-become-an-artist-in-a-minute"
+name: "Doddle- (become an artist in a minute)"
+repoUrl: "https://github.com/NaserElziadna/doddle"
+description: "💚Amazing magical doodle drawing app/game provide a creative doodle world for you 🖌💛🌸💚 [Naser Elziadna]("
+stack: Flutter
+platforms: [Android, iOS]
+category: "Entertainment"
+activity:
+  stars: 252
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2025-01-10
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

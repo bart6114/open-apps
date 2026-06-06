@@ -1,0 +1,17 @@
+# FlutterMates — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "fluttermates"
+name: "FlutterMates"
+repoUrl: "https://github.com/CodemateLtd/FlutterMates"
+description: "A sample app for our internal company talk about Flutter"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Communication"
+# Original submitter: Codemate Ltd
+activity:
+  stars: 600
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2023-02-10
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

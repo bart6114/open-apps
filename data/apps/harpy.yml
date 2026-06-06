@@ -1,0 +1,15 @@
+# Harpy — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "harpy"
+name: "Harpy"
+repoUrl: "https://github.com/robertodoering/harpy"
+description: "A Twitter app built with Flutter [Roberto Doering]("
+stack: Flutter
+platforms: [Android, iOS]
+category: "Social Network"
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

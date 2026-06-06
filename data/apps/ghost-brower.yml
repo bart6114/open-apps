@@ -1,0 +1,16 @@
+# Ghost Brower — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "ghost-brower"
+name: "Ghost Brower"
+repoUrl: "https://github.com/SAHILDUDHAL21/Ghost-Browser"
+description: "Simple Web Browser that does not track any User"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: Sahil Dudhal
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

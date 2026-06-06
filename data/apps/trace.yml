@@ -1,0 +1,17 @@
+# Trace — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "trace"
+name: "Trace"
+repoUrl: "https://github.com/trentpiercy/trace"
+description: "Modern and powerful crypto portfolio & market explorer"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Finance"
+# Original submitter: Trent Piercy
+activity:
+  stars: 1146
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2023-03-07
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

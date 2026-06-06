@@ -1,0 +1,16 @@
+# Flutter Games — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "flutter-games"
+name: "Flutter Games"
+repoUrl: "https://github.com/searchy2/FlutterGames"
+description: "Flutter app for purchasing and renting games"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Shopping"
+# Original submitter: Ray Li
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

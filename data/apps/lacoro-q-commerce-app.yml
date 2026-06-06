@@ -1,0 +1,16 @@
+# LaCoro Q-commerce app — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "lacoro-q-commerce-app"
+name: "LaCoro Q-commerce app"
+repoUrl: "https://github.com/LaCoro/ConsumerFlutterApp"
+description: "An open source quick commerce app in flutter"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Shopping"
+# Original submitter: LaCoro
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

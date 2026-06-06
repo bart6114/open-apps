@@ -1,0 +1,16 @@
+# Enigma Signal Meter — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "enigma-signal-meter"
+name: "Enigma Signal Meter"
+repoUrl: "https://github.com/shaxxx/Signalmeter2"
+description: "Align your satellite dish by reading signal from satellite receiver"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: Krkadoni
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

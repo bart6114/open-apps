@@ -1,0 +1,16 @@
+# Travel Guide — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "travel-guide"
+name: "Travel Guide"
+repoUrl: "https://github.com/Ivaskuu/travel-guide_app"
+description: "Travel guide app"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Travel"
+# Original submitter: Ivascu Adrian
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

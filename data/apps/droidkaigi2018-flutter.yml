@@ -1,0 +1,17 @@
+# DroidKaigi2018-flutter — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "droidkaigi2018-flutter"
+name: "DroidKaigi2018-flutter"
+repoUrl: "https://github.com/konifar/droidkaigi2018-flutter"
+description: "Unofficial conference app for DroidKaigi 2018 Tokyo"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Communication"
+# Original submitter: konifar
+activity:
+  stars: 504
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2018-05-01
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

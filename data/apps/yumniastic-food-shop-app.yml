@@ -1,0 +1,16 @@
+# Yumniastic Food Shop App — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "yumniastic-food-shop-app"
+name: "Yumniastic Food Shop App"
+repoUrl: "https://github.com/1hanzla100/flutter-yumniastic"
+description: "Online food delivery service app and Django API"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Shopping"
+# Original submitter: 1hanzla100
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

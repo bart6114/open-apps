@@ -1,0 +1,17 @@
+# TV Randshow — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "tv-randshow"
+name: "TV Randshow"
+repoUrl: "https://github.com/deandreamatias/tv-randshow"
+description: "App to choose a random TV show episode"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Entertainment"
+# Original submitter: deandreamatias
+activity:
+  stars: 241
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2026-06-03
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

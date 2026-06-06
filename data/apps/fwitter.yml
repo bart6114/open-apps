@@ -1,0 +1,18 @@
+# Fwitter — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "fwitter"
+name: "Fwitter"
+repoUrl: "https://github.com/TheAlphamerc/flutter_twitter_clone"
+description: "Fully functional Twitter clone built in flutter framework using Firebase realtime database and storage"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Social Network"
+# Original submitter: Sonu Sharma
+activity:
+  stars: 4226
+  forks: 0  # populated by GitHub Actions on next refresh
+  lastCommitAt: 2024-07-31
+  monthlyCommits: []  # populated by GitHub Actions on next refresh
+  contributors: 0  # populated by GitHub Actions on next refresh
+  updatedAt: 2026-06-06
+  # Seeded from GitHub search on 2026-06-06.

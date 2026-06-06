@@ -1,0 +1,17 @@
+# Slide Puzzle — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "slide-puzzle"
+name: "Slide Puzzle"
+repoUrl: "https://github.com/kevmoo/slide_puzzle"
+description: "Classic slide (15) puzzle"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Games"
+# Original submitter: Kevin Moore
+activity:
+  stars: 179
+  forks: 74
+  monthlyCommits: []
+  lastCommitAt: 2022-02-05
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

@@ -1,0 +1,16 @@
+# wger — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "wger"
+name: "wger"
+repoUrl: "https://github.com/wger-project/flutter"
+description: "Flutter fitness/workout app for wger by the [wger project](https://github.com/wger-project)"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Health and Fitness"
+activity:
+  stars: 917
+  forks: 401
+  monthlyCommits: []
+  lastCommitAt: 2026-06-05
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

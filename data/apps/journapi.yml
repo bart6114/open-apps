@@ -1,0 +1,16 @@
+# Journapi — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "journapi"
+name: "Journapi"
+repoUrl: "https://github.com/ChangJoo-Park/journapi_flutter"
+description: "Bullet journal application made with Flutter and GetX"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: ChangJoo Park
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

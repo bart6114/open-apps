@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import type { OpenSourceApp } from "./types";
+import type { OpenSourceApp, AppLabel } from "./types";
 
 // ──────────────────────────────────────────────────────────────────────
 // Source of truth: data/generated/apps.json, produced at build time
@@ -52,6 +52,39 @@ type GeneratedApp = Partial<OpenSourceApp> & {
 };
 
 /**
+ * Auto-compute labels for an app from its activity block. Used as a
+ * fallback when a curator hasn't hand-set `labels:` in the yml. Drives
+ * the homepage "new / hot / mature" sections.
+ *
+ *   mature — stars ≥ 500, OR very high stars (popular, established)
+ *   hot    — last commit within the last 6 months (currently active)
+ *   new    — emerging: not mature, not in the last commit window, or
+ *            no commit signal at all
+ *
+ * Multiple labels can apply (a popular active project is both mature
+ * and hot).
+ */
+function computeLabels(g: GeneratedApp): AppLabel[] {
+  const labels: AppLabel[] = [];
+  const stars = typeof g.activity?.stars === "number" ? g.activity.stars : 0;
+  const lastCommit = g.activity?.lastCommitAt;
+
+  if (stars >= 500) labels.push("mature");
+  if (stars >= 100 && stars < 500) labels.push("hot");
+  if (stars < 100) labels.push("new");
+
+  // Hot: recent commit and not already tagged as such
+  if (lastCommit) {
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+    if (new Date(lastCommit) >= sixMonthsAgo && !labels.includes("hot")) {
+      labels.push("hot");
+    }
+  }
+  return labels;
+}
+
+/**
  * Map a generated yml-shaped record to the OpenSourceApp shape that
  * pages expect. Fills defaults, flattens `activity.stars` → `stars`,
  * and tolerates missing curation fields.
@@ -75,7 +108,7 @@ function normalize(g: GeneratedApp): OpenSourceApp {
     status: g.status,
     addedAt: g.addedAt,
     lastCommitAt: a.lastCommitAt ?? g.lastCommitAt,
-    labels: g.labels,
+    labels: g.labels && g.labels.length > 0 ? g.labels : computeLabels(g),
     // Curation (optional)
     projectType: g.projectType,
     stateManagement: g.stateManagement,

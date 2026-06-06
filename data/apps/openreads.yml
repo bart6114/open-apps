@@ -1,0 +1,16 @@
+# Openreads — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "openreads"
+name: "Openreads"
+repoUrl: "https://github.com/mateusz-bak/openreads-android"
+description: "A privacy oriented books tracker that allows you to keep track of your readings"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: mateusz-bak
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

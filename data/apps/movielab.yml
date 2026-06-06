@@ -1,0 +1,17 @@
+# MovieLab — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "movielab"
+name: "MovieLab"
+repoUrl: "https://github.com/ErfanRht/MovieLab"
+description: "A useful and modern movie database app"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Media"
+# Original submitter: Erfan Rahmati
+activity:
+  stars: 450
+  forks: 97
+  monthlyCommits: []
+  lastCommitAt: 2022-09-27
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

@@ -1,0 +1,16 @@
+# E-Commerce App — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "e-commerce-app"
+name: "E-Commerce App"
+repoUrl: "https://github.com/Tarikul711/flutter-ecommerce"
+description: "Ecommerce app UI and API integration"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Shopping"
+# Original submitter: Md Tarikul Islam
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

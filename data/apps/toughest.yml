@@ -1,0 +1,17 @@
+# Toughest — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "toughest"
+name: "Toughest"
+repoUrl: "https://github.com/MDSADABWASIM/Toughest"
+description: "Tricky questions and answer- Offline Interview Q/A"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Entertainment"
+# Original submitter: MD SADAB WASIM
+activity:
+  stars: 275
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2025-11-02
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

@@ -1,0 +1,16 @@
+# Ejimo — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "ejimo"
+name: "Ejimo"
+repoUrl: "https://github.com/albemala/emoji-picker"
+description: "Cross-platform emoji and symbol picker"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: albemala
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

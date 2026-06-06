@@ -1,0 +1,16 @@
+# Notes App — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "notes-app"
+name: "Notes App"
+repoUrl: "https://github.com/bimsina/notes-app"
+description: "Note Taking App made with Flutter with Sqlite as database"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: Bibek Timsina
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

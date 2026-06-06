@@ -1,0 +1,17 @@
+# Grey — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "grey"
+name: "Grey"
+repoUrl: "https://github.com/avirias/Grey"
+description: "A Material designed music player developed in Flutter"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Media"
+# Original submitter: Avinash Kumar
+activity:
+  stars: 528
+  forks: 192
+  monthlyCommits: []
+  lastCommitAt: 2020-06-09
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

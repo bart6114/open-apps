@@ -1,0 +1,17 @@
+# SpaceX GO — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "spacex-go"
+name: "SpaceX GO"
+repoUrl: "https://github.com/jesusrp98/spacex-go"
+description: "Simple yet powerful, open-source SpaceX launch tracker"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Communication"
+# Original submitter: Chechu
+activity:
+  stars: 923
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2024-03-28
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

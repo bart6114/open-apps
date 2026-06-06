@@ -1,0 +1,17 @@
+# Music Player — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "music-player"
+name: "Music Player"
+repoUrl: "https://github.com/iampawan/Flutter-Music-Player"
+description: "Full featured music player"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Media"
+# Original submitter: Pawan Kumar
+activity:
+  stars: 1783
+  forks: 560
+  monthlyCommits: []
+  lastCommitAt: 2024-01-15
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

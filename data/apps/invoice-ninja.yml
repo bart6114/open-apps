@@ -47,8 +47,9 @@ scores:
 # Auto-updated daily by .github/workflows/update-apps.yml.
 # Don't edit by hand — the next workflow run will overwrite it.
 activity:
-  stars: 1800
-  forks: 510
-  lastCommitAt: 2025-11-12
-  contributors: 42
+  stars: 1744
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2026-06-04
+  totalCommitsKnown: 0
   updatedAt: 2026-06-06

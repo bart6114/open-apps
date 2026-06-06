@@ -1,0 +1,17 @@
+# Tailor made — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "tailor-made"
+name: "Tailor made"
+repoUrl: "https://github.com/jogboms/tailor_made"
+description: "Managing a Fashion designer's daily routine"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Personalization"
+# Original submitter: Jeremiah Ogbomo
+activity:
+  stars: 341
+  forks: 116
+  monthlyCommits: []
+  lastCommitAt: 2023-08-15
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

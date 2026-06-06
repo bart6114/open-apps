@@ -1,0 +1,16 @@
+# Time Cop — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "time-cop"
+name: "Time Cop"
+repoUrl: "https://github.com/hamaluik/timecop"
+description: "A time tracking app that respects your privacy"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: Kenton Hamaluik
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

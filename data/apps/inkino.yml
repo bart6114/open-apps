@@ -1,0 +1,17 @@
+# InKino — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "inkino"
+name: "InKino"
+repoUrl: "https://github.com/roughike/inKino"
+description: "A multiplatform Dart movie app"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Media"
+# Original submitter: Iiro Krankka
+activity:
+  stars: 3681
+  forks: 702
+  monthlyCommits: []
+  lastCommitAt: 2022-03-30
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

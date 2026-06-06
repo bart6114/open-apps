@@ -1,0 +1,16 @@
+# GroupChatApp — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "groupchatapp"
+name: "GroupChatApp"
+repoUrl: "https://github.com/ahmedgulabkhan/GroupChatApp"
+description: "Group chat application using Flutter and Firebase, where users can register and create groups or join already existing groups and start conversing with each other"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Social Network"
+# Original submitter: Ahmed Gulab Khan
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

@@ -1,0 +1,15 @@
+# Rapidinho — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "rapidinho"
+name: "Rapidinho"
+repoUrl: "https://github.com/gdgluanda/rapidinho"
+description: "Unofficial delivery app for Rapidinho made"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Shopping"
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

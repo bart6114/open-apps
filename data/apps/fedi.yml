@@ -1,0 +1,16 @@
+# Fedi — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "fedi"
+name: "Fedi"
+repoUrl: "https://github.com/Big-Fig/Fediverse.app"
+description: "Open-source client for Pleroma and Mastodon social networks"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Social Network"
+# Original submitter: Big-Fig
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

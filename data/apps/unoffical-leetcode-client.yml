@@ -1,0 +1,16 @@
+# Unoffical LeetCode Client — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "unoffical-leetcode-client"
+name: "Unoffical LeetCode Client"
+repoUrl: "https://github.com/SAHILDUDHAL21/LeetCode-Unofficial-Mobile-App"
+description: "Minimalist LeetCode Mobile Client"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Social Network"
+# Original submitter: Sahil Dudhal
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

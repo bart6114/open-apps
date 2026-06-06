@@ -1,0 +1,16 @@
+# You — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "you"
+name: "You"
+repoUrl: "https://github.com/MDSADABWASIM/You"
+description: "An app that checks what internet knows about you"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: Md Sadab Wasim
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

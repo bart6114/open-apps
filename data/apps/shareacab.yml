@@ -1,0 +1,16 @@
+# ShareACab — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "shareacab"
+name: "ShareACab"
+repoUrl: "https://github.com/devclub-iitd/ShareACab"
+description: "Cab Sharing App for college students"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Travel"
+# Original submitter: DevClub IIT Delhi
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

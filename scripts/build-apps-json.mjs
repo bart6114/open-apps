@@ -215,11 +215,11 @@ async function main() {
       ? app.activity.monthlyCommits.slice(-MONTHS_WINDOW)
       : null;
 
-    // Bar for inclusion (OR):
+    // Bar for the "curated" tier (OR):
     //   - stars ≥ MIN_STARS, OR
     //   - commit in each of the last MONTHS_WINDOW months (≥ MIN_MONTHLY_COMMITS each).
-    // Apps missing BOTH signals are dropped. The yml stays in the
-    // repo as the source of truth; the JSON is the surfaced subset.
+    // Apps missing BOTH signals are placed in the "experimental"
+    // tier — still surfaced, but visually marked as lower-confidence.
     const reasons = [];
     let passes = false;
 
@@ -242,22 +242,16 @@ async function main() {
 
     if (stale === null) reasons.push("lastCommit=unknown");
     else if (stale > STALE_DAYS && !passes) {
-      // Only flag staleness as a problem if neither pass branch covers
-      // the app — a 4k-star app that's been quiet 7 months still passes
-      // on the stars branch.
       reasons.push(`lastCommit=${Math.round(stale)}d>${STALE_DAYS}d`);
     }
 
-    if (!passes) {
-      dropped.push({
-        slug: app.slug,
-        lastCommitAt: lastCommit,
-        stars,
-        reasons,
-      });
-      continue;
-    }
+    // Tag the tier on the app — pages render curated/experimental
+    // separately.
+    app.tier = passes ? "curated" : "experimental";
     apps.push(app);
+    if (!passes) {
+      dropped.push({ slug: app.slug, tier: "experimental", stars, reasons });
+    }
   }
 
   // Stable order: by stars desc, then name asc.

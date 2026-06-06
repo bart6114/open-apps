@@ -1,0 +1,16 @@
+# Flutter Todo — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "flutter-todo"
+name: "Flutter Todo"
+repoUrl: "https://github.com/tuannguyendotme/flutter_todo"
+description: "This Todo app is implemented using Flutter"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: Tuan Nguyen
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

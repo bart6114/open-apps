@@ -1,0 +1,17 @@
+# Weight Tracker — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "weight-tracker"
+name: "Weight Tracker"
+repoUrl: "https://github.com/MSzalek-Mobile/weight_tracker"
+description: "Weight Tracker is an application dedicated for people who want to dump or maintain weight"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Health and Fitness"
+# Original submitter: Marcin Szałek
+activity:
+  stars: 368
+  forks: 150
+  monthlyCommits: []
+  lastCommitAt: 2020-10-23
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

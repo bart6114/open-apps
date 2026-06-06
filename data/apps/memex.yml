@@ -1,0 +1,16 @@
+# Memex — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "memex"
+name: "Memex"
+repoUrl: "https://github.com/memex-lab/memex"
+description: "An open-source, local-first AI journal for iOS and Android that turns text, photo and voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A. methodology"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: Memex Lab
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

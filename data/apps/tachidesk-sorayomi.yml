@@ -1,0 +1,17 @@
+# Tachidesk-Sorayomi — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "tachidesk-sorayomi"
+name: "Tachidesk-Sorayomi"
+repoUrl: "https://github.com/Suwayomi/Tachidesk-Sorayomi"
+description: "Frontend for [Tachidesk-server](github.com/Suwayomi/Tachidesk-server/), based on Tachiyomi to read manga in desktop"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Entertainment"
+# Original submitter: DattatreyaReddy
+activity:
+  stars: 1542
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2025-07-09
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

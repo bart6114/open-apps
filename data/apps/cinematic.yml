@@ -1,0 +1,17 @@
+# Cinematic — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "cinematic"
+name: "Cinematic"
+repoUrl: "https://github.com/aaronoe/FlutterCinematic"
+description: "UI for Movie DB Public API"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Media"
+# Original submitter: Aaron Oertel
+activity:
+  stars: 901
+  forks: 274
+  monthlyCommits: []
+  lastCommitAt: 2020-10-01
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

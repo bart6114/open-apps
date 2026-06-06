@@ -1,0 +1,16 @@
+# RSA Encryption — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "rsa-encryption"
+name: "RSA Encryption"
+repoUrl: "https://github.com/vellt/RSA-Encryption-Flutter"
+description: "A simple UI for encrypting messages"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: vellt
+activity:
+  stars: 0
+  forks: 0
+  lastCommitAt: null  # populated by GitHub Actions on first refresh
+  contributors: 0
+  updatedAt: 2026-06-06

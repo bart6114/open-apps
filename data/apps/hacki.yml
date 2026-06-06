@@ -1,0 +1,17 @@
+# Hacki — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "hacki"
+name: "Hacki"
+repoUrl: "https://github.com/Livinglist/Hacki"
+description: "A Hacker News reader"
+stack: Flutter
+platforms: [Android, iOS]
+category: "News and Magazine"
+# Original submitter: Jiaqi Feng
+activity:
+  stars: 1561
+  forks: 126
+  monthlyCommits: []
+  lastCommitAt: 2026-06-06
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06
