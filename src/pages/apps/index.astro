@@ -215,6 +215,7 @@ const initialChips = activeFilterChips(initialFilters);
         type AppsFilters,
       } from "../../lib/apps-search";
       import { lensFromSearchParams } from "../../lib/lenses";
+      import { readWatchlist, WATCHLIST_EVENT } from "../../lib/watchlist";
       import type { OpenSourceApp } from "../../data/types";
 
       // ── Data ──
@@ -505,6 +506,66 @@ const initialChips = activeFilterChips(initialFilters);
         });
       }
 
+      // ── Client-side filter: ?watched=1 hides rows not in local watchlist ──
+      function applyClientFilters() {
+        const f = readFilters();
+        if (f.watched !== "1") {
+          // Not in watchlist mode — show everything rendered.
+          resultsEl.classList.remove("hidden");
+          emptyEl.classList.add("hidden");
+          emptyEl.hidden = true;
+          return;
+        }
+        const list = readWatchlist();
+        const rows = resultsEl.querySelectorAll<HTMLElement>("[data-slug]");
+        let visible = 0;
+        rows.forEach((row) => {
+          const slug = row.dataset.slug!;
+          const show = list.includes(slug);
+          row.classList.toggle("hidden", !show);
+          if (show) visible++;
+        });
+        resultsEl.classList.toggle("hidden", visible === 0);
+        if (visible === 0) {
+          emptyEl.hidden = false;
+          emptyEl.classList.remove("hidden");
+        } else {
+          emptyEl.hidden = true;
+          emptyEl.classList.add("hidden");
+        }
+      }
+
+      function visibleCount(): number {
+        if (readFilters().watched !== "1") {
+          return resultsEl.querySelectorAll("[data-slug]").length;
+        }
+        return resultsEl.querySelectorAll("[data-slug]:not(.hidden)").length;
+      }
+
+      function syncWatchlistBadge() {
+        // The Header's "Watching" nav item shows a small count badge
+        // next to the label when the local watchlist is non-empty.
+        const list = readWatchlist();
+        const n = list.length;
+        const link = document.querySelector<HTMLAnchorElement>(
+          "nav[aria-label='Primary'] a[href*='watched=1']",
+        );
+        if (!link) return;
+        let badge = link.querySelector<HTMLElement>(".watchlist-badge");
+        if (n === 0) {
+          if (badge) badge.remove();
+          return;
+        }
+        if (!badge) {
+          badge = document.createElement("span");
+          badge.className =
+            "watchlist-badge ml-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-ink-900 px-1 text-[10px] font-semibold text-white dark:bg-ink-100 dark:text-ink-900";
+          badge.setAttribute("aria-label", `${n} apps in watchlist`);
+          link.appendChild(badge);
+        }
+        badge.textContent = String(n);
+      }
+
       // ── Apply: re-render results + chips + sidebar ──
       function apply() {
         const f = readFilters();
@@ -514,9 +575,11 @@ const initialChips = activeFilterChips(initialFilters);
         resultsEl.innerHTML = filtered.map(renderRow).join("");
         // After rendering, fold in client-side filters (watched).
         applyClientFilters();
+        syncWatchlistBadge();
         const lensText = lens ? ` · lens: ${lens}` : "";
-        countEl.innerHTML = `Showing ${filtered.length} of ${totalApps} apps${lensText}`;
-      
+        const watched = f.watched === "1" ? " · watching" : "";
+        countEl.innerHTML = `Showing ${visibleCount()} of ${totalApps} apps${lensText}${watched}`;
+       
         const chips = activeFilterChips(f);
         if (chips.length === 0) {
           activeFiltersEl.hidden = true;
@@ -615,6 +678,23 @@ const initialChips = activeFilterChips(initialFilters);
       });
 
       window.addEventListener("popstate", apply);
+
+      // When the watchlist changes (heart toggled, cross-tab sync),
+      // re-apply the client filter and update the header badge.
+      window.addEventListener(WATCHLIST_EVENT, () => {
+        applyClientFilters();
+        syncWatchlistBadge();
+        const f = readFilters();
+        const lensText = currentLens() ? ` · lens: ${currentLens()}` : "";
+        const watched = f.watched === "1" ? " · watching" : "";
+        countEl.innerHTML = `Showing ${visibleCount()} of ${totalApps} apps${lensText}${watched}`;
+      });
+      window.addEventListener("storage", (e) => {
+        if (e.key === "open-apps:watchlist") {
+          applyClientFilters();
+          syncWatchlistBadge();
+        }
+      });
 
       apply();
     </script>

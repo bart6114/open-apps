@@ -71,11 +71,43 @@ async function fetchActivity(repoUrl) {
   const data = await gh(`/repos/${owner}/${repo}`);
   if (!data) return null;
 
+  // Pull last 6 months of commit activity in one paginated request.
+  // The GitHub Commits API returns up to 100 per page; 6 months of
+  // activity rarely exceeds that, so a single page is enough for
+  // our purposes. Increase this if a repo has very heavy monthly
+  // commit volume (>100 in the last 6 months).
+  const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+  const monthly = [0, 0, 0, 0, 0, 0];
+  const now = new Date();
+  const currentMonth = now.getUTCMonth();
+  const currentYear = now.getUTCFullYear();
+
   let lastCommitAt = data.pushed_at || data.updated_at;
   try {
-    const commits = await gh(`/repos/${owner}/${repo}/commits?per_page=1`);
-    if (commits && commits[0]?.commit?.committer?.date) {
-      lastCommitAt = commits[0].commit.committer.date;
+    // per_page=100 covers the vast majority of monthly commit volumes
+    // in a 6-month window. We could paginate if needed, but for the
+    // bar logic (>= 1 commit per month) we just need a presence check.
+    const commits = await gh(
+      `/repos/${owner}/${repo}/commits?per_page=100&since=${sixMonthsAgo.toISOString()}`,
+    );
+    if (Array.isArray(commits)) {
+      // Reset and recount.
+      for (let i = 0; i < 6; i++) monthly[i] = 0;
+      for (const c of commits) {
+        const d = c.commit?.committer?.date || c.commit?.author?.date;
+        if (!d) continue;
+        const date = new Date(d);
+        const monthsAgo =
+          (currentYear - date.getUTCFullYear()) * 12 +
+          (currentMonth - date.getUTCMonth());
+        if (monthsAgo >= 0 && monthsAgo < 6) {
+          monthly[5 - monthsAgo]++;
+        }
+        if (!lastCommitAt || d > lastCommitAt) {
+          lastCommitAt = d;
+        }
+      }
     }
   } catch {
     // keep the fallback
@@ -84,6 +116,7 @@ async function fetchActivity(repoUrl) {
   return {
     stars: data.stargazers_count ?? 0,
     forks: data.forks_count ?? 0,
+    monthlyCommits: monthly,
     lastCommitAt: lastCommitAt ? lastCommitAt.slice(0, 10) : null,
     contributors: data.subscribers_count ?? 0,
     updatedAt: new Date().toISOString().slice(0, 10),
@@ -91,20 +124,24 @@ async function fetchActivity(repoUrl) {
 }
 
 function patchYmlActivity(text, activity) {
-  // Replace the entire `activity:` block (key + 5 nested lines)
+  // Replace the entire `activity:` block (key + 6 nested lines)
   // with a freshly-rendered version. Keeps the rest of the yml
   // untouched so hand-curated fields survive.
+  const monthly = Array.isArray(activity.monthlyCommits)
+    ? `[${activity.monthlyCommits.join(", ")}]`
+    : "[]";
   const block = [
     "activity:",
     `  stars: ${activity.stars}`,
     `  forks: ${activity.forks}`,
+    `  monthlyCommits: ${monthly}`,
     `  lastCommitAt: ${activity.lastCommitAt ?? "null"}`,
     `  contributors: ${activity.contributors}`,
     `  updatedAt: ${activity.updatedAt}`,
   ].join("\n");
 
   if (/^activity:\s*$/m.test(text)) {
-    // Replace existing block (5 indented lines after `activity:`).
+    // Replace existing block (up to 8 indented lines after `activity:`).
     return text.replace(
       /^activity:\s*\n(?:[ \t].*\n){0,20}/m,
       block + "\n",
