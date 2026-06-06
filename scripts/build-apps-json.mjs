@@ -21,7 +21,13 @@ const APPS_DIR = join(ROOT, "data", "apps");
 const OUT_DIR = join(ROOT, "data", "generated");
 const OUT_FILE = join(OUT_DIR, "apps.json");
 
-const STALE_DAYS = 365;
+const STALE_DAYS = 180;
+const MIN_STARS = 500;
+/** Number of recent months of commit activity we look at for the
+ *  "consistent activity" branch of the bar. */
+const MONTHS_WINDOW = 6;
+/** Required minimum commits in each of those months. */
+const MIN_MONTHLY_COMMITS = 1;
 
 /**
  * Minimal YAML parser — supports the shape we actually use in
@@ -200,9 +206,55 @@ async function main() {
       app.slug = fileSlug;
     }
 
-    const stale = daysSince(app.activity?.lastCommitAt);
-    if (stale > STALE_DAYS) {
-      dropped.push({ slug: app.slug, lastCommitAt: app.activity?.lastCommitAt, staleDays: Math.round(stale) });
+    const lastCommit = app.activity?.lastCommitAt;
+    const stale = lastCommit ? daysSince(lastCommit) : null;
+    const stars = app.activity?.stars ?? 0;
+    // Last 6 calendar months of commit counts, oldest first. Populated
+    // by .github/workflows/update-apps.yml from the GitHub API.
+    const monthly = Array.isArray(app.activity?.monthlyCommits)
+      ? app.activity.monthlyCommits.slice(-MONTHS_WINDOW)
+      : null;
+
+    // Bar for inclusion (OR):
+    //   - stars ≥ MIN_STARS, OR
+    //   - commit in each of the last MONTHS_WINDOW months (≥ MIN_MONTHLY_COMMITS each).
+    // Apps missing BOTH signals are dropped. The yml stays in the
+    // repo as the source of truth; the JSON is the surfaced subset.
+    const reasons = [];
+    let passes = false;
+
+    if (stars >= MIN_STARS) {
+      passes = true;
+    } else {
+      reasons.push(`stars=${stars}<${MIN_STARS}`);
+    }
+
+    if (monthly && monthly.length === MONTHS_WINDOW) {
+      const tooQuiet = monthly.find((n) => n < MIN_MONTHLY_COMMITS);
+      if (tooQuiet === undefined) {
+        passes = true;
+      } else {
+        reasons.push(`monthlyCommits=${JSON.stringify(monthly)}(some<${MIN_MONTHLY_COMMITS})`);
+      }
+    } else {
+      reasons.push("monthlyCommits=unknown");
+    }
+
+    if (stale === null) reasons.push("lastCommit=unknown");
+    else if (stale > STALE_DAYS && !passes) {
+      // Only flag staleness as a problem if neither pass branch covers
+      // the app — a 4k-star app that's been quiet 7 months still passes
+      // on the stars branch.
+      reasons.push(`lastCommit=${Math.round(stale)}d>${STALE_DAYS}d`);
+    }
+
+    if (!passes) {
+      dropped.push({
+        slug: app.slug,
+        lastCommitAt: lastCommit,
+        stars,
+        reasons,
+      });
       continue;
     }
     apps.push(app);
@@ -223,8 +275,13 @@ async function main() {
       {
         generatedAt: new Date().toISOString(),
         totalApps: apps.length,
-        staleApps: dropped.length,
-        staleDays: STALE_DAYS,
+        droppedApps: dropped.length,
+        bar: {
+          mode: "OR",
+          minStars: MIN_STARS,
+          monthlyWindow: { months: MONTHS_WINDOW, minPerMonth: MIN_MONTHLY_COMMITS },
+          maxStaleDays: STALE_DAYS,
+        },
         apps,
       },
       null,
@@ -233,14 +290,10 @@ async function main() {
   );
 
   console.log(
-    `[build-apps-json] wrote ${apps.length} apps to ${OUT_FILE} ` +
-      `(${dropped.length} dropped as stale > ${STALE_DAYS} days)`,
+    `[build-apps-json] wrote ${apps.length} apps to ${OUT_FILE}\n` +
+      `  bar: stars≥${MIN_STARS} OR monthly≥${MIN_MONTHLY_COMMITS}/month for ${MONTHS_WINDOW} months\n` +
+      `  ${dropped.length} dropped`,
   );
-  if (dropped.length) {
-    for (const d of dropped) {
-      console.log(`  - ${d.slug} (last commit ${d.lastCommitAt}, ${d.staleDays} days ago)`);
-    }
-  }
 }
 
 main().catch((err) => {

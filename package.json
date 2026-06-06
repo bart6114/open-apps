@@ -9,7 +9,7 @@
     "prebuild": "node scripts/fetch-icons.mjs",
     "build:data": "node scripts/build-apps-json.mjs",
     "build": "npm run build:data && astro build",
-    "dev": "astro dev",
+    "dev": "npm run build:data && astro dev",
     "start": "astro dev",
     "preview": "astro preview",
     "astro": "astro",
