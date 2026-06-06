@@ -313,13 +313,6 @@ const initialChips = activeFilterChips(initialFilters);
           "template": "Template",
         }[t] ?? null;
       }
-      function scoreTier(n: number): number {
-        if (n < 20) return 0;
-        if (n < 40) return 1;
-        if (n < 60) return 2;
-        if (n < 80) return 3;
-        return 4;
-      }
       function iconPath(name: string, cat: "stack" | "platform"): string {
         const slug = name.toLowerCase().trim()
           .replace(/\+/g, "plus").replace(/\./g, "")
@@ -328,15 +321,6 @@ const initialChips = activeFilterChips(initialFilters);
         const dir = cat === "stack" ? "stacks" : "platforms";
         return `/icons/${dir}/${slug}.svg`;
       }
-
-      const SCORE_DIMS = [
-        { key: "activity", label: "Activity" },
-        { key: "maturity", label: "Maturity" },
-        { key: "learning", label: "Learning" },
-        { key: "contribution", label: "Contribution" },
-        { key: "docs", label: "Docs" },
-        { key: "overall", label: "Overall" },
-      ] as const;
 
       function renderRow(a: OpenSourceApp): string {
         const owner = ownerOf(a.repoUrl);
