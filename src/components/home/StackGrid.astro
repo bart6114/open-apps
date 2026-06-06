@@ -25,7 +25,7 @@ const statusBadge: Record<Stack["status"], string> = {
 
 <section
   id="stacks"
-  class="section border-b border-ink-200 dark:border-ink-800"
+  class="section scroll-mt-20 border-b border-ink-200 dark:border-ink-800"
 >
   <Container>
     <SectionHeader
@@ -38,7 +38,7 @@ const statusBadge: Record<Stack["status"], string> = {
       {
         stacks.map((stack) => (
           <a
-            href={`#stack-${stack.slug}`}
+            href={`/apps?stack=${encodeURIComponent(stack.name)}`}
             class="card card-hover group flex h-full items-center gap-3 p-3.5 no-underline"
           >
             {/* Compact stack icon — supports the card without dominating it */}

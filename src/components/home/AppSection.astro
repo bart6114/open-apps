@@ -15,7 +15,7 @@ interface Props {
 const { id, title, description, apps, viewAllHref = "#" } = Astro.props;
 ---
 
-<section id={id} class="section border-b border-ink-200 dark:border-ink-800">
+<section id={id} class="section border-b border-ink-200 dark:border-ink-800 scroll-mt-20">
   <Container>
     <div class="flex items-end justify-between gap-4">
       <SectionHeader title={title} description={description} />

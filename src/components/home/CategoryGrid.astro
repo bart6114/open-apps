@@ -12,7 +12,7 @@ const { categories } = Astro.props;
 
 <section
   id="categories"
-  class="section border-b border-ink-200 dark:border-ink-800"
+  class="section scroll-mt-20 border-b border-ink-200 dark:border-ink-800"
 >
   <Container>
     <SectionHeader
@@ -35,7 +35,7 @@ const { categories } = Astro.props;
               }`}
             >
               <a
-                href={`#category-${cat.slug}`}
+                href={`/apps?category=${encodeURIComponent(cat.name)}`}
                 class="group flex h-full items-start gap-3 p-4 no-underline transition-colors hover:bg-ink-50/60 dark:hover:bg-ink-900/40"
               >
                 <div class="flex min-w-0 flex-1 flex-col gap-0.5">
