@@ -80,6 +80,7 @@ const matureList = matureApps().slice(0, 6);
         title="New open-source apps"
         description="Recently added projects from the community."
         apps={newList}
+        viewAllHref="/apps?label=new"
       />
 
       <AppSection
@@ -87,6 +88,7 @@ const matureList = matureApps().slice(0, 6);
         title="Hot open-source apps"
         description="Projects gaining attention, stars, or recent activity."
         apps={hotList}
+        viewAllHref="/apps?label=hot"
       />
 
       <AppSection
@@ -94,6 +96,7 @@ const matureList = matureApps().slice(0, 6);
         title="Mature open-source apps"
         description="Established projects with strong history, clear codebases, or real-world usage."
         apps={matureList}
+        viewAllHref="/apps?label=mature"
       />
 
       <StackGrid stacks={stacks} />

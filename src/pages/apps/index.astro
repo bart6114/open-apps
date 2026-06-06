@@ -161,13 +161,6 @@ const initialChips = activeFilterChips(initialFilters);
       <section class="border-b border-ink-200 dark:border-ink-800">
         <Container>
           <div class="py-8 sm:py-10">
-            <div class="mb-5">
-              <RefinePanel
-                facets={facets}
-                initial={initialFilters}
-              />
-            </div>
-
             <div
               id="results"
               class="flex flex-col gap-3"
@@ -190,37 +183,19 @@ const initialChips = activeFilterChips(initialFilters);
                 Clear all filters
               </button>
             </div>
+
+            {/* Refine sits at the end of the list, after the rows — not above.
+                Users come to this page to scan apps, not to triage filters. */}
+            <div class="mt-10 border-t border-ink-200 pt-6 dark:border-ink-800">
+              <RefinePanel
+                facets={facets}
+                initial={initialFilters}
+              />
+            </div>
           </div>
         </Container>
       </section>
     </main>
-
-    {/* Compare tray — sticky at bottom-right when items selected */}
-    <div
-      id="compare-tray"
-      class="fixed bottom-4 right-4 z-40 hidden"
-    >
-      <div class="flex items-center gap-3 rounded-lg border border-ink-200 bg-white px-3 py-2 shadow-lg dark:border-ink-700 dark:bg-ink-900">
-        <span class="text-2xs font-medium text-ink-700 dark:text-ink-200">
-          <span id="compare-count">0</span> selected
-        </span>
-        <a
-          id="compare-button"
-          href="#"
-          class="btn-primary text-2xs py-1 px-2"
-          aria-disabled="true"
-        >
-          Compare
-        </a>
-        <button
-          type="button"
-          id="compare-clear"
-          class="text-2xs text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
-        >
-          Clear
-        </button>
-      </div>
-    </div>
 
     <Footer />
 
@@ -254,10 +229,6 @@ const initialChips = activeFilterChips(initialFilters);
       const emptyEl = document.getElementById("empty-state")!;
       const countEl = document.getElementById("result-count")!;
       const activeFiltersEl = document.getElementById("active-filters")!;
-      const compareTray = document.getElementById("compare-tray")!;
-      const compareCountEl = document.getElementById("compare-count")!;
-      const compareButton = document.getElementById("compare-button") as HTMLAnchorElement;
-      const compareClearBtn = document.getElementById("compare-clear")!;
 
       // ── State ──
       function readFilters(): AppsFilters {
@@ -389,10 +360,6 @@ const initialChips = activeFilterChips(initialFilters);
         return `
           <article class="decision-row group relative flex flex-col gap-3 rounded-lg border border-ink-200 bg-white p-4 transition-colors hover:border-ink-300 hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_-2px_rgba(0,0,0,0.06)] dark:border-ink-800 dark:bg-ink-950 dark:hover:border-ink-700 dark:hover:shadow-[0_1px_2px_rgba(0,0,0,0.4),0_4px_12px_-2px_rgba(0,0,0,0.3)]" data-slug="${esc(a.slug)}">
             <header class="flex items-start gap-3">
-              <label class="relative z-20 flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded-sm border border-ink-300 bg-white transition-colors hover:border-ink-500 has-[:checked]:border-ink-900 has-[:checked]:bg-ink-900 dark:border-ink-700 dark:bg-ink-950 dark:hover:border-ink-500 dark:has-[:checked]:border-ink-100 dark:has-[:checked]:bg-ink-100" title="Add to compare">
-                <input type="checkbox" class="sr-only" data-compare-toggle="${esc(a.slug)}" aria-label="Add ${esc(a.name)} to compare">
-                <svg viewBox="0 0 12 12" class="h-2.5 w-2.5 text-white opacity-0 transition-opacity peer-checked:opacity-100 dark:text-ink-900" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3" /></svg>
-              </label>
               <a href="/apps/${esc(a.slug)}" class="relative z-10 flex shrink-0" aria-hidden="true" tabindex="-1">${avatarHtml}</a>
               <div class="flex min-w-0 flex-1 flex-col gap-0.5">
                 <div class="flex flex-wrap items-baseline gap-x-2">
@@ -410,7 +377,7 @@ const initialChips = activeFilterChips(initialFilters);
                   ${stars ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="inline-flex items-center gap-0.5 font-mono"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>${esc(stars)}</span>` : ""}
                 </div>
               </div>
-              <a href="/apps/${esc(a.slug)}" class="relative z-10 hidden shrink-0 self-start text-2xs font-medium text-ink-500 hover:text-ink-900 sm:inline dark:text-ink-400 dark:hover:text-ink-100">View analysis →</a>
+              <a href="/apps/${esc(a.slug)}" class="relative z-10 hidden shrink-0 self-start text-2xs font-medium text-ink-500 hover:text-ink-900 sm:inline dark:text-ink-400 dark:hover:text-ink-100">View details →</a>
             </header>
             <p class="m-0 line-clamp-2 text-[0.8125rem] leading-relaxed text-ink-600 dark:text-ink-300">${esc(a.description)}</p>
             <dl class="grid grid-cols-1 gap-x-4 gap-y-1 text-2xs sm:grid-cols-3">
@@ -525,37 +492,7 @@ const initialChips = activeFilterChips(initialFilters);
         });
       }
 
-      // ── Compare state ──
-      const compared = new Set<string>();
-      const COMPARE_MAX = 3;
-
-      function updateCompareTray() {
-        const n = compared.size;
-        if (n === 0) {
-          compareTray.classList.add("hidden");
-          return;
-        }
-        compareTray.classList.remove("hidden");
-        compareCountEl.textContent = String(n);
-        const slugs = [...compared];
-        compareButton.href = `/apps/compare?slugs=${encodeURIComponent(slugs.join(","))}`;
-        compareButton.removeAttribute("aria-disabled");
-        if (n < 2) {
-          compareButton.classList.add("pointer-events-none", "opacity-50");
-          compareButton.setAttribute("aria-disabled", "true");
-        } else {
-          compareButton.classList.remove("pointer-events-none", "opacity-50");
-        }
-      }
-
-      function syncCompareCheckboxes() {
-        document.querySelectorAll<HTMLInputElement>("[data-compare-toggle]").forEach((cb) => {
-          const slug = cb.dataset.compareToggle!;
-          cb.checked = compared.has(slug);
-        });
-      }
-
-      // ── Apply: re-render results + chips + sidebar + compare ──
+      // ── Apply: re-render results + chips + sidebar ──
       function apply() {
         const f = readFilters();
         const filtered = filterApps(apps, f);
@@ -582,7 +519,6 @@ const initialChips = activeFilterChips(initialFilters);
         syncChips(f);
         syncRefineButton(f);
         syncLensTabs();
-        syncCompareCheckboxes();
       }
 
       // ── Wire up controls ──
@@ -643,31 +579,6 @@ const initialChips = activeFilterChips(initialFilters);
         });
       });
 
-      // Compare checkbox toggling (event-delegated)
-      resultsEl.addEventListener("change", (e) => {
-        const target = e.target as HTMLInputElement;
-        if (target.matches("[data-compare-toggle]")) {
-          const slug = target.dataset.compareToggle!;
-          if (target.checked) {
-            if (compared.size >= COMPARE_MAX) {
-              target.checked = false;
-              alert(`You can compare up to ${COMPARE_MAX} apps at a time.`);
-              return;
-            }
-            compared.add(slug);
-          } else {
-            compared.delete(slug);
-          }
-          updateCompareTray();
-        }
-      });
-
-      compareClearBtn.addEventListener("click", () => {
-        compared.clear();
-        updateCompareTray();
-        syncCompareCheckboxes();
-      });
-
       // Active chip removal + clear-all (event-delegated)
       document.addEventListener("click", (e) => {
         const target = e.target as HTMLElement;
@@ -690,7 +601,6 @@ const initialChips = activeFilterChips(initialFilters);
 
       window.addEventListener("popstate", apply);
 
-      updateCompareTray();
       apply();
     </script>
 

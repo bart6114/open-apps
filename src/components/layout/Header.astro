@@ -7,9 +7,12 @@ const navItems = [
   { label: "Mature", href: "#mature" },
   { label: "Stacks", href: "#stacks" },
   { label: "Contributors", href: "#contributors" },
+  { label: "About", href: "/about" },
 ];
 const githubUrl =
   "https://github.com/tortuvshin/open-source-flutter-apps";
+const starsBadgeUrl =
+  "https://img.shields.io/github/stars/tortuvshin/open-source-flutter-apps?style=flat&label=stars&color=18181b&labelColor=transparent";
 ---
 
 <header
@@ -47,13 +50,54 @@ const githubUrl =
     </nav>
 
     <div class="ml-auto flex items-center gap-2">
+      {/* GitHub stars badge — render via <img> so it loads on
+          every page without a JS roundtrip. The badge updates
+          itself as the repo gains stars. */}
+      <a
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Star on GitHub"
+        title="Star this project on GitHub"
+        class="hidden sm:inline-flex h-9 items-center gap-1.5 rounded-md border border-ink-200 px-2.5 text-[0.8125rem] font-medium text-ink-700 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:text-ink-300 dark:hover:border-ink-700 dark:hover:bg-ink-900/40"
+      >
+        <svg
+          viewBox="0 0 16 16"
+          width="14"
+          height="14"
+          aria-hidden="true"
+          fill="currentColor"
+        >
+          <path
+            d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
+          />
+        </svg>
+        <img
+          src={starsBadgeUrl}
+          alt=""
+          width="56"
+          height="14"
+          loading="lazy"
+          decoding="async"
+          class="h-[14px] w-auto dark:hidden"
+        />
+        <img
+          src={starsBadgeUrl.replace("18181b", "fafafa")}
+          alt=""
+          width="56"
+          height="14"
+          loading="lazy"
+          decoding="async"
+          class="h-[14px] w-auto hidden dark:inline"
+        />
+      </a>
       <ThemeToggle />
       <a
         href={githubUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub repository"
-        class="inline-flex items-center gap-1.5 rounded-md border border-ink-200 px-2.5 py-1.5 text-[0.875rem] font-medium text-ink-900 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:text-ink-100 dark:hover:border-ink-700 dark:hover:bg-ink-900/40"
+        class="hidden lg:inline-flex h-9 items-center gap-1.5 rounded-md border border-ink-200 px-2.5 text-[0.875rem] font-medium text-ink-900 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:text-ink-100 dark:hover:border-ink-700 dark:hover:bg-ink-900/40"
       >
         <svg
           viewBox="0 0 16 16"
@@ -64,10 +108,31 @@ const githubUrl =
         >
           <path
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"
-          ></path>
+          />
         </svg>
         <span>GitHub</span>
       </a>
     </div>
   </div>
 </header>
+
+<script>
+  // Smooth-scroll for in-page anchor links (Header nav + Hero CTA).
+  // Works on any <a href="#…"> that points to an existing element on
+  // the current page. External links (e.g. /about, /apps?…) are skipped
+  // because they don't start with "#".
+  document.addEventListener("click", (e) => {
+    const link = (e.target as HTMLElement).closest<HTMLAnchorElement>(
+      'a[href^="#"]',
+    );
+    if (!link) return;
+    const id = link.getAttribute("href")!;
+    if (id.length <= 1) return; // bare "#" → ignore
+    const target = document.querySelector(id);
+    if (!target) return; // not on this page; let the browser navigate
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Update the URL hash without an extra jump, so back/forward works.
+    history.replaceState(null, "", id);
+  });
+</script>
