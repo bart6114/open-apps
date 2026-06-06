@@ -1,0 +1,38 @@
+# Invoice Ninja — companion app for the Invoice Ninja platform.
+# Required — the app record. These never move without a rename PR.
+slug: invoice-ninja
+name: Invoice Ninja
+repoUrl: https://github.com/invoiceninja/flutter-mobile
+description: >-
+  Companion app for the Invoice Ninja platform. Invoicing, expenses,
+  time-billing, payments.
+stack: Flutter
+platforms: [Android, iOS]
+category: Business
+
+# Curated by hand, optional, slow to change.
+homepageUrl: https://invoiceninja.com
+license: AGPL-3.0
+status: active
+bestFor:
+  - Real commercial product with open codebase
+  - Subscription & payment integration patterns
+  - Multi-currency / multi-language business app
+  - Companion-app architecture (mobile + hosted backend)
+whyListed:
+  - Real production app used by paying customers
+  - Active commercial sponsor (Hillel Coren)
+  - Long-running codebase with stable API
+caveats:
+  - Tightly coupled to the hosted Invoice Ninja platform
+  - Some premium features require a paid plan
+  - AGPL-3.0 is copyleft — read the license before forking
+
+# Auto-updated daily by .github/workflows/update-apps.yml.
+# Don't edit by hand — the next workflow run will overwrite it.
+activity:
+  stars: 1800
+  forks: 510
+  lastCommitAt: 2025-11-12
+  contributors: 42
+  updatedAt: 2026-06-06

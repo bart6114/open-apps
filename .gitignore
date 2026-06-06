@@ -7,3 +7,7 @@ dist
 .env.production
 .vercel
 .netlify
+
+# Build-time generated data. Re-derived from data/apps/*.yml on every
+# build and every GitHub Actions refresh — never commit it.
+data/generated/

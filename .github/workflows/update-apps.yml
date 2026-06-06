@@ -1,0 +1,64 @@
+name: Update apps activity
+
+# Daily at 06:00 UTC. Refreshes the `activity:` block in every
+# data/apps/*.yml file from the GitHub REST API, opens a PR if
+# anything changed, and the site is rebuilt on merge.
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Max apps to update (0 = all)"
+        required: false
+        default: "0"
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Refresh activity from GitHub API
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LIMIT: ${{ github.event.inputs.limit || '0' }}
+        run: node scripts/refresh-apps-activity.mjs "$LIMIT"
+
+      - name: Build data/apps/*.yml → data/generated/apps.json
+        run: node scripts/build-apps-json.mjs
+
+      - name: Open PR if anything changed
+        run: |
+          if [ -n "$(git diff --name-only data/apps/)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git checkout -b chore/refresh-apps-activity-$(date -u +%Y%m%d)
+            git add data/apps/ data/generated/
+            git commit -m "chore(data): refresh app activity"
+            git push -u origin HEAD
+            gh pr create \
+              --title "chore(data): refresh app activity" \
+              --body "Automated daily refresh of \`activity:\` blocks from the GitHub API. Stale entries (>365d no commit) are dropped from the build artifact in \`data/generated/apps.json\`." \
+              --head "$(git rev-parse --abbrev-ref HEAD)" \
+              --base main
+          else
+            echo "No changes detected — skipping PR."
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
