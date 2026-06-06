@@ -11,7 +11,6 @@ import { apps } from "../../data/apps";
 import {
   buildFacets,
   filtersFromSearchParams,
-  hasAnyFilter,
   filterApps,
   activeFilterChips,
   removeFilter,
@@ -166,10 +165,6 @@ const initialChips = activeFilterChips(initialFilters);
               <RefinePanel
                 facets={facets}
                 initial={initialFilters}
-                defaultOpen={hasAnyFilter(initialFilters) && (initialFilters.stacks?.length ||
-                  initialFilters.platforms?.length ||
-                  initialFilters.categories?.length ||
-                  initialFilters.licenses?.length) ? true : false}
               />
             </div>
 
@@ -455,14 +450,14 @@ const initialChips = activeFilterChips(initialFilters);
               <div class="flex min-w-0 flex-1 flex-col gap-0.5">
                 <div class="flex flex-wrap items-baseline gap-x-2">
                   <h3 class="m-0 text-[1rem] font-semibold tracking-tight text-ink-900 dark:text-ink-100">
-                    <a href="${esc(a.repoUrl)}" target="_blank" rel="noopener noreferrer" class="relative z-10 text-inherit no-underline hover:underline">${esc(a.name)}</a>
+                    <a href="/apps/${esc(a.slug)}" class="relative z-10 text-inherit no-underline hover:underline">${esc(a.name)}</a>
                   </h3>
                   ${typeTag}
                   ${labelTag}
                   ${curatedTag}
                 </div>
                 <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-2xs text-ink-500 dark:text-ink-400">
-                  ${owner ? `<span class="font-mono"><span class="text-ink-400 dark:text-ink-500">@</span>${esc(owner)}${repo ? `<span class="text-ink-400 dark:text-ink-500">/${esc(repo)}</span>` : ""}</span><span class="text-ink-300 dark:text-ink-700">·</span>` : ""}
+                  ${owner ? `<a href="${esc(a.repoUrl)}" target="_blank" rel="noopener noreferrer" class="relative z-10 font-mono hover:text-ink-900 dark:hover:text-ink-100"><span class="text-ink-400 dark:text-ink-500">@</span>${esc(owner)}${repo ? `<span class="text-ink-400 dark:text-ink-500">/${esc(repo)}</span>` : ""}</a><span class="text-ink-300 dark:text-ink-700">·</span>` : ""}
                   <span>${esc(a.category)}</span>
                   ${a.status ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="capitalize">${esc(a.status)}</span>` : ""}
                   ${stars ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="inline-flex items-center gap-0.5 font-mono"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>${esc(stars)}</span>` : ""}

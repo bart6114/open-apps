@@ -1,10 +1,8 @@
 ---
 import type { OpenSourceApp } from "../../data/types";
 import Icon from "../icons/Icon.astro";
-import {
-  getOwnerAndRepoFromRepoUrl,
-  getOwnerAvatarUrl,
-} from "../../lib/repo";
+import { getOwnerAndRepoFromRepoUrl, getOwnerAvatarUrl } from "../../lib/repo";
+import { SCORE_DIMENSIONS, SCORE_LABELS, scoreTier, scoreLabel } from "../../lib/scores";
 
 interface Props {
   app: OpenSourceApp;
@@ -38,7 +36,7 @@ const initials = app.name
 //   1. Explicit `logoUrl` on the app
 //   2. GitHub owner avatar (extracted from `repoUrl`)
 //   3. Initials placeholder.
-const { owner } = getOwnerAndRepoFromRepoUrl(app.repoUrl);
+const { owner, repo } = getOwnerAndRepoFromRepoUrl(app.repoUrl);
 const logoUrl = app.logoUrl ?? getOwnerAvatarUrl(owner, 80);
 
 // Show up to 4 platforms; overflow as +N.
@@ -60,21 +58,35 @@ function formatStars(n: number): string {
 }
 const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null;
 
+// Compact curation lines: first 2 of each, joined with " · ".
+const hasScores = app.scores && Object.values(app.scores).some((v) => typeof v === "number");
+const curationLines: { key: "bestFor" | "whyListed" | "caveats"; label: string; items: string[]; tone?: "warn" }[] = [];
+if (app.bestFor && app.bestFor.length > 0) {
+  curationLines.push({ key: "bestFor", label: "Best for", items: app.bestFor.slice(0, 2) });
+}
+if (app.whyListed && app.whyListed.length > 0) {
+  curationLines.push({ key: "whyListed", label: "Why listed", items: app.whyListed.slice(0, 2) });
+}
+if (app.caveats && app.caveats.length > 0) {
+  curationLines.push({ key: "caveats", label: "Caveats", items: app.caveats.slice(0, 2), tone: "warn" });
+}
+
 const detailHref = `/apps/${app.slug}`;
+const repoHref = app.repoUrl;
+const ownerHref = owner ? `https://github.com/${owner}` : null;
 ---
 
 <article
   class="card card-hover group relative flex h-full flex-col gap-3 p-4"
 >
-  {/* Stretched link: covers the whole card. Goes to the detail page. */}
-  <a
-    href={detailHref}
-    class="absolute inset-0 z-0 rounded-lg"
-    aria-label={`Open ${app.name} details`}
-  ></a>
-
   {/* Top row: logo + name + label badge. */}
   <header class="relative z-10 flex items-start gap-3">
+    <a
+      href={detailHref}
+      aria-label={`Open ${app.name} details`}
+      class="absolute inset-0 z-0 rounded-lg"
+    ></a>
+
     {logoUrl ? (
       <img
         src={logoUrl}
@@ -98,12 +110,10 @@ const detailHref = `/apps/${app.slug}`;
       <h3
         class="m-0 truncate text-[0.9375rem] font-semibold tracking-tight text-ink-900 group-hover:underline dark:text-ink-100"
       >
-        {/* Name is its own link to the GitHub repo (not the detail page).
+        {/* Name is its own link to the detail page (not the GitHub repo).
             Stacks above the stretched link via z-index. */}
         <a
-          href={app.repoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={detailHref}
           class="relative z-10 text-inherit no-underline"
         >
           {app.name}
@@ -112,13 +122,14 @@ const detailHref = `/apps/${app.slug}`;
       <span class="truncate text-2xs text-ink-500 dark:text-ink-400">
         {owner ? (
           <>
+            {/* @owner/repo → GitHub repo (or owner page when repo is missing). */}
             <a
-              href={`https://github.com/${owner}`}
+              href={repo ? repoHref : (ownerHref ?? repoHref)}
               target="_blank"
               rel="noopener noreferrer"
-              class="relative z-10 text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+              class="relative z-10 font-mono text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
             >
-              <span class="text-ink-400 dark:text-ink-500">@</span>{owner}
+              <span class="text-ink-400 dark:text-ink-500">@</span>{owner}{repo ? <span class="text-ink-400 dark:text-ink-500">/{repo}</span> : ""}
             </a>
             <span class="mx-1 text-ink-300 dark:text-ink-700">·</span>
             {app.category}
@@ -160,30 +171,107 @@ const detailHref = `/apps/${app.slug}`;
     )}
   </div>
 
-  {/* Platform chips */}
-  <div class="relative z-10 flex flex-wrap items-center gap-1.5">
-    {visiblePlatforms.map((p) => (
-      <span class="chip">
-        <Icon name={p} category="platform" size={11} />
-        <span>{p}</span>
-      </span>
-    ))}
-    {platformOverflow > 0 && (
-      <span class="chip text-ink-400 dark:text-ink-500">+{platformOverflow}</span>
-    )}
-  </div>
+  {/* Scores — 6-dimension compact bars, only when curated. */}
+  {hasScores && (
+    <dl
+      class="relative z-10 grid grid-cols-2 gap-x-3 gap-y-1.5 border-t border-ink-200 pt-2.5 text-2xs dark:border-ink-800"
+      aria-label="App scores"
+    >
+      {SCORE_DIMENSIONS.filter((d) => d !== "overall").map((dim) => {
+        const v = app.scores![dim];
+        const tier = typeof v === "number" ? scoreTier(v) : 0;
+        return (
+          <div class="flex items-center gap-1.5">
+            <dt class="w-16 shrink-0 text-ink-500 dark:text-ink-400">
+              {SCORE_LABELS[dim]}
+            </dt>
+            <dd class="flex h-1.5 flex-1 gap-px" aria-label={`${SCORE_LABELS[dim]} ${scoreLabel(v)} of 100`}>
+              {[0, 1, 2, 3].map((i) => (
+                <div
+                  class={`flex-1 rounded-sm ${
+                    i < tier
+                      ? "bg-ink-500 dark:bg-ink-400"
+                      : "bg-ink-200 dark:bg-ink-800"
+                  }`}
+                />
+              ))}
+            </dd>
+            <dd class="w-5 shrink-0 text-right font-mono text-ink-700 dark:text-ink-300 tabular-nums">
+              {scoreLabel(v)}
+            </dd>
+          </div>
+        );
+      })}
+      <div class="col-span-2 flex items-center gap-1.5 border-t border-dashed border-ink-200 pt-1.5 dark:border-ink-800">
+        <dt class="w-16 shrink-0 font-semibold text-ink-700 dark:text-ink-200">
+          {SCORE_LABELS.overall}
+        </dt>
+        <dd class="flex h-1.5 flex-1 gap-px" aria-label={`${SCORE_LABELS.overall} ${scoreLabel(app.scores!.overall)} of 100`}>
+          {[0, 1, 2, 3, 4].map((i) => (
+            <div
+              class={`flex-1 rounded-sm ${
+                i < scoreTier(app.scores!.overall)
+                  ? "bg-ink-700 dark:bg-ink-200"
+                  : "bg-ink-200 dark:bg-ink-800"
+              }`}
+            />
+          ))}
+        </dd>
+        <dd class="w-5 shrink-0 text-right font-mono font-semibold text-ink-900 dark:text-ink-100 tabular-nums">
+          {scoreLabel(app.scores!.overall)}
+        </dd>
+      </div>
+    </dl>
+  )}
 
-  {/* Stack chips */}
-  <div class="relative z-10 mt-auto flex flex-wrap items-center gap-1.5">
-    {visibleStacks.map((s) => (
-      <span class="chip chip-stack">
-        <Icon name={s} category="stack" size={11} />
-        <span>{s}</span>
-      </span>
-    ))}
-    {stackOverflow > 0 && (
-      <span class="chip chip-stack text-ink-400 dark:text-ink-500">+{stackOverflow}</span>
-    )}
+  {/* Curation lines — Best for / Why listed / Caveats (compact). */}
+  {curationLines.length > 0 && (
+    <div
+      class="relative z-10 flex flex-col gap-1 border-t border-ink-200 pt-2.5 text-2xs dark:border-ink-800"
+    >
+      {curationLines.map((line) => (
+        <div class="flex items-baseline gap-1.5">
+          <span
+            class={`shrink-0 font-medium uppercase tracking-wider ${
+              line.tone === "warn"
+                ? "text-amber-700 dark:text-amber-400"
+                : "text-ink-500 dark:text-ink-400"
+            }`}
+          >
+            {line.label}
+          </span>
+          <span class="line-clamp-1 text-ink-700 dark:text-ink-300">
+            {line.items.join(" · ")}
+          </span>
+        </div>
+      ))}
+    </div>
+  )}
+
+  {/* Platform + stack chips, pushed to the bottom. */}
+  <div class="relative z-10 mt-auto flex flex-col gap-1.5">
+    <div class="flex flex-wrap items-center gap-1.5">
+      {visiblePlatforms.map((p) => (
+        <span class="chip">
+          <Icon name={p} category="platform" size={11} />
+          <span>{p}</span>
+        </span>
+      ))}
+      {platformOverflow > 0 && (
+        <span class="chip text-ink-400 dark:text-ink-500">+{platformOverflow}</span>
+      )}
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5">
+      {visibleStacks.map((s) => (
+        <span class="chip chip-stack">
+          <Icon name={s} category="stack" size={11} />
+          <span>{s}</span>
+        </span>
+      ))}
+      {stackOverflow > 0 && (
+        <span class="chip chip-stack text-ink-400 dark:text-ink-500">+{stackOverflow}</span>
+      )}
+    </div>
   </div>
 </article>
 

@@ -20,7 +20,7 @@ interface Props {
   class?: string;
 }
 
-const { facets, initial, defaultOpen = false, class: className = "" } = Astro.props;
+const { facets, initial, defaultOpen = true, class: className = "" } = Astro.props;
 const activeCount = (key: keyof AppsFilters) =>
   ((initial[key] as string[] | undefined) ?? []).length;
 
@@ -32,7 +32,7 @@ const totalActive =
   activeCount("licenses");
 
 const hasActive = totalActive > 0;
-const open = defaultOpen || hasActive;
+const open = defaultOpen;
 
 interface ChipGroup {
   label: string;
