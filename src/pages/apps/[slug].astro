@@ -1,9 +1,9 @@
 ---
 import type { OpenSourceApp } from "../../data/types";
 import { apps } from "../../data/apps";
-import Container from "../layout/Container.astro";
-import Icon from "../icons/Icon.astro";
-import AppCard from "../home/AppCard.astro";
+import Container from "../../components/layout/Container.astro";
+import Icon from "../../components/icons/Icon.astro";
+import AppCard from "../../components/home/AppCard.astro";
 import { getOwnerAndRepoFromRepoUrl } from "../../lib/repo";
 
 export function getStaticPaths() {

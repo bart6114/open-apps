@@ -1,0 +1,763 @@
+---
+import "../../styles/global.css";
+import Header from "../../components/layout/Header.astro";
+import Footer from "../../components/layout/Footer.astro";
+import Container from "../../components/layout/Container.astro";
+import DecisionRow from "../../components/home/DecisionRow.astro";
+import SmartLensTabs from "../../components/home/SmartLensTabs.astro";
+import RefinePanel from "../../components/home/RefinePanel.astro";
+
+import { apps } from "../../data/apps";
+import {
+  buildFacets,
+  filtersFromSearchParams,
+  hasAnyFilter,
+  filterApps,
+  activeFilterChips,
+  removeFilter,
+} from "../../lib/apps-search";
+import { lensFromSearchParams } from "../../lib/lenses";
+
+const initialFilters = filtersFromSearchParams(Astro.url.searchParams);
+const initialLens = lensFromSearchParams(Astro.url.searchParams);
+const facets = buildFacets(apps);
+const totalApps = apps.length;
+const initialResults = filterApps(apps, initialFilters);
+const initialChips = activeFilterChips(initialFilters);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Browse, search, and filter real open-source apps by stack, platform, category, license, status, and curated lens."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2318181b'/%3E%3C/svg%3E"
+    />
+    <title>Apps — Open Source Apps</title>
+    <script is:inline>
+      (function () {
+        var STORAGE_KEY = "open-apps-theme";
+        function getMode() {
+          var stored = localStorage.getItem(STORAGE_KEY);
+          if (stored === "light" || stored === "dark" || stored === "system") return stored;
+          return "system";
+        }
+        function apply(mode) {
+          var resolved =
+            mode === "system"
+              ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+              : mode;
+          var root = document.documentElement;
+          if (resolved === "dark") root.classList.add("dark");
+          else root.classList.remove("dark");
+          root.dataset.theme = mode;
+          root.dataset.resolvedTheme = resolved;
+        }
+        apply(getMode());
+        window.addEventListener("theme:set", function (e) { apply(e.detail); });
+        var mq = window.matchMedia("(prefers-color-scheme: dark)");
+        mq.addEventListener("change", function () {
+          if (getMode() === "system") apply("system");
+        });
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-white text-ink-900 dark:bg-ink-950 dark:text-ink-100">
+    <Header />
+
+    <main>
+      <section class="border-b border-ink-200 dark:border-ink-800">
+        <Container>
+          <div class="py-10 sm:py-14">
+            <div class="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <span class="text-2xs font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">
+                  Apps
+                </span>
+                <h1 class="mt-1 m-0 text-[1.75rem] sm:text-[2rem] font-semibold tracking-[-0.02em] leading-[1.1] text-ink-900 dark:text-ink-100">
+                  Find an open-source app
+                </h1>
+              </div>
+              <p
+                id="result-count"
+                class="m-0 text-2xs text-ink-500 dark:text-ink-400"
+                data-total={totalApps}
+              >
+                Showing {initialResults.length} of {totalApps} apps
+                {initialLens && (
+                  <span class="ml-1 text-ink-400 dark:text-ink-500">· lens: {initialLens}</span>
+                )}
+              </p>
+            </div>
+
+            <form
+              id="search-form"
+              class="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center"
+              role="search"
+            >
+              <label class="relative flex-1">
+                <span class="sr-only">Search apps by name, description, owner, category</span>
+                <svg
+                  viewBox="0 0 16 16"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                  class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-400"
+                  fill="currentColor"
+                >
+                  <path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z" />
+                </svg>
+                <input
+                  id="search-input"
+                  type="search"
+                  name="q"
+                  value={initialFilters.q ?? ""}
+                  placeholder="Search by name, description, owner, category…"
+                  autocomplete="off"
+                  class="w-full rounded-md border border-ink-200 bg-white py-2.5 pl-10 pr-3 text-[0.9375rem] text-ink-900 placeholder:text-ink-400 focus:border-ink-900 focus:outline-none focus:ring-2 focus:ring-ink-900/10 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-100 dark:placeholder:text-ink-500 dark:focus:border-ink-100 dark:focus:ring-ink-100/15"
+                />
+              </label>
+            </form>
+
+            <div class="mt-5">
+              <SmartLensTabs currentParams={Astro.url.searchParams} />
+            </div>
+
+            <div
+              id="active-filters"
+              class="mt-4 flex flex-wrap items-center gap-1.5"
+              hidden={initialChips.length === 0}
+            >
+              {initialChips.map((chip) => (
+                <button
+                  type="button"
+                  class="chip group inline-flex items-center gap-1 hover:border-ink-300 dark:hover:border-ink-700"
+                  data-remove-key={chip.key}
+                  data-remove-value={chip.value}
+                  aria-label={`Remove filter ${chip.label}`}
+                >
+                  <span>{chip.label}</span>
+                  <span aria-hidden="true" class="text-ink-400 group-hover:text-ink-700 dark:text-ink-500 dark:group-hover:text-ink-200">×</span>
+                </button>
+              ))}
+              <button
+                type="button"
+                id="clear-filters"
+                class="text-2xs text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+              >
+                Clear all
+              </button>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section class="border-b border-ink-200 dark:border-ink-800">
+        <Container>
+          <div class="py-8 sm:py-10">
+            <div class="mb-5">
+              <RefinePanel
+                facets={facets}
+                initial={initialFilters}
+                defaultOpen={hasAnyFilter(initialFilters) && (initialFilters.stacks?.length ||
+                  initialFilters.platforms?.length ||
+                  initialFilters.categories?.length ||
+                  initialFilters.licenses?.length) ? true : false}
+              />
+            </div>
+
+            <div
+              id="results"
+              class="flex flex-col gap-3"
+            >
+              {initialResults.map((app) => <DecisionRow app={app} />)}
+            </div>
+
+            <div id="empty-state" class="hidden py-12 text-center" hidden={initialResults.length > 0}>
+              <p class="m-0 text-[0.9375rem] text-ink-700 dark:text-ink-200">
+                No apps match these filters.
+              </p>
+              <p class="mt-1 m-0 text-2xs text-ink-500 dark:text-ink-400">
+                Try removing a filter, clearing the search, or picking a different lens.
+              </p>
+              <button
+                type="button"
+                id="empty-clear"
+                class="mt-4 btn-outline"
+              >
+                Clear all filters
+              </button>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </main>
+
+    {/* Compare tray — sticky at bottom-right when items selected */}
+    <div
+      id="compare-tray"
+      class="fixed bottom-4 right-4 z-40 hidden"
+    >
+      <div class="flex items-center gap-3 rounded-lg border border-ink-200 bg-white px-3 py-2 shadow-lg dark:border-ink-700 dark:bg-ink-900">
+        <span class="text-2xs font-medium text-ink-700 dark:text-ink-200">
+          <span id="compare-count">0</span> selected
+        </span>
+        <a
+          id="compare-button"
+          href="#"
+          class="btn-primary text-2xs py-1 px-2"
+          aria-disabled="true"
+        >
+          Compare
+        </a>
+        <button
+          type="button"
+          id="compare-clear"
+          class="text-2xs text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+        >
+          Clear
+        </button>
+      </div>
+    </div>
+
+    <Footer />
+
+    <script
+      id="apps-data"
+      type="application/json"
+      set:html={JSON.stringify(apps)}
+    />
+
+    <script>
+      import {
+        filtersFromSearchParams,
+        searchParamsFromFilters,
+        filterApps,
+        activeFilterChips,
+        removeFilter,
+        type AppsFilters,
+      } from "../../lib/apps-search";
+      import { lensFromSearchParams } from "../../lib/lenses";
+      import type { OpenSourceApp } from "../../data/types";
+
+      // ── Data ──
+      const apps: OpenSourceApp[] = JSON.parse(
+        document.getElementById("apps-data")!.textContent || "[]",
+      );
+      const totalApps = apps.length;
+
+      // ── DOM refs ──
+      const searchInput = document.getElementById("search-input") as HTMLInputElement;
+      const resultsEl = document.getElementById("results")!;
+      const emptyEl = document.getElementById("empty-state")!;
+      const countEl = document.getElementById("result-count")!;
+      const activeFiltersEl = document.getElementById("active-filters")!;
+      const compareTray = document.getElementById("compare-tray")!;
+      const compareCountEl = document.getElementById("compare-count")!;
+      const compareButton = document.getElementById("compare-button") as HTMLAnchorElement;
+      const compareClearBtn = document.getElementById("compare-clear")!;
+
+      // ── State ──
+      function readFilters(): AppsFilters {
+        return filtersFromSearchParams(new URLSearchParams(location.search));
+      }
+      function writeFilters(f: AppsFilters) {
+        const sp = searchParamsFromFilters(f);
+        const qs = sp.toString();
+        const url = qs ? `?${qs}` : location.pathname;
+        history.replaceState(null, "", url);
+      }
+      function currentLens(): string | null {
+        return lensFromSearchParams(new URLSearchParams(location.search));
+      }
+
+      // ── Render: row HTML ──
+      function esc(s: string): string {
+        return s
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+      function formatStars(n: number): string {
+        if (n >= 1000) {
+          const k = n / 1000;
+          return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
+        }
+        return n.toString();
+      }
+      function ownerOf(repoUrl: string): string | null {
+        const m = repoUrl.match(/github\.com\/([^/]+)\/([^/?#]+)/);
+        return m ? m[1] : null;
+      }
+      function repoOf(repoUrl: string): string | null {
+        const m = repoUrl.match(/github\.com\/([^/]+)\/([^/?#]+)/);
+        return m ? m[2].replace(/\.git$/, "") : null;
+      }
+      function labelClass(l: string): string {
+        if (l === "new") return "border-emerald-300/60 bg-emerald-50 text-emerald-800 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300";
+        if (l === "hot") return "border-orange-300/60 bg-orange-50 text-orange-800 dark:border-orange-800/60 dark:bg-orange-950/40 dark:text-orange-300";
+        if (l === "mature") return "border-blue-300/60 bg-blue-50 text-blue-800 dark:border-blue-800/60 dark:bg-blue-950/40 dark:text-blue-300";
+        return "border-ink-200 bg-ink-50 text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300";
+      }
+      function projectTypeLabel(t?: string): string | null {
+        if (!t) return null;
+        return {
+          "real-app": "Real app",
+          "production": "Production",
+          "reference": "Reference",
+          "demo": "Demo",
+          "template": "Template",
+        }[t] ?? null;
+      }
+      function scoreTier(n: number): number {
+        if (n < 20) return 0;
+        if (n < 40) return 1;
+        if (n < 60) return 2;
+        if (n < 80) return 3;
+        return 4;
+      }
+      function iconPath(name: string, cat: "stack" | "platform"): string {
+        const slug = name.toLowerCase().trim()
+          .replace(/\+/g, "plus").replace(/\./g, "")
+          .replace(/[\s/]+/g, "-").replace(/-+/g, "-")
+          .replace(/^-|-$/g, "").replace(/[^a-z0-9-]/g, "");
+        const dir = cat === "stack" ? "stacks" : "platforms";
+        return `/icons/${dir}/${slug}.svg`;
+      }
+
+      const SCORE_DIMS = [
+        { key: "activity", label: "Activity" },
+        { key: "maturity", label: "Maturity" },
+        { key: "learning", label: "Learning" },
+        { key: "contribution", label: "Contribution" },
+        { key: "docs", label: "Docs" },
+        { key: "overall", label: "Overall" },
+      ] as const;
+
+      function renderRow(a: OpenSourceApp): string {
+        const owner = ownerOf(a.repoUrl);
+        const repo = repoOf(a.repoUrl);
+        const avatar = owner
+          ? `https://avatars.githubusercontent.com/${owner}?v=4&s=80`
+          : null;
+        const label =
+          a.labels?.find((l) => l === "new" || l === "hot" || l === "mature") ??
+          a.labels?.[0];
+        const allStacks = [a.stack, ...(a.stacks ?? [])].filter(Boolean);
+        const visibleStacks = allStacks.slice(0, 5);
+        const stackOverflow = allStacks.length - visibleStacks.length;
+        const visiblePlatforms = a.platforms.slice(0, 5);
+        const platformOverflow = a.platforms.length - visiblePlatforms.length;
+        const stars = typeof a.stars === "number" ? formatStars(a.stars) : null;
+        const isCurated = !!a.curation;
+        const typeLabel = projectTypeLabel(a.projectType);
+        const lc = label ? labelClass(label) : "";
+        const labelTag = label
+          ? `<span class="inline-flex items-center rounded border px-1.5 py-0 text-[10px] font-medium uppercase tracking-wider ${lc}">${esc(label)}</span>`
+          : "";
+        const typeTag = typeLabel
+          ? `<span class="inline-flex items-center rounded border border-ink-200 bg-ink-50 px-1.5 py-0 text-[10px] font-medium uppercase tracking-wider text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300">${esc(typeLabel)}</span>`
+          : "";
+        const curatedTag = isCurated && !a.curation?.reviewed
+          ? `<span class="inline-flex items-center gap-1 rounded border border-amber-300/60 bg-amber-50 px-1.5 py-0 text-[10px] font-medium text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300">Auto-curated · Needs review</span>`
+          : isCurated && a.curation?.reviewed
+            ? `<span class="inline-flex items-center gap-1 rounded border border-emerald-300/60 bg-emerald-50 px-1.5 py-0 text-[10px] font-medium text-emerald-800 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300">Curator reviewed</span>`
+            : "";
+        const avatarHtml = avatar
+          ? `<img src="${esc(avatar)}" alt="${esc(a.name)} avatar" width="44" height="44" loading="lazy" decoding="async" class="h-11 w-11 rounded-md border border-ink-200 bg-white object-cover dark:border-ink-800 dark:bg-ink-900">`
+          : `<span aria-hidden="true" class="flex h-11 w-11 items-center justify-center rounded-md border border-ink-200 bg-ink-50 text-sm font-semibold text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300">${esc(a.name.slice(0, 2).toUpperCase())}</span>`;
+
+        const stackItems = visibleStacks
+          .map(
+            (s) =>
+              `<span class="inline-flex items-center gap-0.5"><img src="${esc(iconPath(s, "stack"))}" alt="" width="10" height="10" loading="lazy" class="h-2.5 w-2.5 object-contain"><span>${esc(s)}</span></span>`,
+          )
+          .join("");
+        const stackOver = stackOverflow > 0
+          ? `<span class="text-ink-400 dark:text-ink-500">+${stackOverflow}</span>`
+          : "";
+        const platformItems = visiblePlatforms
+          .map(
+            (p) =>
+              `<span class="inline-flex items-center gap-0.5"><img src="${esc(iconPath(p, "platform"))}" alt="" width="10" height="10" loading="lazy" class="h-2.5 w-2.5 object-contain"><span>${esc(p)}</span></span>`,
+          )
+          .join("");
+        const platformOver = platformOverflow > 0
+          ? `<span class="text-ink-400 dark:text-ink-500">+${platformOverflow}</span>`
+          : "";
+
+        const licenseBits = [
+          a.license
+            ? `<span class="font-mono text-ink-700 dark:text-ink-300">${esc(a.license)}</span>`
+            : `<span class="text-ink-400 dark:text-ink-500">—</span>`,
+          a.codebaseSize
+            ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="text-ink-500 dark:text-ink-400">${esc(a.codebaseSize)}</span>`
+            : "",
+          a.difficulty
+            ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="text-ink-500 dark:text-ink-400">${esc(a.difficulty)}</span>`
+            : "",
+        ].join("");
+
+        // Scores
+        const hasScores = a.scores && Object.values(a.scores).some((v) => typeof v === "number");
+        const scoresHtml = hasScores
+          ? SCORE_DIMS.map(({ key, label }) => {
+              const v = (a.scores as any)[key] as number | undefined;
+              const tier = typeof v === "number" ? scoreTier(v) : 0;
+              const isOverall = key === "overall";
+              const cells = [0, 1, 2, 3]
+                .map((i) =>
+                  `<div class="flex-1 rounded-sm ${i < tier ? (isOverall ? "bg-ink-700 dark:bg-ink-200" : "bg-ink-500 dark:bg-ink-400") : "bg-ink-200 dark:bg-ink-800"}"></div>`,
+                )
+                .join("");
+              return `<div class="inline-flex items-center gap-1.5"><dt class="${isOverall ? "font-semibold text-ink-700 dark:text-ink-200" : "text-ink-500 dark:text-ink-400"}">${label}</dt>${typeof v === "number" ? `<dd class="font-mono ${isOverall ? "text-ink-900 dark:text-ink-100" : "text-ink-700 dark:text-ink-300"}">${Math.round(v)}</dd>` : ""}<dd class="flex h-1.5 w-10 gap-px">${cells}</dd></div>`;
+            }).join("")
+          : `<span class="text-ink-400 dark:text-ink-500">Scores not yet curated</span>`;
+
+        // Curation lines
+        const curationLines: string[] = [];
+        if (a.bestFor && a.bestFor.length > 0) {
+          const shown = a.bestFor.slice(0, 3).join(" · ");
+          const more = a.bestFor.length > 3 ? ` <span class="text-ink-400 dark:text-ink-500">+${a.bestFor.length - 3}</span>` : "";
+          curationLines.push(`<div class="flex items-baseline gap-2"><span class="shrink-0 font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Best for</span><span class="text-ink-700 dark:text-ink-300">${esc(shown)}${more}</span></div>`);
+        }
+        if (a.whyListed && a.whyListed.length > 0) {
+          const shown = a.whyListed.slice(0, 2).join(" · ");
+          const more = a.whyListed.length > 2 ? ` <span class="text-ink-400 dark:text-ink-500">+${a.whyListed.length - 2}</span>` : "";
+          curationLines.push(`<div class="flex items-baseline gap-2"><span class="shrink-0 font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Why listed</span><span class="text-ink-700 dark:text-ink-300">${esc(shown)}${more}</span></div>`);
+        }
+        if (a.caveats && a.caveats.length > 0) {
+          const shown = a.caveats.slice(0, 2).join(" · ");
+          const more = a.caveats.length > 2 ? ` <span class="text-ink-400 dark:text-ink-500">+${a.caveats.length - 2}</span>` : "";
+          curationLines.push(`<div class="flex items-baseline gap-2"><span class="shrink-0 font-medium uppercase tracking-wider text-amber-700 dark:text-amber-400">Caveats</span><span class="text-ink-700 dark:text-ink-300">${esc(shown)}${more}</span></div>`);
+        }
+        const curationHtml = curationLines.length
+          ? `<div class="flex flex-col gap-1.5 border-t border-ink-200 pt-3 text-2xs dark:border-ink-800">${curationLines.join("")}</div>`
+          : "";
+
+        return `
+          <article class="decision-row group relative flex flex-col gap-3 rounded-lg border border-ink-200 bg-white p-4 transition-colors hover:border-ink-300 hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_-2px_rgba(0,0,0,0.06)] dark:border-ink-800 dark:bg-ink-950 dark:hover:border-ink-700 dark:hover:shadow-[0_1px_2px_rgba(0,0,0,0.4),0_4px_12px_-2px_rgba(0,0,0,0.3)]" data-slug="${esc(a.slug)}">
+            <header class="flex items-start gap-3">
+              <label class="relative z-20 flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded-sm border border-ink-300 bg-white transition-colors hover:border-ink-500 has-[:checked]:border-ink-900 has-[:checked]:bg-ink-900 dark:border-ink-700 dark:bg-ink-950 dark:hover:border-ink-500 dark:has-[:checked]:border-ink-100 dark:has-[:checked]:bg-ink-100" title="Add to compare">
+                <input type="checkbox" class="sr-only" data-compare-toggle="${esc(a.slug)}" aria-label="Add ${esc(a.name)} to compare">
+                <svg viewBox="0 0 12 12" class="h-2.5 w-2.5 text-white opacity-0 transition-opacity peer-checked:opacity-100 dark:text-ink-900" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3" /></svg>
+              </label>
+              <a href="/apps/${esc(a.slug)}" class="relative z-10 flex shrink-0" aria-hidden="true" tabindex="-1">${avatarHtml}</a>
+              <div class="flex min-w-0 flex-1 flex-col gap-0.5">
+                <div class="flex flex-wrap items-baseline gap-x-2">
+                  <h3 class="m-0 text-[1rem] font-semibold tracking-tight text-ink-900 dark:text-ink-100">
+                    <a href="${esc(a.repoUrl)}" target="_blank" rel="noopener noreferrer" class="relative z-10 text-inherit no-underline hover:underline">${esc(a.name)}</a>
+                  </h3>
+                  ${typeTag}
+                  ${labelTag}
+                  ${curatedTag}
+                </div>
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-2xs text-ink-500 dark:text-ink-400">
+                  ${owner ? `<span class="font-mono"><span class="text-ink-400 dark:text-ink-500">@</span>${esc(owner)}${repo ? `<span class="text-ink-400 dark:text-ink-500">/${esc(repo)}</span>` : ""}</span><span class="text-ink-300 dark:text-ink-700">·</span>` : ""}
+                  <span>${esc(a.category)}</span>
+                  ${a.status ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="capitalize">${esc(a.status)}</span>` : ""}
+                  ${stars ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="inline-flex items-center gap-0.5 font-mono"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>${esc(stars)}</span>` : ""}
+                </div>
+              </div>
+              <a href="/apps/${esc(a.slug)}" class="relative z-10 hidden shrink-0 self-start text-2xs font-medium text-ink-500 hover:text-ink-900 sm:inline dark:text-ink-400 dark:hover:text-ink-100">View analysis →</a>
+            </header>
+            <p class="m-0 line-clamp-2 text-[0.8125rem] leading-relaxed text-ink-600 dark:text-ink-300">${esc(a.description)}</p>
+            <dl class="grid grid-cols-1 gap-x-4 gap-y-1 text-2xs sm:grid-cols-3">
+              <div class="flex items-baseline gap-1.5">
+                <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Stack</dt>
+                <dd class="flex flex-wrap items-center gap-1 text-ink-700 dark:text-ink-300">${stackItems}${stackOver}</dd>
+              </div>
+              <div class="flex items-baseline gap-1.5">
+                <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Platforms</dt>
+                <dd class="flex flex-wrap items-center gap-1 text-ink-700 dark:text-ink-300">${platformItems}${platformOver}</dd>
+              </div>
+              <div class="flex items-baseline gap-1.5">
+                <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">License</dt>
+                <dd class="font-mono">${licenseBits}</dd>
+              </div>
+            </dl>
+            <dl class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-2xs" aria-label="App scores">${scoresHtml}</dl>
+            ${curationHtml}
+          </article>
+        `;
+      }
+
+      function renderActiveChips(f: AppsFilters): string {
+        const chips = activeFilterChips(f);
+        if (chips.length === 0) return "";
+        return chips
+          .map(
+            (c) =>
+              `<button type="button" class="chip group inline-flex items-center gap-1 hover:border-ink-300 dark:hover:border-ink-700" data-remove-key="${esc(c.key)}" data-remove-value="${esc(c.value)}" aria-label="Remove filter ${esc(c.label)}"><span>${esc(c.label)}</span><span aria-hidden="true" class="text-ink-400 group-hover:text-ink-700 dark:text-ink-500 dark:group-hover:text-ink-200">×</span></button>`,
+          )
+          .join("") +
+          `<button type="button" id="clear-filters" class="text-2xs text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100">Clear all</button>`;
+      }
+
+      function syncSidebar(f: AppsFilters) {
+        document.querySelectorAll<HTMLInputElement>("[data-filter-group]").forEach((input) => {
+          const key = input.dataset.filterKey! as keyof AppsFilters;
+          const value = input.dataset.filterValue!;
+          const arr = f[key] as string[] | undefined;
+          input.checked = !!arr?.includes(value);
+        });
+      }
+
+      function syncChips(f: AppsFilters) {
+        document.querySelectorAll<HTMLButtonElement>("[data-filter-chip]").forEach((btn) => {
+          const key = btn.dataset.filterKey! as keyof AppsFilters;
+          const value = btn.dataset.filterValue!;
+          const arr = f[key] as string[] | undefined;
+          btn.setAttribute("aria-pressed", arr?.includes(value) ? "true" : "false");
+        });
+      }
+
+      function syncRefineButton(f: AppsFilters) {
+        const total = (["stacks", "platforms", "categories", "labels", "licenses"] as const)
+          .reduce((n, k) => n + ((f[k] as string[] | undefined)?.length ?? 0), 0);
+        const btn = document.getElementById("refine-toggle");
+        const badge = btn?.querySelector<HTMLElement>("[data-refine-count]");
+        if (btn && badge) {
+          if (total > 0) {
+            badge.textContent = String(total);
+            badge.classList.remove("hidden");
+          } else {
+            badge.classList.add("hidden");
+          }
+        }
+      }
+
+      // Sync the lens tab's active state with the current URL.
+      // A lens is "active" if its target params match the current URL.
+      // Mirror of isLensActive in src/lib/lenses.ts — kept inline because
+      // Astro page scripts can't import from .ts modules without bundling.
+      const LENS_TARGETS: Record<string, Record<string, string | string[]>> = {
+        "all": {},
+        "new": { label: "new" },
+        "hot": { label: "hot" },
+        "mature": { label: "mature" },
+        "production-like": { lens: "production-like" },
+        "good-to-learn": { lens: "good-to-learn" },
+      };
+      const ACTIVE_TAB_CLASSES = ["border-ink-900", "bg-ink-900", "text-white", "dark:border-ink-100", "dark:bg-ink-100", "dark:text-ink-900"];
+      const INACTIVE_TAB_CLASSES = ["border-ink-200", "bg-white", "text-ink-700", "hover:border-ink-300", "hover:bg-ink-50", "dark:border-ink-800", "dark:bg-ink-950", "dark:text-ink-300", "dark:hover:border-ink-700", "dark:hover:bg-ink-900/60"];
+
+      function isLensActive(id: string, sp: URLSearchParams): boolean {
+        if (id === "all") {
+          return !sp.get("lens") && !sp.get("label") && !sp.get("status");
+        }
+        const target = LENS_TARGETS[id];
+        if (!target) return false;
+        for (const [k, v] of Object.entries(target)) {
+          if (Array.isArray(v)) {
+            if (sp.getAll(k).length !== v.length) return false;
+            for (const item of v) if (!sp.getAll(k).includes(item)) return false;
+          } else {
+            if (sp.get(k) !== v) return false;
+          }
+        }
+        return true;
+      }
+
+      function syncLensTabs() {
+        const sp = new URLSearchParams(location.search);
+        const lensEls = document.querySelectorAll<HTMLAnchorElement>("nav[aria-label='Curated lenses'] a[data-lens-id]");
+        lensEls.forEach((a) => {
+          const id = a.dataset.lensId!;
+          if (isLensActive(id, sp)) {
+            a.setAttribute("aria-current", "page");
+            a.classList.remove(...INACTIVE_TAB_CLASSES);
+            a.classList.add(...ACTIVE_TAB_CLASSES);
+          } else {
+            a.removeAttribute("aria-current");
+            a.classList.remove(...ACTIVE_TAB_CLASSES);
+            a.classList.add(...INACTIVE_TAB_CLASSES);
+          }
+        });
+      }
+
+      // ── Compare state ──
+      const compared = new Set<string>();
+      const COMPARE_MAX = 3;
+
+      function updateCompareTray() {
+        const n = compared.size;
+        if (n === 0) {
+          compareTray.classList.add("hidden");
+          return;
+        }
+        compareTray.classList.remove("hidden");
+        compareCountEl.textContent = String(n);
+        const slugs = [...compared];
+        compareButton.href = `/apps/compare?slugs=${encodeURIComponent(slugs.join(","))}`;
+        compareButton.removeAttribute("aria-disabled");
+        if (n < 2) {
+          compareButton.classList.add("pointer-events-none", "opacity-50");
+          compareButton.setAttribute("aria-disabled", "true");
+        } else {
+          compareButton.classList.remove("pointer-events-none", "opacity-50");
+        }
+      }
+
+      function syncCompareCheckboxes() {
+        document.querySelectorAll<HTMLInputElement>("[data-compare-toggle]").forEach((cb) => {
+          const slug = cb.dataset.compareToggle!;
+          cb.checked = compared.has(slug);
+        });
+      }
+
+      // ── Apply: re-render results + chips + sidebar + compare ──
+      function apply() {
+        const f = readFilters();
+        const filtered = filterApps(apps, f);
+        const lens = currentLens();
+
+        resultsEl.innerHTML = filtered.map(renderRow).join("");
+        const lensText = lens ? ` · lens: ${lens}` : "";
+        countEl.innerHTML = `Showing ${filtered.length} of ${totalApps} apps${lensText}`;
+
+        const chips = activeFilterChips(f);
+        if (chips.length === 0) {
+          activeFiltersEl.hidden = true;
+          activeFiltersEl.innerHTML = "";
+        } else {
+          activeFiltersEl.hidden = false;
+          activeFiltersEl.innerHTML = renderActiveChips(f);
+        }
+
+        emptyEl.classList.toggle("hidden", filtered.length > 0);
+        emptyEl.hidden = filtered.length > 0;
+        resultsEl.classList.toggle("hidden", filtered.length === 0);
+
+        syncSidebar(f);
+        syncChips(f);
+        syncRefineButton(f);
+        syncLensTabs();
+        syncCompareCheckboxes();
+      }
+
+      // ── Wire up controls ──
+      let searchTimer: number | undefined;
+      searchInput.addEventListener("input", () => {
+        if (searchTimer) window.clearTimeout(searchTimer);
+        searchTimer = window.setTimeout(() => {
+          const f = readFilters();
+          f.q = searchInput.value.trim() || undefined;
+          writeFilters(f);
+          apply();
+        }, 200);
+      });
+      document.getElementById("search-form")!.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const f = readFilters();
+        f.q = searchInput.value.trim() || undefined;
+        writeFilters(f);
+        apply();
+      });
+
+      document.querySelectorAll<HTMLInputElement>("[data-filter-group]").forEach((input) => {
+        input.addEventListener("change", () => {
+          const key = input.dataset.filterKey! as keyof AppsFilters;
+          const value = input.dataset.filterValue!;
+          const f = readFilters();
+          const current = (f[key] as string[] | undefined) ?? [];
+          if (input.checked) {
+            if (!current.includes(value)) {
+              (f[key] as string[] | undefined) = [...current, value];
+            }
+          } else {
+            (f[key] as string[] | undefined) = current.filter((v) => v !== value);
+          }
+          writeFilters(f);
+          apply();
+        });
+      });
+
+      // Refine-panel chip clicks (buttons instead of hidden checkboxes).
+      document.querySelectorAll<HTMLButtonElement>("[data-filter-chip]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const key = btn.dataset.filterKey! as keyof AppsFilters;
+          const value = btn.dataset.filterValue!;
+          const isSingle = btn.dataset.filterSingle === "true";
+          const f = readFilters();
+          const current = (f[key] as string[] | undefined) ?? [];
+          const has = current.includes(value);
+          if (isSingle) {
+            (f[key] as string[] | undefined) = has ? [] : [value];
+          } else {
+            (f[key] as string[] | undefined) = has
+              ? current.filter((v) => v !== value)
+              : [...current, value];
+          }
+          writeFilters(f);
+          apply();
+        });
+      });
+
+      // Compare checkbox toggling (event-delegated)
+      resultsEl.addEventListener("change", (e) => {
+        const target = e.target as HTMLInputElement;
+        if (target.matches("[data-compare-toggle]")) {
+          const slug = target.dataset.compareToggle!;
+          if (target.checked) {
+            if (compared.size >= COMPARE_MAX) {
+              target.checked = false;
+              alert(`You can compare up to ${COMPARE_MAX} apps at a time.`);
+              return;
+            }
+            compared.add(slug);
+          } else {
+            compared.delete(slug);
+          }
+          updateCompareTray();
+        }
+      });
+
+      compareClearBtn.addEventListener("click", () => {
+        compared.clear();
+        updateCompareTray();
+        syncCompareCheckboxes();
+      });
+
+      // Active chip removal + clear-all (event-delegated)
+      document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        const removeBtn = target.closest<HTMLElement>("[data-remove-key]");
+        if (removeBtn) {
+          const key = removeBtn.dataset.removeKey as keyof AppsFilters;
+          const value = removeBtn.dataset.removeValue ?? "";
+          const f = removeFilter(readFilters(), key, value);
+          writeFilters(f);
+          if (key === "q") searchInput.value = "";
+          apply();
+          return;
+        }
+        if (target.id === "clear-filters" || target.id === "empty-clear") {
+          writeFilters({});
+          searchInput.value = "";
+          apply();
+        }
+      });
+
+      window.addEventListener("popstate", apply);
+
+      updateCompareTray();
+      apply();
+    </script>
+
+    <style>
+      .chip {
+        @apply inline-flex items-center gap-1 rounded-md border border-ink-200 bg-white px-1.5 py-0.5 text-2xs font-medium text-ink-700 transition-colors dark:border-ink-800 dark:bg-ink-950 dark:text-ink-300;
+      }
+    </style>
+  </body>
+</html>
