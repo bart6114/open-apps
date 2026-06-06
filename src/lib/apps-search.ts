@@ -13,6 +13,9 @@ export type AppsFilters = {
   categories?: string[];
   labels?: string[];
   licenses?: string[];
+  statuses?: string[];
+  /** A curated lens (e.g. "good-to-learn", "production-like"). Single value. */
+  lens?: string;
 };
 
 const KEYS = {
@@ -22,6 +25,8 @@ const KEYS = {
   categories: "category",
   labels: "label",
   licenses: "license",
+  statuses: "status",
+  lens: "lens",
 } as const;
 
 /**
@@ -36,6 +41,8 @@ export function filtersFromSearchParams(sp: URLSearchParams): AppsFilters {
     categories: sp.getAll(KEYS.categories).filter(Boolean),
     labels: sp.getAll(KEYS.labels).filter(Boolean),
     licenses: sp.getAll(KEYS.licenses).filter(Boolean),
+    statuses: sp.getAll(KEYS.statuses).flatMap((s) => s.split(",")).filter(Boolean),
+    lens: sp.get(KEYS.lens) ?? undefined,
   };
 }
 
@@ -51,18 +58,22 @@ export function searchParamsFromFilters(f: AppsFilters): URLSearchParams {
   for (const v of f.categories ?? []) sp.append(KEYS.categories, v);
   for (const v of f.labels ?? []) sp.append(KEYS.labels, v);
   for (const v of f.licenses ?? []) sp.append(KEYS.licenses, v);
+  if (f.statuses?.length) sp.set(KEYS.statuses, f.statuses.join(","));
+  if (f.lens) sp.set(KEYS.lens, f.lens);
   return sp;
 }
 
 /** True if any filter is active (i.e. the result list isn't "all apps"). */
 export function hasAnyFilter(f: AppsFilters): boolean {
   if (f.q && f.q.trim()) return true;
+  if (f.lens) return true;
   return Boolean(
     (f.stacks?.length ?? 0) +
       (f.platforms?.length ?? 0) +
       (f.categories?.length ?? 0) +
       (f.labels?.length ?? 0) +
-      (f.licenses?.length ?? 0),
+      (f.licenses?.length ?? 0) +
+      (f.statuses?.length ?? 0),
   );
 }
 
@@ -80,6 +91,7 @@ export function filterApps(apps: OpenSourceApp[], f: AppsFilters): OpenSourceApp
   const categories = f.categories?.length ? new Set(f.categories) : null;
   const labels = f.labels?.length ? new Set(f.labels) : null;
   const licenses = f.licenses?.length ? new Set(f.licenses) : null;
+  const statuses = f.statuses?.length ? new Set(f.statuses) : null;
 
   return apps.filter((a) => {
     // Text search — match any of: name, owner (from repoUrl), description, category
@@ -112,6 +124,14 @@ export function filterApps(apps: OpenSourceApp[], f: AppsFilters): OpenSourceApp
       if (!a.license || !licenses.has(a.license)) return false;
     }
 
+    if (statuses) {
+      if (!a.status || !statuses.has(a.status)) return false;
+    }
+
+    if (f.lens) {
+      if (!a.lenses?.includes(f.lens)) return false;
+    }
+
     return true;
   });
 }
@@ -139,6 +159,9 @@ export function activeFilterChips(
   }
   for (const v of f.licenses ?? []) {
     out.push({ key: "licenses", value: v, label: `license: ${v}` });
+  }
+  if (f.lens) {
+    out.push({ key: "lens", value: f.lens, label: `lens: ${f.lens}` });
   }
 
   return out;
