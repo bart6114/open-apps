@@ -45,7 +45,8 @@ const ICONS = [
   { file: "solidity.svg",     target: "stacks/solidity.svg",     label: "Solidity" },
   { file: "rust-light.svg",   target: "stacks/rust.svg",         label: "Rust" },
   // Hand-rolled (no upstream equivalent)
-  { file: null,               target: "stacks/ionic.svg",        label: "Ionic / Capacitor (custom)", custom: true },
+  { file: null,               target: "stacks/ionic.svg",        label: "Ionic (custom shield)",        custom: true },
+  { file: null,               target: "stacks/capacitor.svg",    label: "Capacitor (custom schematic)", custom: true },
 
   // ── Platforms (developer-icons has android/apple/linux) ──────────
   { file: "android.svg",      target: "platforms/android.svg",   label: "Android" },

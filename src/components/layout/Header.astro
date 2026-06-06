@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
+
 const navItems = [
   { label: "New", href: "#new" },
   { label: "Hot", href: "#hot" },
@@ -45,6 +47,7 @@ const githubUrl =
     </nav>
 
     <div class="ml-auto flex items-center gap-2">
+      <ThemeToggle />
       <a
         href={githubUrl}
         target="_blank"

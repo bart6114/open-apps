@@ -1,7 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,md,mdx}'],
-  darkMode: 'media',
+  // Use a `.dark` class on <html> (toggled by the theme script in
+  // the document head) rather than the OS media query, so a manual
+  // theme switcher can override the user's system preference.
+  darkMode: 'class',
   theme: {
     // Disable default palette so we only ship our own neutral / accent
     // tokens. Keeps the bundle small and forces a unified look.
