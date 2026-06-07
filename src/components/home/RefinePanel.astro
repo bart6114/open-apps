@@ -164,9 +164,19 @@ function triggerLabel(g: FilterGroup): string {
    * Dropdown behavior for each filter group:
    *   - click trigger → toggle popover
    *   - click outside / ESC → close
-   *   - Apply writes the URL (server-side render)
-   *   - Clear resets this group's selection in the popover
+   *   - Apply / Clear / Single-select fire `applyFilterPatch()` which
+   *     is a host-page hook (defined in `src/pages/apps/index.astro`).
+   *     The hook updates the URL via `history.pushState` (no reload)
+   *     and re-runs the row filter so the result list updates
+   *     immediately. Static pages don't filter on the server, so
+   *     this is the only way the filter actually narrows the list.
    */
+  function applyFilterPatch(patch: Record<string, string[] | null>) {
+    const fn = (window as unknown as { __applyFilters?: (p: typeof patch) => void }).__applyFilters;
+    if (typeof fn === "function") fn(patch);
+    else location.assign(location.pathname); // graceful fallback
+  }
+
   (() => {
     const groups = document.querySelectorAll<HTMLElement>(".apps-filter");
     if (!groups.length) return;
@@ -223,14 +233,7 @@ function triggerLabel(g: FilterGroup): string {
           input.addEventListener("change", () => {
             const key = input.dataset.filterKey!;
             const value = input.dataset.filterValue!;
-            // Build a URL preserving everything else, drop the entire
-            // multi-value array, set the new single value.
-            const sp = new URLSearchParams(location.search);
-            sp.delete(key);
-            sp.set(key, value);
-            sp.set("page", "1");
-            const qs = sp.toString();
-            location.assign(qs ? `?${qs}` : location.pathname);
+            applyFilterPatch({ [key]: [value] });
           });
         });
       }
@@ -244,24 +247,14 @@ function triggerLabel(g: FilterGroup): string {
         inputs.forEach((i) => {
           if (i.checked) chosen.push(i.dataset.filterValue!);
         });
-        const sp = new URLSearchParams(location.search);
-        sp.delete(key);
-        for (const v of chosen) sp.append(key, v);
-        sp.set("page", "1");
-        const qs = sp.toString();
-        location.assign(qs ? `?${qs}` : location.pathname);
+        applyFilterPatch({ [key]: chosen });
       });
 
-      // Clear: uncheck all in this group, navigate to URL with this
-      // filter removed.
+      // Clear: uncheck all in this group, remove from URL.
       clearBtn?.addEventListener("click", (e) => {
         e.stopPropagation();
         const key = g.dataset.filterGroupKey!;
-        const sp = new URLSearchParams(location.search);
-        sp.delete(key);
-        sp.set("page", "1");
-        const qs = sp.toString();
-        location.assign(qs ? `?${qs}` : location.pathname);
+        applyFilterPatch({ [key]: null });
       });
 
       // Prevent clicks inside the popover from closing it (e.g. the

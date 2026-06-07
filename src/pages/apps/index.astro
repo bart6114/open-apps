@@ -379,47 +379,214 @@ const description =
         const url = qs ? `?${qs}` : location.pathname;
         location.assign(url);
       }
-      function removeFilter(
-        f: AppsFilters,
-        key: keyof AppsFilters,
-        value: string,
-      ): AppsFilters {
-        let next: AppsFilters;
-        if (key === "q") {
-          next = { ...f, q: undefined };
-        } else {
-          const current = f[key] as string[] | undefined;
-          if (!current) return f;
-          const filtered = current.filter((v) => v !== value);
-          next = { ...f, [key]: filtered.length ? filtered : undefined };
-        }
-        next.page = 1;
-        return next;
-      }
 
-      const searchInput = document.getElementById("search-input") as HTMLInputElement | null;
-      if (searchInput) {
-        let timer: number | undefined;
-        searchInput.addEventListener("input", () => {
-          if (timer) window.clearTimeout(timer);
-          timer = window.setTimeout(() => {
-            const f = readFilters();
-            f.q = searchInput.value.trim() || undefined;
-            f.page = 1;
-            writeFilters(f);
-          }, 220);
-        });
-        document.getElementById("search-form")?.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const f = readFilters();
-          f.q = searchInput.value.trim() || undefined;
-          f.page = 1;
-          writeFilters(f);
-        });
-      }
+      // ── Client-side row filter ─────────────────────────────────────
+      //
+      // The page is statically rendered (one HTML for every URL), so
+      // `?stack=flutter` etc. don't re-render the result list on the
+      // server. The RefinePanel calls `window.__applyFilters({...})` to
+      // push a new filter state; we hide non-matching rows, update the
+      // active-chip strip, the summary line, and the trigger labels
+      // — all without a full page reload.
+      //
+      // Each `.apps-row` already carries `data-stack`, `data-stacks`,
+      // `data-category`, `data-platforms`, `data-labels`, `data-status`,
+      // `data-license`, `data-stars`, `data-updated`, `data-name`,
+      // `data-q` (description, lowercased) for matching.
 
-      // Sort dropdown: server-side, so just navigate to the new URL.
+      type RowEl = HTMLElement & {
+        dataset: {
+          stack?: string;
+          stacks?: string;
+          category?: string;
+          platforms?: string;
+          labels?: string;
+          status?: string;
+          license?: string;
+          stars?: string;
+          updated?: string;
+          name?: string;
+          q?: string;
+        };
+      };
+
+      const rows = Array.from(
+        document.querySelectorAll<RowEl>(".apps-row[data-slug]"),
+      );
+      const resultsList = document.getElementById("apps-results-list");
+      const emptyState = document.getElementById("apps-empty-state");
+      const resultsCount = document.getElementById("apps-results-count");
+      const filtersSummary = document.getElementById("apps-filters-summary");
       const sortSelect = document.getElementById("sort-select") as HTMLSelectElement | null;
+      const searchInput = document.getElementById("search-input") as HTMLInputElement | null;
+      const activeChipsEl = document.getElementById("apps-active-chips");
+      const clearAllBtn = document.getElementById("apps-clear-all") as HTMLAnchorElement | null;
+      const triggerLabels = new Map<string, HTMLElement>();
+
+      document.querySelectorAll<HTMLElement>(".apps-filter").forEach((g) => {
+        const key = g.dataset.filterGroupKey!;
+        const label = g.querySelector<HTMLElement>(".apps-filter-trigger > span:first-child");
+        if (label) triggerLabels.set(key, label);
+      });
+
+      function pillFor(key: string, value: string): HTMLElement {
+        const el = document.createElement("button");
+        el.type = "button";
+        el.className =
+          "apps-active-chip inline-flex items-center gap-1 rounded-full border border-ink-200 bg-white px-2.5 py-1 text-2xs text-ink-700 transition-colors hover:border-ink-300 dark:border-ink-700 dark:bg-ink-900/40 dark:text-ink-200";
+        el.dataset.removeKey = key;
+        el.dataset.removeValue = value;
+        const v = document.createElement("span");
+        v.textContent = value;
+        el.appendChild(v);
+        const x = document.createElement("span");
+        x.setAttribute("aria-hidden", "true");
+        x.textContent = "×";
+        el.appendChild(x);
+        return el;
+      }
+
+      function renderChips(f: AppsFilters) {
+        if (!activeChipsEl) return;
+        activeChipsEl.innerHTML = "";
+        const chips: HTMLElement[] = [];
+        if (f.q) {
+          const e = pillFor("q", f.q);
+          const v = e.querySelector("span")!;
+          v.textContent = `“${f.q}”`;
+          chips.push(e);
+        }
+        for (const v of f.stacks ?? []) chips.push(pillFor("stacks", v));
+        for (const v of f.platforms ?? []) chips.push(pillFor("platforms", v));
+        for (const v of f.categories ?? []) chips.push(pillFor("categories", v));
+        for (const v of f.labels ?? []) chips.push(pillFor("labels", v));
+        for (const v of f.licenses ?? []) chips.push(pillFor("licenses", v));
+        for (const e of chips) activeChipsEl.appendChild(e);
+        if (clearAllBtn) {
+          if (chips.length > 0) {
+            clearAllBtn.classList.remove("hidden");
+          } else {
+            clearAllBtn.classList.add("hidden");
+          }
+        }
+      }
+
+      function triggerLabelText(key: string, f: AppsFilters): string {
+        const map: Record<string, string> = {
+          stacks: "Stack",
+          platforms: "Platform",
+          categories: "Category",
+          licenses: "License",
+        };
+        const base = map[key] ?? key;
+        const arr = (f as unknown as Record<string, string[] | undefined>)[key] ?? [];
+        if (arr.length === 0) return `${base}: Any`;
+        if (arr.length === 1) return `${base}: ${arr[0]}`;
+        return `${base}: ${arr.length} selected`;
+      }
+
+      function applyRowFilter(f: AppsFilters): number {
+        const q = f.q?.trim().toLowerCase() ?? "";
+        const stacks = new Set(f.stacks ?? []);
+        const platforms = new Set(f.platforms ?? []);
+        const categories = new Set(f.categories ?? []);
+        const labels = new Set(f.labels ?? []);
+        const licenses = new Set(f.licenses ?? []);
+        const statuses = new Set(f.statuses ?? []);
+
+        let visible = 0;
+        for (const row of rows) {
+          const d = row.dataset;
+          const rowStacks = (d.stacks || "").split("|").filter(Boolean);
+          const rowPlatforms = (d.platforms || "").split("|").filter(Boolean);
+          const rowLabels = (d.labels || "").split("|").filter(Boolean);
+
+          let show = true;
+          if (q) {
+            const hay = `${d.name ?? ""} ${d.q ?? ""} ${d.category ?? ""}`;
+            if (!hay.includes(q)) show = false;
+          }
+          if (show && stacks.size > 0) {
+            if (![d.stack ?? "", ...rowStacks].some((s) => stacks.has(s))) show = false;
+          }
+          if (show && platforms.size > 0) {
+            if (!rowPlatforms.some((p) => platforms.has(p))) show = false;
+          }
+          if (show && categories.size > 0) {
+            if (!categories.has(d.category ?? "")) show = false;
+          }
+          if (show && labels.size > 0) {
+            if (!rowLabels.some((l) => labels.has(l))) show = false;
+          }
+          if (show && licenses.size > 0) {
+            if (!d.license || !licenses.has(d.license)) show = false;
+          }
+          if (show && statuses.size > 0) {
+            if (!d.status || !statuses.has(d.status)) show = false;
+          }
+          row.hidden = !show;
+          if (show) visible++;
+        }
+        if (resultsList) resultsList.hidden = visible === 0 && rows.length > 0;
+        if (emptyState) emptyState.hidden = visible !== 0;
+        if (resultsCount) {
+          const total = rows.length;
+          resultsCount.textContent = `${visible} of ${total}`;
+        }
+        return visible;
+      }
+
+      function renderSummary(f: AppsFilters) {
+        if (!filtersSummary) return;
+        const parts: string[] = [];
+        if (f.q) parts.push(`matching “${f.q}”`);
+        if (f.stacks?.length) parts.push(`stack: ${f.stacks.join(", ")}`);
+        if (f.platforms?.length) parts.push(`platform: ${f.platforms.join(", ")}`);
+        if (f.categories?.length) parts.push(`category: ${f.categories.join(", ")}`);
+        if (f.licenses?.length) parts.push(`license: ${f.licenses.join(", ")}`);
+        if (f.labels?.length) parts.push(`label: ${f.labels.join(", ")}`);
+        filtersSummary.textContent = parts.length ? parts.join(" · ") : "";
+      }
+
+      function applyAll(f: AppsFilters) {
+        applyRowFilter(f);
+        renderChips(f);
+        renderSummary(f);
+        for (const [key, el] of triggerLabels) {
+          el.textContent = triggerLabelText(key, f);
+        }
+        if (searchInput && (searchInput.value ?? "") !== (f.q ?? "")) {
+          searchInput.value = f.q ?? "";
+        }
+        if (sortSelect && f.sort && sortSelect.value !== f.sort) {
+          sortSelect.value = f.sort;
+        }
+      }
+
+      // Initial render from URL.
+      applyAll(readFilters());
+
+      // Hook called by RefinePanel: patch the filter state, push the
+      // new URL, re-filter rows.
+      (window as unknown as { __applyFilters: (p: Record<string, string[] | null>) => void }).__applyFilters =
+        (patch) => {
+          const f = readFilters();
+          for (const [key, val] of Object.entries(patch)) {
+            if (val === null) {
+              (f as unknown as Record<string, unknown>)[key] = undefined;
+            } else {
+              (f as unknown as Record<string, unknown>)[key] = val;
+            }
+          }
+          f.page = 1;
+          const sp = searchParamsFromFilters(f);
+          const qs = sp.toString();
+          const url = qs ? `?${qs}` : location.pathname;
+          history.pushState({ filters: f }, "", url);
+          applyAll(f);
+        };
+
+      // Sort dropdown: navigate to new URL (server-side render).
       sortSelect?.addEventListener("change", () => {
         const f = readFilters();
         f.sort = (sortSelect.value as AppsFilters["sort"]) || undefined;
@@ -427,8 +594,8 @@ const description =
         writeFilters(f);
       });
 
-      // Active chip removal → navigate. The button has data-remove-key /
-      // data-remove-value; we use event delegation.
+      // Active chip removal (delegated) — also works on chips rendered
+      // by the client-side filter above.
       document.addEventListener("click", (e) => {
         const target = e.target as HTMLElement;
         const removeBtn = target.closest<HTMLElement>(".apps-active-chip");
@@ -436,8 +603,34 @@ const description =
           e.preventDefault();
           const key = removeBtn.dataset.removeKey as keyof AppsFilters;
           const value = removeBtn.dataset.removeValue ?? "";
-          writeFilters(removeFilter(readFilters(), key, value));
+          (window as unknown as { __applyFilters?: (p: Record<string, string[] | null>) => void }).__applyFilters?.({
+            [key]: null,
+          });
         }
+      });
+
+      // Search input: debounced client-side patch (no reload).
+      if (searchInput) {
+        let timer: number | undefined;
+        searchInput.addEventListener("input", () => {
+          if (timer) window.clearTimeout(timer);
+          timer = window.setTimeout(() => {
+            (window as unknown as { __applyFilters?: (p: Record<string, string[] | null>) => void }).__applyFilters?.({
+              q: searchInput.value.trim() ? [searchInput.value.trim()] : null,
+            });
+          }, 220);
+        });
+        document.getElementById("search-form")?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          (window as unknown as { __applyFilters?: (p: Record<string, string[] | null>) => void }).__applyFilters?.({
+            q: searchInput.value.trim() ? [searchInput.value.trim()] : null,
+          });
+        });
+      }
+
+      // Back/forward: re-apply the filter from the new URL.
+      window.addEventListener("popstate", () => {
+        applyAll(readFilters());
       });
     </script>
 

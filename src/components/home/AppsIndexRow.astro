@@ -82,6 +82,17 @@ const repoHref = app.repoUrl;
 <article
   class="apps-row group relative flex flex-col gap-3 rounded-lg border border-ink-200 bg-white p-4 transition-colors hover:border-ink-300 hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_-2px_rgba(0,0,0,0.06)] dark:border-ink-800 dark:bg-ink-950 dark:hover:border-ink-700 dark:hover:shadow-[0_1px_2px_rgba(0,0,0,0.4),0_4px_12px_-2px_rgba(0,0,0,0.3)]"
   data-slug={app.slug}
+  data-stack={app.stack}
+  data-stacks={allStacks.join("|")}
+  data-category={app.category ?? ""}
+  data-platforms={(app.platforms ?? []).join("|")}
+  data-labels={(app.labels ?? []).join("|")}
+  data-status={app.status ?? ""}
+  data-license={app.license ?? ""}
+  data-stars={app.stars ?? 0}
+  data-updated={app.lastCommitAt ?? ""}
+  data-name={app.name.toLowerCase()}
+  data-q={(app.description ?? "").toLowerCase()}
 >
   {/* Header: avatar + name + label */}
   <header class="flex items-start gap-3">
