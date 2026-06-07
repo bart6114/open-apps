@@ -49,6 +49,9 @@ github:
       - flutter
       - buy
       - rent
+    license:
+      spdx_id: 0BSD
+      key: null
   activity:
     monthlyCommits: []
     totalCommitsKnown: 68

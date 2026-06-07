@@ -59,14 +59,49 @@ async function fetchHtml(owner, repo) {
 
 function extractLicense(html) {
   // GitHub renders the license link in the sidebar. Two common forms:
-  //   <a href="/owner/repo/blob/main/LICENSE" ...>MIT license</a>
+  //   <a href="/owner/repo/blob/main/LICENSE" ...>Mit license</a>
   //   <a ...>AGPL-3.0 license</a>
-  // We grab the first "<word>-<word>" pattern that's also a known SPDX.
+  // We grab the first SPDX-shaped token before " license" — either
+  // explicit versioned (AGPL-3.0) or one of the known no-version
+  // SPDXs (MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, etc.).
   const m =
-    html.match(/>([A-Z][A-Z0-9.+-]*-\d(?:\.\d)?)\s+license</i) ||
-    html.match(/>(MIT|Apache-2\.0|BSD-2-Clause|BSD-3-Clause|GPL-2\.0|GPL-3\.0|AGPL-3\.0|MPL-2\.0|ISC|Unlicense)\s+license</i) ||
-    html.match(/>(MIT|Apache-2\.0|BSD-2-Clause|BSD-3-Clause|GPL-2\.0|GPL-3\.0|AGPL-3\.0|MPL-2\.0|ISC|Unlicense)</);
+    html.match(/>([A-Z][A-Z0-9.+-]*-\d(?:\.\d)?)\s+license/i) ||
+    html.match(/>(MIT|Apache-2\.0|BSD-2-Clause|BSD-3-Clause|GPL-2\.0|GPL-3\.0|AGPL-3\.0|MPL-2\.0|ISC|Unlicense|0BSD|Unlicense)\s+license/i);
   return m ? m[1] : null;
+}
+
+async function fetchLicenseViaShields(owner, repo) {
+  // shields.io's `/github/license/{owner}/{repo}` endpoint scrapes the
+  // GitHub page server-side and returns the canonical SPDX id even
+  // when the on-page render doesn't include the standard "X license"
+  // link text. The response is an SVG whose <title> looks like
+  //   "license: MIT"          ← real SPDX
+  //   "license: not identifiable by github"
+  //   "license: not specified"
+  //   "license: unknown"
+  // We strip the "license:" prefix and treat the placeholder values
+  // as no-data.
+  try {
+    const res = await fetch(`https://img.shields.io/github/license/${owner}/${repo}`, { headers: HEADERS });
+    if (!res.ok) return null;
+    const svg = await res.text();
+    const m = svg.match(/<title>([^<]+)<\/title>/);
+    if (!m) return null;
+    const raw = m[1].trim();
+    const id = raw.replace(/^license:\s*/i, "").trim();
+    if (
+      !id ||
+      id === "not specified" ||
+      id === "not identifiable by github" ||
+      id === "unknown" ||
+      id.toLowerCase().includes("business source")
+    ) {
+      return null;
+    }
+    return id;
+  } catch {
+    return null;
+  }
 }
 
 function extractLanguage(html) {
@@ -153,10 +188,13 @@ async function main() {
       failed.push(`${owner}/${repo}: ${res.error}`);
       continue;
     }
-    const license = extractLicense(res.html);
+    const htmlLicense = extractLicense(res.html);
     const language = extractLanguage(res.html);
     const topics = extractTopics(res.html);
     const homepage = extractHomepage(res.html);
+    // Fallback: if the HTML doesn't show "X license" (some repos
+    // have a LICENSE file but render it differently), ask shields.io.
+    const license = htmlLicense ?? (await fetchLicenseViaShields(owner, repo));
     const before = JSON.stringify(parsed.github?.repository ?? {});
     // Migration + a previous run of this script wrote `license` as a
     // bare string (e.g. `license: MIT`). The schemaVersion 1 shape

@@ -36,6 +36,9 @@ github:
     forks_count: 20
     pushed_at: 2022-11-23T11:01:00Z
     language: Dart
+    license:
+      spdx_id: "license: not specified"
+      key: null
   activity:
     monthlyCommits: []
     totalCommitsKnown: 55

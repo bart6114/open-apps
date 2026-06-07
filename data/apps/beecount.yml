@@ -53,6 +53,9 @@ github:
       - money-management
       - supabase
       - accounting-app
+    license:
+      spdx_id: "license: not identifiable by github"
+      key: null
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0

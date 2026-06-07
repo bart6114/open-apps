@@ -47,6 +47,9 @@ github:
       - ios
       - invoice
       - flutter
+    license:
+      spdx_id: "license: not identifiable by github"
+      key: null
   activity:
     monthlyCommits:
       - 3

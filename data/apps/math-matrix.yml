@@ -57,6 +57,9 @@ github:
       - flutter-clean-architecture
       - math-games
       - math-puzzle
+    license:
+      spdx_id: "license: not specified"
+      key: null
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100

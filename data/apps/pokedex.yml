@@ -46,6 +46,9 @@ github:
       - flutter-examples
       - flutter-ui
       - pokemon-info
+    license:
+      spdx_id: "license: not identifiable by github"
+      key: null
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0

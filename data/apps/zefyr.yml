@@ -40,6 +40,9 @@ github:
       - rich-text-editor
       - flutter
       - dartlang
+    license:
+      spdx_id: "license: not specified"
+      key: null
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0

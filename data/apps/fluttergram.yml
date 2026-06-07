@@ -41,6 +41,9 @@ github:
       - firebase
       - flutter
       - firestore
+    license:
+      spdx_id: "license: not identifiable by github"
+      key: null
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
