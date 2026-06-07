@@ -42,16 +42,16 @@ export interface LensDef {
 }
 
 export const LENSES: LensDef[] = [
-  { id: "all", label: "All", toParams: () => ({}) },
+  { id: "all", label: "All apps", description: "Every app in the directory", toParams: () => ({}) },
   {
     id: "new",
-    label: "New",
-    description: "Recently added apps",
+    label: "Newly added",
+    description: "Recently added to the directory",
     toParams: () => ({ label: "new" }),
   },
   {
     id: "hot",
-    label: "Hot",
+    label: "Hot right now",
     description: "Apps gaining attention or recent activity",
     toParams: () => ({ label: "hot" }),
   },
@@ -63,13 +63,13 @@ export const LENSES: LensDef[] = [
   },
   {
     id: "production-like",
-    label: "Production-like",
+    label: "Production-grade",
     description: "Real apps, not toy projects",
     toParams: () => ({ lens: "production-like" }),
   },
   {
     id: "good-to-learn",
-    label: "Good to learn from",
+    label: "Good to learn",
     description: "Readable codebases with useful patterns",
     toParams: () => ({ lens: "good-to-learn" }),
   },

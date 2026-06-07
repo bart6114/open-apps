@@ -19,6 +19,15 @@ type GeneratedApp = {
   category?: string;
   stack?: string;
   platforms?: string[];
+  github?: {
+    repository?: {
+      stargazers_count?: number;
+      forks_count?: number;
+    };
+    activity?: {
+      contributorsKnown?: number;
+    };
+  };
   activity?: {
     stars?: number;
     forks?: number;
@@ -39,14 +48,24 @@ const platforms = new Set<string>();
 let totalForks = 0;
 let totalStars = 0;
 let starsKnown = 0;
+let totalContributors = 0;
+let contributorsKnown = 0;
 for (const a of apps) {
   for (const p of a.platforms ?? []) platforms.add(p);
-  if (typeof a.activity?.forks === "number" && a.activity.forks > 0) {
-    totalForks += a.activity.forks;
+  const forks = a.github?.repository?.forks_count ?? a.activity?.forks;
+  const stars = a.github?.repository?.stargazers_count ?? a.activity?.stars;
+  const contributorsCount = a.github?.activity?.contributorsKnown ?? a.activity?.contributors;
+
+  if (typeof forks === "number" && forks > 0) {
+    totalForks += forks;
   }
-  if (typeof a.activity?.stars === "number" && a.activity.stars > 0) {
-    totalStars += a.activity.stars;
+  if (typeof stars === "number" && stars > 0) {
+    totalStars += stars;
     starsKnown += 1;
+  }
+  if (typeof contributorsCount === "number" && contributorsCount > 0) {
+    totalContributors += contributorsCount;
+    contributorsKnown += 1;
   }
 }
 
@@ -63,11 +82,8 @@ export type SiteStats = {
 
 export const stats: SiteStats = {
   apps: apps.length,
-  contributors: contributors.length,
-  // The 4k stars figure is the legacy collection we forked from. We use
-  // that as the project's social-proof number — the directory's own stars
-  // (per-app) are surfaced on each card, not aggregated here.
-  stars: 4000,
+  contributors: totalContributors || contributors.length,
+  stars: totalStars,
   forks: totalForks,
   categories: categories.length,
   stacks: new Set(apps.map((a) => a.stack).filter(Boolean)).size,
@@ -75,6 +91,5 @@ export const stats: SiteStats = {
   originalRepo: "https://github.com/tortuvshin/open-source-flutter-apps",
 };
 
-// `starsKnown` is the count of apps with a non-zero star reading. Useful
-// for honest copy like "X apps with verified activity data".
-export const statsDebug = { starsKnown };
+// Counts of apps with synced readings. Useful for honest diagnostics.
+export const statsDebug = { starsKnown, contributorsKnown };

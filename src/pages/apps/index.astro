@@ -311,16 +311,27 @@ if (initialLens) filterSummary.push(`lens: ${initialLens}`);
         </Container>
       </section>
 
-      {/* ── Lenses + Refine ── */}
+      {/* ── Lenses + Filter bar — single toolbar that combines
+            "what lens am I in" (curated views) with "what fields
+            are filtered" (drop-down filters). Stays compact. ── */}
       <section class="border-b border-ink-200 dark:border-ink-800">
         <Container>
-          <div class="py-6">
-            <SmartLensTabs currentParams={Astro.url.searchParams} />
-            <div class="mt-4">
+          <div class="flex flex-col gap-3 py-4">
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span
+                class="text-2xs font-semibold uppercase tracking-wider text-ink-500 dark:text-ink-400"
+                >Lenses</span
+              >
+              <SmartLensTabs currentParams={Astro.url.searchParams} />
+            </div>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span
+                class="text-2xs font-semibold uppercase tracking-wider text-ink-500 dark:text-ink-400"
+                >Filters</span
+              >
               <RefinePanel
                 facets={facets}
                 initial={initialFilters}
-                defaultOpen={false}
               />
             </div>
           </div>
