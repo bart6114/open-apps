@@ -3,6 +3,11 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
+  "description": "A static, community-curated directory of real open-source application codebases. Each app is a YAML file; activity is refreshed daily; the build pipeline renders an Astro site.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "icons": "node scripts/fetch-icons.mjs",
     "predev": "node scripts/fetch-icons.mjs",
@@ -14,7 +19,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "refresh:activity": "node scripts/refresh-apps-activity.mjs"
+    "refresh:activity": "node scripts/refresh-apps-activity.mjs",
+    "test": "node --test scripts/*.test.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

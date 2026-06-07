@@ -4,6 +4,11 @@ A static, community-curated directory of real open-source application codebases.
 
 The goal is to find **10,000 useful open-source apps** and keep the directory honest about which ones are still alive, which ones matter, and which ones have been quiet for a year.
 
+[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Node ≥ 20](https://img.shields.io/badge/node-%E2%89%A520-339933.svg)](./package.json)
+[![Astro](https://img.shields.io/badge/built%20with-Astro-FF5D01.svg)](https://astro.build)
+[![Tests](https://img.shields.io/badge/tests-19%20passing-brightgreen.svg)](./scripts)
+
 ## How it works
 
 Each registered app is a single YAML file under [`data/apps/`](./data/apps/). GitHub Actions refreshes activity metadata daily, and the build pipeline turns all YAML files into one JSON datasource that the Astro site reads at build time. Stale projects — no commit in over a year — are dropped from the listing automatically.

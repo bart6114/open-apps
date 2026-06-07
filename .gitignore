@@ -11,3 +11,17 @@ dist
 # Build-time generated data. Re-derived from data/apps/*.yml on every
 # build and every GitHub Actions refresh — never commit it.
 data/generated/
+
+# IDE / editor cruft
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS / shell
+Thumbs.db
+
+# One-off dev artifacts and large binary assets not needed at runtime
+/art/
+/docs/  # reserved for future design docs; currently empty
+*.log
