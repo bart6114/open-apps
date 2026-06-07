@@ -5,9 +5,8 @@ import { stats } from "../../data/stats";
 const githubUrl = stats.originalRepo;
 
 // Nav items. Order is information-architecture: discover → browse → act.
-// `Watching` was hidden in v0.1 because the local watchlist is a thin
-// feature that doesn't carry its weight in the top nav. `Contributors`
-// is intentionally not a top-level item — it lives lower on the page.
+// `Contributors` is intentionally not a top-level item — it lives lower
+// on the page. The watchlist was removed in v0.1 (see CHANGELOG).
 const navItems = [
   { label: "New", href: "#new" },
   { label: "Hot", href: "#hot" },

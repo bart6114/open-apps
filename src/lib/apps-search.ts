@@ -16,8 +16,6 @@ export type AppsFilters = {
   statuses?: string[];
   /** A curated lens (e.g. "good-to-learn", "production-like"). Single value. */
   lens?: string;
-  /** "1" to show only apps the user has in their local watchlist. */
-  watched?: string;
 };
 
 const KEYS = {
@@ -29,7 +27,6 @@ const KEYS = {
   licenses: "license",
   statuses: "status",
   lens: "lens",
-  watched: "watched",
 } as const;
 
 /**
@@ -46,7 +43,6 @@ export function filtersFromSearchParams(sp: URLSearchParams): AppsFilters {
     licenses: sp.getAll(KEYS.licenses).filter(Boolean),
     statuses: sp.getAll(KEYS.statuses).flatMap((s) => s.split(",")).filter(Boolean),
     lens: sp.get(KEYS.lens) ?? undefined,
-    watched: sp.get(KEYS.watched) ?? undefined,
   };
 }
 
@@ -64,7 +60,6 @@ export function searchParamsFromFilters(f: AppsFilters): URLSearchParams {
   for (const v of f.licenses ?? []) sp.append(KEYS.licenses, v);
   if (f.statuses?.length) sp.set(KEYS.statuses, f.statuses.join(","));
   if (f.lens) sp.set(KEYS.lens, f.lens);
-  if (f.watched) sp.set(KEYS.watched, f.watched);
   return sp;
 }
 
@@ -72,7 +67,6 @@ export function searchParamsFromFilters(f: AppsFilters): URLSearchParams {
 export function hasAnyFilter(f: AppsFilters): boolean {
   if (f.q && f.q.trim()) return true;
   if (f.lens) return true;
-  if (f.watched) return true;
   return Boolean(
     (f.stacks?.length ?? 0) +
       (f.platforms?.length ?? 0) +

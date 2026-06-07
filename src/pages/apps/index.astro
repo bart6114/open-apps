@@ -215,7 +215,6 @@ const initialChips = activeFilterChips(initialFilters);
         type AppsFilters,
       } from "../../lib/apps-search";
       import { lensFromSearchParams } from "../../lib/lenses";
-      import { readWatchlist, WATCHLIST_EVENT } from "../../lib/watchlist";
       import type { OpenSourceApp } from "../../data/types";
 
       // ── Data ──
@@ -379,19 +378,6 @@ const initialChips = activeFilterChips(initialFilters);
                 </div>
               </div>
               <a href="/apps/${esc(a.slug)}" class="relative z-10 hidden shrink-0 self-start text-2xs font-medium text-ink-500 hover:text-ink-900 sm:inline dark:text-ink-400 dark:hover:text-ink-100">View details →</a>
-              <div class="relative z-20 shrink-0 self-start">
-                <button
-                  type="button"
-                  class="watch-btn watch-btn-row inline-flex h-7 w-7 items-center justify-center rounded-md border border-ink-200 bg-white text-ink-500 transition-colors hover:border-ink-300 hover:text-ink-900 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-400 dark:hover:border-ink-700 dark:hover:text-ink-100"
-                  data-watch-toggle="${esc(a.slug)}"
-                  aria-label="Watch ${esc(a.name)}"
-                  title="Add to your local watchlist"
-                >
-                  <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor" class="watch-icon-outline">
-                    <path d="M8 14.25l-1.45-1.32C2.4 9.36 0 7.18 0 4.5 0 2.42 1.42 1 3.5 1c1.74 0 3.41 1.01 4.5 2.61C9.09 2.01 10.76 1 12.5 1 14.58 1 16 2.42 16 4.5c0 2.68-2.4 4.86-6.55 8.43L8 14.25z"/>
-                  </svg>
-                </button>
-              </div>
             </header>
             <p class="m-0 line-clamp-2 text-[0.8125rem] leading-relaxed text-ink-600 dark:text-ink-300">${esc(a.description)}</p>
             <dl class="grid grid-cols-1 gap-x-4 gap-y-1 text-2xs sm:grid-cols-3">
@@ -506,66 +492,6 @@ const initialChips = activeFilterChips(initialFilters);
         });
       }
 
-      // ── Client-side filter: ?watched=1 hides rows not in local watchlist ──
-      function applyClientFilters() {
-        const f = readFilters();
-        if (f.watched !== "1") {
-          // Not in watchlist mode — show everything rendered.
-          resultsEl.classList.remove("hidden");
-          emptyEl.classList.add("hidden");
-          emptyEl.hidden = true;
-          return;
-        }
-        const list = readWatchlist();
-        const rows = resultsEl.querySelectorAll<HTMLElement>("[data-slug]");
-        let visible = 0;
-        rows.forEach((row) => {
-          const slug = row.dataset.slug!;
-          const show = list.includes(slug);
-          row.classList.toggle("hidden", !show);
-          if (show) visible++;
-        });
-        resultsEl.classList.toggle("hidden", visible === 0);
-        if (visible === 0) {
-          emptyEl.hidden = false;
-          emptyEl.classList.remove("hidden");
-        } else {
-          emptyEl.hidden = true;
-          emptyEl.classList.add("hidden");
-        }
-      }
-
-      function visibleCount(): number {
-        if (readFilters().watched !== "1") {
-          return resultsEl.querySelectorAll("[data-slug]").length;
-        }
-        return resultsEl.querySelectorAll("[data-slug]:not(.hidden)").length;
-      }
-
-      function syncWatchlistBadge() {
-        // The Header's "Watching" nav item shows a small count badge
-        // next to the label when the local watchlist is non-empty.
-        const list = readWatchlist();
-        const n = list.length;
-        const link = document.querySelector<HTMLAnchorElement>(
-          "nav[aria-label='Primary'] a[href*='watched=1']",
-        );
-        if (!link) return;
-        let badge = link.querySelector<HTMLElement>(".watchlist-badge");
-        if (n === 0) {
-          if (badge) badge.remove();
-          return;
-        }
-        if (!badge) {
-          badge = document.createElement("span");
-          badge.className =
-            "watchlist-badge ml-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-ink-900 px-1 text-[10px] font-semibold text-white dark:bg-ink-100 dark:text-ink-900";
-          badge.setAttribute("aria-label", `${n} apps in watchlist`);
-          link.appendChild(badge);
-        }
-        badge.textContent = String(n);
-      }
-
       // ── Apply: re-render results + chips + sidebar ──
       function apply() {
         const f = readFilters();
@@ -573,12 +499,8 @@ const initialChips = activeFilterChips(initialFilters);
         const lens = currentLens();
 
         resultsEl.innerHTML = filtered.map(renderRow).join("");
-        // After rendering, fold in client-side filters (watched).
-        applyClientFilters();
-        syncWatchlistBadge();
         const lensText = lens ? ` · lens: ${lens}` : "";
-        const watched = f.watched === "1" ? " · watching" : "";
-        countEl.innerHTML = `Showing ${visibleCount()} of ${totalApps} apps${lensText}${watched}`;
+        countEl.innerHTML = `Showing ${filtered.length} of ${totalApps} apps${lensText}`;
        
         const chips = activeFilterChips(f);
         if (chips.length === 0) {
@@ -678,23 +600,6 @@ const initialChips = activeFilterChips(initialFilters);
       });
 
       window.addEventListener("popstate", apply);
-
-      // When the watchlist changes (heart toggled, cross-tab sync),
-      // re-apply the client filter and update the header badge.
-      window.addEventListener(WATCHLIST_EVENT, () => {
-        applyClientFilters();
-        syncWatchlistBadge();
-        const f = readFilters();
-        const lensText = currentLens() ? ` · lens: ${currentLens()}` : "";
-        const watched = f.watched === "1" ? " · watching" : "";
-        countEl.innerHTML = `Showing ${visibleCount()} of ${totalApps} apps${lensText}${watched}`;
-      });
-      window.addEventListener("storage", (e) => {
-        if (e.key === "open-apps:watchlist") {
-          applyClientFilters();
-          syncWatchlistBadge();
-        }
-      });
 
       apply();
     </script>

@@ -1,7 +1,6 @@
 ---
 import type { OpenSourceApp } from "../../data/types";
 import Icon from "../icons/Icon.astro";
-import WatchButton from "./WatchButton.astro";
 import { getOwnerAndRepoFromRepoUrl, getOwnerAvatarUrl } from "../../lib/repo";
 
 interface Props {
@@ -100,8 +99,6 @@ const repoHref = app.repoUrl;
       aria-label={`Open ${app.name} details`}
       class="absolute inset-0 z-0 rounded-lg"
     ></a>
-
-    <WatchButton slug={app.slug} variant="card" />
 
     {logoUrl ? (
       <img

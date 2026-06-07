@@ -1,7 +1,6 @@
 ---
 import type { OpenSourceApp } from "../../data/types";
 import Icon from "../icons/Icon.astro";
-import WatchButton from "./WatchButton.astro";
 import {
   getOwnerAndRepoFromRepoUrl,
   getOwnerAvatarUrl,
@@ -169,9 +168,6 @@ const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null
     >
       View details →
     </a>
-    <div class="relative z-20 shrink-0 self-start">
-      <WatchButton slug={app.slug} variant="card" class="!relative !right-auto !top-auto !h-7 !w-7" />
-    </div>
   </header>
 
   {/* One-line summary */}
