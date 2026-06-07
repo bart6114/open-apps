@@ -3,26 +3,89 @@ import "../../styles/global.css";
 import Header from "../../components/layout/Header.astro";
 import Footer from "../../components/layout/Footer.astro";
 import Container from "../../components/layout/Container.astro";
-import DecisionRow from "../../components/home/DecisionRow.astro";
 import SmartLensTabs from "../../components/home/SmartLensTabs.astro";
 import RefinePanel from "../../components/home/RefinePanel.astro";
+import AppsIndexRow from "../../components/home/AppsIndexRow.astro";
+import AppsPagination from "../../components/home/AppsPagination.astro";
+import ExploreByCategory from "../../components/home/ExploreByCategory.astro";
+import ExploreByStack from "../../components/home/ExploreByStack.astro";
 
 import { apps } from "../../data/apps";
 import {
   buildFacets,
   filtersFromSearchParams,
+  searchParamsFromFilters,
   filterApps,
   activeFilterChips,
-  removeFilter,
+  applySort,
+  paginate,
+  totalPages,
+  PAGE_SIZE,
+  effectiveSort,
+  effectivePage,
+  effectiveDensity,
+  SORT_OPTIONS,
+  type AppsFilters,
 } from "../../lib/apps-search";
 import { lensFromSearchParams } from "../../lib/lenses";
+import { categories } from "../../data/categories";
+import { stacks } from "../../data/stacks";
+import { stats } from "../../data/stats";
 
+// Parse URL → filters, then derive the effective (post-default) values.
 const initialFilters = filtersFromSearchParams(Astro.url.searchParams);
 const initialLens = lensFromSearchParams(Astro.url.searchParams);
 const facets = buildFacets(apps);
-const totalApps = apps.length;
-const initialResults = filterApps(apps, initialFilters);
+const sort = effectiveSort(initialFilters);
+const page = effectivePage(initialFilters);
+const density = effectiveDensity(initialFilters);
 const initialChips = activeFilterChips(initialFilters);
+
+// Apply filter → sort → paginate server-side. URL is the source of
+// truth; this page is fully SSR. No client-side render loop.
+const filtered = filterApps(apps, initialFilters);
+const sorted = applySort(filtered, sort);
+const totalFiltered = sorted.length;
+const totalFilteredPages = totalPages(totalFiltered);
+const safePage = Math.min(page, totalFilteredPages);
+const pageApps = paginate(sorted, safePage);
+const initialChipsTotal = initialChips.length;
+
+const githubUrl = stats.originalRepo;
+
+// Build a "next page" / "prev page" href that preserves every other
+// filter param. Reused by the pagination component.
+function hrefForPage(target: number): string {
+  const next: AppsFilters = { ...initialFilters, page: target };
+  const sp = searchParamsFromFilters(next);
+  const qs = sp.toString();
+  return qs ? `/apps?${qs}` : "/apps";
+}
+
+function hrefForDensity(value: "comfortable" | "compact"): string {
+  const next: AppsFilters = { ...initialFilters, density: value, page: 1 };
+  const sp = searchParamsFromFilters(next);
+  const qs = sp.toString();
+  return qs ? `/apps?${qs}` : "/apps";
+}
+
+function hrefForClearAll(): string {
+  return "/apps";
+}
+
+// Human-readable summary line under the search.
+const sortLabel = SORT_OPTIONS.find((o) => o.value === sort)?.label ?? "Recently updated";
+const filterSummary: string[] = [];
+if (initialFilters.q) filterSummary.push(`matching "${initialFilters.q}"`);
+if (initialFilters.stacks?.length) filterSummary.push(`stack: ${initialFilters.stacks.join(", ")}`);
+if (initialFilters.platforms?.length)
+  filterSummary.push(`platform: ${initialFilters.platforms.join(", ")}`);
+if (initialFilters.categories?.length)
+  filterSummary.push(`category: ${initialFilters.categories.join(", ")}`);
+if (initialFilters.licenses?.length)
+  filterSummary.push(`license: ${initialFilters.licenses.join(", ")}`);
+if (initialFilters.labels?.length) filterSummary.push(`label: ${initialFilters.labels.join(", ")}`);
+if (initialLens) filterSummary.push(`lens: ${initialLens}`);
 ---
 
 <!doctype html>
@@ -30,16 +93,16 @@ const initialChips = activeFilterChips(initialFilters);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="generator"={Astro.generator} />
     <meta
       name="description"
-      content="Browse, search, and filter real open-source apps by stack, platform, category, license, status, and curated lens."
+      content="Search and filter real open-source applications by platform, stack, category, license, and activity."
     />
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2318181b'/%3E%3C/svg%3E"
     />
-    <title>Apps — Open Source Apps</title>
+    <title>Browse open-source apps — Open Source Apps</title>
     <script is:inline>
       (function () {
         var STORAGE_KEY = "open-apps-theme";
@@ -72,126 +135,261 @@ const initialChips = activeFilterChips(initialFilters);
     <Header />
 
     <main>
-      <section class="border-b border-ink-200 dark:border-ink-800">
+      {/* ── Top: title + search + sticky toolbar ── */}
+      <section
+        class="border-b border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-950"
+      >
         <Container>
-          <div class="py-10 sm:py-14">
-            <div class="flex flex-wrap items-end justify-between gap-3">
-              <div>
-                <span class="text-2xs font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">
-                  Apps
-                </span>
-                <h1 class="mt-1 m-0 text-[1.75rem] sm:text-[2rem] font-semibold tracking-[-0.02em] leading-[1.1] text-ink-900 dark:text-ink-100">
-                  Find an open-source app
-                </h1>
-              </div>
-              <p
-                id="result-count"
-                class="m-0 text-2xs text-ink-500 dark:text-ink-400"
-                data-total={totalApps}
-              >
-                Showing {initialResults.length} of {totalApps} apps
-                {initialLens && (
-                  <span class="ml-1 text-ink-400 dark:text-ink-500">· lens: {initialLens}</span>
-                )}
-              </p>
-            </div>
-
-            <form
-              id="search-form"
-              class="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center"
-              role="search"
+          <div class="py-8 sm:py-10">
+            <span
+              class="text-2xs font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400"
+              >Apps</span
             >
-              <label class="relative flex-1">
-                <span class="sr-only">Search apps by name, description, owner, category</span>
-                <svg
-                  viewBox="0 0 16 16"
-                  width="16"
-                  height="16"
-                  aria-hidden="true"
-                  class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-400"
-                  fill="currentColor"
-                >
-                  <path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z" />
-                </svg>
-                <input
-                  id="search-input"
-                  type="search"
-                  name="q"
-                  value={initialFilters.q ?? ""}
-                  placeholder="Search by name, description, owner, category…"
-                  autocomplete="off"
-                  class="w-full rounded-md border border-ink-200 bg-white py-2.5 pl-10 pr-3 text-[0.9375rem] text-ink-900 placeholder:text-ink-400 focus:border-ink-900 focus:outline-none focus:ring-2 focus:ring-ink-900/10 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-100 dark:placeholder:text-ink-500 dark:focus:border-ink-100 dark:focus:ring-ink-100/15"
-                />
-              </label>
-            </form>
+            <h1
+              class="mt-1 m-0 text-[1.75rem] sm:text-[2rem] font-semibold tracking-[-0.02em] leading-[1.1] text-ink-900 dark:text-ink-100"
+            >
+              Browse open-source apps
+            </h1>
+            <p
+              class="mt-2 m-0 max-w-[64ch] text-[0.9375rem] leading-relaxed text-ink-500 dark:text-ink-400"
+            >
+              Search and filter real open-source applications by platform,
+              stack, category, license, and activity. Every entry is a real
+              codebase with hand-curated context.
+            </p>
 
-            <div class="mt-5">
-              <SmartLensTabs currentParams={Astro.url.searchParams} />
-            </div>
-
+            {/* Sticky toolbar. Holds: search, results summary, sort,
+                density toggle. Once it sticks on scroll, the chips
+                layer + refine button follow along below. */}
             <div
-              id="active-filters"
-              class="mt-4 flex flex-wrap items-center gap-1.5"
-              hidden={initialChips.length === 0}
+              id="apps-toolbar"
+              class="sticky top-[57px] z-30 mt-6 -mx-5 border-y border-ink-200 bg-white/95 px-5 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:border-ink-800 dark:bg-ink-950/95 dark:supports-[backdrop-filter]:bg-ink-950/80 sm:-mx-7 sm:px-7"
             >
-              {initialChips.map((chip) => (
-                <button
-                  type="button"
-                  class="chip group inline-flex items-center gap-1 hover:border-ink-300 dark:hover:border-ink-700"
-                  data-remove-key={chip.key}
-                  data-remove-value={chip.value}
-                  aria-label={`Remove filter ${chip.label}`}
-                >
-                  <span>{chip.label}</span>
-                  <span aria-hidden="true" class="text-ink-400 group-hover:text-ink-700 dark:text-ink-500 dark:group-hover:text-ink-200">×</span>
-                </button>
-              ))}
-              <button
-                type="button"
-                id="clear-filters"
-                class="text-2xs text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+              <form
+                id="search-form"
+                class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center"
+                role="search"
               >
-                Clear all
-              </button>
+                <label class="relative flex-1">
+                  <span class="sr-only">Search apps by name, description, owner, category</span>
+                  <svg
+                    viewBox="0 0 16 16"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                    class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-400"
+                    fill="currentColor"
+                  >
+                    <path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z" />
+                  </svg>
+                  <input
+                    id="search-input"
+                    type="search"
+                    name="q"
+                    value={initialFilters.q ?? ""}
+                    placeholder="Search by app name, category, stack, platform, or license..."
+                    autocomplete="off"
+                    class="w-full rounded-md border border-ink-200 bg-white py-2 pl-9 pr-3 text-[0.875rem] text-ink-900 placeholder:text-ink-400 focus:border-ink-900 focus:outline-none focus:ring-2 focus:ring-ink-900/10 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-100 dark:placeholder:text-ink-500 dark:focus:border-ink-100 dark:focus:ring-ink-100/15"
+                  />
+                </label>
+
+                {/* Sort dropdown */}
+                <label class="relative">
+                  <span class="sr-only">Sort apps</span>
+                  <select
+                    id="sort-select"
+                    class="h-9 cursor-pointer appearance-none rounded-md border border-ink-200 bg-white py-1.5 pl-3 pr-8 text-[0.8125rem] font-medium text-ink-700 transition-colors hover:border-ink-300 focus:border-ink-900 focus:outline-none focus:ring-2 focus:ring-ink-900/10 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-300 dark:hover:border-ink-700 dark:focus:border-ink-100 dark:focus:ring-ink-100/15"
+                  >
+                    {SORT_OPTIONS.map((o) => (
+                      <option value={o.value} selected={o.value === sort}>{o.label}</option>
+                    ))}
+                  </select>
+                  <svg
+                    viewBox="0 0 16 16"
+                    width="11"
+                    height="11"
+                    aria-hidden="true"
+                    class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-ink-400"
+                    fill="currentColor"
+                  >
+                    <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"/>
+                  </svg>
+                </label>
+
+                {/* Density toggle: comfortable / compact */}
+                <div
+                  class="inline-flex h-9 items-center rounded-md border border-ink-200 bg-white p-0.5 dark:border-ink-800 dark:bg-ink-950"
+                  role="group"
+                  aria-label="List density"
+                >
+                  <a
+                    href={hrefForDensity("comfortable")}
+                    class={`inline-flex h-7 items-center rounded-[5px] px-2 text-[0.75rem] font-medium transition-colors ${
+                      density === "comfortable"
+                        ? "bg-ink-900 text-white dark:bg-ink-100 dark:text-ink-900"
+                        : "text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+                    }`}
+                    aria-pressed={density === "comfortable" ? "true" : "false"}
+                  >
+                    Comfortable
+                  </a>
+                  <a
+                    href={hrefForDensity("compact")}
+                    class={`inline-flex h-7 items-center rounded-[5px] px-2 text-[0.75rem] font-medium transition-colors ${
+                      density === "compact"
+                        ? "bg-ink-900 text-white dark:bg-ink-100 dark:text-ink-900"
+                        : "text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+                    }`}
+                    aria-pressed={density === "compact" ? "true" : "false"}
+                  >
+                    Compact
+                  </a>
+                </div>
+              </form>
+
+              {/* Result count summary + active filter chips row. */}
+              <div
+                id="result-summary"
+                class="flex flex-col gap-2 border-t border-ink-100 py-2.5 text-2xs dark:border-ink-900 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <p class="m-0 text-ink-500 dark:text-ink-400">
+                  <span
+                    id="result-count"
+                    class="font-mono text-ink-900 dark:text-ink-100"
+                    data-total={totalFiltered}
+                    data-page-count={pageApps.length}
+                    data-page-size={PAGE_SIZE}
+                    data-page={safePage}
+                    data-pages={totalFilteredPages}
+                  >
+                    {totalFiltered} {totalFiltered === 1 ? "app" : "apps"} found
+                  </span>
+                  {filterSummary.length > 0 && (
+                    <span class="text-ink-400 dark:text-ink-500">
+                      {" · "}filtered by {filterSummary.join(" · ")}
+                    </span>
+                  )}
+                  <span class="text-ink-400 dark:text-ink-500">
+                    {" · "}sorted by {sortLabel}
+                  </span>
+                  {totalFilteredPages > 1 && (
+                    <span class="text-ink-400 dark:text-ink-500">
+                      {" · "}page {safePage} of {totalFilteredPages}
+                    </span>
+                  )}
+                </p>
+
+                {initialChipsTotal > 0 && (
+                  <div
+                    id="active-filters"
+                    class="flex flex-wrap items-center gap-1.5"
+                    aria-label="Active filters"
+                  >
+                    {initialChips.map((chip) => (
+                      <button
+                        type="button"
+                        class="apps-active-chip group inline-flex items-center gap-1 rounded-md border border-ink-200 bg-white px-1.5 py-0.5 text-2xs font-medium text-ink-700 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-300 dark:hover:border-ink-700 dark:hover:bg-ink-900/60"
+                        data-remove-key={chip.key}
+                        data-remove-value={chip.value}
+                        aria-label={`Remove filter ${chip.label}`}
+                      >
+                        <span>{chip.label}</span>
+                        <span aria-hidden="true" class="text-ink-400 group-hover:text-ink-700 dark:text-ink-500 dark:group-hover:text-ink-200">×</span>
+                      </button>
+                    ))}
+                    <a
+                      href={hrefForClearAll()}
+                      class="text-2xs text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+                    >
+                      Clear all
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
+      {/* ── Lenses + Refine ── */}
       <section class="border-b border-ink-200 dark:border-ink-800">
         <Container>
-          <div class="py-8 sm:py-10">
-            <div
-              id="results"
-              class="flex flex-col gap-3"
-            >
-              {initialResults.map((app) => <DecisionRow app={app} />)}
-            </div>
-
-            <div id="empty-state" class="hidden py-12 text-center" hidden={initialResults.length > 0}>
-              <p class="m-0 text-[0.9375rem] text-ink-700 dark:text-ink-200">
-                No apps match these filters.
-              </p>
-              <p class="mt-1 m-0 text-2xs text-ink-500 dark:text-ink-400">
-                Try removing a filter, clearing the search, or picking a different lens.
-              </p>
-              <button
-                type="button"
-                id="empty-clear"
-                class="mt-4 btn-outline"
-              >
-                Clear all filters
-              </button>
-            </div>
-
-            {/* Refine sits at the end of the list, after the rows — not above.
-                Users come to this page to scan apps, not to triage filters. */}
-            <div class="mt-10 border-t border-ink-200 pt-6 dark:border-ink-800">
+          <div class="py-6">
+            <SmartLensTabs currentParams={Astro.url.searchParams} />
+            <div class="mt-4">
               <RefinePanel
                 facets={facets}
                 initial={initialFilters}
+                defaultOpen={false}
               />
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Results ── */}
+      <section class="border-b border-ink-200 dark:border-ink-800">
+        <Container>
+          <div class="py-8 sm:py-10">
+            {pageApps.length === 0 ? (
+              <div
+                id="empty-state"
+                class="flex flex-col items-center gap-2 py-16 text-center"
+              >
+                <p class="m-0 text-[0.9375rem] font-medium text-ink-700 dark:text-ink-200">
+                  No apps match these filters.
+                </p>
+                <p class="m-0 max-w-[40ch] text-2xs text-ink-500 dark:text-ink-400">
+                  Try removing a filter, clearing the search, or picking a
+                  different lens.
+                </p>
+                <a href={hrefForClearAll()} class="mt-3 btn-outline">Clear all filters</a>
+              </div>
+            ) : (
+              <div
+                id="results"
+                data-density={density}
+                class={`flex flex-col gap-3 ${density === "compact" ? "apps-density-compact" : ""}`}
+              >
+                {pageApps.map((app) => <AppsIndexRow app={app} />)}
+              </div>
+            )}
+
+            <AppsPagination
+              current={safePage}
+              total={totalFilteredPages}
+              hrefFor={hrefForPage}
+            />
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Explore: navigation (not filters) ── */}
+      <ExploreByCategory categories={categories} />
+      <ExploreByStack stacks={stacks} />
+
+      {/* ── Submit CTA ── */}
+      <section class="border-t border-ink-200 dark:border-ink-800">
+        <Container>
+          <div class="flex flex-col items-center gap-3 py-12 text-center">
+            <h2
+              class="m-0 text-[1.25rem] font-semibold tracking-tight text-ink-900 dark:text-ink-100"
+            >
+              Know a real open-source app that belongs here?
+            </h2>
+            <p
+              class="m-0 max-w-[48ch] text-[0.875rem] text-ink-500 dark:text-ink-400"
+            >
+              Open a pull request with a YAML file. We review every
+              submission against the bar — no marketing, no tutorials.
+            </p>
+            <a
+              href={`${githubUrl}/blob/main/CONTRIBUTING.md`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary"
+              >Submit via GitHub</a
+            >
           </div>
         </Container>
       </section>
@@ -199,38 +397,16 @@ const initialChips = activeFilterChips(initialFilters);
 
     <Footer />
 
-    <script
-      id="apps-data"
-      type="application/json"
-      set:html={JSON.stringify(apps)}
-    />
-
+    {/* Initial state for the search form is server-rendered; this script
+        only handles debounced search updates + chip removal so the URL
+        stays canonical and SSR matches client expectations. */}
     <script>
       import {
         filtersFromSearchParams,
         searchParamsFromFilters,
-        filterApps,
-        activeFilterChips,
-        removeFilter,
         type AppsFilters,
       } from "../../lib/apps-search";
-      import { lensFromSearchParams } from "../../lib/lenses";
-      import type { OpenSourceApp } from "../../data/types";
 
-      // ── Data ──
-      const apps: OpenSourceApp[] = JSON.parse(
-        document.getElementById("apps-data")!.textContent || "[]",
-      );
-      const totalApps = apps.length;
-
-      // ── DOM refs ──
-      const searchInput = document.getElementById("search-input") as HTMLInputElement;
-      const resultsEl = document.getElementById("results")!;
-      const emptyEl = document.getElementById("empty-state")!;
-      const countEl = document.getElementById("result-count")!;
-      const activeFiltersEl = document.getElementById("active-filters")!;
-
-      // ── State ──
       function readFilters(): AppsFilters {
         return filtersFromSearchParams(new URLSearchParams(location.search));
       }
@@ -238,375 +414,83 @@ const initialChips = activeFilterChips(initialFilters);
         const sp = searchParamsFromFilters(f);
         const qs = sp.toString();
         const url = qs ? `?${qs}` : location.pathname;
-        history.replaceState(null, "", url);
+        location.assign(url);
       }
-      function currentLens(): string | null {
-        return lensFromSearchParams(new URLSearchParams(location.search));
-      }
-
-      // ── Render: row HTML ──
-      function esc(s: string): string {
-        return s
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#39;");
-      }
-      function formatStars(n: number): string {
-        if (n >= 1000) {
-          const k = n / 1000;
-          return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
-        }
-        return n.toString();
-      }
-      function ownerOf(repoUrl: string): string | null {
-        const m = repoUrl.match(/github\.com\/([^/]+)\/([^/?#]+)/);
-        return m ? m[1] : null;
-      }
-      function repoOf(repoUrl: string): string | null {
-        const m = repoUrl.match(/github\.com\/([^/]+)\/([^/?#]+)/);
-        return m ? m[2].replace(/\.git$/, "") : null;
-      }
-      function labelClass(l: string): string {
-        if (l === "new") return "border-emerald-300/60 bg-emerald-50 text-emerald-800 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300";
-        if (l === "hot") return "border-orange-300/60 bg-orange-50 text-orange-800 dark:border-orange-800/60 dark:bg-orange-950/40 dark:text-orange-300";
-        if (l === "mature") return "border-blue-300/60 bg-blue-50 text-blue-800 dark:border-blue-800/60 dark:bg-blue-950/40 dark:text-blue-300";
-        return "border-ink-200 bg-ink-50 text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300";
-      }
-      function projectTypeLabel(t?: string): string | null {
-        if (!t) return null;
-        return {
-          "real-app": "Real app",
-          "production": "Production",
-          "reference": "Reference",
-          "demo": "Demo",
-          "template": "Template",
-        }[t] ?? null;
-      }
-      function iconPath(name: string, cat: "stack" | "platform"): string {
-        const slug = name.toLowerCase().trim()
-          .replace(/\+/g, "plus").replace(/\./g, "")
-          .replace(/[\s/]+/g, "-").replace(/-+/g, "-")
-          .replace(/^-|-$/g, "").replace(/[^a-z0-9-]/g, "");
-        const dir = cat === "stack" ? "stacks" : "platforms";
-        return `/icons/${dir}/${slug}.svg`;
-      }
-
-      function renderRow(a: OpenSourceApp): string {
-        const owner = ownerOf(a.repoUrl);
-        const repo = repoOf(a.repoUrl);
-        const avatar = owner
-          ? `https://avatars.githubusercontent.com/${owner}?v=4&s=80`
-          : null;
-        const label =
-          a.labels?.find((l) => l === "new" || l === "hot" || l === "mature") ??
-          a.labels?.[0];
-        const allStacks = [a.stack, ...(a.stacks ?? [])].filter(Boolean);
-        const visibleStacks = allStacks.slice(0, 5);
-        const stackOverflow = allStacks.length - visibleStacks.length;
-        const visiblePlatforms = a.platforms.slice(0, 5);
-        const platformOverflow = a.platforms.length - visiblePlatforms.length;
-        const stars = typeof a.stars === "number" ? formatStars(a.stars) : null;
-        const isCurated = !!a.curation;
-        const typeLabel = projectTypeLabel(a.projectType);
-        const lc = label ? labelClass(label) : "";
-        const labelTag = label
-          ? `<span class="inline-flex items-center rounded border px-1.5 py-0 text-[10px] font-medium uppercase tracking-wider ${lc}">${esc(label)}</span>`
-          : "";
-        const typeTag = typeLabel
-          ? `<span class="inline-flex items-center rounded border border-ink-200 bg-ink-50 px-1.5 py-0 text-[10px] font-medium uppercase tracking-wider text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300">${esc(typeLabel)}</span>`
-          : "";
-        const curatedTag = isCurated && !a.curation?.reviewed
-          ? `<span class="inline-flex items-center gap-1 rounded border border-amber-300/60 bg-amber-50 px-1.5 py-0 text-[10px] font-medium text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300">Auto-curated · Needs review</span>`
-          : isCurated && a.curation?.reviewed
-            ? `<span class="inline-flex items-center gap-1 rounded border border-emerald-300/60 bg-emerald-50 px-1.5 py-0 text-[10px] font-medium text-emerald-800 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300">Curator reviewed</span>`
-            : "";
-        const avatarHtml = avatar
-          ? `<img src="${esc(avatar)}" alt="${esc(a.name)} avatar" width="44" height="44" loading="lazy" decoding="async" class="h-11 w-11 rounded-md border border-ink-200 bg-white object-cover dark:border-ink-800 dark:bg-ink-900">`
-          : `<span aria-hidden="true" class="flex h-11 w-11 items-center justify-center rounded-md border border-ink-200 bg-ink-50 text-sm font-semibold text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300">${esc(a.name.slice(0, 2).toUpperCase())}</span>`;
-
-        const stackItems = visibleStacks
-          .map(
-            (s) =>
-              `<span class="inline-flex items-center gap-0.5"><img src="${esc(iconPath(s, "stack"))}" alt="" width="10" height="10" loading="lazy" class="h-2.5 w-2.5 object-contain"><span>${esc(s)}</span></span>`,
-          )
-          .join("");
-        const stackOver = stackOverflow > 0
-          ? `<span class="text-ink-400 dark:text-ink-500">+${stackOverflow}</span>`
-          : "";
-        const platformItems = visiblePlatforms
-          .map(
-            (p) =>
-              `<span class="inline-flex items-center gap-0.5"><img src="${esc(iconPath(p, "platform"))}" alt="" width="10" height="10" loading="lazy" class="h-2.5 w-2.5 object-contain"><span>${esc(p)}</span></span>`,
-          )
-          .join("");
-        const platformOver = platformOverflow > 0
-          ? `<span class="text-ink-400 dark:text-ink-500">+${platformOverflow}</span>`
-          : "";
-
-        const licenseBits = [
-          a.license
-            ? `<span class="font-mono text-ink-700 dark:text-ink-300">${esc(a.license)}</span>`
-            : `<span class="text-ink-400 dark:text-ink-500">—</span>`,
-          a.codebaseSize
-            ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="text-ink-500 dark:text-ink-400">${esc(a.codebaseSize)}</span>`
-            : "",
-          a.difficulty
-            ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="text-ink-500 dark:text-ink-400">${esc(a.difficulty)}</span>`
-            : "",
-        ].join("");
-
-        return `
-          <article class="decision-row group relative flex flex-col gap-3 rounded-lg border border-ink-200 bg-white p-4 transition-colors hover:border-ink-300 hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_-2px_rgba(0,0,0,0.06)] dark:border-ink-800 dark:bg-ink-950 dark:hover:border-ink-700 dark:hover:shadow-[0_1px_2px_rgba(0,0,0,0.4),0_4px_12px_-2px_rgba(0,0,0,0.3)]" data-slug="${esc(a.slug)}">
-            <header class="flex items-start gap-3">
-              <a href="/apps/${esc(a.slug)}" class="relative z-10 flex shrink-0" aria-hidden="true" tabindex="-1">${avatarHtml}</a>
-              <div class="flex min-w-0 flex-1 flex-col gap-0.5">
-                <div class="flex flex-wrap items-baseline gap-x-2">
-                  <h3 class="m-0 text-[1rem] font-semibold tracking-tight text-ink-900 dark:text-ink-100">
-                    <a href="/apps/${esc(a.slug)}" class="relative z-10 text-inherit no-underline hover:underline">${esc(a.name)}</a>
-                  </h3>
-                  ${typeTag}
-                  ${labelTag}
-                  ${curatedTag}
-                </div>
-                <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-2xs text-ink-500 dark:text-ink-400">
-                  ${owner ? `<a href="${esc(a.repoUrl)}" target="_blank" rel="noopener noreferrer" class="relative z-10 font-mono hover:text-ink-900 dark:hover:text-ink-100"><span class="text-ink-400 dark:text-ink-500">@</span>${esc(owner)}${repo ? `<span class="text-ink-400 dark:text-ink-500">/${esc(repo)}</span>` : ""}</a><span class="text-ink-300 dark:text-ink-700">·</span>` : ""}
-                  <span>${esc(a.category)}</span>
-                  ${a.status ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="capitalize">${esc(a.status)}</span>` : ""}
-                  ${stars ? `<span class="text-ink-300 dark:text-ink-700">·</span><span class="inline-flex items-center gap-0.5 font-mono"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>${esc(stars)}</span>` : ""}
-                </div>
-              </div>
-              <a href="/apps/${esc(a.slug)}" class="relative z-10 hidden shrink-0 self-start text-2xs font-medium text-ink-500 hover:text-ink-900 sm:inline dark:text-ink-400 dark:hover:text-ink-100">View details →</a>
-            </header>
-            <p class="m-0 line-clamp-2 text-[0.8125rem] leading-relaxed text-ink-600 dark:text-ink-300">${esc(a.description)}</p>
-            <dl class="grid grid-cols-1 gap-x-4 gap-y-1 text-2xs sm:grid-cols-3">
-              <div class="flex items-baseline gap-1.5">
-                <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Stack</dt>
-                <dd class="flex flex-wrap items-center gap-1 text-ink-700 dark:text-ink-300">${stackItems}${stackOver}</dd>
-              </div>
-              <div class="flex items-baseline gap-1.5">
-                <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Platforms</dt>
-                <dd class="flex flex-wrap items-center gap-1 text-ink-700 dark:text-ink-300">${platformItems}${platformOver}</dd>
-              </div>
-              <div class="flex items-baseline gap-1.5">
-                <dt class="font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">License</dt>
-                <dd class="font-mono">${licenseBits}</dd>
-              </div>
-            </dl>
-          </article>
-        `;
-      }
-
-      function renderActiveChips(f: AppsFilters): string {
-        const chips = activeFilterChips(f);
-        if (chips.length === 0) return "";
-        return chips
-          .map(
-            (c) =>
-              `<button type="button" class="chip group inline-flex items-center gap-1 hover:border-ink-300 dark:hover:border-ink-700" data-remove-key="${esc(c.key)}" data-remove-value="${esc(c.value)}" aria-label="Remove filter ${esc(c.label)}"><span>${esc(c.label)}</span><span aria-hidden="true" class="text-ink-400 group-hover:text-ink-700 dark:text-ink-500 dark:group-hover:text-ink-200">×</span></button>`,
-          )
-          .join("") +
-          `<button type="button" id="clear-filters" class="text-2xs text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100">Clear all</button>`;
-      }
-
-      function syncSidebar(f: AppsFilters) {
-        document.querySelectorAll<HTMLInputElement>("[data-filter-group]").forEach((input) => {
-          const key = input.dataset.filterKey! as keyof AppsFilters;
-          const value = input.dataset.filterValue!;
-          const arr = f[key] as string[] | undefined;
-          input.checked = !!arr?.includes(value);
-        });
-      }
-
-      function syncChips(f: AppsFilters) {
-        document.querySelectorAll<HTMLButtonElement>("[data-filter-chip]").forEach((btn) => {
-          const key = btn.dataset.filterKey! as keyof AppsFilters;
-          const value = btn.dataset.filterValue!;
-          const arr = f[key] as string[] | undefined;
-          btn.setAttribute("aria-pressed", arr?.includes(value) ? "true" : "false");
-        });
-      }
-
-      function syncRefineButton(f: AppsFilters) {
-        const total = (["stacks", "platforms", "categories", "labels", "licenses"] as const)
-          .reduce((n, k) => n + ((f[k] as string[] | undefined)?.length ?? 0), 0);
-        const btn = document.getElementById("refine-toggle");
-        const badge = btn?.querySelector<HTMLElement>("[data-refine-count]");
-        if (btn && badge) {
-          if (total > 0) {
-            badge.textContent = String(total);
-            badge.classList.remove("hidden");
-          } else {
-            badge.classList.add("hidden");
-          }
-        }
-      }
-
-      // Sync the lens tab's active state with the current URL.
-      // A lens is "active" if its target params match the current URL.
-      // Mirror of isLensActive in src/lib/lenses.ts — kept inline because
-      // Astro page scripts can't import from .ts modules without bundling.
-      const LENS_TARGETS: Record<string, Record<string, string | string[]>> = {
-        "all": {},
-        "new": { label: "new" },
-        "hot": { label: "hot" },
-        "mature": { label: "mature" },
-        "production-like": { lens: "production-like" },
-        "good-to-learn": { lens: "good-to-learn" },
-      };
-      const ACTIVE_TAB_CLASSES = ["border-ink-900", "bg-ink-900", "text-white", "dark:border-ink-100", "dark:bg-ink-100", "dark:text-ink-900"];
-      const INACTIVE_TAB_CLASSES = ["border-ink-200", "bg-white", "text-ink-700", "hover:border-ink-300", "hover:bg-ink-50", "dark:border-ink-800", "dark:bg-ink-950", "dark:text-ink-300", "dark:hover:border-ink-700", "dark:hover:bg-ink-900/60"];
-
-      function isLensActive(id: string, sp: URLSearchParams): boolean {
-        if (id === "all") {
-          return !sp.get("lens") && !sp.get("label") && !sp.get("status");
-        }
-        const target = LENS_TARGETS[id];
-        if (!target) return false;
-        for (const [k, v] of Object.entries(target)) {
-          if (Array.isArray(v)) {
-            if (sp.getAll(k).length !== v.length) return false;
-            for (const item of v) if (!sp.getAll(k).includes(item)) return false;
-          } else {
-            if (sp.get(k) !== v) return false;
-          }
-        }
-        return true;
-      }
-
-      function syncLensTabs() {
-        const sp = new URLSearchParams(location.search);
-        const lensEls = document.querySelectorAll<HTMLAnchorElement>("nav[aria-label='Curated lenses'] a[data-lens-id]");
-        lensEls.forEach((a) => {
-          const id = a.dataset.lensId!;
-          if (isLensActive(id, sp)) {
-            a.setAttribute("aria-current", "page");
-            a.classList.remove(...INACTIVE_TAB_CLASSES);
-            a.classList.add(...ACTIVE_TAB_CLASSES);
-          } else {
-            a.removeAttribute("aria-current");
-            a.classList.remove(...ACTIVE_TAB_CLASSES);
-            a.classList.add(...INACTIVE_TAB_CLASSES);
-          }
-        });
-      }
-
-      // ── Apply: re-render results + chips + sidebar ──
-      function apply() {
-        const f = readFilters();
-        const filtered = filterApps(apps, f);
-        const lens = currentLens();
-
-        resultsEl.innerHTML = filtered.map(renderRow).join("");
-        const lensText = lens ? ` · lens: ${lens}` : "";
-        countEl.innerHTML = `Showing ${filtered.length} of ${totalApps} apps${lensText}`;
-       
-        const chips = activeFilterChips(f);
-        if (chips.length === 0) {
-          activeFiltersEl.hidden = true;
-          activeFiltersEl.innerHTML = "";
+      function removeFilter(
+        f: AppsFilters,
+        key: keyof AppsFilters,
+        value: string,
+      ): AppsFilters {
+        let next: AppsFilters;
+        if (key === "q") {
+          next = { ...f, q: undefined };
         } else {
-          activeFiltersEl.hidden = false;
-          activeFiltersEl.innerHTML = renderActiveChips(f);
+          const current = f[key] as string[] | undefined;
+          if (!current) return f;
+          const filtered = current.filter((v) => v !== value);
+          next = { ...f, [key]: filtered.length ? filtered : undefined };
         }
-
-        emptyEl.classList.toggle("hidden", filtered.length > 0);
-        emptyEl.hidden = filtered.length > 0;
-        resultsEl.classList.toggle("hidden", filtered.length === 0);
-
-        syncSidebar(f);
-        syncChips(f);
-        syncRefineButton(f);
-        syncLensTabs();
+        next.page = 1;
+        return next;
       }
 
-      // ── Wire up controls ──
-      let searchTimer: number | undefined;
-      searchInput.addEventListener("input", () => {
-        if (searchTimer) window.clearTimeout(searchTimer);
-        searchTimer = window.setTimeout(() => {
+      const searchInput = document.getElementById("search-input") as HTMLInputElement | null;
+      if (searchInput) {
+        let timer: number | undefined;
+        searchInput.addEventListener("input", () => {
+          if (timer) window.clearTimeout(timer);
+          timer = window.setTimeout(() => {
+            const f = readFilters();
+            f.q = searchInput.value.trim() || undefined;
+            f.page = 1;
+            writeFilters(f);
+          }, 220);
+        });
+        document.getElementById("search-form")?.addEventListener("submit", (e) => {
+          e.preventDefault();
           const f = readFilters();
           f.q = searchInput.value.trim() || undefined;
+          f.page = 1;
           writeFilters(f);
-          apply();
-        }, 200);
-      });
-      document.getElementById("search-form")!.addEventListener("submit", (e) => {
-        e.preventDefault();
+        });
+      }
+
+      // Sort dropdown: server-side, so just navigate to the new URL.
+      const sortSelect = document.getElementById("sort-select") as HTMLSelectElement | null;
+      sortSelect?.addEventListener("change", () => {
         const f = readFilters();
-        f.q = searchInput.value.trim() || undefined;
+        f.sort = (sortSelect.value as AppsFilters["sort"]) || undefined;
+        f.page = 1;
         writeFilters(f);
-        apply();
       });
 
-      document.querySelectorAll<HTMLInputElement>("[data-filter-group]").forEach((input) => {
-        input.addEventListener("change", () => {
-          const key = input.dataset.filterKey! as keyof AppsFilters;
-          const value = input.dataset.filterValue!;
-          const f = readFilters();
-          const current = (f[key] as string[] | undefined) ?? [];
-          if (input.checked) {
-            if (!current.includes(value)) {
-              (f[key] as string[] | undefined) = [...current, value];
-            }
-          } else {
-            (f[key] as string[] | undefined) = current.filter((v) => v !== value);
-          }
-          writeFilters(f);
-          apply();
-        });
-      });
-
-      // Refine-panel chip clicks (buttons instead of hidden checkboxes).
-      document.querySelectorAll<HTMLButtonElement>("[data-filter-chip]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const key = btn.dataset.filterKey! as keyof AppsFilters;
-          const value = btn.dataset.filterValue!;
-          const isSingle = btn.dataset.filterSingle === "true";
-          const f = readFilters();
-          const current = (f[key] as string[] | undefined) ?? [];
-          const has = current.includes(value);
-          if (isSingle) {
-            (f[key] as string[] | undefined) = has ? [] : [value];
-          } else {
-            (f[key] as string[] | undefined) = has
-              ? current.filter((v) => v !== value)
-              : [...current, value];
-          }
-          writeFilters(f);
-          apply();
-        });
-      });
-
-      // Active chip removal + clear-all (event-delegated)
+      // Active chip removal → navigate. The button has data-remove-key /
+      // data-remove-value; we use event delegation.
       document.addEventListener("click", (e) => {
         const target = e.target as HTMLElement;
-        const removeBtn = target.closest<HTMLElement>("[data-remove-key]");
+        const removeBtn = target.closest<HTMLElement>(".apps-active-chip");
         if (removeBtn) {
+          e.preventDefault();
           const key = removeBtn.dataset.removeKey as keyof AppsFilters;
           const value = removeBtn.dataset.removeValue ?? "";
-          const f = removeFilter(readFilters(), key, value);
-          writeFilters(f);
-          if (key === "q") searchInput.value = "";
-          apply();
-          return;
-        }
-        if (target.id === "clear-filters" || target.id === "empty-clear") {
-          writeFilters({});
-          searchInput.value = "";
-          apply();
+          writeFilters(removeFilter(readFilters(), key, value));
         }
       });
-
-      window.addEventListener("popstate", apply);
-
-      apply();
     </script>
 
     <style>
-      .chip {
-        @apply inline-flex items-center gap-1 rounded-md border border-ink-200 bg-white px-1.5 py-0.5 text-2xs font-medium text-ink-700 transition-colors dark:border-ink-800 dark:bg-ink-950 dark:text-ink-300;
+      /* Compact density: hide description + chips, keep header /
+         metadata / actions. Toggle is a single class on the parent
+         container, so we can flip density without re-rendering rows. */
+      .apps-density-compact :global(.apps-row) {
+        padding: 0.625rem 0.875rem;
+        gap: 0.5rem;
+      }
+      .apps-density-compact :global(.apps-row-desc) {
+        display: none;
+      }
+      .apps-density-compact :global(.apps-row-chips) {
+        display: none;
       }
     </style>
   </body>
