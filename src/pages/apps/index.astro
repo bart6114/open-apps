@@ -602,7 +602,6 @@ const description =
         if (removeBtn) {
           e.preventDefault();
           const key = removeBtn.dataset.removeKey as keyof AppsFilters;
-          const value = removeBtn.dataset.removeValue ?? "";
           (window as unknown as { __applyFilters?: (p: Record<string, string[] | null>) => void }).__applyFilters?.({
             [key]: null,
           });
