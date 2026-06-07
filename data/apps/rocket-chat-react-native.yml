@@ -38,11 +38,10 @@ github:
     forks_count: 1000
     pushed_at: 2026-06-03T18:43:36Z
     license:
-      "0": M
-      "1": I
-      "2": T
       spdx_id: MIT
       key: null
+      name: null
+      url: null
     language: TypeScript
     topics:
       - android

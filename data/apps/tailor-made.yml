@@ -36,11 +36,10 @@ github:
     forks_count: 116
     pushed_at: 2023-07-05T08:45:27Z
     license:
-      "0": M
-      "1": I
-      "2": T
       spdx_id: MIT
       key: null
+      name: null
+      url: null
     language: Dart
     topics:
       - android

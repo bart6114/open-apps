@@ -3,22 +3,28 @@
 
 /**
  * /contributors — full shout-out page. Every contributor is listed
- * with username, name (if known), contributions count, and a link
- * to their GitHub profile. The page is what the homepage "View all"
- * link points to, so visitors can see who has actually shaped the
- * directory over time.
+ * with avatar, name (if known), and a link to their GitHub
+ * profile. The page is what the homepage "View all" link points
+ * to, so visitors can see who has actually shaped the directory
+ * over time. Order matches the synced list (most active first)
+ * but the page intentionally avoids leaderboard framing — no
+ * commit counts, no rank numbering.
  */
 import BaseLayout from "../components/layout/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
 import { contributors as allContributors } from "../data/contributors";
 
-const contributors = [...allContributors].sort((a, b) => (b.contributions ?? 0) - (a.contributions ?? 0));
+// `contributors.ts` is already sorted by contributions desc by the
+// sync script; the spread + sort is kept only as a defensive copy
+// in case the source order ever changes upstream.
+const contributors = [...allContributors].sort(
+  (a, b) => (b.contributions ?? 0) - (a.contributions ?? 0),
+);
 const total = contributors.length;
-const totalContribs = contributors.reduce((sum, c) => sum + (c.contributions ?? 0), 0);
 const withNames = contributors.filter((c) => c.name).length;
 
 const title = "Contributors — Open Source Apps";
-const description = `Every person who has shaped the Open Source Apps directory. ${total} contributors, ${totalContribs.toLocaleString()} total contributions.`;
+const description = `Every person who has shaped the Open Source Apps directory. ${total} contributors.`;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -45,8 +51,7 @@ const description = `Every person who has shaped the Open Source Apps directory.
       >
         This directory exists because {total} people keep discovering,
         submitting, reviewing, curating, and maintaining open-source app
-        references. Below is the full list — sorted by contributions
-        count, with their {totalContribs.toLocaleString()} commits total.
+        references. Below is the full list.
         {withNames > 0 && (
           <span class="block mt-1 text-ink-400 dark:text-ink-500">
             {withNames} of {total} have a public display name on GitHub; the rest are known by their username.

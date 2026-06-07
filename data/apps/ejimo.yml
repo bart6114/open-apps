@@ -36,15 +36,10 @@ github:
     forks_count: 1
     pushed_at: 2026-05-21T12:45:11Z
     license:
-      "0": G
-      "1": P
-      "2": L
-      "3": "-"
-      "4": "3"
-      "5": .
-      "6": "0"
       spdx_id: GPL-3.0
       key: null
+      name: null
+      url: null
     language: Dart
   activity:
     monthlyCommits: []

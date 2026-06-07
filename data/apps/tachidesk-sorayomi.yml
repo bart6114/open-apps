@@ -38,15 +38,10 @@ github:
     forks_count: 0
     pushed_at: 2025-07-09T05:10:46Z
     license:
-      "0": M
-      "1": P
-      "2": L
-      "3": "-"
-      "4": "2"
-      "5": .
-      "6": "0"
       spdx_id: MPL-2.0
       key: null
+      name: null
+      url: null
     language: Dart
     topics:
       - android

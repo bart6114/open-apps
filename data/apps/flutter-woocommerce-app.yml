@@ -36,20 +36,10 @@ github:
     forks_count: 243
     pushed_at: 2026-05-23T13:32:09Z
     license:
-      "0": B
-      "1": S
-      "2": D
-      "3": "-"
-      "4": "2"
-      "5": "-"
-      "6": C
-      "7": l
-      "8": a
-      "9": u
-      "10": s
-      "11": e
       spdx_id: BSD-2-Clause
       key: null
+      name: null
+      url: null
     language: Dart
     topics:
       - android
