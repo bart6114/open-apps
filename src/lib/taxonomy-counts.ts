@@ -7,11 +7,9 @@
 // page frontmatter at build time, never on the client.
 
 import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const generatedPath = join(__dirname, "..", "..", "data", "generated", "apps.json");
+const generatedPath = join(process.cwd(), "data", "generated", "apps.json");
 
 type GeneratedApp = {
   category?: string;

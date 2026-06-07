@@ -5,6 +5,7 @@
   "private": true,
   "description": "A static, community-curated directory of real open-source application codebases. Each app is a YAML file; activity is refreshed daily; the build pipeline renders an Astro site.",
   "license": "MIT",
+  "packageManager": "pnpm@10.12.1",
   "engines": {
     "node": ">=20"
   },
@@ -14,8 +15,8 @@
     "prebuild": "node scripts/fetch-icons.mjs",
     "validate:data": "node scripts/validate-apps.mjs",
     "build:data": "node scripts/validate-apps.mjs && node scripts/build-apps-json.mjs",
-    "build": "npm run build:data && astro build",
-    "dev": "npm run build:data && astro dev",
+    "build": "pnpm run build:data && astro build",
+    "dev": "pnpm run build:data && astro dev",
     "start": "astro dev",
     "preview": "astro preview",
     "astro": "astro",
@@ -24,15 +25,20 @@
     "test": "node --test scripts/*.test.mjs"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/tailwind": "^5.1.5",
-    "astro": "^5.0.0",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.6.3",
+    "@astrojs/check": "^0.9.9",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.4.4",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3",
     "yaml": "^2.9.0",
-    "zod": "^3.25.76"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^25.9.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "yaml": "^2.9.0"
+    }
   }
 }

@@ -4,16 +4,14 @@
 // here always match what's actually rendered. No hand-tuned magic numbers.
 //
 // Numbers in the rendered UI (hero, footer, etc.) come from this module.
-// If a number looks wrong, regenerate the JSON (`npm run build:data`) and
+// If a number looks wrong, regenerate the JSON (`pnpm run build:data`) and
 // re-build — the stats recompute from the fresh data.
 import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 import { categories } from "./categories";
 import { contributors } from "./contributors";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const generatedPath = join(__dirname, "..", "..", "data", "generated", "apps.json");
+const generatedPath = join(process.cwd(), "data", "generated", "apps.json");
 
 type GeneratedApp = {
   category?: string;
