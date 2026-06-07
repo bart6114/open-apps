@@ -16,11 +16,11 @@ The directory currently starts with Flutter apps and is expanding into React Nat
 - Home: https://open-apps.dev.mn/
 - About: https://open-apps.dev.mn/about
 - Apps: https://open-apps.dev.mn/apps
-- Hot apps: https://open-apps.dev.mn/hot
-- New apps: https://open-apps.dev.mn/new
-- Mature apps: https://open-apps.dev.mn/mature
-- Categories: https://open-apps.dev.mn/categories
-- Stacks: https://open-apps.dev.mn/stacks
+- Hot apps: https://open-apps.dev.mn/apps?label=hot
+- New apps: https://open-apps.dev.mn/apps?label=new
+- Mature apps: https://open-apps.dev.mn/apps?label=mature
+- Browse by stack: https://open-apps.dev.mn/apps
+- Browse by category: https://open-apps.dev.mn/apps
 
 ## What the site contains
 
