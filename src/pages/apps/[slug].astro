@@ -37,10 +37,14 @@ const initials = app.name
 // the GitHub owner avatar (matches the AppCard pattern on the home page).
 const ownerAvatar = app.logoUrl ?? getOwnerAvatarUrl(owner, 160);
 
-// Label for the primary label badge (new / hot / mature)
-const primaryLabel =
-  app.labels?.find((l) => l === "new" || l === "hot" || l === "mature") ??
-  app.labels?.[0];
+// Label for the primary label badge (new / hot / mature / stale).
+// Stale apps override the "mature" label — see AppCard.astro for
+// the same logic; both call sites must stay in sync.
+const isStale = app.status === "stale";
+const primaryLabel = isStale
+  ? "stale"
+  : app.labels?.find((l) => l === "new" || l === "hot" || l === "mature") ??
+    app.labels?.[0];
 
 const labelClass = primaryLabel === "new"
   ? "badge-new"
@@ -48,7 +52,9 @@ const labelClass = primaryLabel === "new"
     ? "badge-hot"
     : primaryLabel === "mature"
       ? "badge-mature"
-      : "";
+      : primaryLabel === "stale"
+        ? "badge-stale"
+        : "";
 
 // All stacks (primary + secondary) for chips
 const allStacks = [app.stack, ...(app.stacks ?? [])].filter(Boolean);
