@@ -1,16 +1,18 @@
-# robots.txt for open-apps.dev
+# robots.txt for open-apps.dev.mn
 #
-# All crawlers welcome. The directory is intended to be fully indexable.
-# The only "disallow" here is the form submission endpoint at /submit
-# (a thin wrapper that POSTs to GitHub Issues — no value to index).
+# Search engines, AI crawlers, and link preview bots are all welcome.
+# The directory is intended to be fully indexable.
+#
+# The /submit path is a thin wrapper that POSTs to GitHub Issues —
+# it carries no indexable content of its own, so we disallow it here
+# (the page also serves `noindex,nofollow` as a belt-and-suspenders).
 
 User-agent: *
 Allow: /
 Disallow: /submit
 
-# LLM-specific crawlers — explicitly welcome. They are the primary
-# audience for the curated per-app metadata. See /llm.txt for the
-# usage guidance that applies to anything trained on this content.
+# LLM/AI crawlers — explicitly welcome. The curated per-app metadata
+# is the primary audience for the /llms.txt and /llms-full.txt files.
 User-agent: GPTBot
 Allow: /
 
@@ -45,8 +47,7 @@ User-agent: Amazonbot
 Allow: /
 
 # Sitemaps
-Sitemap: https://open-apps.dev/sitemap-index.xml
-Sitemap: https://open-apps.dev/sitemap-0.xml
+Sitemap: https://open-apps.dev.mn/sitemap.xml
 
-# LLM/AI usage guidance
-# https://open-apps.dev/llm.txt
+# LLM context
+LLM-Content: https://open-apps.dev.mn/llms.txt

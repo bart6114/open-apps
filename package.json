@@ -12,9 +12,10 @@
   "scripts": {
     "icons": "node scripts/fetch-icons.mjs",
     "predev": "node scripts/fetch-icons.mjs",
-    "prebuild": "node scripts/fetch-icons.mjs",
+    "prebuild": "node scripts/fetch-icons.mjs && node scripts/build-llms-full.mjs",
     "validate:data": "node scripts/validate-apps.mjs",
     "build:data": "node scripts/validate-apps.mjs && node scripts/build-apps-json.mjs",
+    "build:llms-full": "node scripts/build-llms-full.mjs",
     "build": "pnpm run build:data && astro build",
     "dev": "pnpm run build:data && astro dev",
     "start": "astro dev",
@@ -29,7 +30,6 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.4",
     "tailwindcss": "^4.3.0",

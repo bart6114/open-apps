@@ -1,0 +1,35 @@
+# Open Source Apps
+
+Open Source Apps is a curated directory of real open-source applications that developers can run, study, and contribute to.
+
+The project focuses on complete applications, not SDKs, templates, toy demos, or abandoned README lists.
+
+Main URL: https://open-apps.dev.mn/
+GitHub: https://github.com/tortuvshin/open-source-flutter-apps
+
+## Current scope
+
+The directory currently starts with Flutter apps and is expanding into React Native, native iOS, native Android, Kotlin Multiplatform, Capacitor, desktop, and web apps.
+
+## Important pages
+
+- Home: https://open-apps.dev.mn/
+- About: https://open-apps.dev.mn/about
+- Apps: https://open-apps.dev.mn/apps
+- Hot apps: https://open-apps.dev.mn/hot
+- New apps: https://open-apps.dev.mn/new
+- Mature apps: https://open-apps.dev.mn/mature
+- Categories: https://open-apps.dev.mn/categories
+- Stacks: https://open-apps.dev.mn/stacks
+
+## What the site contains
+
+- Real open-source applications
+- App categories
+- Technology stacks
+- Platform support
+- License information
+- GitHub stars
+- Repository activity
+- Maturity signals
+- Contribution links
