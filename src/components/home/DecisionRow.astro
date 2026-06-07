@@ -5,6 +5,7 @@ import {
   getOwnerAndRepoFromRepoUrl,
   getOwnerAvatarUrl,
 } from "../../lib/repo";
+import { formatStars } from "../../lib/format";
 
 interface Props {
   app: OpenSourceApp;
@@ -41,14 +42,7 @@ const projectTypeLabel = (() => {
   }
 })();
 
-function formatStars(n: number): string {
-  if (n >= 1000) {
-    const k = n / 1000;
-    return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
-  }
-  return n.toString();
-}
-const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null;
+const starsLabel = formatStars(app.stars);
 ---
 
 <article

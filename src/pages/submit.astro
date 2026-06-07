@@ -207,7 +207,9 @@ const noindex = true;
         if (topics.includes("capacitor") || topics.includes("ionic")) return "capacitor";
         if (language === "swift" || language === "objective-c") return "ios";
         if (language === "kotlin" || language === "java") return "android";
-        return "flutter";
+        // Unknown — return empty so the user has to pick. The previous
+        // default of "flutter" mis-tagged Java/Kotlin/Swift-only apps.
+        return "";
       }
 
       function inferPlatforms(repo, stack) {

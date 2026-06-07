@@ -4,7 +4,8 @@ import type { OpenSourceApp } from "../../data/types";
 import { apps } from "../../data/apps";
 import Container from "../../components/layout/Container.astro";
 import Icon from "../../components/icons/Icon.astro";
-import { getOwnerAndRepoFromRepoUrl } from "../../lib/repo";
+import { getOwnerAndRepoFromRepoUrl, getOwnerAvatarUrl } from "../../lib/repo";
+import { formatDate, formatStars } from "../../lib/format";
 import { SCORE_DIMENSIONS, SCORE_LABELS, scoreTier, scoreLabel, SCORE_REASONING } from "../../lib/scores";
 
 export function getStaticPaths() {
@@ -31,10 +32,9 @@ const initials = app.name
   .join("")
   .toUpperCase();
 
-// Owner avatar URL
-const ownerAvatar = owner
-  ? `https://avatars.githubusercontent.com/${owner}?v=4&s=160`
-  : null;
+// Owner avatar URL — prefer the curated logoUrl if set, fall back to
+// the GitHub owner avatar (matches the AppCard pattern on the home page).
+const ownerAvatar = app.logoUrl ?? getOwnerAvatarUrl(owner, 160);
 
 // Label for the primary label badge (new / hot / mature)
 const primaryLabel =
@@ -58,27 +58,6 @@ const hasCuration =
   (app.bestFor && app.bestFor.length > 0) ||
   (app.whyListed && app.whyListed.length > 0) ||
   (app.caveats && app.caveats.length > 0);
-
-// Date formatting helper
-function formatDate(iso?: string): string {
-  if (!iso) return "—";
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
-
-function formatStars(n?: number): string | null {
-  if (typeof n !== "number") return null;
-  if (n >= 1000) {
-    const k = n / 1000;
-    return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
-  }
-  return n.toString();
-}
 
 const starsLabel = formatStars(app.stars);
 
@@ -478,7 +457,11 @@ const jsonLd: Record<string, unknown> = {
                       <span class="text-2xs text-ink-500 dark:text-ink-400">
                         Auto-curated · {app.curation.by}
                       </span>
-                    ) : null}
+                    ) : (
+                      <span class="text-2xs text-ink-500 dark:text-ink-400">
+                        Auto-curated
+                      </span>
+                    )}
                   </header>
                   <dl class="flex flex-col gap-2.5 text-sm">
                     {SCORE_DIMENSIONS.map((dim) => {

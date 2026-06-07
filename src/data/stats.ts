@@ -14,23 +14,8 @@ import { categories } from "./categories";
 import { contributors } from "./contributors";
 
 type GeneratedApp = {
-  category?: string;
   stack?: string;
   platforms?: string[];
-  github?: {
-    repository?: {
-      stargazers_count?: number;
-      forks_count?: number;
-    };
-    activity?: {
-      contributorsKnown?: number;
-    };
-  };
-  activity?: {
-    stars?: number;
-    forks?: number;
-    contributors?: number;
-  };
 };
 
 type RepoStats = {
@@ -48,14 +33,8 @@ const apps: GeneratedApp[] = raw.apps ?? [];
 const repo = repoStats as RepoStats;
 
 const platforms = new Set<string>();
-let starsKnown = 0;
-let contributorsKnown = 0;
 for (const a of apps) {
   for (const p of a.platforms ?? []) platforms.add(p);
-  const stars = a.github?.repository?.stargazers_count ?? a.activity?.stars;
-  const contributorsCount = a.github?.activity?.contributorsKnown ?? a.activity?.contributors;
-  if (typeof stars === "number" && stars > 0) starsKnown += 1;
-  if (typeof contributorsCount === "number" && contributorsCount > 0) contributorsKnown += 1;
 }
 
 export type SiteStats = {
@@ -84,8 +63,3 @@ export const stats: SiteStats = {
   platforms: platforms.size,
   originalRepo: "https://github.com/tortuvshin/open-apps",
 };
-
-// Counts of apps with synced readings. Useful for honest diagnostics
-// on per-app data quality; the displayed site stats no longer use
-// per-app aggregation.
-export const statsDebug = { starsKnown, contributorsKnown };

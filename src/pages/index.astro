@@ -18,8 +18,6 @@ const hotList = hotApps().slice(0, 6);
 const newList = newApps().slice(0, 6);
 const matureList = matureApps().slice(0, 6);
 
-const visibleContributors = contributors;
-
 const title = "Open Source Apps — A directory of real open-source applications";
 const description =
   "A searchable directory of real open-source applications — organized by stack, category, platform, license, activity, and maturity.";
@@ -61,7 +59,7 @@ const description =
 
       <CategoryGrid categories={categories} />
 
-      <ContributorsGrid contributors={visibleContributors} />
+      <ContributorsGrid contributors={contributors} />
 
       <OriginalCollection stats={stats} />
 </BaseLayout>

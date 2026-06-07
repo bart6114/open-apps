@@ -147,25 +147,3 @@ const bySlug = new Map(apps.map((a) => [a.slug, a]));
 export function appBySlug(slug: string): OpenSourceApp | undefined {
   return bySlug.get(slug);
 }
-
-// ── Stats helpers used by home + apps pages ─────────────────────────
-
-export function appsByCategory(): Map<string, OpenSourceApp[]> {
-  const m = new Map<string, OpenSourceApp[]>();
-  for (const a of apps) {
-    const k = a.category || "Other";
-    if (!m.has(k)) m.set(k, []);
-    m.get(k)!.push(a);
-  }
-  return m;
-}
-
-export function appsByStack(): Map<string, OpenSourceApp[]> {
-  const m = new Map<string, OpenSourceApp[]>();
-  for (const a of apps) {
-    const k = a.stack || "Other";
-    if (!m.has(k)) m.set(k, []);
-    m.get(k)!.push(a);
-  }
-  return m;
-}
