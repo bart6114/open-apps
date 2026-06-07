@@ -88,7 +88,7 @@ export const stats: SiteStats = {
   categories: categories.length,
   stacks: new Set(apps.map((a) => a.stack).filter(Boolean)).size,
   platforms: platforms.size,
-  originalRepo: "https://github.com/tortuvshin/open-source-flutter-apps",
+  originalRepo: "https://github.com/tortuvshin/open-apps",
 };
 
 // Counts of apps with synced readings. Useful for honest diagnostics.

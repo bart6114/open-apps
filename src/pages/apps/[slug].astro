@@ -110,6 +110,8 @@ const latestReleaseAt =
   typeof latestRelease?.published_at === "string"
     ? latestRelease.published_at
     : undefined;
+const contributorsKnown = app.github?.activity?.contributorsKnown;
+const totalCommitsKnown = app.github?.activity?.totalCommitsKnown;
 const distributionChannels = app.distribution?.channels ?? [];
 const distributionLabel = (type: string) => ({
   "app-store": "App Store",
@@ -368,6 +370,18 @@ const distributionLabel = (type: string) => ({
                   <dt class="text-ink-500 dark:text-ink-400">Forks</dt>
                   <dd class="font-mono text-ink-900 dark:text-ink-100">
                     {repoMeta?.forks_count ?? "—"}
+                  </dd>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-ink-500 dark:text-ink-400">Contributors</dt>
+                  <dd class="font-mono text-ink-900 dark:text-ink-100">
+                    {contributorsKnown ?? "—"}
+                  </dd>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-ink-500 dark:text-ink-400">Commits known</dt>
+                  <dd class="font-mono text-ink-900 dark:text-ink-100">
+                    {totalCommitsKnown ?? "—"}
                   </dd>
                 </div>
                 <div class="flex items-center justify-between gap-3">
