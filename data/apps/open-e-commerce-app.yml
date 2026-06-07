@@ -1,17 +1,58 @@
-# Open E-Commerce App — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "open-e-commerce-app"
-name: "Open E-Commerce App"
-repoUrl: "https://github.com/4seer/openflutterecommerceapp"
-description: "Open Flutter Project E-commerce App"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Business"
-# Original submitter: 4seer
-activity:
-  stars: 919
-  forks: 0
-  monthlyCommits: []
-  lastCommitAt: 2023-06-07
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:4seer/openflutterecommerceapp
+slug: open-e-commerce-app
+source:
+  provider: github
+  owner: 4seer
+  repo: openflutterecommerceapp
+  url: https://github.com/4seer/openflutterecommerceapp
+app:
+  name: Open E-Commerce App
+  description: Open Flutter Project E-commerce App
+  category: business
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: 4seer/openflutterecommerceapp
+    html_url: https://github.com/4seer/openflutterecommerceapp
+    description: Open Flutter Project E-commerce App
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 919
+    forks_count: 0
+    pushed_at: 2023-02-09T14:00:06Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:39.235Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

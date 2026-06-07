@@ -1,16 +1,58 @@
-# Math Matrix — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "math-matrix"
-name: "Math Matrix"
-repoUrl: "https://github.com/jaysavsani07/math-metrix"
-description: "Brain training games composition [Mehul Makwana](https://github.com/mehulmk)"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Games"
-activity:
-  stars: 441
-  forks: 103
-  monthlyCommits: []
-  lastCommitAt: 2025-11-03
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:jaysavsani07/math-metrix
+slug: math-matrix
+source:
+  provider: github
+  owner: jaysavsani07
+  repo: math-metrix
+  url: https://github.com/jaysavsani07/math-metrix
+app:
+  name: Math Matrix
+  description: Brain training games composition [Mehul Makwana](https://github.com/mehulmk)
+  category: games
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: jaysavsani07/math-metrix
+    html_url: https://github.com/jaysavsani07/math-metrix
+    description: Brain training games composition [Mehul Makwana](https://github.com/mehulmk)
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 441
+    forks_count: 103
+    pushed_at: 2025-11-03T13:24:08Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:33.491Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: quiet
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

@@ -1,17 +1,58 @@
-# NewsBuzz — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "newsbuzz"
-name: "NewsBuzz"
-repoUrl: "https://github.com/theankurkedia/NewsBuzz"
-description: "Firebase backed news reader using News API"
-stack: Flutter
-platforms: [Android, iOS]
-category: "News and Magazine"
-# Original submitter: Ankur Kedia
-activity:
-  stars: 597
-  forks: 193
-  monthlyCommits: []
-  lastCommitAt: 2018-10-27
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:theankurkedia/NewsBuzz
+slug: newsbuzz
+source:
+  provider: github
+  owner: theankurkedia
+  repo: NewsBuzz
+  url: https://github.com/theankurkedia/NewsBuzz
+app:
+  name: NewsBuzz
+  description: Firebase backed news reader using News API
+  category: news-and-magazine
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: theankurkedia/NewsBuzz
+    html_url: https://github.com/theankurkedia/NewsBuzz
+    description: Firebase backed news reader using News API
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 597
+    forks_count: 193
+    pushed_at: 2018-06-16T18:22:22Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:37.815Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

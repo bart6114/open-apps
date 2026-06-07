@@ -1,17 +1,58 @@
-# Flutter WooCommerce app — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "flutter-woocommerce-app"
-name: "Flutter WooCommerce app"
-repoUrl: "https://github.com/woosignal/flutter-woocommerce-app"
-description: "A ready-made app template for WooCommerce stores"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Shopping"
-# Original submitter: WooSignal
-activity:
-  stars: 707
-  forks: 243
-  monthlyCommits: []
-  lastCommitAt: 2026-05-23
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:woosignal/flutter-woocommerce-app
+slug: flutter-woocommerce-app
+source:
+  provider: github
+  owner: woosignal
+  repo: flutter-woocommerce-app
+  url: https://github.com/woosignal/flutter-woocommerce-app
+app:
+  name: Flutter WooCommerce app
+  description: A ready-made app template for WooCommerce stores
+  category: shopping
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: woosignal/flutter-woocommerce-app
+    html_url: https://github.com/woosignal/flutter-woocommerce-app
+    description: A ready-made app template for WooCommerce stores
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 707
+    forks_count: 243
+    pushed_at: 2026-05-23T13:32:09Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:24.060Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

@@ -1,16 +1,62 @@
-# Open Food Facts — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "open-food-facts"
-name: "Open Food Facts"
-repoUrl: "https://github.com/openfoodfacts/smooth-app"
-description: "The new mobile app of Open Food Facts, with other 2 million installs, that allows you to understand the health and environmental impact of your food, as well as to contribute new products to the Open Database [Open Food facts]("
-stack: Flutter
-platforms: [Android, iOS]
-category: "Health and Fitness"
-activity:
-  stars: 1342
-  forks: 451
-  monthlyCommits: []
-  lastCommitAt: 2026-06-05
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:openfoodfacts/smooth-app
+slug: open-food-facts
+source:
+  provider: github
+  owner: openfoodfacts
+  repo: smooth-app
+  url: https://github.com/openfoodfacts/smooth-app
+app:
+  name: Open Food Facts
+  description: The new mobile app of Open Food Facts, with other 2 million installs, that allows you
+    to understand the health and environmental impact of your food, as well as to contribute new
+    products to the Open Database [Open Food facts](
+  category: health-and-fitness
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: openfoodfacts/smooth-app
+    html_url: https://github.com/openfoodfacts/smooth-app
+    description: The new mobile app of Open Food Facts, with other 2 million installs, that allows you
+      to understand the health and environmental impact of your food, as well as to contribute new
+      products to the Open Database [Open Food facts](
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 1342
+    forks_count: 451
+    pushed_at: 2026-06-05T10:58:16Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:39.780Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

@@ -1,17 +1,59 @@
-# Flutter Chat App — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "flutter-chat-app"
-name: "Flutter Chat App"
-repoUrl: "https://github.com/rohan20/flutter-chat-app"
-description: "A one-to-one chat app built on Flutter with firebase authentication and image sharing capability"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Social Network"
-# Original submitter: Rohan Taneja
-activity:
-  stars: 1149
-  forks: 319
-  monthlyCommits: []
-  lastCommitAt: 2021-09-21
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:rohan20/flutter-chat-app
+slug: flutter-chat-app
+source:
+  provider: github
+  owner: rohan20
+  repo: flutter-chat-app
+  url: https://github.com/rohan20/flutter-chat-app
+app:
+  name: Flutter Chat App
+  description: A one-to-one chat app built on Flutter with firebase authentication and image sharing capability
+  category: social-network
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: rohan20/flutter-chat-app
+    html_url: https://github.com/rohan20/flutter-chat-app
+    description: A one-to-one chat app built on Flutter with firebase authentication and image sharing
+      capability
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 1149
+    forks_count: 319
+    pushed_at: 2018-06-25T08:46:35Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:21.035Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

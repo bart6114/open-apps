@@ -1,17 +1,58 @@
-# Platypus Crypto — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "platypus-crypto"
-name: "Platypus Crypto"
-repoUrl: "https://github.com/Blakexx/CryptoTracker"
-description: "Platypus Crypto is an ad-free cross-platform robust solution for tracking cryptocurrency assets"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Finance"
-# Original submitter: Blake Bottum
-activity:
-  stars: 192
-  forks: 0
-  monthlyCommits: []
-  lastCommitAt: 2021-09-18
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:Blakexx/CryptoTracker
+slug: platypus-crypto
+source:
+  provider: github
+  owner: Blakexx
+  repo: CryptoTracker
+  url: https://github.com/Blakexx/CryptoTracker
+app:
+  name: Platypus Crypto
+  description: Platypus Crypto is an ad-free cross-platform robust solution for tracking cryptocurrency assets
+  category: finance
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: Blakexx/CryptoTracker
+    html_url: https://github.com/Blakexx/CryptoTracker
+    description: Platypus Crypto is an ad-free cross-platform robust solution for tracking cryptocurrency assets
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 192
+    forks_count: 0
+    pushed_at: 2021-09-18T03:10:12Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:40.286Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

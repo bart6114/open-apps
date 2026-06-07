@@ -1,17 +1,58 @@
-# Music Player — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "music-player"
-name: "Music Player"
-repoUrl: "https://github.com/iampawan/Flutter-Music-Player"
-description: "Full featured music player"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Media"
-# Original submitter: Pawan Kumar
-activity:
-  stars: 1783
-  forks: 560
-  monthlyCommits: []
-  lastCommitAt: 2024-01-15
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:iampawan/Flutter-Music-Player
+slug: music-player
+source:
+  provider: github
+  owner: iampawan
+  repo: Flutter-Music-Player
+  url: https://github.com/iampawan/Flutter-Music-Player
+app:
+  name: Music Player
+  description: Full featured music player
+  category: media
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: iampawan/Flutter-Music-Player
+    html_url: https://github.com/iampawan/Flutter-Music-Player
+    description: Full featured music player
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 1783
+    forks_count: 560
+    pushed_at: 2022-05-31T07:29:16Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:36.377Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

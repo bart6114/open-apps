@@ -1,17 +1,60 @@
-# Fwitter — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "fwitter"
-name: "Fwitter"
-repoUrl: "https://github.com/TheAlphamerc/flutter_twitter_clone"
-description: "Fully functional Twitter clone built in flutter framework using Firebase realtime database and storage"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Social Network"
-# Original submitter: Sonu Sharma
-activity:
-  stars: 4226
-  forks: 1160
-  monthlyCommits: []
-  lastCommitAt: 2024-07-31
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:TheAlphamerc/flutter_twitter_clone
+slug: fwitter
+source:
+  provider: github
+  owner: TheAlphamerc
+  repo: flutter_twitter_clone
+  url: https://github.com/TheAlphamerc/flutter_twitter_clone
+app:
+  name: Fwitter
+  description: Fully functional Twitter clone built in flutter framework using Firebase realtime
+    database and storage
+  category: social-network
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: TheAlphamerc/flutter_twitter_clone
+    html_url: https://github.com/TheAlphamerc/flutter_twitter_clone
+    description: Fully functional Twitter clone built in flutter framework using Firebase realtime
+      database and storage
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 4226
+    forks_count: 1160
+    pushed_at: 2024-07-31T04:57:56Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:26.962Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

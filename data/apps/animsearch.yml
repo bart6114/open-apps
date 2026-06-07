@@ -1,17 +1,58 @@
-# AnimSearch — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "animsearch"
-name: "AnimSearch"
-repoUrl: "https://github.com/ArizArmeidi/AnimSearch"
-description: "Anime and Manga search app. created using Flutter and Jikan API"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Entertainment"
-# Original submitter: Ariz Armeidi
-activity:
-  stars: 88
-  forks: 0
-  monthlyCommits: []
-  lastCommitAt: 2023-01-06
-  totalCommitsKnown: 71
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:ArizArmeidi/AnimSearch
+slug: animsearch
+source:
+  provider: github
+  owner: ArizArmeidi
+  repo: AnimSearch
+  url: https://github.com/ArizArmeidi/AnimSearch
+app:
+  name: AnimSearch
+  description: Anime and Manga search app. created using Flutter and Jikan API
+  category: entertainment
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: ArizArmeidi/AnimSearch
+    html_url: https://github.com/ArizArmeidi/AnimSearch
+    description: Anime and Manga search app. created using Flutter and Jikan API
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 88
+    forks_count: 0
+    pushed_at: 2023-01-06T20:52:20Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 71
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:11.749Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

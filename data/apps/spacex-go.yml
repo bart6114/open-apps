@@ -1,17 +1,58 @@
-# SpaceX GO — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "spacex-go"
-name: "SpaceX GO"
-repoUrl: "https://github.com/jesusrp98/spacex-go"
-description: "Simple yet powerful, open-source SpaceX launch tracker"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Communication"
-# Original submitter: Chechu
-activity:
-  stars: 923
-  forks: 0
-  monthlyCommits: []
-  lastCommitAt: 2024-03-28
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:jesusrp98/spacex-go
+slug: spacex-go
+source:
+  provider: github
+  owner: jesusrp98
+  repo: spacex-go
+  url: https://github.com/jesusrp98/spacex-go
+app:
+  name: SpaceX GO
+  description: Simple yet powerful, open-source SpaceX launch tracker
+  category: communication
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: jesusrp98/spacex-go
+    html_url: https://github.com/jesusrp98/spacex-go
+    description: Simple yet powerful, open-source SpaceX launch tracker
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 923
+    forks_count: 0
+    pushed_at: 2021-11-08T19:01:07Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:44.072Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

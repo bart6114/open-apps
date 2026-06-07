@@ -1,17 +1,58 @@
-# Immich — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "immich"
-name: "Immich"
-repoUrl: "https://github.com/immich-app/immich"
-description: "Self-hosted photo and video backup solution directly from your mobile phone"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Tools"
-# Original submitter: Alex
-activity:
-  stars: 102744
-  forks: 5799
-  monthlyCommits: []
-  lastCommitAt: 2026-06-06
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:immich-app/immich
+slug: immich
+source:
+  provider: github
+  owner: immich-app
+  repo: immich
+  url: https://github.com/immich-app/immich
+app:
+  name: Immich
+  description: Self-hosted photo and video backup solution directly from your mobile phone
+  category: tools
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: immich-app/immich
+    html_url: https://github.com/immich-app/immich
+    description: Self-hosted photo and video backup solution directly from your mobile phone
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 102744
+    forks_count: 5799
+    pushed_at: 2026-06-07T13:40:01Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:30.417Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

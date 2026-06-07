@@ -1,17 +1,58 @@
-# Flutter Music — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "flutter-music"
-name: "Flutter Music"
-repoUrl: "https://github.com/o-ifeanyi/musicPlayer"
-description: "A Flutter music player to play songs"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Media"
-# Original submitter: o-ifeanyi
-activity:
-  stars: 154
-  forks: 22
-  monthlyCommits: []
-  lastCommitAt: 2023-02-19
-  totalCommitsKnown: 58
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:o-ifeanyi/musicPlayer
+slug: flutter-music
+source:
+  provider: github
+  owner: o-ifeanyi
+  repo: musicPlayer
+  url: https://github.com/o-ifeanyi/musicPlayer
+app:
+  name: Flutter Music
+  description: A Flutter music player to play songs
+  category: media
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: o-ifeanyi/musicPlayer
+    html_url: https://github.com/o-ifeanyi/musicPlayer
+    description: A Flutter music player to play songs
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 154
+    forks_count: 22
+    pushed_at: 2023-02-19T22:26:41Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 58
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:23.201Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

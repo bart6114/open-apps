@@ -1,21 +1,64 @@
-# TubeCards — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "tubecards"
-name: "TubeCards"
-repoUrl: "https://github.com/friebetill/tubecards/"
-description: "Cross-platform Spaced Repetition App for flashcards"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Education"
-# Original submitter: friebetill
-activity:
-  stars: 360
-  forks: 54
-  watchers: 360
-  openIssues: 5
-  monthlyCommits: [0, 0, 0, 0, 0, 0]
-  lastCommitAt: 2024-03-12
-  totalCommitsKnown: 87
-  contributors: 1
-  openPullRequests: 0
-  updatedAt: 2026-06-07
+schemaVersion: 1
+id: github:friebetill/tubecards
+slug: tubecards
+source:
+  provider: github
+  owner: friebetill
+  repo: tubecards
+  url: https://github.com/friebetill/tubecards/
+app:
+  name: TubeCards
+  description: Cross-platform Spaced Repetition App for flashcards
+  category: education
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: friebetill/tubecards
+    html_url: https://github.com/friebetill/tubecards/
+    description: Cross-platform Spaced Repetition App for flashcards
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 360
+    forks_count: 54
+    pushed_at: 2022-10-26T11:03:54Z
+  activity:
+    monthlyCommits:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    totalCommitsKnown: 87
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:49.911Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

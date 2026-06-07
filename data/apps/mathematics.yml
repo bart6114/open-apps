@@ -1,20 +1,66 @@
-# Mathematics — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "mathematics"
-name: "Mathematics"
-repoUrl: "https://github.com/j-j-gajjar/mathematics/"
-description: "Generate MCQ PDF / Question PDF : With Answer and Quiz [J-J-GAJJAR](https://github.com/j-j-gajjar)"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Education"
-activity:
-  stars: 143
-  forks: 40
-  watchers: 143
-  openIssues: 6
-  monthlyCommits: [0, 0, 0, 0, 0, 4]
-  lastCommitAt: 2026-06-07
-  totalCommitsKnown: 63
-  contributors: 5
-  openPullRequests: 1
-  updatedAt: 2026-06-07
+schemaVersion: 1
+id: github:j-j-gajjar/mathematics
+slug: mathematics
+source:
+  provider: github
+  owner: j-j-gajjar
+  repo: mathematics
+  url: https://github.com/j-j-gajjar/mathematics/
+app:
+  name: Mathematics
+  description: "Generate MCQ PDF / Question PDF : With Answer and Quiz
+    [J-J-GAJJAR](https://github.com/j-j-gajjar)"
+  category: education
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: j-j-gajjar/mathematics
+    html_url: https://github.com/j-j-gajjar/mathematics/
+    description: "Generate MCQ PDF / Question PDF : With Answer and Quiz
+      [J-J-GAJJAR](https://github.com/j-j-gajjar)"
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 143
+    forks_count: 40
+    pushed_at: 2026-06-07T06:37:55Z
+  activity:
+    monthlyCommits:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 4
+    totalCommitsKnown: 63
+    openPullRequests: 1
+  sync:
+    syncedAt: 2026-06-07T15:24:33.915Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

@@ -1,17 +1,58 @@
-# Flutter Ebook App — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "flutter-ebook-app"
-name: "Flutter Ebook App"
-repoUrl: "https://github.com/JideGuru/FlutterEbookApp"
-description: "A simple Flutter app to read and download e-books"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Entertainment"
-# Original submitter: Festus Olusegun
-activity:
-  stars: 3323
-  forks: 0
-  monthlyCommits: []
-  lastCommitAt: 2024-08-07
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:JideGuru/FlutterEbookApp
+slug: flutter-ebook-app
+source:
+  provider: github
+  owner: JideGuru
+  repo: FlutterEbookApp
+  url: https://github.com/JideGuru/FlutterEbookApp
+app:
+  name: Flutter Ebook App
+  description: A simple Flutter app to read and download e-books
+  category: entertainment
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: JideGuru/FlutterEbookApp
+    html_url: https://github.com/JideGuru/FlutterEbookApp
+    description: A simple Flutter app to read and download e-books
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 3323
+    forks_count: 0
+    pushed_at: 2024-07-25T09:32:54Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:21.545Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

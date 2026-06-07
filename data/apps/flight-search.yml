@@ -1,17 +1,58 @@
-# Flight search — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "flight-search"
-name: "Flight search"
-repoUrl: "https://github.com/MarcinusX/flutter_ui_challenge_flight_search"
-description: "Flight search app"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Travel"
-# Original submitter: Marcin Szałek
-activity:
-  stars: 1000
-  forks: 224
-  monthlyCommits: []
-  lastCommitAt: 2021-07-10
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:MarcinusX/flutter_ui_challenge_flight_search
+slug: flight-search
+source:
+  provider: github
+  owner: MarcinusX
+  repo: flutter_ui_challenge_flight_search
+  url: https://github.com/MarcinusX/flutter_ui_challenge_flight_search
+app:
+  name: Flight search
+  description: Flight search app
+  category: travel
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: MarcinusX/flutter_ui_challenge_flight_search
+    html_url: https://github.com/MarcinusX/flutter_ui_challenge_flight_search
+    description: Flight search app
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 1000
+    forks_count: 224
+    pushed_at: 2018-11-06T13:17:13Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:19.177Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

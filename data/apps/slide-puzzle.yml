@@ -1,17 +1,58 @@
-# Slide Puzzle — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "slide-puzzle"
-name: "Slide Puzzle"
-repoUrl: "https://github.com/kevmoo/slide_puzzle"
-description: "Classic slide (15) puzzle"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Games"
-# Original submitter: Kevin Moore
-activity:
-  stars: 179
-  forks: 74
-  monthlyCommits: []
-  lastCommitAt: 2022-02-05
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:kevmoo/slide_puzzle
+slug: slide-puzzle
+source:
+  provider: github
+  owner: kevmoo
+  repo: slide_puzzle
+  url: https://github.com/kevmoo/slide_puzzle
+app:
+  name: Slide Puzzle
+  description: Classic slide (15) puzzle
+  category: games
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: kevmoo/slide_puzzle
+    html_url: https://github.com/kevmoo/slide_puzzle
+    description: Classic slide (15) puzzle
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 179
+    forks_count: 74
+    pushed_at: 2022-02-05T00:08:01Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:43.620Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

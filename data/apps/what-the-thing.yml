@@ -1,17 +1,60 @@
-# What the thing? — open-source React Native AR/object-recognition app.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "what-the-thing"
-name: "What the thing?"
-repoUrl: "https://github.com/vigzmv/what_the_thing"
-description: "Point your camera at objects to learn how to say them in another language. Object-recognition powered app built with React Native."
-stack: "React Native"
-platforms: [Android, iOS]
-category: "Education"
-# Original submitter: jondot/awesome-react-native
-activity:
-  stars: 544
-  forks: 100
-  monthlyCommits: []
-  lastCommitAt: 2025-06-19
-  totalCommitsKnown: 0
-  updatedAt: 2025-06-19
+schemaVersion: 1
+id: github:vigzmv/what_the_thing
+slug: what-the-thing
+source:
+  provider: github
+  owner: vigzmv
+  repo: what_the_thing
+  url: https://github.com/vigzmv/what_the_thing
+app:
+  name: What the thing?
+  description: Point your camera at objects to learn how to say them in another language.
+    Object-recognition powered app built with React Native.
+  category: education
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: react-native
+  families:
+    - cross-platform
+  technologies:
+    - id: react-native
+      role: mobile-framework
+github:
+  repository:
+    full_name: vigzmv/what_the_thing
+    html_url: https://github.com/vigzmv/what_the_thing
+    description: Point your camera at objects to learn how to say them in another language.
+      Object-recognition powered app built with React Native.
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 544
+    forks_count: 100
+    pushed_at: 2025-06-19T14:44:50Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:51.909Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: quiet
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

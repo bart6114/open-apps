@@ -1,17 +1,58 @@
-# Toughest — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "toughest"
-name: "Toughest"
-repoUrl: "https://github.com/MDSADABWASIM/Toughest"
-description: "Tricky questions and answer- Offline Interview Q/A"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Entertainment"
-# Original submitter: MD SADAB WASIM
-activity:
-  stars: 275
-  forks: 0
-  monthlyCommits: []
-  lastCommitAt: 2025-11-02
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:MDSADABWASIM/Toughest
+slug: toughest
+source:
+  provider: github
+  owner: MDSADABWASIM
+  repo: Toughest
+  url: https://github.com/MDSADABWASIM/Toughest
+app:
+  name: Toughest
+  description: Tricky questions and answer- Offline Interview Q/A
+  category: entertainment
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: MDSADABWASIM/Toughest
+    html_url: https://github.com/MDSADABWASIM/Toughest
+    description: Tricky questions and answer- Offline Interview Q/A
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 275
+    forks_count: 0
+    pushed_at: 2025-11-02T06:16:51Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:48.375Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: quiet
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

@@ -1,17 +1,58 @@
-# Taskist — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "taskist"
-name: "Taskist"
-repoUrl: "https://github.com/huextrat/Taskist"
-description: "Taskist is a ToDo List app for Task Management"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Productivity"
-# Original submitter: Hugo EXTRAT
-activity:
-  stars: 1057
-  forks: 271
-  monthlyCommits: []
-  lastCommitAt: 2023-12-15
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:huextrat/Taskist
+slug: taskist
+source:
+  provider: github
+  owner: huextrat
+  repo: Taskist
+  url: https://github.com/huextrat/Taskist
+app:
+  name: Taskist
+  description: Taskist is a ToDo List app for Task Management
+  category: productivity
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: huextrat/Taskist
+    html_url: https://github.com/huextrat/Taskist
+    description: Taskist is a ToDo List app for Task Management
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 1057
+    forks_count: 271
+    pushed_at: 2020-07-09T17:54:35Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:46.949Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

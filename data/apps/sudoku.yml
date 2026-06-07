@@ -1,17 +1,58 @@
-# Sudoku — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "sudoku"
-name: "Sudoku"
-repoUrl: "https://github.com/VarunS2002/Flutter-Sudoku"
-description: "Sudoku Game built"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Games"
-# Original submitter: VarunS2002
-activity:
-  stars: 99
-  forks: 43
-  monthlyCommits: []
-  lastCommitAt: 2023-07-14
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:VarunS2002/Flutter-Sudoku
+slug: sudoku
+source:
+  provider: github
+  owner: VarunS2002
+  repo: Flutter-Sudoku
+  url: https://github.com/VarunS2002/Flutter-Sudoku
+app:
+  name: Sudoku
+  description: Sudoku Game built
+  category: games
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: VarunS2002/Flutter-Sudoku
+    html_url: https://github.com/VarunS2002/Flutter-Sudoku
+    description: Sudoku Game built
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 99
+    forks_count: 43
+    pushed_at: 2022-07-02T13:02:45Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:45.520Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

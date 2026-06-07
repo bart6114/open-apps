@@ -1,17 +1,58 @@
-# Airdash — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "airdash"
-name: "Airdash"
-repoUrl: "https://github.com/simonbengtsson/airdash"
-description: "Share files to any device"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Tools"
-# Original submitter: Simon Bengtsson
-activity:
-  stars: 667
-  forks: 126
-  monthlyCommits: []
-  lastCommitAt: 2026-02-16
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:simonbengtsson/airdash
+slug: airdash
+source:
+  provider: github
+  owner: simonbengtsson
+  repo: airdash
+  url: https://github.com/simonbengtsson/airdash
+app:
+  name: Airdash
+  description: Share files to any device
+  category: tools
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: simonbengtsson/airdash
+    html_url: https://github.com/simonbengtsson/airdash
+    description: Share files to any device
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 667
+    forks_count: 126
+    pushed_at: 2026-02-16T14:04:56Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:11.305Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

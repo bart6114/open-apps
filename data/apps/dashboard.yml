@@ -1,17 +1,58 @@
-# Dashboard — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "dashboard"
-name: "Dashboard"
-repoUrl: "https://github.com/Ivaskuu/dashboard"
-description: "Dashboard concept made"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Personalization"
-# Original submitter: Ivascu Adrian
-activity:
-  stars: 946
-  forks: 281
-  monthlyCommits: []
-  lastCommitAt: 2019-08-09
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:Ivaskuu/dashboard
+slug: dashboard
+source:
+  provider: github
+  owner: Ivaskuu
+  repo: dashboard
+  url: https://github.com/Ivaskuu/dashboard
+app:
+  name: Dashboard
+  description: Dashboard concept made
+  category: personalization
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: Ivaskuu/dashboard
+    html_url: https://github.com/Ivaskuu/dashboard
+    description: Dashboard concept made
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 946
+    forks_count: 281
+    pushed_at: 2018-05-26T13:08:55Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:15.536Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

@@ -1,17 +1,58 @@
-# Flip — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "flip"
-name: "Flip"
-repoUrl: "https://github.com/RedBrogdon/flutterflip"
-description: "Reversi game"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Games"
-# Original submitter: Andrew Brogdon
-activity:
-  stars: 268
-  forks: 59
-  monthlyCommits: []
-  lastCommitAt: 2026-05-25
-  totalCommitsKnown: 75
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:RedBrogdon/flutterflip
+slug: flip
+source:
+  provider: github
+  owner: RedBrogdon
+  repo: flutterflip
+  url: https://github.com/RedBrogdon/flutterflip
+app:
+  name: Flip
+  description: Reversi game
+  category: games
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: RedBrogdon/flutterflip
+    html_url: https://github.com/RedBrogdon/flutterflip
+    description: Reversi game
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 268
+    forks_count: 59
+    pushed_at: 2026-05-25T19:45:28Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 75
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:19.667Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

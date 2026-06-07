@@ -1,17 +1,58 @@
-# Flutter Games — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "flutter-games"
-name: "Flutter Games"
-repoUrl: "https://github.com/searchy2/FlutterGames"
-description: "Flutter app for purchasing and renting games"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Shopping"
-# Original submitter: Ray Li
-activity:
-  stars: 339
-  forks: 74
-  monthlyCommits: []
-  lastCommitAt: 2026-04-16
-  totalCommitsKnown: 68
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:searchy2/FlutterGames
+slug: flutter-games
+source:
+  provider: github
+  owner: searchy2
+  repo: FlutterGames
+  url: https://github.com/searchy2/FlutterGames
+app:
+  name: Flutter Games
+  description: Flutter app for purchasing and renting games
+  category: shopping
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: searchy2/FlutterGames
+    html_url: https://github.com/searchy2/FlutterGames
+    description: Flutter app for purchasing and renting games
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 339
+    forks_count: 74
+    pushed_at: 2026-04-16T23:56:57Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 68
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:22.761Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

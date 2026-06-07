@@ -1,17 +1,58 @@
-# Fedi — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "fedi"
-name: "Fedi"
-repoUrl: "https://github.com/Big-Fig/Fediverse.app"
-description: "Open-source client for Pleroma and Mastodon social networks"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Social Network"
-# Original submitter: Big-Fig
-activity:
-  stars: 146
-  forks: 24
-  monthlyCommits: []
-  lastCommitAt: 2022-11-19
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:Big-Fig/Fediverse.app
+slug: fedi
+source:
+  provider: github
+  owner: Big-Fig
+  repo: Fediverse.app
+  url: https://github.com/Big-Fig/Fediverse.app
+app:
+  name: Fedi
+  description: Open-source client for Pleroma and Mastodon social networks
+  category: social-network
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: Big-Fig/Fediverse.app
+    html_url: https://github.com/Big-Fig/Fediverse.app
+    description: Open-source client for Pleroma and Mastodon social networks
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 146
+    forks_count: 24
+    pushed_at: 2022-11-19T20:38:09Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:18.718Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

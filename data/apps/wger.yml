@@ -1,16 +1,58 @@
-# wger — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "wger"
-name: "wger"
-repoUrl: "https://github.com/wger-project/flutter"
-description: "Flutter fitness/workout app for wger by the [wger project](https://github.com/wger-project)"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Health and Fitness"
-activity:
-  stars: 917
-  forks: 401
-  monthlyCommits: []
-  lastCommitAt: 2026-06-05
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:wger-project/flutter
+slug: wger
+source:
+  provider: github
+  owner: wger-project
+  repo: flutter
+  url: https://github.com/wger-project/flutter
+app:
+  name: wger
+  description: Flutter fitness/workout app for wger by the [wger project](https://github.com/wger-project)
+  category: health-and-fitness
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: wger-project/flutter
+    html_url: https://github.com/wger-project/flutter
+    description: Flutter fitness/workout app for wger by the [wger project](https://github.com/wger-project)
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 917
+    forks_count: 401
+    pushed_at: 2026-06-04T04:48:14Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:51.449Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

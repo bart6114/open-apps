@@ -1,17 +1,58 @@
-# Ejimo — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "ejimo"
-name: "Ejimo"
-repoUrl: "https://github.com/albemala/emoji-picker"
-description: "Cross-platform emoji and symbol picker"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Tools"
-# Original submitter: albemala
-activity:
-  stars: 59
-  forks: 1
-  monthlyCommits: []
-  lastCommitAt: 2026-05-21
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:albemala/emoji-picker
+slug: ejimo
+source:
+  provider: github
+  owner: albemala
+  repo: emoji-picker
+  url: https://github.com/albemala/emoji-picker
+app:
+  name: Ejimo
+  description: Cross-platform emoji and symbol picker
+  category: tools
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: albemala/emoji-picker
+    html_url: https://github.com/albemala/emoji-picker
+    description: Cross-platform emoji and symbol picker
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 59
+    forks_count: 1
+    pushed_at: 2026-05-21T12:45:11Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:18.267Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

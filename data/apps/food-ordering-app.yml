@@ -1,17 +1,58 @@
-# Food Ordering App — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "food-ordering-app"
-name: "Food Ordering App"
-repoUrl: "https://github.com/Tarikul711/flutter-food-delivery-app-ui"
-description: "Food delivery App UI designed"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Lifestyle"
-# Original submitter: Tarikul Islam
-activity:
-  stars: 1201
-  forks: 595
-  monthlyCommits: []
-  lastCommitAt: 2024-08-03
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:Tarikul711/flutter-food-delivery-app-ui
+slug: food-ordering-app
+source:
+  provider: github
+  owner: Tarikul711
+  repo: flutter-food-delivery-app-ui
+  url: https://github.com/Tarikul711/flutter-food-delivery-app-ui
+app:
+  name: Food Ordering App
+  description: Food delivery App UI designed
+  category: lifestyle
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: Tarikul711/flutter-food-delivery-app-ui
+    html_url: https://github.com/Tarikul711/flutter-food-delivery-app-ui
+    description: Food delivery App UI designed
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 1201
+    forks_count: 595
+    pushed_at: 2020-08-24T04:49:26Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:26.563Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

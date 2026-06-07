@@ -1,17 +1,58 @@
-# DroidKaigi2018-flutter — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "droidkaigi2018-flutter"
-name: "DroidKaigi2018-flutter"
-repoUrl: "https://github.com/konifar/droidkaigi2018-flutter"
-description: "Unofficial conference app for DroidKaigi 2018 Tokyo"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Communication"
-# Original submitter: konifar
-activity:
-  stars: 504
-  forks: 0
-  monthlyCommits: []
-  lastCommitAt: 2018-05-01
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:konifar/droidkaigi2018-flutter
+slug: droidkaigi2018-flutter
+source:
+  provider: github
+  owner: konifar
+  repo: droidkaigi2018-flutter
+  url: https://github.com/konifar/droidkaigi2018-flutter
+app:
+  name: DroidKaigi2018-flutter
+  description: Unofficial conference app for DroidKaigi 2018 Tokyo
+  category: communication
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: konifar/droidkaigi2018-flutter
+    html_url: https://github.com/konifar/droidkaigi2018-flutter
+    description: Unofficial conference app for DroidKaigi 2018 Tokyo
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 504
+    forks_count: 0
+    pushed_at: 2018-02-07T16:39:22Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:16.931Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

@@ -1,17 +1,58 @@
-# Minsk8 — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "minsk8"
-name: "Minsk8"
-repoUrl: "https://github.com/comerc/minsk8"
-description: "Marketplace with Hasura & Firebase"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Business"
-# Original submitter: comerc
-activity:
-  stars: 68
-  forks: 0
-  monthlyCommits: []
-  lastCommitAt: 2023-03-05
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:comerc/minsk8
+slug: minsk8
+source:
+  provider: github
+  owner: comerc
+  repo: minsk8
+  url: https://github.com/comerc/minsk8
+app:
+  name: Minsk8
+  description: Marketplace with Hasura & Firebase
+  category: business
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: comerc/minsk8
+    html_url: https://github.com/comerc/minsk8
+    description: Marketplace with Hasura & Firebase
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 68
+    forks_count: 0
+    pushed_at: 2022-05-28T09:05:56Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:35.312Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

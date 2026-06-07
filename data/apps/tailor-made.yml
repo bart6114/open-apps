@@ -1,17 +1,58 @@
-# Tailor made — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "tailor-made"
-name: "Tailor made"
-repoUrl: "https://github.com/jogboms/tailor_made"
-description: "Managing a Fashion designer's daily routine"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Personalization"
-# Original submitter: Jeremiah Ogbomo
-activity:
-  stars: 341
-  forks: 116
-  monthlyCommits: []
-  lastCommitAt: 2023-08-15
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:jogboms/tailor_made
+slug: tailor-made
+source:
+  provider: github
+  owner: jogboms
+  repo: tailor_made
+  url: https://github.com/jogboms/tailor_made
+app:
+  name: Tailor made
+  description: Managing a Fashion designer's daily routine
+  category: personalization
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: jogboms/tailor_made
+    html_url: https://github.com/jogboms/tailor_made
+    description: Managing a Fashion designer's daily routine
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 341
+    forks_count: 116
+    pushed_at: 2023-07-05T08:45:27Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:46.420Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

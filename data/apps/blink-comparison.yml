@@ -1,17 +1,58 @@
-# Blink Comparison — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "blink-comparison"
-name: "Blink Comparison"
-repoUrl: "https://github.com/proninyaroslav/blink-comparison"
-description: "Simplifies comparing photos of tamper-evident seals and patterns using your eyes"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Tools"
-# Original submitter: Yaroslav Pronin
-activity:
-  stars: 300
-  forks: 28
-  monthlyCommits: []
-  lastCommitAt: 2025-08-31
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:proninyaroslav/blink-comparison
+slug: blink-comparison
+source:
+  provider: github
+  owner: proninyaroslav
+  repo: blink-comparison
+  url: https://github.com/proninyaroslav/blink-comparison
+app:
+  name: Blink Comparison
+  description: Simplifies comparing photos of tamper-evident seals and patterns using your eyes
+  category: tools
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: proninyaroslav/blink-comparison
+    html_url: https://github.com/proninyaroslav/blink-comparison
+    description: Simplifies comparing photos of tamper-evident seals and patterns using your eyes
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 300
+    forks_count: 28
+    pushed_at: 2025-08-31T19:54:51Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:13.236Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: quiet
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

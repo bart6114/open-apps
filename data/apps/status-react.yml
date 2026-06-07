@@ -1,17 +1,60 @@
-# Status — open-source React Native Ethereum client.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "status-react"
-name: "Status.im"
-repoUrl: "https://github.com/status-im/status-react"
-description: "Status is a secure messaging app, Ethereum wallet, and Web3 browser built on decentralized protocols."
-stack: "React Native"
-platforms: [Android, iOS]
-category: "Communication"
-# Original submitter: jondot/awesome-react-native
-activity:
-  stars: 4016
-  forks: 1000
-  monthlyCommits: []
-  lastCommitAt: 2026-06-04
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-04
+schemaVersion: 1
+id: github:status-im/status-react
+slug: status-react
+source:
+  provider: github
+  owner: status-im
+  repo: status-react
+  url: https://github.com/status-im/status-react
+app:
+  name: Status.im
+  description: Status is a secure messaging app, Ethereum wallet, and Web3 browser built on
+    decentralized protocols.
+  category: communication
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: react-native
+  families:
+    - cross-platform
+  technologies:
+    - id: react-native
+      role: mobile-framework
+github:
+  repository:
+    full_name: status-im/status-react
+    html_url: https://github.com/status-im/status-react
+    description: Status is a secure messaging app, Ethereum wallet, and Web3 browser built on
+      decentralized protocols.
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 4016
+    forks_count: 1000
+    pushed_at: 2025-10-23T06:09:38Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:45.096Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: quiet
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

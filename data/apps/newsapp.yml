@@ -1,17 +1,58 @@
-# NewsApp — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "newsapp"
-name: "NewsApp"
-repoUrl: "https://github.com/j-j-gajjar/FLUTTER_NewsApp"
-description: "Live News Using API with Many API filterrs"
-stack: Flutter
-platforms: [Android, iOS]
-category: "News and Magazine"
-# Original submitter: J-J-GAJJAR
-activity:
-  stars: 252
-  forks: 50
-  monthlyCommits: []
-  lastCommitAt: 2025-09-07
-  totalCommitsKnown: 52
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:j-j-gajjar/FLUTTER_NewsApp
+slug: newsapp
+source:
+  provider: github
+  owner: j-j-gajjar
+  repo: FLUTTER_NewsApp
+  url: https://github.com/j-j-gajjar/FLUTTER_NewsApp
+app:
+  name: NewsApp
+  description: Live News Using API with Many API filterrs
+  category: news-and-magazine
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: j-j-gajjar/FLUTTER_NewsApp
+    html_url: https://github.com/j-j-gajjar/FLUTTER_NewsApp
+    description: Live News Using API with Many API filterrs
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 252
+    forks_count: 50
+    pushed_at: 2025-09-07T09:05:24Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 52
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:37.385Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: quiet
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

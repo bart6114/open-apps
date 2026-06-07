@@ -1,17 +1,58 @@
-# Hacki — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "hacki"
-name: "Hacki"
-repoUrl: "https://github.com/Livinglist/Hacki"
-description: "A Hacker News reader"
-stack: Flutter
-platforms: [Android, iOS]
-category: "News and Magazine"
-# Original submitter: Jiaqi Feng
-activity:
-  stars: 1561
-  forks: 126
-  monthlyCommits: []
-  lastCommitAt: 2026-06-06
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:Livinglist/Hacki
+slug: hacki
+source:
+  provider: github
+  owner: Livinglist
+  repo: Hacki
+  url: https://github.com/Livinglist/Hacki
+app:
+  name: Hacki
+  description: A Hacker News reader
+  category: news-and-magazine
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: Livinglist/Hacki
+    html_url: https://github.com/Livinglist/Hacki
+    description: A Hacker News reader
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 1561
+    forks_count: 126
+    pushed_at: 2026-06-06T01:50:41Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:29.500Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

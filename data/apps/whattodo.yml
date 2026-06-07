@@ -1,17 +1,58 @@
-# WhatTodo — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "whattodo"
-name: "WhatTodo"
-repoUrl: "https://github.com/burhanrashid52/WhatTodo"
-description: "Todoist like UI"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Productivity"
-# Original submitter: Burhanuddin Rashid
-activity:
-  stars: 1265
-  forks: 275
-  monthlyCommits: []
-  lastCommitAt: 2026-02-12
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:burhanrashid52/WhatTodo
+slug: whattodo
+source:
+  provider: github
+  owner: burhanrashid52
+  repo: WhatTodo
+  url: https://github.com/burhanrashid52/WhatTodo
+app:
+  name: WhatTodo
+  description: Todoist like UI
+  category: productivity
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: burhanrashid52/WhatTodo
+    html_url: https://github.com/burhanrashid52/WhatTodo
+    description: Todoist like UI
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 1265
+    forks_count: 275
+    pushed_at: 2024-11-16T11:27:52Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:52.328Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

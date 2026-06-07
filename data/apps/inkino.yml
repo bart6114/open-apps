@@ -1,17 +1,58 @@
-# InKino — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "inkino"
-name: "InKino"
-repoUrl: "https://github.com/roughike/inKino"
-description: "A multiplatform Dart movie app"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Media"
-# Original submitter: Iiro Krankka
-activity:
-  stars: 3681
-  forks: 702
-  monthlyCommits: []
-  lastCommitAt: 2022-03-30
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:roughike/inKino
+slug: inkino
+source:
+  provider: github
+  owner: roughike
+  repo: inKino
+  url: https://github.com/roughike/inKino
+app:
+  name: InKino
+  description: A multiplatform Dart movie app
+  category: media
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: roughike/inKino
+    html_url: https://github.com/roughike/inKino
+    description: A multiplatform Dart movie app
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 3681
+    forks_count: 702
+    pushed_at: 2020-09-02T05:24:27Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:30.834Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

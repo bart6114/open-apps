@@ -1,17 +1,58 @@
-# FlutterGram — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "fluttergram"
-name: "FlutterGram"
-repoUrl: "https://github.com/mdanics/fluttergram"
-description: "Complete Instagram based on Firestore & Google Functions"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Social Network"
-# Original submitter: MDanics
-activity:
-  stars: 2394
-  forks: 616
-  monthlyCommits: []
-  lastCommitAt: 2024-08-07
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:mdanics/fluttergram
+slug: fluttergram
+source:
+  provider: github
+  owner: mdanics
+  repo: fluttergram
+  url: https://github.com/mdanics/fluttergram
+app:
+  name: FlutterGram
+  description: Complete Instagram based on Firestore & Google Functions
+  category: social-network
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: mdanics/fluttergram
+    html_url: https://github.com/mdanics/fluttergram
+    description: Complete Instagram based on Firestore & Google Functions
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 2394
+    forks_count: 616
+    pushed_at: 2021-04-01T15:51:17Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:24.568Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

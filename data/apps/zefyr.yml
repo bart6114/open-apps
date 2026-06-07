@@ -1,17 +1,58 @@
-# Zefyr — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "zefyr"
-name: "Zefyr"
-repoUrl: "https://github.com/memspace/zefyr"
-description: "Soft and gentle rich text editing for Flutter applications"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Tools"
-# Original submitter: Memspace
-activity:
-  stars: 2228
-  forks: 538
-  monthlyCommits: []
-  lastCommitAt: 2024-06-10
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:memspace/zefyr
+slug: zefyr
+source:
+  provider: github
+  owner: memspace
+  repo: zefyr
+  url: https://github.com/memspace/zefyr
+app:
+  name: Zefyr
+  description: Soft and gentle rich text editing for Flutter applications
+  category: tools
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: memspace/zefyr
+    html_url: https://github.com/memspace/zefyr
+    description: Soft and gentle rich text editing for Flutter applications
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 2228
+    forks_count: 538
+    pushed_at: 2022-10-09T03:01:17Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:53.639Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

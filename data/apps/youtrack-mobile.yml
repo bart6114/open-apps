@@ -1,17 +1,60 @@
-# YouTrack Mobile — official JetBrains React Native client for YouTrack.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "youtrack-mobile"
-name: "YouTrack Mobile"
-repoUrl: "https://github.com/JetBrains/youtrack-mobile"
-description: "Official JetBrains YouTrack mobile app — issue tracking, agile boards, knowledge base, and notifications for YouTrack projects."
-stack: "React Native"
-platforms: [Android, iOS]
-category: "Productivity"
-# Original submitter: jondot/awesome-react-native
-activity:
-  stars: 286
-  forks: 100
-  monthlyCommits: []
-  lastCommitAt: 2026-04-20
-  totalCommitsKnown: 0
-  updatedAt: 2026-04-20
+schemaVersion: 1
+id: github:JetBrains/youtrack-mobile
+slug: youtrack-mobile
+source:
+  provider: github
+  owner: JetBrains
+  repo: youtrack-mobile
+  url: https://github.com/JetBrains/youtrack-mobile
+app:
+  name: YouTrack Mobile
+  description: Official JetBrains YouTrack mobile app — issue tracking, agile boards, knowledge base,
+    and notifications for YouTrack projects.
+  category: productivity
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: react-native
+  families:
+    - cross-platform
+  technologies:
+    - id: react-native
+      role: mobile-framework
+github:
+  repository:
+    full_name: JetBrains/youtrack-mobile
+    html_url: https://github.com/JetBrains/youtrack-mobile
+    description: Official JetBrains YouTrack mobile app — issue tracking, agile boards, knowledge base,
+      and notifications for YouTrack projects.
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 286
+    forks_count: 100
+    pushed_at: 2026-04-20T09:12:06Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:53.168Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

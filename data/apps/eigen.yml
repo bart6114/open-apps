@@ -1,17 +1,60 @@
-# Artsy — open-source React Native app from Artsy (curated import).
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "eigen"
-name: "Artsy"
-repoUrl: "https://github.com/artsy/eigen"
-description: "The mobile app for artsy.net — discover fine art, browse artists and artworks, follow galleries, and bid in auctions from your phone."
-stack: "React Native"
-platforms: [Android, iOS]
-category: "Shopping"
-# Original submitter: jondot/awesome-react-native
-activity:
-  stars: 3772
-  forks: 1000
-  monthlyCommits: []
-  lastCommitAt: 2026-06-07
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-07
+schemaVersion: 1
+id: github:artsy/eigen
+slug: eigen
+source:
+  provider: github
+  owner: artsy
+  repo: eigen
+  url: https://github.com/artsy/eigen
+app:
+  name: Artsy
+  description: The mobile app for artsy.net — discover fine art, browse artists and artworks, follow
+    galleries, and bid in auctions from your phone.
+  category: shopping
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: react-native
+  families:
+    - cross-platform
+  technologies:
+    - id: react-native
+      role: mobile-framework
+github:
+  repository:
+    full_name: artsy/eigen
+    html_url: https://github.com/artsy/eigen
+    description: The mobile app for artsy.net — discover fine art, browse artists and artworks, follow
+      galleries, and bid in auctions from your phone.
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 3772
+    forks_count: 1000
+    pushed_at: 2026-06-05T08:29:52Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:17.804Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

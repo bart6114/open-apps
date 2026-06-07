@@ -1,17 +1,62 @@
-# Memex — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "memex"
-name: "Memex"
-repoUrl: "https://github.com/memex-lab/memex"
-description: "An open-source, local-first AI journal for iOS and Android that turns text, photo and voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A. methodology"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Productivity"
-# Original submitter: Memex Lab
-activity:
-  stars: 339
-  forks: 27
-  monthlyCommits: []
-  lastCommitAt: 2026-06-05
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:memex-lab/memex
+slug: memex
+source:
+  provider: github
+  owner: memex-lab
+  repo: memex
+  url: https://github.com/memex-lab/memex
+app:
+  name: Memex
+  description: An open-source, local-first AI journal for iOS and Android that turns text, photo and
+    voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A.
+    methodology
+  category: productivity
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: memex-lab/memex
+    html_url: https://github.com/memex-lab/memex
+    description: An open-source, local-first AI journal for iOS and Android that turns text, photo and
+      voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A.
+      methodology
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 339
+    forks_count: 27
+    pushed_at: 2026-06-04T04:42:49Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:34.847Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

@@ -1,17 +1,58 @@
-# Weight Tracker — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "weight-tracker"
-name: "Weight Tracker"
-repoUrl: "https://github.com/MSzalek-Mobile/weight_tracker"
-description: "Weight Tracker is an application dedicated for people who want to dump or maintain weight"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Health and Fitness"
-# Original submitter: Marcin Szałek
-activity:
-  stars: 368
-  forks: 150
-  monthlyCommits: []
-  lastCommitAt: 2020-10-23
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:MSzalek-Mobile/weight_tracker
+slug: weight-tracker
+source:
+  provider: github
+  owner: MSzalek-Mobile
+  repo: weight_tracker
+  url: https://github.com/MSzalek-Mobile/weight_tracker
+app:
+  name: Weight Tracker
+  description: Weight Tracker is an application dedicated for people who want to dump or maintain weight
+  category: health-and-fitness
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: MSzalek-Mobile/weight_tracker
+    html_url: https://github.com/MSzalek-Mobile/weight_tracker
+    description: Weight Tracker is an application dedicated for people who want to dump or maintain weight
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 368
+    forks_count: 150
+    pushed_at: 2019-10-24T18:36:15Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:50.915Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

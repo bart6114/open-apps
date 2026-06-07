@@ -1,17 +1,58 @@
-# WorkoutTracker — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "workouttracker"
-name: "WorkoutTracker"
-repoUrl: "https://github.com/jerichoi224/WorkoutTracker"
-description: "A Flutter app to help you keep track of workout sessions"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Health and Fitness"
-# Original submitter: Daniel Choi
-activity:
-  stars: 105
-  forks: 20
-  monthlyCommits: []
-  lastCommitAt: 2022-11-23
-  totalCommitsKnown: 55
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:jerichoi224/WorkoutTracker
+slug: workouttracker
+source:
+  provider: github
+  owner: jerichoi224
+  repo: WorkoutTracker
+  url: https://github.com/jerichoi224/WorkoutTracker
+app:
+  name: WorkoutTracker
+  description: A Flutter app to help you keep track of workout sessions
+  category: health-and-fitness
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: jerichoi224/WorkoutTracker
+    html_url: https://github.com/jerichoi224/WorkoutTracker
+    description: A Flutter app to help you keep track of workout sessions
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 105
+    forks_count: 20
+    pushed_at: 2022-11-23T11:01:00Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 55
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:52.725Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

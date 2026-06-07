@@ -1,17 +1,60 @@
-# BeeCount — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "beecount"
-name: "BeeCount"
-repoUrl: "https://github.com/TNT-Likely/BeeCount"
-description: "Privacy-first cross-platform expense tracker with self-hostable cloud sync (BeeCount Cloud, iCloud, Supabase, WebDAV, S3) and offline-first design"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Finance"
-# Original submitter: TNT-Likely
-activity:
-  stars: 1715
-  forks: 242
-  monthlyCommits: []
-  lastCommitAt: 2026-06-05
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:TNT-Likely/BeeCount
+slug: beecount
+source:
+  provider: github
+  owner: TNT-Likely
+  repo: BeeCount
+  url: https://github.com/TNT-Likely/BeeCount
+app:
+  name: BeeCount
+  description: Privacy-first cross-platform expense tracker with self-hostable cloud sync (BeeCount
+    Cloud, iCloud, Supabase, WebDAV, S3) and offline-first design
+  category: finance
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: TNT-Likely/BeeCount
+    html_url: https://github.com/TNT-Likely/BeeCount
+    description: Privacy-first cross-platform expense tracker with self-hostable cloud sync (BeeCount
+      Cloud, iCloud, Supabase, WebDAV, S3) and offline-first design
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 1715
+    forks_count: 242
+    pushed_at: 2026-06-05T14:15:08Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:12.182Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

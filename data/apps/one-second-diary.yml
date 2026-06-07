@@ -1,17 +1,58 @@
-# One Second Diary — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "one-second-diary"
-name: "One Second Diary"
-repoUrl: "https://github.com/KyleKun/one_second_diary"
-description: "Minimalist Video Diary app"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Tools"
-# Original submitter: KyleKun
-activity:
-  stars: 388
-  forks: 74
-  monthlyCommits: []
-  lastCommitAt: 2024-02-09
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:KyleKun/one_second_diary
+slug: one-second-diary
+source:
+  provider: github
+  owner: KyleKun
+  repo: one_second_diary
+  url: https://github.com/KyleKun/one_second_diary
+app:
+  name: One Second Diary
+  description: Minimalist Video Diary app
+  category: tools
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: KyleKun/one_second_diary
+    html_url: https://github.com/KyleKun/one_second_diary
+    description: Minimalist Video Diary app
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 388
+    forks_count: 74
+    pushed_at: 2023-12-24T16:15:00Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:38.769Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

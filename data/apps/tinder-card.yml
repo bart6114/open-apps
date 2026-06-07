@@ -1,17 +1,58 @@
-# Tinder Card — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "tinder-card"
-name: "Tinder Card"
-repoUrl: "https://github.com/Ivaskuu/tinder_cards"
-description: "Tinder like cards swipe effect"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Social Network"
-# Original submitter: Ivascu Adrian
-activity:
-  stars: 968
-  forks: 120
-  monthlyCommits: []
-  lastCommitAt: 2020-02-05
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:Ivaskuu/tinder_cards
+slug: tinder-card
+source:
+  provider: github
+  owner: Ivaskuu
+  repo: tinder_cards
+  url: https://github.com/Ivaskuu/tinder_cards
+app:
+  name: Tinder Card
+  description: Tinder like cards swipe effect
+  category: social-network
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: Ivaskuu/tinder_cards
+    html_url: https://github.com/Ivaskuu/tinder_cards
+    description: Tinder like cards swipe effect
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 968
+    forks_count: 120
+    pushed_at: 2020-02-05T08:31:52Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:47.810Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

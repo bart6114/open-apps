@@ -1,17 +1,58 @@
-# Flutter Browser App — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "flutter-browser-app"
-name: "Flutter Browser App"
-repoUrl: "https://github.com/pichillilorenzo/flutter_browser_app"
-description: "A Full-Featured Mobile Browser App"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Tools"
-# Original submitter: Lorenzo Pichilli
-activity:
-  stars: 586
-  forks: 204
-  monthlyCommits: []
-  lastCommitAt: 2024-10-25
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:pichillilorenzo/flutter_browser_app
+slug: flutter-browser-app
+source:
+  provider: github
+  owner: pichillilorenzo
+  repo: flutter_browser_app
+  url: https://github.com/pichillilorenzo/flutter_browser_app
+app:
+  name: Flutter Browser App
+  description: A Full-Featured Mobile Browser App
+  category: tools
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: pichillilorenzo/flutter_browser_app
+    html_url: https://github.com/pichillilorenzo/flutter_browser_app
+    description: A Full-Featured Mobile Browser App
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 586
+    forks_count: 204
+    pushed_at: 2024-10-25T21:48:30Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:20.542Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

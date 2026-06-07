@@ -1,16 +1,60 @@
-# Meme Chat — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "meme-chat"
-name: "Meme Chat"
-repoUrl: "https://github.com/efortuna/memechat"
-description: "Chat app on Flutter, using Firebase, Google Sign In, and device camera integration by a team of Googlers"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Social Network"
-activity:
-  stars: 543
-  forks: 151
-  monthlyCommits: []
-  lastCommitAt: 2021-02-08
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:efortuna/memechat
+slug: meme-chat
+source:
+  provider: github
+  owner: efortuna
+  repo: memechat
+  url: https://github.com/efortuna/memechat
+app:
+  name: Meme Chat
+  description: Chat app on Flutter, using Firebase, Google Sign In, and device camera integration by a
+    team of Googlers
+  category: social-network
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: efortuna/memechat
+    html_url: https://github.com/efortuna/memechat
+    description: Chat app on Flutter, using Firebase, Google Sign In, and device camera integration by a
+      team of Googlers
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 543
+    forks_count: 151
+    pushed_at: 2019-04-30T04:07:31Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:34.355Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

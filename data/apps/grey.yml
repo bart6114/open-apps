@@ -1,17 +1,58 @@
-# Grey — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "grey"
-name: "Grey"
-repoUrl: "https://github.com/avirias/Grey"
-description: "A Material designed music player developed in Flutter"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Media"
-# Original submitter: Avinash Kumar
-activity:
-  stars: 528
-  forks: 192
-  monthlyCommits: []
-  lastCommitAt: 2020-06-09
-  totalCommitsKnown: 0
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:avirias/Grey
+slug: grey
+source:
+  provider: github
+  owner: avirias
+  repo: Grey
+  url: https://github.com/avirias/Grey
+app:
+  name: Grey
+  description: A Material designed music player developed in Flutter
+  category: media
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: avirias/Grey
+    html_url: https://github.com/avirias/Grey
+    description: A Material designed music player developed in Flutter
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 528
+    forks_count: 192
+    pushed_at: 2020-01-15T17:38:41Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:27.395Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

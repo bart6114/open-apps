@@ -1,17 +1,60 @@
-# Sandwhich — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "sandwhich"
-name: "Sandwhich"
-repoUrl: "https://github.com/MotionMobs/Sandwhich"
-description: "An app to solve the age-old sandwich debate built using machine learning, Flutter, and TensorFlow Lite"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Entertainment"
-# Original submitter: MotionMobs
-activity:
-  stars: 151
-  forks: 0
-  monthlyCommits: []
-  lastCommitAt: 2019-07-11
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:MotionMobs/Sandwhich
+slug: sandwhich
+source:
+  provider: github
+  owner: MotionMobs
+  repo: Sandwhich
+  url: https://github.com/MotionMobs/Sandwhich
+app:
+  name: Sandwhich
+  description: An app to solve the age-old sandwich debate built using machine learning, Flutter, and
+    TensorFlow Lite
+  category: entertainment
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: MotionMobs/Sandwhich
+    html_url: https://github.com/MotionMobs/Sandwhich
+    description: An app to solve the age-old sandwich debate built using machine learning, Flutter, and
+      TensorFlow Lite
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 151
+    forks_count: 0
+    pushed_at: 2019-04-05T19:35:51Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:42.744Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+

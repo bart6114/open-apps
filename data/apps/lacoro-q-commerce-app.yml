@@ -1,17 +1,58 @@
-# LaCoro Q-commerce app — auto-generated from README-LEGACY.md.
-# Hand-curate bestFor / whyListed / caveats / scores after import.
-slug: "lacoro-q-commerce-app"
-name: "LaCoro Q-commerce app"
-repoUrl: "https://github.com/LaCoro/ConsumerFlutterApp"
-description: "An open source quick commerce app in flutter"
-stack: Flutter
-platforms: [Android, iOS]
-category: "Shopping"
-# Original submitter: LaCoro
-activity:
-  stars: 64
-  forks: 25
-  monthlyCommits: []
-  lastCommitAt: 2024-04-04
-  totalCommitsKnown: 100
-  updatedAt: 2026-06-06
+schemaVersion: 1
+id: github:LaCoro/ConsumerFlutterApp
+slug: lacoro-q-commerce-app
+source:
+  provider: github
+  owner: LaCoro
+  repo: ConsumerFlutterApp
+  url: https://github.com/LaCoro/ConsumerFlutterApp
+app:
+  name: LaCoro Q-commerce app
+  description: An open source quick commerce app in flutter
+  category: shopping
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+stack:
+  primary: flutter
+  families:
+    - cross-platform
+  technologies:
+    - id: flutter
+      role: mobile-framework
+github:
+  repository:
+    full_name: LaCoro/ConsumerFlutterApp
+    html_url: https://github.com/LaCoro/ConsumerFlutterApp
+    description: An open source quick commerce app in flutter
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    stargazers_count: 64
+    forks_count: 25
+    pushed_at: 2024-04-04T06:24:21Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 100
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-07T15:24:32.605Z
+    apiVersion: rest-v3
+    source: migrate-legacy
+health:
+  status: stale
+  tier: listed
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+
