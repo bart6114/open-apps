@@ -7,6 +7,7 @@ import Icon from "../../components/icons/Icon.astro";
 import { getOwnerAndRepoFromRepoUrl, getOwnerAvatarUrl } from "../../lib/repo";
 import { formatDate, formatStars } from "../../lib/format";
 import { SCORE_DIMENSIONS, SCORE_LABELS, scoreTier, scoreLabel, SCORE_REASONING } from "../../lib/scores";
+import { stats } from "../../data/stats";
 
 export function getStaticPaths() {
   return apps.map((app) => ({
@@ -420,7 +421,7 @@ const jsonLd: Record<string, unknown> = {
                   <p class="m-0 text-2xs text-ink-400 dark:text-ink-500">
                     Activity data refreshes daily via
                     <a
-                      href={`${githubUrl}/blob/main/.github/workflows/sync-github-metadata.yml`}
+                      href={`${stats.originalRepo}/blob/main/.github/workflows/sync-github-metadata.yml`}
                       target="_blank"
                       rel="noopener noreferrer"
                       class="text-ink-700 hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100"
