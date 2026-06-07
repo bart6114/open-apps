@@ -35,7 +35,17 @@ github:
     stargazers_count: 917
     forks_count: 401
     pushed_at: 2026-06-04T04:48:14Z
-    license: AGPL-3.0
+    license:
+      "0": A
+      "1": G
+      "2": P
+      "3": L
+      "4": "-"
+      "5": "3"
+      "6": .
+      "7": "0"
+      spdx_id: AGPL-3.0
+      key: null
     language: Dart
     topics:
       - dart

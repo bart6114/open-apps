@@ -35,7 +35,16 @@ github:
     stargazers_count: 360
     forks_count: 54
     pushed_at: 2022-10-26T11:03:54Z
-    license: GPL-3.0
+    license:
+      "0": G
+      "1": P
+      "2": L
+      "3": "-"
+      "4": "3"
+      "5": .
+      "6": "0"
+      spdx_id: GPL-3.0
+      key: null
     language: Dart
     topics:
       - youtube

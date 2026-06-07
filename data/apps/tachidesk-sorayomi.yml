@@ -37,7 +37,16 @@ github:
     stargazers_count: 1542
     forks_count: 0
     pushed_at: 2025-07-09T05:10:46Z
-    license: MPL-2.0
+    license:
+      "0": M
+      "1": P
+      "2": L
+      "3": "-"
+      "4": "2"
+      "5": .
+      "6": "0"
+      spdx_id: MPL-2.0
+      key: null
     language: Dart
     topics:
       - android

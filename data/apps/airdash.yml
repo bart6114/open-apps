@@ -35,7 +35,12 @@ github:
     stargazers_count: 667
     forks_count: 126
     pushed_at: 2026-02-16T14:04:56Z
-    license: MIT
+    license:
+      "0": M
+      "1": I
+      "2": T
+      spdx_id: MIT
+      key: null
     language: Dart
     topics:
       - webrtc

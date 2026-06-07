@@ -35,7 +35,21 @@ github:
     stargazers_count: 179
     forks_count: 74
     pushed_at: 2022-02-05T00:08:01Z
-    license: BSD-3-Clause
+    license:
+      "0": B
+      "1": S
+      "2": D
+      "3": "-"
+      "4": "3"
+      "5": "-"
+      "6": C
+      "7": l
+      "8": a
+      "9": u
+      "10": s
+      "11": e
+      spdx_id: BSD-3-Clause
+      key: null
     language: Dart
   activity:
     monthlyCommits: []

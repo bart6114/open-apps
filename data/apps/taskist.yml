@@ -35,7 +35,12 @@ github:
     stargazers_count: 1057
     forks_count: 271
     pushed_at: 2020-07-09T17:54:35Z
-    license: MIT
+    license:
+      "0": M
+      "1": I
+      "2": T
+      spdx_id: MIT
+      key: null
     language: Dart
     topics:
       - dart

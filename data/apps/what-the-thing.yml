@@ -37,7 +37,12 @@ github:
     stargazers_count: 544
     forks_count: 100
     pushed_at: 2025-06-19T14:44:50Z
-    license: MIT
+    license:
+      "0": M
+      "1": I
+      "2": T
+      spdx_id: MIT
+      key: null
     language: JavaScript
     topics:
       - android

@@ -37,7 +37,16 @@ github:
     stargazers_count: 4016
     forks_count: 1000
     pushed_at: 2025-10-23T06:09:38Z
-    license: MPL-2.0
+    license:
+      "0": M
+      "1": P
+      "2": L
+      "3": "-"
+      "4": "2"
+      "5": .
+      "6": "0"
+      spdx_id: MPL-2.0
+      key: null
     language: Clojure
     topics:
       - android

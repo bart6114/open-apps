@@ -158,7 +158,16 @@ async function main() {
     const topics = extractTopics(res.html);
     const homepage = extractHomepage(res.html);
     const before = JSON.stringify(parsed.github?.repository ?? {});
-    const next = assembleRepoBlock(parsed.github?.repository, { license, language, topics, homepage });
+    // Migration + a previous run of this script wrote `license` as a
+    // bare string (e.g. `license: MIT`). The schemaVersion 1 shape
+    // requires an object `{ spdx_id, key, name, url }` — repair that
+    // before the comparison so a re-run can detect "no change".
+    let existing = parsed.github?.repository;
+    if (typeof existing?.license === "string") {
+      const spdx = existing.license;
+      existing = { ...existing, license: { spdx_id: spdx, key: null, name: null, url: null } };
+    }
+    const next = assembleRepoBlock(existing, { license, language, topics, homepage });
     if (JSON.stringify(next) === before) {
       process.stdout.write("no change\n");
       continue;

@@ -35,7 +35,19 @@ github:
     stargazers_count: 1265
     forks_count: 275
     pushed_at: 2024-11-16T11:27:52Z
-    license: Apache-2.0
+    license:
+      "0": A
+      "1": p
+      "2": a
+      "3": c
+      "4": h
+      "5": e
+      "6": "-"
+      "7": "2"
+      "8": .
+      "9": "0"
+      spdx_id: Apache-2.0
+      key: null
     language: Dart
     topics:
       - android

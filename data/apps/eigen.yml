@@ -37,7 +37,12 @@ github:
     stargazers_count: 3772
     forks_count: 1000
     pushed_at: 2026-06-05T08:29:52Z
-    license: MIT
+    license:
+      "0": M
+      "1": I
+      "2": T
+      spdx_id: MIT
+      key: null
     language: TypeScript
     topics:
       - art
