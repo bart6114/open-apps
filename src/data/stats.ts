@@ -6,12 +6,9 @@
 // Numbers in the rendered UI (hero, footer, etc.) come from this module.
 // If a number looks wrong, regenerate the JSON (`pnpm run build:data`) and
 // re-build — the stats recompute from the fresh data.
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import generatedJson from "../../data/generated/apps.json";
 import { categories } from "./categories";
 import { contributors } from "./contributors";
-
-const generatedPath = join(process.cwd(), "data", "generated", "apps.json");
 
 type GeneratedApp = {
   category?: string;
@@ -33,14 +30,8 @@ type GeneratedApp = {
   };
 };
 
-let apps: GeneratedApp[] = [];
-try {
-  const raw = JSON.parse(readFileSync(generatedPath, "utf8")) as { apps: GeneratedApp[] };
-  apps = raw.apps ?? [];
-} catch {
-  // In dev, build:data may not have run yet. Stats will be zero. Don't crash.
-  apps = [];
-}
+const raw = generatedJson as { apps?: GeneratedApp[] };
+const apps: GeneratedApp[] = raw.apps ?? [];
 
 const platforms = new Set<string>();
 let totalForks = 0;

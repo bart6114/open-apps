@@ -1,5 +1,4 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import generatedJson from "../../data/generated/apps.json";
 import type { OpenSourceApp, AppLabel } from "./types";
 
 // ──────────────────────────────────────────────────────────────────────
@@ -13,24 +12,7 @@ import type { OpenSourceApp, AppLabel } from "./types";
 // `pnpm run build:data`, and it will appear here.
 // ──────────────────────────────────────────────────────────────────────
 
-// We read the JSON at module init via Node's fs because the file
-// is generated (gitignored) and Vite/rollup can't statically resolve
-// gitignored JSON imports.
-const generatedPath = join(process.cwd(), "data", "generated", "apps.json");
-
-let generated: { apps: unknown[] };
-try {
-  generated = JSON.parse(readFileSync(generatedPath, "utf8"));
-} catch (err) {
-  // In dev mode the JSON may not exist yet if `pnpm run build:data`
-  // wasn't run. Surface a clear error instead of failing later.
-  if ((err as NodeJS.ErrnoException).code === "ENOENT") {
-    throw new Error(
-      `data/generated/apps.json not found. Run \`pnpm run build:data\` first.`,
-    );
-  }
-  throw err;
-}
+const generated = generatedJson as { apps: unknown[] };
 
 type GeneratedApp = Partial<OpenSourceApp> & {
   slug: string;

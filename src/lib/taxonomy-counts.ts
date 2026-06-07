@@ -6,10 +6,7 @@
 // All functions are synchronous and cheap — they're called from Astro
 // page frontmatter at build time, never on the client.
 
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-
-const generatedPath = join(process.cwd(), "data", "generated", "apps.json");
+import generatedJson from "../../data/generated/apps.json";
 
 type GeneratedApp = {
   category?: string;
@@ -17,12 +14,8 @@ type GeneratedApp = {
 };
 
 function loadApps(): GeneratedApp[] {
-  try {
-    const raw = JSON.parse(readFileSync(generatedPath, "utf8")) as { apps?: GeneratedApp[] };
-    return raw.apps ?? [];
-  } catch {
-    return [];
-  }
+  const raw = generatedJson as { apps?: GeneratedApp[] };
+  return raw.apps ?? [];
 }
 
 const apps = loadApps();
