@@ -15,7 +15,7 @@ const counts = countByCategory();
 // coverage. The taxonomy is a "future state" map; the rendered list is the
 // intersection of the taxonomy and what actually exists in data/apps/.
 const visible = categories
-  .map((c) => ({ ...c, count: counts.get(c.name) ?? 0 }))
+  .map((c) => ({ ...c, count: counts.get(c.slug) ?? 0 }))
   .filter((c) => c.count > 0)
   .sort((a, b) => b.count - a.count);
 ---

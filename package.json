@@ -25,6 +25,7 @@
     "refresh:activity": "node scripts/refresh-apps-activity.mjs",
     "test": "node --test scripts/*.test.mjs",
     "sync:contributors": "node scripts/sync-contributors.mjs",
+    "enrich:github": "node scripts/enrich-github-metadata.mjs",
     "prewrangler:deploy": "pnpm run build",
     "wrangler:deploy": "npx wrangler deploy"
   },
