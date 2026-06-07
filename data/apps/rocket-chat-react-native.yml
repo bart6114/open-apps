@@ -1,0 +1,17 @@
+# Rocket.Chat React Native — official mobile client for Rocket.Chat.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "rocket-chat-react-native"
+name: "Rocket.Chat"
+repoUrl: "https://github.com/RocketChat/Rocket.Chat.ReactNative"
+description: "Official Rocket.Chat mobile client — open-source team communication, channels, threads, file sharing, voice/video calls, end-to-end encrypted."
+stack: "React Native"
+platforms: [Android, iOS]
+category: "Communication"
+# Original submitter: jondot/awesome-react-native
+activity:
+  stars: 2391
+  forks: 1000
+  monthlyCommits: []
+  lastCommitAt: 2026-06-05
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-05

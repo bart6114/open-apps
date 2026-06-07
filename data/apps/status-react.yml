@@ -1,0 +1,17 @@
+# Status — open-source React Native Ethereum client.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "status-react"
+name: "Status.im"
+repoUrl: "https://github.com/status-im/status-react"
+description: "Status is a secure messaging app, Ethereum wallet, and Web3 browser built on decentralized protocols."
+stack: "React Native"
+platforms: [Android, iOS]
+category: "Communication"
+# Original submitter: jondot/awesome-react-native
+activity:
+  stars: 4016
+  forks: 1000
+  monthlyCommits: []
+  lastCommitAt: 2026-06-04
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-04

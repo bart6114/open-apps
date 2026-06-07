@@ -1,0 +1,17 @@
+# YouTrack Mobile — official JetBrains React Native client for YouTrack.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "youtrack-mobile"
+name: "YouTrack Mobile"
+repoUrl: "https://github.com/JetBrains/youtrack-mobile"
+description: "Official JetBrains YouTrack mobile app — issue tracking, agile boards, knowledge base, and notifications for YouTrack projects."
+stack: "React Native"
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: jondot/awesome-react-native
+activity:
+  stars: 286
+  forks: 100
+  monthlyCommits: []
+  lastCommitAt: 2026-04-20
+  totalCommitsKnown: 0
+  updatedAt: 2026-04-20

@@ -1,0 +1,18 @@
+# Joplin — privacy-focused note-taking app with React Native mobile client.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "joplin"
+name: "Joplin"
+repoUrl: "https://github.com/laurent22/joplin"
+description: "Joplin is a free, open source note taking and to-do application. The mobile client is built with React Native and supports full sync via Nextcloud, Dropbox, OneDrive, WebDAV, and Joplin Cloud."
+stack: "React Native"
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: jondot/awesome-react-native
+# Note: monorepo contains the React Native client under ReactNativeClient/
+activity:
+  stars: 55117
+  forks: 6100
+  monthlyCommits: []
+  lastCommitAt: 2026-06-03
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-03
