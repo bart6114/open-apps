@@ -374,20 +374,44 @@ const jsonLd: Record<string, unknown> = {
                 Activity
               </h2>
               {monthlyCommits.length > 0 ? (
-                <div class="mt-4 flex h-28 items-end gap-1.5" aria-label="Monthly commits">
-                  {monthlyCommits.map((item) => (
-                    <div class="flex min-w-0 flex-1 flex-col items-center gap-1">
-                      <div
-                        class="w-full rounded-sm bg-ink-700 dark:bg-ink-200"
-                        style={`height: ${Math.max(8, Math.round(((item.commits ?? 0) / maxMonthlyCommits) * 96))}px`}
-                        title={`${item.month || "month"}: ${item.commits ?? 0} commits`}
-                      />
-                      <span class="max-w-full truncate text-[10px] text-ink-500 dark:text-ink-400">
-                        {item.month ? item.month.slice(5) : item.commits}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                <figure class="mt-4 m-0">
+                  <div
+                    class="flex h-28 items-end gap-1.5"
+                    role="img"
+                    aria-label={`Monthly commits over the last ${monthlyCommits.length} months. Peak: ${maxMonthlyCommits} commits.`}
+                  >
+                    {monthlyCommits.map((item) => (
+                      <div class="flex min-w-0 flex-1 flex-col items-center gap-1">
+                        <div
+                          class="w-full rounded-sm bg-ink-700 dark:bg-ink-200"
+                          style={`height: ${Math.max(8, Math.round(((item.commits ?? 0) / maxMonthlyCommits) * 96))}px`}
+                          title={`${item.month || "month"}: ${item.commits ?? 0} commits`}
+                        />
+                        <span class="max-w-full truncate text-[10px] text-ink-500 dark:text-ink-400">
+                          {item.month ? item.month.slice(5) : item.commits}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Visually-hidden data table so screen readers can read
+                      the same values sighted users see in the bars. */}
+                  <figcaption class="sr-only">
+                    <table>
+                      <caption>Monthly commit count over the last {monthlyCommits.length} months</caption>
+                      <thead>
+                        <tr><th scope="col">Month</th><th scope="col">Commits</th></tr>
+                      </thead>
+                      <tbody>
+                        {monthlyCommits.map((item) => (
+                          <tr>
+                            <th scope="row">{item.month || "Unknown"}</th>
+                            <td>{item.commits ?? 0}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </figcaption>
+                </figure>
               ) : (
                 <p class="mt-4 m-0 text-sm text-ink-500 dark:text-ink-400">
                   Monthly commit history has not been synced yet.

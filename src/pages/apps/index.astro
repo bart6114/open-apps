@@ -178,8 +178,10 @@ const description =
                   role="group"
                   aria-label="List density"
                 >
-                  <a
-                    href={hrefForDensity("comfortable")}
+                  <button
+                    type="button"
+                    data-density-toggle="comfortable"
+                    data-href={hrefForDensity("comfortable")}
                     class={`inline-flex h-7 items-center rounded-[5px] px-2 text-[0.75rem] font-medium transition-colors ${
                       density === "comfortable"
                         ? "bg-ink-900 text-white dark:bg-ink-100 dark:text-ink-900"
@@ -188,9 +190,11 @@ const description =
                     aria-pressed={density === "comfortable" ? "true" : "false"}
                   >
                     Comfortable
-                  </a>
-                  <a
-                    href={hrefForDensity("compact")}
+                  </button>
+                  <button
+                    type="button"
+                    data-density-toggle="compact"
+                    data-href={hrefForDensity("compact")}
                     class={`inline-flex h-7 items-center rounded-[5px] px-2 text-[0.75rem] font-medium transition-colors ${
                       density === "compact"
                         ? "bg-ink-900 text-white dark:bg-ink-100 dark:text-ink-900"
@@ -199,7 +203,7 @@ const description =
                     aria-pressed={density === "compact" ? "true" : "false"}
                   >
                     Compact
-                  </a>
+                  </button>
                 </div>
               </form>
 
@@ -210,7 +214,7 @@ const description =
               >
                 <p class="m-0 text-ink-500 dark:text-ink-400">
                   <span
-                    id="result-count"
+                    id="apps-results-count"
                     class="font-mono text-ink-900 dark:text-ink-100"
                     data-total={totalFiltered}
                     data-page-count={pageApps.length}
@@ -221,7 +225,7 @@ const description =
                     {totalFiltered} {totalFiltered === 1 ? "app" : "apps"} found
                   </span>
                   {filterSummary.length > 0 && (
-                    <span class="text-ink-400 dark:text-ink-500">
+                    <span id="apps-filters-summary" class="text-ink-400 dark:text-ink-500">
                       {" · "}filtered by {filterSummary.join(" · ")}
                     </span>
                   )}
@@ -237,7 +241,7 @@ const description =
 
                 {initialChipsTotal > 0 && (
                   <div
-                    id="active-filters"
+                    id="apps-active-chips"
                     class="flex flex-wrap items-center gap-1.5"
                     aria-label="Active filters"
                   >
@@ -254,6 +258,7 @@ const description =
                       </button>
                     ))}
                     <a
+                      id="apps-clear-all"
                       href={hrefForClearAll()}
                       class="text-2xs text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
                     >
@@ -314,7 +319,7 @@ const description =
               </div>
             ) : (
               <div
-                id="results"
+                id="apps-results-list"
                 data-density={density}
                 class={`flex flex-col gap-3 ${density === "compact" ? "apps-density-compact" : ""}`}
               >
@@ -503,7 +508,10 @@ const description =
 
           let show = true;
           if (q) {
-            const hay = `${d.name ?? ""} ${d.q ?? ""} ${d.category ?? ""}`;
+            // Match the server-side `filterApps` haystack: name, owner,
+            // description, category. Without `owner` here, live search
+            // would miss apps a user is searching for by owner name.
+            const hay = `${d.name ?? ""} ${d.owner ?? ""} ${d.q ?? ""} ${d.category ?? ""}`;
             if (!hay.includes(q)) show = false;
           }
           if (show && stacks.size > 0) {
@@ -605,6 +613,15 @@ const description =
           (window as unknown as { __applyFilters?: (p: Record<string, string[] | null>) => void }).__applyFilters?.({
             [key]: null,
           });
+          return;
+        }
+        // Density toggle: behave like a real <button> — anchor was a
+        // misuse of `aria-pressed` (which belongs on buttons). Now
+        // we navigate to the URL on click instead of using <a href>.
+        const densityBtn = target.closest<HTMLButtonElement>("[data-density-toggle]");
+        if (densityBtn) {
+          const href = densityBtn.dataset.href;
+          if (href) location.assign(href);
         }
       });
 

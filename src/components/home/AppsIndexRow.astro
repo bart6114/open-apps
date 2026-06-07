@@ -69,6 +69,7 @@ const repoHref = app.repoUrl;
   data-stars={app.stars ?? 0}
   data-updated={app.lastCommitAt ?? ""}
   data-name={app.name.toLowerCase()}
+  data-owner={(owner ?? "").toLowerCase()}
   data-q={(app.description ?? "").toLowerCase()}
 >
   {/* Header: avatar + name + label */}

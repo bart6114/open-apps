@@ -114,8 +114,13 @@ const starsLabel = compact(stats.stars);
   // Smooth-scroll for in-page anchor links (Header nav + Hero CTA).
   // Works on any <a href="#…"> that points to an existing element on
   // the current page. External links (e.g. /about, /apps?…) are skipped
-  // because they don't start with "#".
+  // because they don't start with "#". Modifier-clicks (Cmd/Ctrl/Shift/
+  // middle) let the browser handle the anchor normally so users can
+  // open the same section in a new tab.
   document.addEventListener("click", (e) => {
+    if (e.defaultPrevented) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (e.button !== 0) return; // non-primary mouse button
     const link = (e.target as HTMLElement).closest<HTMLAnchorElement>(
       'a[href^="#"]',
     );
