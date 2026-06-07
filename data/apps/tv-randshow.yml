@@ -35,6 +35,20 @@ github:
     stargazers_count: 241
     forks_count: 0
     pushed_at: 2026-06-03T06:24:12Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - android
+      - dart
+      - streaming
+      - hive
+      - tmdb
+      - flutter
+      - flutter-apps
+      - sqflite
+      - flutter-app
+      - flare-animation
+      - tv-randshow
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +69,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

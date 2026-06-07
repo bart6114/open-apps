@@ -37,6 +37,17 @@ github:
     stargazers_count: 3772
     forks_count: 1000
     pushed_at: 2026-06-05T08:29:52Z
+    license: MIT
+    language: TypeScript
+    topics:
+      - art
+      - android
+      - swift
+      - ios
+      - app
+      - react-native
+      - objective-c
+      - app-store
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -57,4 +68,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

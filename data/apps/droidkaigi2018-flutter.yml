@@ -35,6 +35,12 @@ github:
     stargazers_count: 504
     forks_count: 0
     pushed_at: 2018-02-07T16:39:22Z
+    license: Apache-2.0
+    language: Dart
+    topics:
+      - dart
+      - droidkaigi
+      - flutter
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +61,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

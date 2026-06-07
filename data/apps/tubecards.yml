@@ -35,6 +35,13 @@ github:
     stargazers_count: 360
     forks_count: 54
     pushed_at: 2022-10-26T11:03:54Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - youtube
+      - spaced-repetition
+      - anki
+      - flutter
   activity:
     monthlyCommits:
       - 0
@@ -61,4 +68,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

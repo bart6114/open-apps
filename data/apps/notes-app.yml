@@ -35,6 +35,13 @@ github:
     stargazers_count: 541
     forks_count: 118
     pushed_at: 2022-02-08T14:46:03Z
+    license: MIT
+    language: Dart
+    topics:
+      - sqlite
+      - flutter
+      - flutter-apps
+      - flutter-ui
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +62,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

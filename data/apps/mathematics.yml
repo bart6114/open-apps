@@ -37,6 +37,23 @@ github:
     stargazers_count: 143
     forks_count: 40
     pushed_at: 2026-06-07T06:37:55Z
+    language: Dart
+    topics:
+      - dart
+      - ui
+      - ux
+      - flutter
+      - hacktoberfest
+      - flutter-apps
+      - flutter-material
+      - flutter-demo
+      - flutter-examples
+      - flutter-ui
+      - flutter-admob
+      - flutter-ads
+      - flutter-pdf-app
+      - flutter-pdf-generator
+      - flutter-mathematics-app
   activity:
     monthlyCommits:
       - 0
@@ -63,4 +80,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

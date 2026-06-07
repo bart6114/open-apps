@@ -35,6 +35,15 @@ github:
     stargazers_count: 186
     forks_count: 0
     pushed_at: 2024-06-07T08:35:45Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - android
+      - dart
+      - app
+      - flutter
+      - dartlang
+      - flutter-apps
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +64,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

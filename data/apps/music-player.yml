@@ -35,6 +35,19 @@ github:
     stargazers_count: 1783
     forks_count: 560
     pushed_at: 2022-05-31T07:29:16Z
+    license: Apache-2.0
+    language: Dart
+    topics:
+      - android
+      - dart
+      - open-source
+      - ios
+      - music-player
+      - material
+      - cross-platform
+      - playstore
+      - flutter-music-player
+      - fetch-songs
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +68,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

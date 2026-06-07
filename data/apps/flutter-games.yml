@@ -35,6 +35,20 @@ github:
     stargazers_count: 339
     forks_count: 74
     pushed_at: 2026-04-16T23:56:57Z
+    language: Dart
+    topics:
+      - game
+      - sample
+      - demo
+      - ecommerce
+      - marketplace
+      - movie
+      - market
+      - shop
+      - store
+      - flutter
+      - buy
+      - rent
   activity:
     monthlyCommits: []
     totalCommitsKnown: 68
@@ -55,4 +69,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

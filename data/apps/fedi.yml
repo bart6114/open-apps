@@ -35,6 +35,20 @@ github:
     stargazers_count: 146
     forks_count: 24
     pushed_at: 2022-11-19T20:38:09Z
+    license: AGPL-3.0
+    language: Dart
+    topics:
+      - android
+      - social
+      - ios
+      - mastodon
+      - flutter
+      - fediverse
+      - mastodon-client
+      - pleroma
+      - fediverse-client
+      - pleroma-client
+      - fedi
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +69,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

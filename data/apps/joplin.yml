@@ -39,6 +39,26 @@ github:
     stargazers_count: 55117
     forks_count: 6100
     pushed_at: 2026-06-03T21:57:08Z
+    language: TypeScript
+    topics:
+      - electron
+      - nodejs
+      - javascript
+      - android
+      - react-native
+      - dropbox
+      - synchronisation
+      - nextcloud
+      - onedrive
+      - webdav
+      - note-taking
+      - evernote
+      - obsidian
+      - standardnotes
+      - web-clipper
+      - enex-files
+      - joplin
+      - notesnook
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -59,4 +79,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

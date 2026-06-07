@@ -35,6 +35,13 @@ github:
     stargazers_count: 388
     forks_count: 74
     pushed_at: 2023-12-24T16:15:00Z
+    license: MIT
+    language: Dart
+    topics:
+      - android
+      - diary
+      - flutter
+      - flutter-app
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +62,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

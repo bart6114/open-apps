@@ -37,6 +37,19 @@ github:
     stargazers_count: 4226
     forks_count: 1160
     pushed_at: 2024-07-31T04:57:56Z
+    license: MIT
+    language: Dart
+    topics:
+      - social
+      - twitter
+      - flutter
+      - firebase-auth
+      - firebase-storage
+      - firebase-realtime-database
+      - social-app
+      - twitter-clone
+      - flutter-apps
+      - flutter-app
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -57,4 +70,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

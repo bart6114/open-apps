@@ -35,6 +35,18 @@ github:
     stargazers_count: 300
     forks_count: 28
     pushed_at: 2025-08-31T19:54:51Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - tamper-evident
+      - tamper-proof
+      - blink-comparison
+      - tamper-evident-seal
+      - blink-comparator
+      - glitter-nail-polish
+      - blink-test
+      - photo-comparison
+      - photo-comparator
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +67,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

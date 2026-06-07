@@ -35,6 +35,7 @@ github:
     stargazers_count: 968
     forks_count: 120
     pushed_at: 2020-02-05T08:31:52Z
+    language: Dart
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +56,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

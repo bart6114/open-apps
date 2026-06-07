@@ -35,6 +35,28 @@ github:
     stargazers_count: 441
     forks_count: 103
     pushed_at: 2025-11-03T13:24:08Z
+    language: Dart
+    topics:
+      - dart
+      - clean-code
+      - clean-architecture
+      - flutter
+      - dartlang
+      - flutter-demo
+      - dart2
+      - flutter-ui
+      - flutter-package
+      - flutter-example
+      - flutter-app
+      - dart-lang
+      - flutter-practices
+      - flutter-ui-challenges
+      - flutter-provider
+      - dart-package
+      - flutter-navigator
+      - flutter-clean-architecture
+      - math-games
+      - math-puzzle
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +77,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

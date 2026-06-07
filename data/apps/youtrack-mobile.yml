@@ -37,6 +37,13 @@ github:
     stargazers_count: 286
     forks_count: 100
     pushed_at: 2026-04-20T09:12:06Z
+    language: TypeScript
+    topics:
+      - react
+      - android
+      - ios
+      - react-native
+      - youtrack
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -57,4 +64,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

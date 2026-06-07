@@ -35,6 +35,20 @@ github:
     stargazers_count: 1561
     forks_count: 126
     pushed_at: 2026-06-06T01:50:41Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - android
+      - dart
+      - ios
+      - hacker-news
+      - mobile-app
+      - ios-app
+      - android-app
+      - flutter
+      - hacker-news-client
+      - flutter-bloc
+      - flutter-app
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +69,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

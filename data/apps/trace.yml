@@ -35,6 +35,13 @@ github:
     stargazers_count: 1146
     forks_count: 0
     pushed_at: 2020-08-09T15:37:48Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - finance
+      - mobile-app
+      - cryptocurrency
+      - flutter
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +62,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

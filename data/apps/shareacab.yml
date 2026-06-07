@@ -35,6 +35,10 @@ github:
     stargazers_count: 83
     forks_count: 34
     pushed_at: 2022-10-08T18:05:11Z
+    license: MIT
+    language: Dart
+    topics:
+      - college-students
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +59,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

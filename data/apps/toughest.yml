@@ -35,6 +35,15 @@ github:
     stargazers_count: 275
     forks_count: 0
     pushed_at: 2025-11-02T06:16:51Z
+    license: MIT
+    language: Dart
+    topics:
+      - android
+      - dart
+      - opensource
+      - flutter
+      - flutter-apps
+      - flutter-examples
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +64,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

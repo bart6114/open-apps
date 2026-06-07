@@ -35,6 +35,19 @@ github:
     stargazers_count: 88
     forks_count: 0
     pushed_at: 2023-01-06T20:52:20Z
+    license: MIT
+    language: Dart
+    topics:
+      - android
+      - dart
+      - anime
+      - flutter
+      - flutter-apps
+      - jikan
+      - flutter-examples
+      - flutter-ui
+      - flutter-app
+      - jikan-api
   activity:
     monthlyCommits: []
     totalCommitsKnown: 71
@@ -55,4 +68,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

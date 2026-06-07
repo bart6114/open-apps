@@ -93,11 +93,24 @@ function extractHomepage(html) {
   return m ? m[1] : null;
 }
 
+function licenseObject(spdxId) {
+  // schemaVersion 1 expects `github.repository.license` as an object
+  // with at least `spdx_id`. We only have the SPDX id from the HTML
+  // scrape, so the rest of the fields stay null — sync-github-metadata
+  // fills them in when run with a token.
+  return { spdx_id: spdxId, key: null, name: null, url: null };
+}
+
 function assembleRepoBlock(existing, fields) {
   const repo = { ...(existing ?? {}) };
-  if (fields.license) repo.license = fields.license;
+  if (fields.license) {
+    // Preserve any richer fields the repo already has (e.g. name, url
+    // populated by a previous token-backed sync), overwrite the spdx_id
+    // and key with the freshly scraped value.
+    const prev = existing?.license ?? {};
+    repo.license = { ...prev, spdx_id: fields.license, key: prev.key ?? null };
+  }
   if (fields.language) repo.language = fields.language;
-  if (fields.homepage) repo.homepage = fields.homepage;
   if (fields.topics && fields.topics.length > 0) repo.topics = fields.topics;
   return repo;
 }

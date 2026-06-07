@@ -37,6 +37,22 @@ github:
     stargazers_count: 1542
     forks_count: 0
     pushed_at: 2025-07-09T05:10:46Z
+    license: MPL-2.0
+    language: Dart
+    topics:
+      - android
+      - windows
+      - macos
+      - linux
+      - dart
+      - ios
+      - web
+      - cross-platform
+      - flutter
+      - tachiyomi
+      - flutter-hooks
+      - riverpod
+      - tachidesk
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -57,4 +73,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

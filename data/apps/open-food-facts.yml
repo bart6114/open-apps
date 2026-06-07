@@ -39,6 +39,22 @@ github:
     stargazers_count: 1342
     forks_count: 451
     pushed_at: 2026-06-05T10:58:16Z
+    license: Apache-2.0
+    language: Dart
+    topics:
+      - android
+      - dart
+      - food
+      - ios
+      - mobile
+      - mobile-app
+      - flutter
+      - nutrition
+      - hacktoberfest
+      - dartlang
+      - openfoodfacts
+      - flutter-app
+      - hacktoberfest-accepted
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -59,4 +75,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

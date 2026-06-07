@@ -39,6 +39,26 @@ github:
     stargazers_count: 339
     forks_count: 27
     pushed_at: 2026-06-04T04:42:49Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - privacy
+      - skills
+      - journaling
+      - pkm
+      - knowledge-management
+      - journal-app
+      - assistant-app
+      - local-first
+      - personal-knowledge-management
+      - ai-assistant
+      - local-agent
+      - ai-companion
+      - journaling-app
+      - ai-journal
+      - life-logging
+      - ai-diary
+      - personal-knowledge-management-system
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -59,4 +79,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

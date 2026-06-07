@@ -35,6 +35,24 @@ github:
     stargazers_count: 341
     forks_count: 116
     pushed_at: 2023-07-05T08:45:27Z
+    license: MIT
+    language: Dart
+    topics:
+      - android
+      - ios
+      - firebase
+      - fashion
+      - flutter
+      - firebase-auth
+      - firebase-storage
+      - dartlang
+      - firebase-functions
+      - firebase-cloud
+      - flutter-apps
+      - firestore
+      - inventory-app
+      - flutter-examples
+      - flutter-app
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +73,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

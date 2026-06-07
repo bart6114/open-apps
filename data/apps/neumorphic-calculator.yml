@@ -35,6 +35,20 @@ github:
     stargazers_count: 57
     forks_count: 0
     pushed_at: 2025-08-18T19:57:30Z
+    license: MIT
+    language: Dart
+    topics:
+      - android
+      - ios
+      - calculator
+      - flutter
+      - calculator-application
+      - flutter-apps
+      - calculator-app
+      - flutter-app
+      - flutter-calculator
+      - flutter-calculator-mathematics-opensource
+      - flutter-calculator-app
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +69,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

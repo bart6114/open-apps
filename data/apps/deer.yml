@@ -35,6 +35,18 @@ github:
     stargazers_count: 460
     forks_count: 101
     pushed_at: 2020-11-11T16:33:00Z
+    license: MIT
+    language: Dart
+    topics:
+      - dart
+      - task
+      - todo
+      - minimalist
+      - flutter
+      - deer
+      - bloc
+      - bloc-pattern
+      - flutter-bloc-pattern
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +67,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

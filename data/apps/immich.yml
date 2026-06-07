@@ -35,6 +35,25 @@ github:
     stargazers_count: 102744
     forks_count: 5799
     pushed_at: 2026-06-07T13:40:01Z
+    license: AGPL-3.0
+    language: TypeScript
+    topics:
+      - nodejs
+      - javascript
+      - photos
+      - typescript
+      - svelte
+      - photo-gallery
+      - mobile-app
+      - self-hosted
+      - videos
+      - google-photos
+      - flutter
+      - backup-tool
+      - nestjs
+      - photos-management
+      - sveltekit
+      - google-photos-alternative
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +74,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

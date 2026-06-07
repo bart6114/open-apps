@@ -37,6 +37,24 @@ github:
     stargazers_count: 4016
     forks_count: 1000
     pushed_at: 2025-10-23T06:09:38Z
+    license: MPL-2.0
+    language: Clojure
+    topics:
+      - android
+      - ios
+      - clojure
+      - mobile
+      - react-native
+      - clojurescript
+      - ethereum
+      - messenger
+      - blockchain
+      - reagent
+      - re-frame
+      - cryptocurrency
+      - wallet
+      - reactnative
+      - react-native-app
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -57,4 +75,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

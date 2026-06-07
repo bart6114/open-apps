@@ -35,6 +35,13 @@ github:
     stargazers_count: 528
     forks_count: 192
     pushed_at: 2020-01-15T17:38:41Z
+    license: MIT
+    language: Dart
+    topics:
+      - dart
+      - music-player
+      - flutter
+      - flute-music-player
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +62,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

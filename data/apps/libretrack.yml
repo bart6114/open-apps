@@ -35,6 +35,18 @@ github:
     stargazers_count: 359
     forks_count: 28
     pushed_at: 2026-05-19T09:16:03Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - android
+      - linux
+      - tracking
+      - parcel
+      - ups
+      - russian-post
+      - package-tracking
+      - mail-tracking
+      - freedom-tracking-app
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +67,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

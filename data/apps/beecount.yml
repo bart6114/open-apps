@@ -37,6 +37,22 @@ github:
     stargazers_count: 1715
     forks_count: 242
     pushed_at: 2026-06-05T14:15:08Z
+    language: Dart
+    topics:
+      - personal-finance
+      - offline-first
+      - expense-tracker
+      - accounting
+      - webdav
+      - self-hosted
+      - chinese
+      - flutter
+      - account
+      - privacy-first
+      - finance-app
+      - money-management
+      - supabase
+      - accounting-app
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -57,4 +73,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

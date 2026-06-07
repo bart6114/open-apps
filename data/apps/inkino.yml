@@ -35,6 +35,18 @@ github:
     stargazers_count: 3681
     forks_count: 702
     pushed_at: 2020-09-02T05:24:27Z
+    license: Apache-2.0
+    language: Dart
+    topics:
+      - testing
+      - dart
+      - angular
+      - cross-platform
+      - multiplatform
+      - flutter
+      - dartlang
+      - angulardart
+      - flutter-redux
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +67,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

@@ -37,6 +37,16 @@ github:
     stargazers_count: 1744
     forks_count: 578
     pushed_at: 2026-05-14T04:31:34Z
+    language: Dart
+    topics:
+      - redux
+      - android
+      - windows
+      - macos
+      - linux
+      - ios
+      - invoice
+      - flutter
   activity:
     monthlyCommits:
       - 3
@@ -70,4 +80,3 @@ curation:
     - Tightly coupled to the hosted Invoice Ninja platform
     - Some premium features require a paid plan
     - AGPL-3.0 is copyleft — read the license before forking
-

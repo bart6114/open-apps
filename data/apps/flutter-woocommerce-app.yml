@@ -35,6 +35,23 @@ github:
     stargazers_count: 707
     forks_count: 243
     pushed_at: 2026-05-23T13:32:09Z
+    license: BSD-2-Clause
+    language: Dart
+    topics:
+      - android
+      - dart
+      - wordpress
+      - template
+      - ios
+      - app
+      - ecommerce
+      - woocommerce
+      - flutter
+      - flutter-apps
+      - woosignal
+      - woocommerce-app
+      - flutter-woocommerce
+      - woocommerce-flutter
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +72,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

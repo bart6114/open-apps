@@ -37,6 +37,29 @@ github:
     stargazers_count: 252
     forks_count: 0
     pushed_at: 2025-01-10T06:01:23Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - dart
+      - drawing
+      - games
+      - canvas
+      - sketch
+      - image-processing
+      - draw
+      - flutter
+      - symmetry
+      - drawing-app
+      - drawings
+      - flutter-apps
+      - flutter-examples
+      - doddle
+      - flutter-drawing-app
+      - symmetry-drawing
+      - symmetricall-drawing
+      - symmetricall
+      - naser
+      - naserelziadna
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -57,4 +80,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

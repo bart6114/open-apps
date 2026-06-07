@@ -35,6 +35,13 @@ github:
     stargazers_count: 68
     forks_count: 0
     pushed_at: 2022-05-28T09:05:56Z
+    license: MIT
+    language: Dart
+    topics:
+      - firebase
+      - live-streaming
+      - hasura-graphql
+      - flutter-app
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +62,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

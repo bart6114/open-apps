@@ -35,6 +35,23 @@ github:
     stargazers_count: 667
     forks_count: 126
     pushed_at: 2026-02-16T14:04:56Z
+    license: MIT
+    language: Dart
+    topics:
+      - webrtc
+      - peer-to-peer
+      - file-sharing
+      - file-transfer
+      - flutter
+      - firebase-functions
+      - webrtc-signaling
+      - flutter-apps
+      - firebase-firestore
+      - flutter-app
+      - flutter-desktop
+      - flutter-ci
+      - production-app
+      - app-store-connect
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +72,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

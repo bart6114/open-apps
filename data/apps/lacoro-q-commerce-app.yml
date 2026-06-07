@@ -35,6 +35,15 @@ github:
     stargazers_count: 64
     forks_count: 25
     pushed_at: 2024-04-04T06:24:21Z
+    license: MIT
+    language: Dart
+    topics:
+      - android
+      - ios
+      - ecommerce
+      - flutter
+      - hactoberfest
+      - hacktoberfest2020
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +64,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

@@ -37,6 +37,14 @@ github:
     stargazers_count: 2391
     forks_count: 1000
     pushed_at: 2026-06-03T18:43:36Z
+    license: MIT
+    language: TypeScript
+    topics:
+      - android
+      - chat
+      - ios
+      - react-native
+      - hacktoberfest
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -57,4 +65,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

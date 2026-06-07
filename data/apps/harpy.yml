@@ -35,6 +35,16 @@ github:
     stargazers_count: 2073
     forks_count: 202
     pushed_at: 2023-10-22T14:41:29Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - dart
+      - mobile
+      - twitter
+      - twitter-api
+      - mobile-app
+      - twitter-client
+      - flutter
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +65,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

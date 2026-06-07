@@ -35,6 +35,27 @@ github:
     stargazers_count: 1138
     forks_count: 515
     pushed_at: 2023-04-07T07:14:41Z
+    license: MIT
+    language: Dart
+    topics:
+      - go
+      - dart
+      - ecommerce
+      - material-design
+      - ecommerce-application
+      - flutter
+      - grocery
+      - ecommerce-store
+      - ecommerce-shopping-solution
+      - flutter-apps
+      - flutter-material
+      - flutter-demo
+      - flutter-widget
+      - flutter-ui
+      - flutter-app
+      - flutter-material-app
+      - flutter-showcase
+      - flutter-web
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +76,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

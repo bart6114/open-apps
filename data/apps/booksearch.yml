@@ -35,6 +35,12 @@ github:
     stargazers_count: 550
     forks_count: 146
     pushed_at: 2018-12-31T10:45:41Z
+    language: Dart
+    topics:
+      - android
+      - medium
+      - animations
+      - flutter
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +61,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

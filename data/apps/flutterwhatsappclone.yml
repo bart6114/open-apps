@@ -35,6 +35,15 @@ github:
     stargazers_count: 1759
     forks_count: 677
     pushed_at: 2020-08-22T08:58:08Z
+    language: Dart
+    topics:
+      - android
+      - dart
+      - ios
+      - material-design
+      - clone
+      - whatsapp
+      - flutter
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +64,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

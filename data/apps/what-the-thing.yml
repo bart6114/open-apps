@@ -37,6 +37,16 @@ github:
     stargazers_count: 544
     forks_count: 100
     pushed_at: 2025-06-19T14:44:50Z
+    license: MIT
+    language: JavaScript
+    topics:
+      - android
+      - react-native
+      - translation
+      - camera
+      - clarifai
+      - image-recognition
+      - thing
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -57,4 +67,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

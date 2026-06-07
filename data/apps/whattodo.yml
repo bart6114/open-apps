@@ -35,6 +35,18 @@ github:
     stargazers_count: 1265
     forks_count: 275
     pushed_at: 2024-11-16T11:27:52Z
+    license: Apache-2.0
+    language: Dart
+    topics:
+      - android
+      - dart
+      - ios
+      - task
+      - projects
+      - labels
+      - flutter
+      - whattodo
+      - sqflite
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +67,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

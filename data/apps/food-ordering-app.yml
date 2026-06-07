@@ -35,6 +35,24 @@ github:
     stargazers_count: 1201
     forks_count: 595
     pushed_at: 2020-08-24T04:49:26Z
+    language: Dart
+    topics:
+      - ecommerce
+      - ecommerce-application
+      - flutter
+      - food-products
+      - dominos
+      - ecommerce-shopping-solution
+      - mcdonald
+      - mcdonalds
+      - food-delivery-application
+      - flutter-apps
+      - food-ordering
+      - food-delivery
+      - flutter-examples
+      - flutter-ui
+      - foodpanda
+      - foodpanda-mcdonald
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +73,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

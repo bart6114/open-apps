@@ -35,6 +35,16 @@ github:
     stargazers_count: 917
     forks_count: 401
     pushed_at: 2026-06-04T04:48:14Z
+    license: AGPL-3.0
+    language: Dart
+    topics:
+      - dart
+      - fitness
+      - gym
+      - flutter
+      - hacktoberfest
+      - workout
+      - wger
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +65,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

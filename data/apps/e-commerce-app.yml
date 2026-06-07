@@ -35,6 +35,27 @@ github:
     stargazers_count: 862
     forks_count: 330
     pushed_at: 2020-10-08T17:58:04Z
+    language: Dart
+    topics:
+      - android
+      - ecommerce
+      - ecommerce-application
+      - flutter
+      - ecommerce-shopping-solution
+      - flutter-apps
+      - flutter-material
+      - flutter-examples
+      - flutter-ui
+      - flutter-package
+      - flutter-ui-challenges
+      - flutter-design
+      - flutter-shopping-cart
+      - shoppers
+      - flutter-ecommerce-template
+      - evaly
+      - flutter-login-page
+      - flutter-registration-page
+      - flutter-aimation
   activity:
     monthlyCommits: []
     totalCommitsKnown: 0
@@ -55,4 +76,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

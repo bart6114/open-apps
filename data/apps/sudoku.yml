@@ -35,6 +35,22 @@ github:
     stargazers_count: 99
     forks_count: 43
     pushed_at: 2022-07-02T13:02:45Z
+    license: GPL-3.0
+    language: Dart
+    topics:
+      - android
+      - game
+      - windows
+      - macos
+      - linux
+      - dart
+      - ios
+      - pwa
+      - web-app
+      - sudoku
+      - flutter
+      - single-player
+      - fuschia
   activity:
     monthlyCommits: []
     totalCommitsKnown: 100
@@ -55,4 +71,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

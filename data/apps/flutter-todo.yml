@@ -35,6 +35,19 @@ github:
     stargazers_count: 142
     forks_count: 40
     pushed_at: 2019-09-27T11:20:16Z
+    license: Apache-2.0
+    language: Dart
+    topics:
+      - android
+      - ios
+      - todo
+      - firebase
+      - mobile
+      - cross-platform
+      - todolist
+      - flutter
+      - todoapp
+      - scopedmodel
   activity:
     monthlyCommits: []
     totalCommitsKnown: 74
@@ -55,4 +68,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-

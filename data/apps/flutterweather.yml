@@ -35,6 +35,18 @@ github:
     stargazers_count: 342
     forks_count: 117
     pushed_at: 2024-01-19T18:04:14Z
+    license: MIT
+    language: Dart
+    topics:
+      - dart
+      - weather
+      - openweathermap-api
+      - openweathermap
+      - flutter
+      - weather-app
+      - openweather-api
+      - flutter-examples
+      - fluter-ui
   activity:
     monthlyCommits: []
     totalCommitsKnown: 67
@@ -55,4 +67,3 @@ curation:
   reviewedAt: null
   bestFor: []
   caveats: []
-
