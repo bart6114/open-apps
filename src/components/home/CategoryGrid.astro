@@ -2,12 +2,22 @@
 import type { Category } from "../../data/categories";
 import SectionHeader from "../layout/SectionHeader.astro";
 import Container from "../layout/Container.astro";
+import { countByCategory } from "../../lib/taxonomy-counts";
 
 interface Props {
   categories: Category[];
 }
 
 const { categories } = Astro.props;
+const counts = countByCategory();
+
+// Hide categories that have zero apps in the directory. We don't lie about
+// coverage. The taxonomy is a "future state" map; the rendered list is the
+// intersection of the taxonomy and what actually exists in data/apps/.
+const visible = categories
+  .map((c) => ({ ...c, count: counts.get(c.name) ?? 0 }))
+  .filter((c) => c.count > 0)
+  .sort((a, b) => b.count - a.count);
 ---
 
 <section
@@ -28,7 +38,7 @@ const { categories } = Astro.props;
         class="m-0 grid list-none grid-cols-1 divide-y divide-ink-200 p-0 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-3 dark:divide-ink-800"
       >
         {
-          categories.map((cat, i) => (
+          visible.map((cat, i) => (
             <li
               class={`divide-x divide-ink-200 dark:divide-ink-800 ${
                 i >= 1 ? "sm:border-l-0" : ""
@@ -39,9 +49,17 @@ const { categories } = Astro.props;
                 class="group flex h-full items-start gap-3 p-4 no-underline transition-colors hover:bg-ink-50/60 dark:hover:bg-ink-900/40"
               >
                 <div class="flex min-w-0 flex-1 flex-col gap-0.5">
-                  <h3 class="m-0 text-[0.875rem] font-semibold tracking-tight text-ink-900 group-hover:underline dark:text-ink-100">
-                    {cat.name}
-                  </h3>
+                  <div class="flex items-center gap-2">
+                    <h3 class="m-0 text-[0.9375rem] font-semibold tracking-tight text-ink-900 group-hover:underline dark:text-ink-100">
+                      {cat.name}
+                    </h3>
+                    <span
+                      class="inline-flex items-center rounded-md border border-ink-200 bg-ink-50 px-1.5 py-0.5 font-mono text-[10px] font-medium text-ink-600 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-400"
+                      title={`${cat.count} apps in this category`}
+                    >
+                      {cat.count} apps
+                    </span>
+                  </div>
                   <p class="m-0 text-2xs leading-relaxed text-ink-500 dark:text-ink-400">
                     {cat.blurb}
                   </p>

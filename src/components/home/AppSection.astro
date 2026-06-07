@@ -7,12 +7,26 @@ import Container from "../layout/Container.astro";
 interface Props {
   id: string;
   title: string;
+  /** Plain-language subtitle explaining the lens. */
   description: string;
   apps: OpenSourceApp[];
+  /** Where the "View all" link points (typically the apps page with a
+   *  filter applied). */
   viewAllHref?: string;
+  /** Custom label for the "View all" link. Lets us say
+   *  "View all new" / "View hot apps" / "View mature apps"
+   *  instead of the generic "View all". */
+  viewAllLabel?: string;
 }
 
-const { id, title, description, apps, viewAllHref = "#" } = Astro.props;
+const {
+  id,
+  title,
+  description,
+  apps,
+  viewAllHref = "#",
+  viewAllLabel = "View all",
+} = Astro.props;
 ---
 
 <section id={id} class="section border-b border-ink-200 dark:border-ink-800 scroll-mt-20">
@@ -23,7 +37,7 @@ const { id, title, description, apps, viewAllHref = "#" } = Astro.props;
         href={viewAllHref}
         class="hidden shrink-0 pb-2 text-2xs font-medium text-ink-500 transition-colors hover:text-ink-900 sm:inline dark:text-ink-400 dark:hover:text-ink-100"
       >
-        View all →
+        {viewAllLabel} →
       </a>
     </div>
 
@@ -37,7 +51,7 @@ const { id, title, description, apps, viewAllHref = "#" } = Astro.props;
       <a
         href={viewAllHref}
         class="text-2xs font-medium text-ink-500 transition-colors hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
-        >View all →</a
+        >{viewAllLabel} →</a
       >
     </div>
   </Container>

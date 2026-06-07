@@ -5,9 +5,17 @@ import Container from "../layout/Container.astro";
 
 interface Props {
   contributors: Contributor[];
+  /**
+   * Total count of contributors in the directory, used to render
+   * "Showing 24 of 47" when the homepage is capped for layout reasons.
+   * Falls back to `contributors.length` when not provided.
+   */
+  totalCount?: number;
 }
 
-const { contributors } = Astro.props;
+const { contributors, totalCount } = Astro.props;
+const total = typeof totalCount === "number" ? totalCount : contributors.length;
+const isCapped = total > contributors.length;
 ---
 
 <section
@@ -61,7 +69,11 @@ const { contributors } = Astro.props;
     <p
       class="mt-6 text-2xs text-ink-500 dark:text-ink-400 m-0"
     >
-      Showing all {contributors.length} contributors.
+      {isCapped ? (
+        <>Showing {contributors.length} of {total} contributors.</>
+      ) : (
+        <>Showing all {total} contributors.</>
+      )}
       <a
         href="https://github.com/tortuvshin/open-source-flutter-apps/graphs/contributors"
         target="_blank"

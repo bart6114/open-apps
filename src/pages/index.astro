@@ -3,12 +3,12 @@ import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import Hero from "../components/home/Hero.astro";
+import WhyThisExists from "../components/home/WhyThisExists.astro";
 import AppSection from "../components/home/AppSection.astro";
 import StackGrid from "../components/home/StackGrid.astro";
 import CategoryGrid from "../components/home/CategoryGrid.astro";
 import ContributorsGrid from "../components/home/ContributorsGrid.astro";
 import OriginalCollection from "../components/home/OriginalCollection.astro";
-import MinimalAbout from "../components/home/MinimalAbout.astro";
 
 import { newApps, hotApps, matureApps } from "../data/apps";
 import { stacks } from "../data/stacks";
@@ -16,9 +16,13 @@ import { categories } from "../data/categories";
 import { contributors } from "../data/contributors";
 import { stats } from "../data/stats";
 
-const newList = newApps().slice(0, 6);
 const hotList = hotApps().slice(0, 6);
+const newList = newApps().slice(0, 6);
 const matureList = matureApps().slice(0, 6);
+
+// Cap the contributors section so it doesn't dominate the page. The
+// rest of the 47 are visible on the dedicated contributors page.
+const visibleContributors = contributors.slice(0, 24);
 ---
 
 <!doctype html>
@@ -29,13 +33,13 @@ const matureList = matureApps().slice(0, 6);
     <meta name="generator" content={Astro.generator} />
     <meta
       name="description"
-      content="A static, community-curated directory of real open-source application codebases. Starting with mobile."
+      content="A searchable directory of real open-source applications — organized by stack, category, platform, license, activity, and maturity."
     />
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2318181b'/%3E%3C/svg%3E"
     />
-    <title>Open Source Apps — Discover real open-source apps</title>
+    <title>Open Source Apps — A directory of real open-source applications</title>
     {/* Theme bootstrap. Runs before paint to avoid a flash of the
         wrong theme. Listens for `theme:set` events from the
         ThemeToggle component. */}
@@ -75,39 +79,45 @@ const matureList = matureApps().slice(0, 6);
     <main>
       <Hero />
 
-      <AppSection
-        id="new"
-        title="New open-source apps"
-        description="Recently added projects from the community."
-        apps={newList}
-        viewAllHref="/apps?label=new"
-      />
+      <WhyThisExists />
 
       <AppSection
         id="hot"
         title="Hot open-source apps"
-        description="Projects gaining attention, stars, or recent activity."
+        description="Projects gaining stars, activity, or attention recently."
         apps={hotList}
         viewAllHref="/apps?label=hot"
+        viewAllLabel="View hot apps"
+      />
+
+      <AppSection
+        id="new"
+        title="New open-source apps"
+        description="Recently added apps from the community."
+        apps={newList}
+        viewAllHref="/apps?label=new"
+        viewAllLabel="View all new"
       />
 
       <AppSection
         id="mature"
         title="Mature open-source apps"
-        description="Established projects with strong history, clear codebases, or real-world usage."
+        description="Established apps with strong history, active maintainers, and real-world usage."
         apps={matureList}
         viewAllHref="/apps?label=mature"
+        viewAllLabel="View mature apps"
       />
 
       <StackGrid stacks={stacks} />
 
       <CategoryGrid categories={categories} />
 
-      <ContributorsGrid contributors={contributors} />
+      <ContributorsGrid
+        contributors={visibleContributors}
+        totalCount={contributors.length}
+      />
 
       <OriginalCollection stats={stats} />
-
-      <MinimalAbout />
     </main>
 
     <Footer />

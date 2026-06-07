@@ -1,24 +1,32 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
+import { stats } from "../../data/stats";
 
+const githubUrl = stats.originalRepo;
+
+// Nav items. Order is information-architecture: discover → browse → act.
+// `Watching` was hidden in v0.1 because the local watchlist is a thin
+// feature that doesn't carry its weight in the top nav. `Contributors`
+// is intentionally not a top-level item — it lives lower on the page.
 const navItems = [
   { label: "New", href: "#new" },
   { label: "Hot", href: "#hot" },
-  { label: "Mature", href: "#mature" },
+  { label: "Categories", href: "#categories" },
   { label: "Stacks", href: "#stacks" },
-  { label: "Contributors", href: "#contributors" },
-  { label: "Watching", href: "/apps?watched=1" },
-  { label: "About", href: "/about" },
+  { label: "About", href: "#about" },
 ];
-const githubUrl =
-  "https://github.com/tortuvshin/open-source-flutter-apps";
+
 // Shields badge with no `label=` param so the rendered image is just
 // the number (e.g. "4k"), not "stars 4k". The button context already
 // says "GitHub", so the label is redundant.
-const starsBadgeLight =
-  "https://img.shields.io/github/stars/tortuvshin/open-source-flutter-apps?style=flat&color=18181b";
-const starsBadgeDark =
-  "https://img.shields.io/github/stars/tortuvshin/open-source-flutter-apps?style=flat&color=fafafa";
+function compact(n: number): string {
+  if (n >= 1000) {
+    const k = n / 1000;
+    return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
+  }
+  return n.toString();
+}
+const starsLabel = compact(stats.stars);
 ---
 
 <header
@@ -56,15 +64,31 @@ const starsBadgeDark =
     </nav>
 
     <div class="ml-auto flex items-center gap-2">
-      {/* Single GitHub button. Star count badge is rendered as an
-          <img> on the right side of the same anchor so it stays
-          up-to-date without any JS. */}
+      {/* Submit app — primary action, lives in the header so it's
+          always one click away. Routes to the project's
+          CONTRIBUTING.md on GitHub (this is a curation project, not
+          a SaaS with a "Submit" form). */}
+      <a
+        href={`${githubUrl}/blob/main/CONTRIBUTING.md`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden h-9 items-center gap-1.5 rounded-md border border-ink-200 bg-white px-3 text-[0.875rem] font-medium text-ink-700 transition-colors hover:border-ink-300 hover:bg-ink-50 sm:inline-flex dark:border-ink-800 dark:bg-ink-950 dark:text-ink-300 dark:hover:border-ink-700 dark:hover:bg-ink-900/40"
+      >
+        <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor">
+          <path d="M7.75 2a.75.75 0 0 1 .75.75v3.5h3.5a.75.75 0 0 1 0 1.5h-3.5v3.5a.75.75 0 0 1-1.5 0v-3.5h-3.5a.75.75 0 0 1 0-1.5h3.5v-3.5A.75.75 0 0 1 7.75 2Z"/>
+        </svg>
+        <span>Submit via GitHub</span>
+      </a>
+
+      {/* GitHub button. The star count is rendered as text, not an
+          external badge image, so it works offline, doesn't depend
+          on shields.io, and reflects what we already know (stats.stars). */}
       <a
         href={githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="View on GitHub — star count shown on the right"
-        title="View on GitHub"
+        aria-label={`View source on GitHub — ${stats.stars} stars`}
+        title="View source on GitHub"
         class="inline-flex h-9 items-center divide-x divide-ink-200 overflow-hidden rounded-md border border-ink-200 text-[0.875rem] font-medium transition-colors hover:border-ink-300 hover:bg-ink-50 dark:divide-ink-800 dark:border-ink-800 dark:hover:border-ink-700 dark:hover:bg-ink-900/40"
       >
         <span class="flex items-center gap-1.5 px-2.5 py-1.5 text-ink-900 dark:text-ink-100">
@@ -79,7 +103,7 @@ const starsBadgeDark =
               d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"
             />
           </svg>
-          <span>GitHub</span>
+          <span>Star</span>
         </span>
         <span class="flex items-center gap-1 bg-ink-50 px-2 py-1.5 text-ink-700 dark:bg-ink-900/60 dark:text-ink-300">
           <svg
@@ -94,24 +118,7 @@ const starsBadgeDark =
               d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
             />
           </svg>
-          <img
-            src={starsBadgeLight}
-            alt=""
-            width="32"
-            height="14"
-            loading="lazy"
-            decoding="async"
-            class="h-[14px] w-auto dark:hidden"
-          />
-          <img
-            src={starsBadgeDark}
-            alt=""
-            width="32"
-            height="14"
-            loading="lazy"
-            decoding="async"
-            class="h-[14px] w-auto hidden dark:inline"
-          />
+          <span class="font-mono">{starsLabel}</span>
         </span>
       </a>
       <ThemeToggle />
@@ -138,46 +145,4 @@ const starsBadgeDark =
     // Update the URL hash without an extra jump, so back/forward works.
     history.replaceState(null, "", id);
   });
-</script>
-
-<script>
-  // Show a count badge next to the "Watching" nav link on every page,
-  // driven by the local watchlist. Keep this lightweight — it's a
-  // tiny DOM update, not a full filter pipeline.
-  (function () {
-    const KEY = "open-apps:watchlist";
-    function read() {
-      try {
-        const raw = localStorage.getItem(KEY);
-        if (!raw) return [];
-        const arr = JSON.parse(raw);
-        return Array.isArray(arr) ? arr : [];
-      } catch {
-        return [];
-      }
-    }
-    function paint() {
-      const link = document.querySelector('nav[aria-label="Primary"] a[href*="watched=1"]');
-      if (!link) return;
-      const n = read().length;
-      let badge = link.querySelector(".watchlist-badge");
-      if (n === 0) {
-        if (badge) badge.remove();
-        return;
-      }
-      if (!badge) {
-        badge = document.createElement("span");
-        badge.className =
-          "watchlist-badge ml-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-ink-900 px-1 text-[10px] font-semibold text-white dark:bg-ink-100 dark:text-ink-900";
-        badge.setAttribute("aria-label", `${n} apps in watchlist`);
-        link.appendChild(badge);
-      }
-      badge.textContent = String(n);
-    }
-    paint();
-    window.addEventListener("open-apps:watchlist:change", paint);
-    window.addEventListener("storage", (e) => {
-      if (e.key === KEY) paint();
-    });
-  })();
 </script>
