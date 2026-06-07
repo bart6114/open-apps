@@ -5,7 +5,7 @@ Open Source Apps is a curated directory of real open-source applications that de
 The project focuses on complete applications, not SDKs, templates, toy demos, or abandoned README lists.
 
 Main URL: https://open-apps.dev.mn/
-GitHub: https://github.com/tortuvshin/open-source-flutter-apps
+GitHub: https://github.com/tortuvshin/open-apps
 
 ## Current scope
 
