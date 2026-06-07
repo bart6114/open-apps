@@ -37,7 +37,7 @@ github:
     pushed_at: 2023-02-19T22:26:41Z
     language: Dart
     license:
-      spdx_id: "license: not specified"
+      spdx_id: null
       key: null
   activity:
     monthlyCommits: []

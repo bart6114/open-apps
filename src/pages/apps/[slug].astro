@@ -413,9 +413,21 @@ const jsonLd: Record<string, unknown> = {
                   </figcaption>
                 </figure>
               ) : (
-                <p class="mt-4 m-0 text-sm text-ink-500 dark:text-ink-400">
-                  Monthly commit history has not been synced yet.
-                </p>
+                <div class="mt-4 space-y-1.5">
+                  <p class="m-0 text-sm text-ink-500 dark:text-ink-400">
+                    Monthly commit history is not yet populated for this app.
+                  </p>
+                  <p class="m-0 text-2xs text-ink-400 dark:text-ink-500">
+                    Activity data refreshes daily via
+                    <a
+                      href={`${githubUrl}/blob/main/.github/workflows/sync-github-metadata.yml`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-ink-700 hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100"
+                    >sync-github-metadata</a
+                    >. Last commit and stars are already in sync.
+                  </p>
+                </div>
               )}
             </div>
 

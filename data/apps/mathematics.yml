@@ -55,7 +55,7 @@ github:
       - flutter-pdf-generator
       - flutter-mathematics-app
     license:
-      spdx_id: "license: not specified"
+      spdx_id: null
       key: null
   activity:
     monthlyCommits:

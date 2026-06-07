@@ -42,7 +42,7 @@ github:
       - flutter
       - firestore
     license:
-      spdx_id: "license: not identifiable by github"
+      spdx_id: null
       key: null
   activity:
     monthlyCommits: []

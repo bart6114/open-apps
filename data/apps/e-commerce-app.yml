@@ -57,7 +57,7 @@ github:
       - flutter-registration-page
       - flutter-aimation
     license:
-      spdx_id: "license: not specified"
+      spdx_id: null
       key: null
   activity:
     monthlyCommits: []

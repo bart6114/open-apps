@@ -58,7 +58,7 @@ github:
       - math-games
       - math-puzzle
     license:
-      spdx_id: "license: not specified"
+      spdx_id: null
       key: null
   activity:
     monthlyCommits: []

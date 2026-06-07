@@ -42,7 +42,7 @@ github:
       - animations
       - flutter
     license:
-      spdx_id: "license: not specified"
+      spdx_id: null
       key: null
   activity:
     monthlyCommits: []
