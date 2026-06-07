@@ -63,20 +63,14 @@ const starsLabel = compact(stats.stars);
     </nav>
 
     <div class="ml-auto flex items-center gap-2">
-      {/* Submit app — primary action, lives in the header so it's
-          always one click away. Routes to the project's
-          CONTRIBUTING.md on GitHub (this is a curation project, not
-          a SaaS with a "Submit" form). */}
       <a
-        href={`${githubUrl}/blob/main/CONTRIBUTING.md`}
-        target="_blank"
-        rel="noopener noreferrer"
+        href="/submit"
         class="hidden h-9 items-center gap-1.5 rounded-md border border-ink-200 bg-white px-3 text-[0.875rem] font-medium text-ink-700 transition-colors hover:border-ink-300 hover:bg-ink-50 sm:inline-flex dark:border-ink-800 dark:bg-ink-950 dark:text-ink-300 dark:hover:border-ink-700 dark:hover:bg-ink-900/40"
       >
         <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor">
           <path d="M7.75 2a.75.75 0 0 1 .75.75v3.5h3.5a.75.75 0 0 1 0 1.5h-3.5v3.5a.75.75 0 0 1-1.5 0v-3.5h-3.5a.75.75 0 0 1 0-1.5h3.5v-3.5A.75.75 0 0 1 7.75 2Z"/>
         </svg>
-        <span>Submit via GitHub</span>
+        <span>Submit app</span>
       </a>
 
       {/* GitHub button. The star count is rendered as text, not an
