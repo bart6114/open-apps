@@ -8,12 +8,18 @@ const githubUrl = stats.originalRepo;
 // Nav items. Order is information-architecture: discover → browse → act.
 // `Contributors` is intentionally not a top-level item — it lives lower
 // on the page. The watchlist was removed in v0.1 (see CHANGELOG).
+//
+// All links point to /apps with a filter rather than in-page anchors.
+// This keeps the nav usable from any page (e.g. /about) — anchor links
+// would only work on the home page, leaving /apps and /about with dead
+// links. Category/Stack filters are exposed via the /apps refine panel
+// and the home page's "Browse by stack"/"Browse by category" sections.
 const navItems = [
-  { label: "New", href: "#new" },
-  { label: "Hot", href: "#hot" },
-  { label: "Categories", href: "#categories" },
-  { label: "Stacks", href: "#stacks" },
-  { label: "About", href: "#about" },
+  { label: "New", href: "/apps?label=new" },
+  { label: "Hot", href: "/apps?label=hot" },
+  { label: "Categories", href: "/apps" },
+  { label: "Stacks", href: "/apps" },
+  { label: "About", href: "/about" },
 ];
 
 const starsLabel = compact(stats.stars);
