@@ -16,6 +16,8 @@ interface Props {
 const { contributors, totalCount } = Astro.props;
 const total = typeof totalCount === "number" ? totalCount : contributors.length;
 const isCapped = total > contributors.length;
+const topContributors = contributors.slice(0, 10);
+const otherContributors = contributors.slice(10);
 ---
 
 <section
@@ -29,11 +31,9 @@ const isCapped = total > contributors.length;
       description="This directory exists because people keep discovering, submitting, reviewing, and maintaining open-source app references."
     />
 
-    <ul
-      class="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(96px,1fr))] gap-x-2 gap-y-4 p-0"
-    >
+    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(88px,1fr))] gap-x-2 gap-y-4 p-0">
       {
-        contributors.map((c) => (
+        topContributors.map((c) => (
           <li class="flex flex-col items-center gap-1.5 text-center">
             <a
               href={c.profileUrl}
@@ -66,11 +66,39 @@ const isCapped = total > contributors.length;
       }
     </ul>
 
+    {otherContributors.length > 0 && (
+      <ul class="mt-6 m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-2 p-0 sm:grid-cols-[repeat(auto-fill,minmax(56px,1fr))]">
+        {otherContributors.map((c) => (
+          <li class="flex justify-center">
+            <a
+              href={c.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${c.name ?? c.username} on GitHub`}
+              title={`${c.name ?? c.username}${typeof c.contributions === "number" ? ` · ${c.contributions} contributions` : ""}`}
+              class="group block rounded-full transition-opacity hover:opacity-80"
+            >
+              <img
+                src={c.avatarUrl}
+                alt={`${c.name ?? c.username} avatar`}
+                loading="lazy"
+                width="32"
+                height="32"
+                class="h-8 w-8 rounded-full border border-ink-200 bg-white object-cover dark:border-ink-800 dark:bg-ink-900"
+              />
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+
     <p
       class="mt-6 text-2xs text-ink-500 dark:text-ink-400 m-0"
     >
       {isCapped ? (
         <>Showing {contributors.length} of {total} contributors.</>
+      ) : contributors.length > 10 ? (
+        <>Showing top 10 plus {contributors.length - 10} more contributors.</>
       ) : (
         <>Showing all {total} contributors.</>
       )}
