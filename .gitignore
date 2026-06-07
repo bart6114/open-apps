@@ -22,6 +22,9 @@ data/generated/apps.index.json
 # build, so it doesn't need to live in git history.
 public/llms-full.txt
 
+# Claude Code local settings — per-developer, never shared.
+.claude/settings.local.json
+
 # IDE / editor cruft
 .idea/
 .vscode/
