@@ -31,7 +31,7 @@ or deleting records should happen through reviewable PRs.
 3. Review the drafted name, description, category, platforms, stack, tags,
    and curation notes.
 4. Open a PR with the generated `data/apps/<slug>.yml`.
-5. CI runs `npm run validate:data` and `npm run build:data`.
+5. CI runs `pnpm run validate:data` and `pnpm run build:data`.
 
 Advanced contributors may still write YAML by hand. Use
 [`docs/SCHEMA.md`](./docs/SCHEMA.md) as the contract and prefer
@@ -76,17 +76,18 @@ Advanced contributors may still write YAML by hand. Use
 ## Local development
 
 ```sh
-npm install
-npm run build:data   # yml → json, drops stale entries
-npm run build        # full Astro build
-npm run dev          # local dev server
-npm run check        # astro type / lint check
+corepack enable
+pnpm install
+pnpm run build:data   # yml → json, drops stale entries
+pnpm run build        # full Astro build
+pnpm run dev          # local dev server
+pnpm run check        # astro type / lint check
 ```
 
 ## Tests
 
 ```sh
-node --test scripts/*.test.mjs
+pnpm test
 ```
 
 See `scripts/build-apps-json.test.mjs` and

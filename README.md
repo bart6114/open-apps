@@ -164,25 +164,26 @@ GitHub metadata, health fields, distribution channels, and ownership rules.
 Requirements:
 
 - Node.js 20 or newer
-- npm
+- pnpm, managed by Corepack
 
 ```sh
-npm install
-npm run build:data
-npm run build
-npm run dev
+corepack enable
+pnpm install
+pnpm run build:data
+pnpm run build
+pnpm run dev
 ```
 
 Useful commands:
 
 | Command | Purpose |
 |---------|---------|
-| `npm run validate:data` | Validate `data/apps/*.yml` against the schema. |
-| `npm run build:data` | Validate and generate app JSON. |
-| `npm run build` | Build the full static Astro site. |
-| `npm run dev` | Generate data and start the local dev server. |
-| `npm run check` | Run Astro type checks. |
-| `npm test` | Run Node test files under `scripts/`. |
+| `pnpm run validate:data` | Validate `data/apps/*.yml` against the schema. |
+| `pnpm run build:data` | Validate and generate app JSON. |
+| `pnpm run build` | Build the full static Astro site. |
+| `pnpm run dev` | Generate data and start the local dev server. |
+| `pnpm run check` | Run Astro type checks. |
+| `pnpm test` | Run Node test files under `scripts/`. |
 
 ## Contributing
 
@@ -193,9 +194,9 @@ GitHub repository URL, review the drafted fields, then open a PR with the new
 Before opening a PR:
 
 ```sh
-npm run build:data
-npm run build
-npm test
+pnpm run build:data
+pnpm run build
+pnpm test
 ```
 
 Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the inclusion bar, YAML style,

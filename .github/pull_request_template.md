@@ -38,7 +38,7 @@ metadata themselves.
 - [ ] I read [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 - [ ] I did NOT hand-edit synced `github:` / `health:` data unless this PR
       is explicitly fixing automation output.
-- [ ] I ran `npm run build:data` and `npm run build` locally and both
+- [ ] I ran `pnpm run build:data` and `pnpm run build` locally and both
       succeeded
 - [ ] The yml file is named `<slug>.yml` and `slug:` inside matches the
       filename
