@@ -1,23 +1,31 @@
 ---
+// SPDX-License-Identifier: MIT
+
+/**
+ * Contributors grid for the home page. Renders all contributors at a
+ * uniform avatar size (no big/small distinction — the previous
+ * "top 10 + rest" layout implied a hierarchy that doesn't exist).
+ *
+ * When the contributor count is large enough that the homepage
+ * layout would feel cluttered, a "View all" link points to the
+ * dedicated `/contributors` page where the full list lives.
+ */
 import type { Contributor } from "../../data/contributors";
 import SectionHeader from "../layout/SectionHeader.astro";
 import Container from "../layout/Container.astro";
 
 interface Props {
   contributors: Contributor[];
-  /**
-   * Total count of contributors in the directory, used to render
-   * "Showing 24 of 47" when the homepage is capped for layout reasons.
-   * Falls back to `contributors.length` when not provided.
-   */
-  totalCount?: number;
 }
 
-const { contributors, totalCount } = Astro.props;
-const total = typeof totalCount === "number" ? totalCount : contributors.length;
-const isCapped = total > contributors.length;
-const topContributors = contributors.slice(0, 10);
-const otherContributors = contributors.slice(10);
+const { contributors } = Astro.props;
+const total = contributors.length;
+// Threshold above which we link out to the full /contributors page
+// instead of inlining every avatar on the homepage.
+const INLINE_LIMIT = 100;
+const isCapped = total > INLINE_LIMIT;
+const visible = isCapped ? contributors.slice(0, INLINE_LIMIT) : contributors;
+const more = Math.max(0, total - INLINE_LIMIT);
 ---
 
 <section
@@ -31,25 +39,27 @@ const otherContributors = contributors.slice(10);
       description="This directory exists because people keep discovering, submitting, reviewing, and maintaining open-source app references."
     />
 
-    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(88px,1fr))] gap-x-2 gap-y-4 p-0">
+    <ul
+      class="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-x-3 gap-y-5 p-0"
+    >
       {
-        topContributors.map((c) => (
+        visible.map((c) => (
           <li class="flex flex-col items-center gap-1.5 text-center">
             <a
               href={c.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${c.name ?? c.username} on GitHub`}
-              title={c.name ?? c.username}
+              title={`${c.name ?? c.username}${typeof c.contributions === "number" ? ` · ${c.contributions} contributions` : ""}`}
               class="block transition-opacity hover:opacity-80"
             >
               <img
                 src={c.avatarUrl}
                 alt={`${c.name ?? c.username} avatar`}
                 loading="lazy"
-                width="48"
-                height="48"
-                class="h-12 w-12 rounded-full border border-ink-200 bg-white object-cover dark:border-ink-800 dark:bg-ink-900"
+                width="40"
+                height="40"
+                class="h-10 w-10 rounded-full border border-ink-200 bg-white object-cover dark:border-ink-800 dark:bg-ink-900"
               />
             </a>
             <a
@@ -66,50 +76,30 @@ const otherContributors = contributors.slice(10);
       }
     </ul>
 
-    {otherContributors.length > 0 && (
-      <ul class="mt-6 m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-2 p-0 sm:grid-cols-[repeat(auto-fill,minmax(56px,1fr))]">
-        {otherContributors.map((c) => (
-          <li class="flex justify-center">
-            <a
-              href={c.profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${c.name ?? c.username} on GitHub`}
-              title={`${c.name ?? c.username}${typeof c.contributions === "number" ? ` · ${c.contributions} contributions` : ""}`}
-              class="group block rounded-full transition-opacity hover:opacity-80"
-            >
-              <img
-                src={c.avatarUrl}
-                alt={`${c.name ?? c.username} avatar`}
-                loading="lazy"
-                width="32"
-                height="32"
-                class="h-8 w-8 rounded-full border border-ink-200 bg-white object-cover dark:border-ink-800 dark:bg-ink-900"
-              />
-            </a>
-          </li>
-        ))}
-      </ul>
-    )}
-
-    <p
-      class="mt-6 text-2xs text-ink-500 dark:text-ink-400 m-0"
+    <div
+      class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-2xs text-ink-500 dark:text-ink-400"
     >
-      {isCapped ? (
-        <>Showing {contributors.length} of {total} contributors.</>
-      ) : contributors.length > 10 ? (
-        <>Showing top 10 plus {contributors.length - 10} more contributors.</>
-      ) : (
-        <>Showing all {total} contributors.</>
-      )}
+      <span>
+        {isCapped
+          ? <>Showing {visible.length} of {total} contributors on the homepage.</>
+          : <>Showing all {total} contributors.</>}
+      </span>
+      <a
+        href="/contributors"
+        class="inline-flex items-center gap-1 font-medium text-ink-700 hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100"
+      >
+        View all
+        {more > 0 ? ` (${more} more)` : ""} →
+      </a>
+      <span aria-hidden="true">·</span>
       <a
         href="https://github.com/tortuvshin/open-apps/graphs/contributors"
         target="_blank"
         rel="noopener noreferrer"
-        class="ml-2 text-ink-700 hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100"
+        class="text-ink-700 hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100"
       >
-        View on GitHub →
+        GitHub contributors graph
       </a>
-    </p>
+    </div>
   </Container>
 </section>

@@ -46,8 +46,19 @@ type GeneratedApp = Partial<OpenSourceApp> & {
  */
 function computeLabels(g: GeneratedApp): AppLabel[] {
   const labels: AppLabel[] = [];
-  const stars = typeof g.activity?.stars === "number" ? g.activity.stars : 0;
-  const lastCommit = g.activity?.lastCommitAt;
+  // After the schemaVersion 1 migration, stars + lastCommitAt live at
+  // the top level of the generated record (the v1 normalizer in
+  // `app-schema.mjs` flattens `github.repository.stargazers_count`
+  // and `github.repository.pushed_at` to top-level). The old
+  // `g.activity.stars` shape still works for legacy records, so we
+  // fall back to it for mixed input.
+  const stars =
+    typeof g.stars === "number"
+      ? g.stars
+      : typeof g.activity?.stars === "number"
+        ? g.activity.stars
+        : 0;
+  const lastCommit = g.lastCommitAt ?? g.activity?.lastCommitAt;
 
   if (stars >= 500) labels.push("mature");
   if (stars >= 100 && stars < 500) labels.push("hot");
