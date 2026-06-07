@@ -83,6 +83,33 @@ function formatStars(n?: number): string | null {
 }
 
 const starsLabel = formatStars(app.stars);
+
+const repoMeta = app.github?.repository;
+const repoHealth = app.health;
+const rawMonthly = app.github?.activity?.monthlyCommits ?? [];
+const monthlyCommits = rawMonthly.map((item) =>
+  typeof item === "number" ? { month: "", commits: item } : item,
+);
+const maxMonthlyCommits = Math.max(1, ...monthlyCommits.map((item) => item.commits ?? 0));
+const languages = app.github?.languages
+  ? Object.entries(app.github.languages)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+  : [];
+const totalLanguageBytes = Math.max(1, languages.reduce((sum, [, bytes]) => sum + bytes, 0));
+const files = app.github?.files ?? {};
+const contributionSignals = [
+  { label: "README", ok: files.readme },
+  { label: "Contributing", ok: files.contributing },
+  { label: "Security", ok: files.security },
+  { label: "Issue templates", ok: files.issueTemplates },
+  { label: "PR template", ok: files.pullRequestTemplate },
+].filter((signal) => signal.ok !== undefined);
+const latestRelease = app.github?.latestRelease;
+const latestReleaseAt =
+  typeof latestRelease?.published_at === "string"
+    ? latestRelease.published_at
+    : undefined;
 ---
 
 <!doctype html>
@@ -281,6 +308,119 @@ const starsLabel = formatStars(app.stars);
               </div>
             )}
           </dl>
+
+          {/* Decision signals */}
+          <section class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
+            <div class="card p-5">
+              <h2 class="m-0 text-[1rem] font-semibold tracking-tight text-ink-900 dark:text-ink-100">
+                Repository health
+              </h2>
+              <dl class="mt-4 grid gap-3 text-sm">
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-ink-500 dark:text-ink-400">Status</dt>
+                  <dd class="font-medium capitalize text-ink-900 dark:text-ink-100">
+                    {repoHealth?.status ?? app.status ?? "unknown"}
+                  </dd>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-ink-500 dark:text-ink-400">Tier</dt>
+                  <dd class="font-medium capitalize text-ink-900 dark:text-ink-100">
+                    {repoHealth?.tier ?? app.tier ?? "listed"}
+                  </dd>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-ink-500 dark:text-ink-400">Forks</dt>
+                  <dd class="font-mono text-ink-900 dark:text-ink-100">
+                    {repoMeta?.forks_count ?? "—"}
+                  </dd>
+                </div>
+                <div class="flex items-center justify-between gap-3">
+                  <dt class="text-ink-500 dark:text-ink-400">Open issues</dt>
+                  <dd class="font-mono text-ink-900 dark:text-ink-100">
+                    {repoMeta?.open_issues_count ?? "—"}
+                  </dd>
+                </div>
+                {latestReleaseAt && (
+                  <div class="flex items-center justify-between gap-3">
+                    <dt class="text-ink-500 dark:text-ink-400">Latest release</dt>
+                    <dd class="font-mono text-ink-900 dark:text-ink-100">
+                      {formatDate(latestReleaseAt)}
+                    </dd>
+                  </div>
+                )}
+              </dl>
+            </div>
+
+            <div class="card p-5">
+              <h2 class="m-0 text-[1rem] font-semibold tracking-tight text-ink-900 dark:text-ink-100">
+                Activity
+              </h2>
+              {monthlyCommits.length > 0 ? (
+                <div class="mt-4 flex h-28 items-end gap-1.5" aria-label="Monthly commits">
+                  {monthlyCommits.map((item) => (
+                    <div class="flex min-w-0 flex-1 flex-col items-center gap-1">
+                      <div
+                        class="w-full rounded-sm bg-ink-700 dark:bg-ink-200"
+                        style={`height: ${Math.max(8, Math.round(((item.commits ?? 0) / maxMonthlyCommits) * 96))}px`}
+                        title={`${item.month || "month"}: ${item.commits ?? 0} commits`}
+                      />
+                      <span class="max-w-full truncate text-[10px] text-ink-500 dark:text-ink-400">
+                        {item.month ? item.month.slice(5) : item.commits}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p class="mt-4 m-0 text-sm text-ink-500 dark:text-ink-400">
+                  Monthly commit history has not been synced yet.
+                </p>
+              )}
+            </div>
+
+            <div class="card p-5">
+              <h2 class="m-0 text-[1rem] font-semibold tracking-tight text-ink-900 dark:text-ink-100">
+                Contribution readiness
+              </h2>
+              {contributionSignals.length > 0 ? (
+                <ul class="mt-4 m-0 grid list-none gap-2 p-0 text-sm">
+                  {contributionSignals.map((signal) => (
+                    <li class="flex items-center justify-between gap-3">
+                      <span class="text-ink-700 dark:text-ink-200">{signal.label}</span>
+                      <span class={signal.ok ? "text-emerald-700 dark:text-emerald-400" : "text-ink-400 dark:text-ink-600"}>
+                        {signal.ok ? "Found" : "Missing"}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="mt-4 m-0 text-sm text-ink-500 dark:text-ink-400">
+                  Contribution files have not been synced yet.
+                </p>
+              )}
+            </div>
+          </section>
+
+          {languages.length > 0 && (
+            <section class="mt-4 card p-5">
+              <h2 class="m-0 text-[1rem] font-semibold tracking-tight text-ink-900 dark:text-ink-100">
+                Language mix
+              </h2>
+              <dl class="mt-4 grid gap-2 text-sm">
+                {languages.map(([language, bytes]) => {
+                  const pct = Math.round((bytes / totalLanguageBytes) * 100);
+                  return (
+                    <div class="grid grid-cols-[8rem_minmax(0,1fr)_3rem] items-center gap-3">
+                      <dt class="truncate text-ink-700 dark:text-ink-200">{language}</dt>
+                      <dd class="h-2 overflow-hidden rounded-sm bg-ink-200 dark:bg-ink-800">
+                        <div class="h-full bg-ink-700 dark:bg-ink-200" style={`width: ${pct}%`} />
+                      </dd>
+                      <dd class="text-right font-mono text-2xs text-ink-500 dark:text-ink-400">{pct}%</dd>
+                    </div>
+                  );
+                })}
+              </dl>
+            </section>
+          )}
 
           {/* Curation block — scores + Best for / Why listed / Caveats */}
           {(hasScores || hasCuration) && (

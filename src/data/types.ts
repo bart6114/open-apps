@@ -38,6 +38,47 @@ export type AppScores = {
   overall: number;
 };
 
+export type GithubRepositoryMetadata = {
+  full_name?: string;
+  html_url?: string;
+  homepage?: string | null;
+  description?: string | null;
+  fork?: boolean;
+  archived?: boolean;
+  disabled?: boolean;
+  private?: boolean;
+  visibility?: string;
+  default_branch?: string;
+  language?: string | null;
+  topics?: string[];
+  license?: {
+    key?: string | null;
+    name?: string | null;
+    spdx_id?: string | null;
+    url?: string | null;
+  } | null;
+  stargazers_count?: number;
+  watchers_count?: number;
+  forks_count?: number;
+  open_issues_count?: number;
+  subscribers_count?: number;
+  size?: number;
+  created_at?: string | null;
+  updated_at?: string | null;
+  pushed_at?: string | null;
+};
+
+export type AppHealth = {
+  status?: string;
+  tier?: string;
+  visibility?: string;
+  activityScore?: number;
+  maintenanceScore?: number;
+  metadataCompleteness?: number;
+  cleanupCandidate?: boolean;
+  staleReason?: string | null;
+};
+
 // ── Curation provenance: was this human-reviewed? ────────────────────
 /**
  * Every curated field needs a chain of trust. `reviewed: true` means
@@ -161,4 +202,22 @@ export type OpenSourceApp = {
 
   // ── Curation: provenance ──
   curation?: CurationInfo;
+
+  // ── Final schema raw blocks ────────────────────────────────────────
+  github?: {
+    repository?: GithubRepositoryMetadata;
+    languages?: Record<string, number>;
+    latestRelease?: Record<string, unknown> | null;
+    activity?: {
+      monthlyCommits?: Array<number | { month: string; commits: number }>;
+      totalCommitsKnown?: number;
+      contributorsKnown?: number;
+      openPullRequests?: number;
+    };
+    files?: Record<string, boolean>;
+    labels?: Array<Record<string, unknown>>;
+    sync?: Record<string, unknown>;
+  };
+  health?: AppHealth;
+  tier?: string;
 };

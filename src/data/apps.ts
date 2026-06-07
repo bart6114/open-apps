@@ -126,6 +126,9 @@ function normalize(g: GeneratedApp): OpenSourceApp {
     lenses: g.lenses,
     scores: g.scores,
     curation: g.curation,
+    github: g.github,
+    health: g.health,
+    tier: g.tier,
   };
 }
 
