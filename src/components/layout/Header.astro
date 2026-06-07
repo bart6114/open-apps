@@ -1,6 +1,7 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
 import { stats } from "../../data/stats";
+import { compact } from "../../lib/format";
 
 const githubUrl = stats.originalRepo;
 
@@ -15,16 +16,6 @@ const navItems = [
   { label: "About", href: "#about" },
 ];
 
-// Shields badge with no `label=` param so the rendered image is just
-// the number (e.g. "4k"), not "stars 4k". The button context already
-// says "GitHub", so the label is redundant.
-function compact(n: number): string {
-  if (n >= 1000) {
-    const k = n / 1000;
-    return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
-  }
-  return n.toString();
-}
 const starsLabel = compact(stats.stars);
 ---
 

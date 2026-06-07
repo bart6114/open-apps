@@ -38,12 +38,8 @@ const visible = categories
         class="m-0 grid list-none grid-cols-1 divide-y divide-ink-200 p-0 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-3 dark:divide-ink-800"
       >
         {
-          visible.map((cat, i) => (
-            <li
-              class={`divide-x divide-ink-200 dark:divide-ink-800 ${
-                i >= 1 ? "sm:border-l-0" : ""
-              }`}
-            >
+          visible.map((cat) => (
+            <li class="divide-x divide-ink-200 dark:divide-ink-800">
               <a
                 href={`/apps?category=${encodeURIComponent(cat.name)}`}
                 class="group flex h-full items-start gap-3 p-4 no-underline transition-colors hover:bg-ink-50/60 dark:hover:bg-ink-900/40"

@@ -1,17 +1,9 @@
 ---
 import Container from "../layout/Container.astro";
 import { stats } from "../../data/stats";
+import { compact } from "../../lib/format";
 
 const githubUrl = stats.originalRepo;
-
-// Compact number formatter: 1234 → "1.2k", 79 → "79".
-function compact(n: number): string {
-  if (n >= 1000) {
-    const k = n / 1000;
-    return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
-  }
-  return n.toString();
-}
 
 const trustStats: { value: string; label: string }[] = [
   { value: compact(stats.apps), label: "apps indexed" },
@@ -62,7 +54,7 @@ const trustStats: { value: string; label: string }[] = [
         >
           Find open-source apps you can actually<br class="hidden sm:block" />
           <span
-            class="bg-gradient-to-r from-ink-900 via-ink-700 to-ink-900 bg-clip-text text-transparent dark:from-ink-100 dark:via-ink-300 dark:dark:from-ink-100 dark:via-ink-300 dark:to-ink-100"
+            class="bg-gradient-to-r from-ink-900 via-ink-700 to-ink-900 bg-clip-text text-transparent dark:from-ink-100 dark:via-ink-300 dark:to-ink-100"
             style="background-size: 200% 200%; animation: fade-in-up 0.7s ease-out 0.1s both, gradient-shift 8s ease-in-out 1s infinite;"
           >
             run, study, and contribute to.

@@ -2,6 +2,7 @@
 import type { OpenSourceApp } from "../../data/types";
 import Icon from "../icons/Icon.astro";
 import { getOwnerAndRepoFromRepoUrl, getOwnerAvatarUrl } from "../../lib/repo";
+import { formatStars, formatRelative } from "../../lib/format";
 
 interface Props {
   app: OpenSourceApp;
@@ -54,35 +55,7 @@ const allStacks = [app.stack, ...(app.stacks ?? [])].filter(Boolean);
 const visibleStacks = allStacks.slice(0, 3);
 const stackOverflow = allStacks.length - visibleStacks.length;
 
-// Star count formatted compactly.
-function formatStars(n: number): string {
-  if (n >= 1000) {
-    const k = n / 1000;
-    return (k >= 10 ? Math.round(k).toString() : k.toFixed(1)) + "k";
-  }
-  return n.toString();
-}
-const starsLabel = typeof app.stars === "number" ? formatStars(app.stars) : null;
-
-// "Updated 2d ago" / "Updated 4mo ago" / "—" for missing data.
-function formatRelative(iso: string | null | undefined): string {
-  if (!iso) return "—";
-  const d = new Date(iso);
-  if (Number.isNaN(d.valueOf())) return "—";
-  const now = new Date();
-  const diffMs = now.valueOf() - d.valueOf();
-  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  if (days < 0) return "today";
-  if (days === 0) return "today";
-  if (days === 1) return "1d ago";
-  if (days < 30) return `${days}d ago`;
-  const months = Math.floor(days / 30);
-  if (months === 1) return "1mo ago";
-  if (months < 12) return `${months}mo ago`;
-  const years = Math.floor(months / 12);
-  if (years === 1) return "1y ago";
-  return `${years}y ago`;
-}
+const starsLabel = formatStars(app.stars);
 const updatedLabel = formatRelative(app.lastCommitAt);
 
 const detailHref = `/apps/${app.slug}`;

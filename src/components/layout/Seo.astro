@@ -26,10 +26,6 @@ interface Props {
   image?: string;
   /** og:type. Default: "website". Use "article" for blog posts / changelog. */
   type?: "website" | "article" | "profile";
-  /** Article published time (ISO 8601). */
-  publishedTime?: string;
-  /** Article modified time (ISO 8601). */
-  modifiedTime?: string;
   /** Set true to add noindex,nofollow. */
   noindex?: boolean;
   /** Extra JSON-LD payload (object) — typically SoftwareSourceCode on app pages. */
@@ -41,8 +37,6 @@ const {
   description,
   image = "/og-image.svg",
   type = "website",
-  publishedTime,
-  modifiedTime,
   noindex = false,
   jsonLd,
 } = Astro.props;
@@ -103,8 +97,6 @@ const organizationLd = {
 <meta property="og:image:alt" content="Open Source Apps — a directory of real open-source apps" />
 <meta property="og:site_name" content="Open Source Apps" />
 <meta property="og:locale" content="en" />
-{publishedTime && <meta property="article:published_time" content={publishedTime} />}
-{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />

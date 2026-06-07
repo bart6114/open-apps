@@ -15,10 +15,7 @@ import Seo from "./Seo.astro";
 interface Props {
   title: string;
   description: string;
-  image?: string;
   type?: "website" | "article" | "profile";
-  publishedTime?: string;
-  modifiedTime?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
@@ -26,10 +23,7 @@ interface Props {
 const {
   title,
   description,
-  image,
   type,
-  publishedTime,
-  modifiedTime,
   noindex,
   jsonLd,
 } = Astro.props;
@@ -53,10 +47,7 @@ const favicon =
     <Seo
       title={title}
       description={description}
-      image={image}
       type={type}
-      publishedTime={publishedTime}
-      modifiedTime={modifiedTime}
       noindex={noindex}
       jsonLd={jsonLd}
     />

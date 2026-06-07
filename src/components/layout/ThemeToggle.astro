@@ -7,9 +7,9 @@
 // preference changes (only meaningful when mode is "system").
 //
 // Implementation note: the actual <html class="dark"> toggle happens
-// in the inline script in `src/pages/index.astro` (see THEME_INIT).
-// That script runs before paint so the user never sees a flash of
-// the wrong theme.
+// in the inline script in `src/components/layout/BaseLayout.astro`
+// (THEME_INIT). That script runs before paint so the user never sees
+// a flash of the wrong theme.
 
 interface Props {
   class?: string;
