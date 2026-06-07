@@ -63,6 +63,21 @@ function escape(s) {
   return s.replace(/\r?\n+/g, " ").trim();
 }
 
+// Pick the forks count from the most current location. Schema v1
+// apps carry it under `github.repository.forks_count`; the index
+// shape flattens that to top-level `forks`; legacy records still
+// have it under `activity.forks`. Reading the wrong path left
+// every entry as "—" in the published llms-full.txt. Pinned by
+// scripts/build-llms-full.test.mjs.
+function pickForks(a) {
+  if (typeof a?.github?.repository?.forks_count === "number") {
+    return a.github.repository.forks_count;
+  }
+  if (typeof a?.forks === "number") return a.forks;
+  if (typeof a?.activity?.forks === "number") return a.activity.forks;
+  return null;
+}
+
 function render(apps) {
   const out = [];
   out.push("# Open Source Apps — full directory");
@@ -92,7 +107,7 @@ function render(apps) {
     out.push(`Platforms: ${Array.isArray(a.platforms) && a.platforms.length > 0 ? a.platforms.join(", ") : "—"}`);
     out.push(`Description: ${escape(a.description ?? "—")}`);
     out.push(`Stars: ${compactStars(a.stars)}`);
-    out.push(`Forks: ${compactStars(a.activity?.forks)}`);
+    out.push(`Forks: ${compactStars(pickForks(a))}`);
     out.push(`Last commit: ${escape(a.lastCommitAt ?? a.activity?.lastCommitAt ?? "—")} (${relativeTime(a.lastCommitAt ?? a.activity?.lastCommitAt)})`);
     out.push(`Status: ${escape(a.health?.status ?? a.activity?.status ?? "—")}`);
     out.push(`Tier: ${escape(a.tier ?? "—")}`);
