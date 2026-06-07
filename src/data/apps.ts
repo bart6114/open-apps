@@ -100,6 +100,7 @@ function normalize(g: GeneratedApp): OpenSourceApp {
     stack: g.stack,
     stacks: g.stacks,
     platforms: g.platforms ?? [],
+    distribution: g.distribution,
     category: g.category,
     tags: g.tags,
     logoUrl: g.logoUrl,

@@ -110,6 +110,20 @@ const latestReleaseAt =
   typeof latestRelease?.published_at === "string"
     ? latestRelease.published_at
     : undefined;
+const distributionChannels = app.distribution?.channels ?? [];
+const distributionLabel = (type: string) => ({
+  "app-store": "App Store",
+  "play-store": "Play Store",
+  fdroid: "F-Droid",
+  "github-releases": "GitHub Releases",
+  apk: "APK",
+  testflight: "TestFlight",
+  website: "Website",
+  snapcraft: "Snapcraft",
+  flathub: "Flathub",
+  "microsoft-store": "Microsoft Store",
+  other: "Download",
+}[type] ?? "Download");
 ---
 
 <!doctype html>
@@ -244,6 +258,28 @@ const latestReleaseAt =
               )}
             </div>
           </header>
+
+          {distributionChannels.length > 0 && (
+            <section class="mt-6 flex flex-wrap items-center gap-2">
+              <span class="text-2xs font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">
+                Download
+              </span>
+              {distributionChannels.map((channel) => (
+                <a
+                  href={channel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-outline"
+                  title={channel.notes}
+                >
+                  {channel.label ?? distributionLabel(channel.type)}
+                  {channel.platform && (
+                    <span class="text-ink-400 dark:text-ink-500">· {channel.platform}</span>
+                  )}
+                </a>
+              ))}
+            </section>
+          )}
 
           {/* Description */}
           <p class="mt-6 max-w-[68ch] text-[0.9375rem] sm:text-base leading-relaxed text-ink-700 dark:text-ink-200 m-0">

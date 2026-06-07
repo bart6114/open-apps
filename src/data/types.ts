@@ -79,6 +79,30 @@ export type AppHealth = {
   staleReason?: string | null;
 };
 
+export type DistributionChannel = {
+  type:
+    | "app-store"
+    | "play-store"
+    | "fdroid"
+    | "github-releases"
+    | "apk"
+    | "testflight"
+    | "website"
+    | "snapcraft"
+    | "flathub"
+    | "microsoft-store"
+    | "other";
+  platform?: string;
+  label?: string;
+  url: string;
+  verified?: boolean;
+  notes?: string;
+};
+
+export type AppDistribution = {
+  channels?: DistributionChannel[];
+};
+
 // ── Curation provenance: was this human-reviewed? ────────────────────
 /**
  * Every curated field needs a chain of trust. `reviewed: true` means
@@ -123,6 +147,7 @@ export type OpenSourceApp = {
   /** Additional stacks used in the codebase. */
   stacks?: string[];
   platforms: string[];
+  distribution?: AppDistribution;
   category: string;
   tags?: string[];
 
