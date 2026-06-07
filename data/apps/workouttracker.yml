@@ -1,0 +1,17 @@
+# WorkoutTracker — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "workouttracker"
+name: "WorkoutTracker"
+repoUrl: "https://github.com/jerichoi224/WorkoutTracker"
+description: "A Flutter app to help you keep track of workout sessions"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Health and Fitness"
+# Original submitter: Daniel Choi
+activity:
+  stars: 105
+  forks: 20
+  monthlyCommits: []
+  lastCommitAt: 2022-11-23
+  totalCommitsKnown: 55
+  updatedAt: 2026-06-06

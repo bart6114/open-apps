@@ -1,0 +1,17 @@
+# Pokedex — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "pokedex"
+name: "Pokedex"
+repoUrl: "https://github.com/scitbiz/flutter_pokedex"
+description: "Pokedex app built"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Games"
+# Original submitter: Pham Sy Hung
+activity:
+  stars: 2526
+  forks: 582
+  monthlyCommits: []
+  lastCommitAt: 2026-04-03
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

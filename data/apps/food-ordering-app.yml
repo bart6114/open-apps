@@ -1,0 +1,17 @@
+# Food Ordering App — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "food-ordering-app"
+name: "Food Ordering App"
+repoUrl: "https://github.com/Tarikul711/flutter-food-delivery-app-ui"
+description: "Food delivery App UI designed"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Lifestyle"
+# Original submitter: Tarikul Islam
+activity:
+  stars: 1201
+  forks: 595
+  monthlyCommits: []
+  lastCommitAt: 2024-08-03
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

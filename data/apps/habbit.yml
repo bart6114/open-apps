@@ -1,0 +1,17 @@
+# Habbit — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "habbit"
+name: "Habbit"
+repoUrl: "https://github.com/lzyy/habbit"
+description: "Habbit is an ultra simple habit tracker that just works"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: Li Zhong
+activity:
+  stars: 141
+  forks: 21
+  monthlyCommits: []
+  lastCommitAt: 2019-01-27
+  totalCommitsKnown: 53
+  updatedAt: 2026-06-06

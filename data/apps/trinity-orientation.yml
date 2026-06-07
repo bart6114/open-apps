@@ -1,0 +1,17 @@
+# Trinity Orientation — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "trinity-orientation"
+name: "Trinity Orientation"
+repoUrl: "https://github.com/matthewtory/trinity-orientation-2018"
+description: "Orientation week at Trinity College, U of T"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Productivity"
+# Original submitter: Matthew Tory
+activity:
+  stars: 619
+  forks: 220
+  monthlyCommits: []
+  lastCommitAt: 2024-01-24
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

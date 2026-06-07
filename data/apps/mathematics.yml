@@ -1,0 +1,16 @@
+# Mathematics — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "mathematics"
+name: "Mathematics"
+repoUrl: "https://github.com/j-j-gajjar/mathematics/"
+description: "Generate MCQ PDF / Question PDF : With Answer and Quiz [J-J-GAJJAR](https://github.com/j-j-gajjar)"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Education"
+activity:
+  stars: 143
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2025-11-26
+  totalCommitsKnown: 59
+  updatedAt: 2026-06-06

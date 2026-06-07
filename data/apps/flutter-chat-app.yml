@@ -1,0 +1,17 @@
+# Flutter Chat App — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "flutter-chat-app"
+name: "Flutter Chat App"
+repoUrl: "https://github.com/rohan20/flutter-chat-app"
+description: "A one-to-one chat app built on Flutter with firebase authentication and image sharing capability"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Social Network"
+# Original submitter: Rohan Taneja
+activity:
+  stars: 1149
+  forks: 319
+  monthlyCommits: []
+  lastCommitAt: 2021-09-21
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

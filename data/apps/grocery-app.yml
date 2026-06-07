@@ -1,0 +1,17 @@
+# Grocery-App — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "grocery-app"
+name: "Grocery-App"
+repoUrl: "https://github.com/Widle-Studio/Grocery-App"
+description: "Flutter Grocery Shopping App"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Shopping"
+# Original submitter: Widle
+activity:
+  stars: 1138
+  forks: 515
+  monthlyCommits: []
+  lastCommitAt: 2023-04-07
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

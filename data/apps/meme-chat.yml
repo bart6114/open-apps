@@ -1,0 +1,16 @@
+# Meme Chat — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "meme-chat"
+name: "Meme Chat"
+repoUrl: "https://github.com/efortuna/memechat"
+description: "Chat app on Flutter, using Firebase, Google Sign In, and device camera integration by a team of Googlers"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Social Network"
+activity:
+  stars: 543
+  forks: 151
+  monthlyCommits: []
+  lastCommitAt: 2021-02-08
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

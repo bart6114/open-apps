@@ -1,0 +1,17 @@
+# Flutter Browser App — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "flutter-browser-app"
+name: "Flutter Browser App"
+repoUrl: "https://github.com/pichillilorenzo/flutter_browser_app"
+description: "A Full-Featured Mobile Browser App"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: Lorenzo Pichilli
+activity:
+  stars: 586
+  forks: 204
+  monthlyCommits: []
+  lastCommitAt: 2024-10-25
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

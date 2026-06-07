@@ -1,0 +1,17 @@
+# Flitter — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "flitter"
+name: "Flitter"
+repoUrl: "https://github.com/dart-flitter/flitter"
+description: "Glitter app"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: Hadrien Lejard
+activity:
+  stars: 182
+  forks: 39
+  monthlyCommits: []
+  lastCommitAt: 2018-03-12
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

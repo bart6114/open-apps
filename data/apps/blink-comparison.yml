@@ -1,0 +1,17 @@
+# Blink Comparison — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "blink-comparison"
+name: "Blink Comparison"
+repoUrl: "https://github.com/proninyaroslav/blink-comparison"
+description: "Simplifies comparing photos of tamper-evident seals and patterns using your eyes"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: Yaroslav Pronin
+activity:
+  stars: 300
+  forks: 28
+  monthlyCommits: []
+  lastCommitAt: 2025-08-31
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

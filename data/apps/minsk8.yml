@@ -1,0 +1,17 @@
+# Minsk8 — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "minsk8"
+name: "Minsk8"
+repoUrl: "https://github.com/comerc/minsk8"
+description: "Marketplace with Hasura & Firebase"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Business"
+# Original submitter: comerc
+activity:
+  stars: 68
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2023-03-05
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

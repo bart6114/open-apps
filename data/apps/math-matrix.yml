@@ -1,0 +1,16 @@
+# Math Matrix — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "math-matrix"
+name: "Math Matrix"
+repoUrl: "https://github.com/jaysavsani07/math-metrix"
+description: "Brain training games composition [Mehul Makwana](https://github.com/mehulmk)"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Games"
+activity:
+  stars: 441
+  forks: 103
+  monthlyCommits: []
+  lastCommitAt: 2025-11-03
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

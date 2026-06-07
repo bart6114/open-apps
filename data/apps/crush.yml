@@ -1,0 +1,17 @@
+# Crush — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "crush"
+name: "Crush"
+repoUrl: "https://github.com/boeledi/flutter_crush"
+description: "How to build a Math-3 game, like Candy Crush, Bejeweled"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Games"
+# Original submitter: Didier Boelens
+activity:
+  stars: 613
+  forks: 236
+  monthlyCommits: []
+  lastCommitAt: 2024-04-02
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

@@ -1,0 +1,17 @@
+# Flutter WooCommerce app — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "flutter-woocommerce-app"
+name: "Flutter WooCommerce app"
+repoUrl: "https://github.com/woosignal/flutter-woocommerce-app"
+description: "A ready-made app template for WooCommerce stores"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Shopping"
+# Original submitter: WooSignal
+activity:
+  stars: 707
+  forks: 243
+  monthlyCommits: []
+  lastCommitAt: 2026-05-23
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

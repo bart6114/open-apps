@@ -1,0 +1,55 @@
+# Invoice Ninja — companion app for the Invoice Ninja platform.
+# Required — the app record. These never move without a rename PR.
+slug: invoice-ninja
+name: Invoice Ninja
+repoUrl: https://github.com/invoiceninja/flutter-mobile
+description: >-
+  Companion app for the Invoice Ninja platform. Invoicing, expenses,
+  time-billing, payments.
+stack: Flutter
+platforms: [Android, iOS]
+category: Business
+
+# Curated by hand, optional, slow to change.
+homepageUrl: https://invoiceninja.com
+license: AGPL-3.0
+status: active
+labels: [new]
+projectType: production
+stateManagement: Provider
+backend: REST API (Laravel)
+architecture: Feature-based
+difficulty: intermediate
+codebaseSize: large
+bestFor:
+  - Real commercial product with open codebase
+  - Subscription & payment integration patterns
+  - Multi-currency / multi-language business app
+  - Companion-app architecture (mobile + hosted backend)
+whyListed:
+  - Real production app used by paying customers
+  - Active commercial sponsor (Hillel Coren)
+  - Long-running codebase with stable API
+caveats:
+  - Tightly coupled to the hosted Invoice Ninja platform
+  - Some premium features require a paid plan
+  - AGPL-3.0 is copyleft — read the license before forking
+goodFirstIssues: https://github.com/invoiceninja/flutter-mobile/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+contributionGuide: https://github.com/invoiceninja/flutter-mobile/blob/master/CONTRIBUTING.md
+scores:
+  activity: 65
+  maturity: 92
+  learning: 78
+  contribution: 70
+  docs: 62
+  overall: 76
+
+# Auto-updated daily by .github/workflows/update-apps.yml.
+# Don't edit by hand — the next workflow run will overwrite it.
+activity:
+  stars: 1744
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2026-06-04
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

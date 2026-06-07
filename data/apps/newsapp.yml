@@ -1,0 +1,17 @@
+# NewsApp — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "newsapp"
+name: "NewsApp"
+repoUrl: "https://github.com/j-j-gajjar/FLUTTER_NewsApp"
+description: "Live News Using API with Many API filterrs"
+stack: Flutter
+platforms: [Android, iOS]
+category: "News and Magazine"
+# Original submitter: J-J-GAJJAR
+activity:
+  stars: 252
+  forks: 50
+  monthlyCommits: []
+  lastCommitAt: 2025-09-07
+  totalCommitsKnown: 52
+  updatedAt: 2026-06-06

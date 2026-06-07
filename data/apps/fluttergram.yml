@@ -1,0 +1,17 @@
+# FlutterGram — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "fluttergram"
+name: "FlutterGram"
+repoUrl: "https://github.com/mdanics/fluttergram"
+description: "Complete Instagram based on Firestore & Google Functions"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Social Network"
+# Original submitter: MDanics
+activity:
+  stars: 2394
+  forks: 616
+  monthlyCommits: []
+  lastCommitAt: 2024-08-07
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

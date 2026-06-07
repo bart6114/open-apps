@@ -1,0 +1,17 @@
+# BeeCount — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "beecount"
+name: "BeeCount"
+repoUrl: "https://github.com/TNT-Likely/BeeCount"
+description: "Privacy-first cross-platform expense tracker with self-hostable cloud sync (BeeCount Cloud, iCloud, Supabase, WebDAV, S3) and offline-first design"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Finance"
+# Original submitter: TNT-Likely
+activity:
+  stars: 1715
+  forks: 242
+  monthlyCommits: []
+  lastCommitAt: 2026-06-05
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

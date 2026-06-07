@@ -1,0 +1,17 @@
+# Platypus Crypto — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "platypus-crypto"
+name: "Platypus Crypto"
+repoUrl: "https://github.com/Blakexx/CryptoTracker"
+description: "Platypus Crypto is an ad-free cross-platform robust solution for tracking cryptocurrency assets"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Finance"
+# Original submitter: Blake Bottum
+activity:
+  stars: 192
+  forks: 0
+  monthlyCommits: []
+  lastCommitAt: 2021-09-18
+  totalCommitsKnown: 100
+  updatedAt: 2026-06-06

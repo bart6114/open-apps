@@ -1,0 +1,17 @@
+# Dashboard — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "dashboard"
+name: "Dashboard"
+repoUrl: "https://github.com/Ivaskuu/dashboard"
+description: "Dashboard concept made"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Personalization"
+# Original submitter: Ivascu Adrian
+activity:
+  stars: 946
+  forks: 281
+  monthlyCommits: []
+  lastCommitAt: 2019-08-09
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

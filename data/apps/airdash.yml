@@ -1,0 +1,17 @@
+# Airdash — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "airdash"
+name: "Airdash"
+repoUrl: "https://github.com/simonbengtsson/airdash"
+description: "Share files to any device"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: Simon Bengtsson
+activity:
+  stars: 667
+  forks: 126
+  monthlyCommits: []
+  lastCommitAt: 2026-02-16
+  totalCommitsKnown: 0
+  updatedAt: 2026-06-06

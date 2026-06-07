@@ -1,0 +1,17 @@
+# FlutterWeather — auto-generated from README-LEGACY.md.
+# Hand-curate bestFor / whyListed / caveats / scores after import.
+slug: "flutterweather"
+name: "FlutterWeather"
+repoUrl: "https://github.com/ArizArmeidi/FlutterWeather"
+description: "Weather App with clean and modern UI"
+stack: Flutter
+platforms: [Android, iOS]
+category: "Tools"
+# Original submitter: Ariz Armeidi
+activity:
+  stars: 342
+  forks: 117
+  monthlyCommits: []
+  lastCommitAt: 2024-01-19
+  totalCommitsKnown: 67
+  updatedAt: 2026-06-06
