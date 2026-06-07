@@ -33,6 +33,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Refresh activity from GitHub API
         env:
@@ -40,8 +44,8 @@ jobs:
           LIMIT: ${{ github.event.inputs.limit || '0' }}
         run: node scripts/refresh-apps-activity.mjs "$LIMIT"
 
-      - name: Build data/apps/*.yml → data/generated/apps.json
-        run: node scripts/build-apps-json.mjs
+      - name: Validate and build generated data
+        run: npm run build:data
 
       - name: Open PR if anything changed
         run: |
@@ -49,12 +53,12 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git checkout -b chore/refresh-apps-activity-$(date -u +%Y%m%d)
-            git add data/apps/ data/generated/
+            git add data/apps/
             git commit -m "chore(data): refresh app activity"
             git push -u origin HEAD
             gh pr create \
               --title "chore(data): refresh app activity" \
-              --body "Automated daily refresh of \`activity:\` blocks from the GitHub API. Stale entries (>365d no commit) are dropped from the build artifact in \`data/generated/apps.json\`." \
+              --body "Automated daily refresh of GitHub activity metadata. Generated JSON is rebuilt during deploy and is not committed." \
               --head "$(git rev-parse --abbrev-ref HEAD)" \
               --base main
           else
