@@ -1,14 +1,38 @@
 ---
+// SPDX-License-Identifier: MIT
+
+/**
+ * BaseLayout — wraps every page. Owns the theme-detection inline script
+ * and the global shell (Header, Footer). Per-page SEO (title, description,
+ * OG, JSON-LD) is delegated to <Seo /> so each page can declare what it
+ * needs without polluting the layout file.
+ */
 import "../../styles/global.css";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
+import Seo from "./Seo.astro";
 
 interface Props {
   title: string;
   description: string;
+  image?: string;
+  type?: "website" | "article" | "profile";
+  publishedTime?: string;
+  modifiedTime?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  type,
+  publishedTime,
+  modifiedTime,
+  noindex,
+  jsonLd,
+} = Astro.props;
 
 const favicon =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2318181b'/%3E%3C/svg%3E";
@@ -20,9 +44,23 @@ const favicon =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
     <link rel="icon" href={favicon} />
-    <title>{title}</title>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" href="/llm.txt" title="LLM usage guidance" />
+
+    <Seo
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      noindex={noindex}
+      jsonLd={jsonLd}
+    />
+
     <slot name="head" />
     <script is:inline>
       (function () {

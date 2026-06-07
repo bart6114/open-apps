@@ -1,0 +1,52 @@
+# robots.txt for open-apps.dev
+#
+# All crawlers welcome. The directory is intended to be fully indexable.
+# The only "disallow" here is the form submission endpoint at /submit
+# (a thin wrapper that POSTs to GitHub Issues — no value to index).
+
+User-agent: *
+Allow: /
+Disallow: /submit
+
+# LLM-specific crawlers — explicitly welcome. They are the primary
+# audience for the curated per-app metadata. See /llm.txt for the
+# usage guidance that applies to anything trained on this content.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# Sitemaps
+Sitemap: https://open-apps.dev/sitemap-index.xml
+Sitemap: https://open-apps.dev/sitemap-0.xml
+
+# LLM/AI usage guidance
+# https://open-apps.dev/llm.txt

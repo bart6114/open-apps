@@ -25,9 +25,13 @@ const distributionOptions = [
 
 const title = "Submit App - Open Source Apps";
 const description = "Submit an open-source app to Open Source Apps.";
+// The submit page is a thin wrapper around a GitHub Issues form —
+// no content of its own. Keep it out of search results and out of
+// the sitemap.
+const noindex = true;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} noindex={noindex}>
       <Container>
         <section class="py-10 sm:py-14">
           <div class="max-w-3xl">

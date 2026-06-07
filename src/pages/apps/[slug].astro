@@ -127,9 +127,43 @@ const distributionLabel = (type: string) => ({
 
 const title = `${app.name} — Open Source Apps`;
 const description = `${app.name} — ${app.description}`;
+
+// JSON-LD structured data for this app. Uses schema.org's
+// SoftwareSourceCode type — that's the right fit for a source
+// repository, more so than the generic SoftwareApplication. Helps
+// Google show rich results (programming language, license, last
+// commit date) on app detail pages.
+const jsonLd: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: app.name,
+  headline: app.name,
+  description: app.description,
+  url: app.repoUrl,
+  codeRepository: app.repoUrl,
+  ...(app.homepageUrl ? { sameAs: [app.repoUrl, app.homepageUrl] } : { sameAs: [app.repoUrl] }),
+  ...(app.stack ? { programmingLanguage: app.stack } : {}),
+  ...(app.license ? { license: app.license } : {}),
+  ...(app.category ? { applicationCategory: app.category } : {}),
+  ...(app.platforms && app.platforms.length > 0
+    ? { operatingSystem: app.platforms.join(", ") }
+    : {}),
+  ...(app.tags && app.tags.length > 0 ? { keywords: app.tags.join(", ") } : {}),
+  ...(app.addedAt ? { dateCreated: app.addedAt } : {}),
+  ...(app.lastCommitAt ? { dateModified: app.lastCommitAt } : {}),
+  ...(app.github?.repository?.stargazers_count !== undefined
+    ? { interactionStatistic: {
+        "@type": "InteractionCounter",
+        interactionType: { "@type": "LikeAction" },
+        userInteractionCount: app.github.repository.stargazers_count,
+      } }
+    : {}),
+  author: { "@type": "Organization", name: owner ?? app.name, url: app.repoUrl },
+  isAccessibleForFree: true,
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
       <Container>
         <article class="pt-10 sm:pt-14">
           {/* Breadcrumb */}
