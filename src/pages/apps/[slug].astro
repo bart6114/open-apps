@@ -1,10 +1,8 @@
 ---
-import "../../styles/global.css";
+import BaseLayout from "../../components/layout/BaseLayout.astro";
 import type { OpenSourceApp } from "../../data/types";
 import { apps } from "../../data/apps";
 import Container from "../../components/layout/Container.astro";
-import Header from "../../components/layout/Header.astro";
-import Footer from "../../components/layout/Footer.astro";
 import Icon from "../../components/icons/Icon.astro";
 import { getOwnerAndRepoFromRepoUrl } from "../../lib/repo";
 import { SCORE_DIMENSIONS, SCORE_LABELS, scoreTier, scoreLabel, SCORE_REASONING } from "../../lib/scores";
@@ -126,55 +124,12 @@ const distributionLabel = (type: string) => ({
   "microsoft-store": "Microsoft Store",
   other: "Download",
 }[type] ?? "Download");
+
+const title = `${app.name} — Open Source Apps`;
+const description = `${app.name} — ${app.description}`;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content={`${app.name} — ${app.description}`}
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2318181b'/%3E%3C/svg%3E"
-    />
-    <title>{app.name} — Open Source Apps</title>
-    <script is:inline>
-      (function () {
-        var STORAGE_KEY = "open-apps-theme";
-        function getMode() {
-          var stored = localStorage.getItem(STORAGE_KEY);
-          if (stored === "light" || stored === "dark" || stored === "system") return stored;
-          return "system";
-        }
-        function apply(mode) {
-          var resolved =
-            mode === "system"
-              ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-              : mode;
-          var root = document.documentElement;
-          if (resolved === "dark") root.classList.add("dark");
-          else root.classList.remove("dark");
-          root.dataset.theme = mode;
-          root.dataset.resolvedTheme = resolved;
-        }
-        apply(getMode());
-        window.addEventListener("theme:set", function (e) { apply(e.detail); });
-        var mq = window.matchMedia("(prefers-color-scheme: dark)");
-        mq.addEventListener("change", function () {
-          if (getMode() === "system") apply("system");
-        });
-      })();
-    </script>
-  </head>
-  <body class="min-h-screen bg-white text-ink-900 dark:bg-ink-950 dark:text-ink-100">
-    <Header />
-
-    <main>
+<BaseLayout title={title} description={description}>
       <Container>
         <article class="pt-10 sm:pt-14">
           {/* Breadcrumb */}
@@ -680,10 +635,6 @@ const distributionLabel = (type: string) => ({
               e-commerce page. Use the Apps list to find more by stack. */}
         </article>
       </Container>
-    </main>
-
-    <Footer />
-
     <style>
       @reference "../../styles/global.css";
 
@@ -694,5 +645,4 @@ const distributionLabel = (type: string) => ({
         @apply bg-ink-50 dark:bg-ink-900/60;
       }
     </style>
-  </body>
-</html>
+</BaseLayout>

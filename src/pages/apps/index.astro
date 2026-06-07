@@ -1,7 +1,5 @@
 ---
-import "../../styles/global.css";
-import Header from "../../components/layout/Header.astro";
-import Footer from "../../components/layout/Footer.astro";
+import BaseLayout from "../../components/layout/BaseLayout.astro";
 import Container from "../../components/layout/Container.astro";
 import SmartLensTabs from "../../components/home/SmartLensTabs.astro";
 import RefinePanel from "../../components/home/RefinePanel.astro";
@@ -86,55 +84,13 @@ if (initialFilters.licenses?.length)
   filterSummary.push(`license: ${initialFilters.licenses.join(", ")}`);
 if (initialFilters.labels?.length) filterSummary.push(`label: ${initialFilters.labels.join(", ")}`);
 if (initialLens) filterSummary.push(`lens: ${initialLens}`);
+
+const title = "Browse open-source apps — Open Source Apps";
+const description =
+  "Search and filter real open-source applications by platform, stack, category, license, and activity.";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator"={Astro.generator} />
-    <meta
-      name="description"
-      content="Search and filter real open-source applications by platform, stack, category, license, and activity."
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2318181b'/%3E%3C/svg%3E"
-    />
-    <title>Browse open-source apps — Open Source Apps</title>
-    <script is:inline>
-      (function () {
-        var STORAGE_KEY = "open-apps-theme";
-        function getMode() {
-          var stored = localStorage.getItem(STORAGE_KEY);
-          if (stored === "light" || stored === "dark" || stored === "system") return stored;
-          return "system";
-        }
-        function apply(mode) {
-          var resolved =
-            mode === "system"
-              ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-              : mode;
-          var root = document.documentElement;
-          if (resolved === "dark") root.classList.add("dark");
-          else root.classList.remove("dark");
-          root.dataset.theme = mode;
-          root.dataset.resolvedTheme = resolved;
-        }
-        apply(getMode());
-        window.addEventListener("theme:set", function (e) { apply(e.detail); });
-        var mq = window.matchMedia("(prefers-color-scheme: dark)");
-        mq.addEventListener("change", function () {
-          if (getMode() === "system") apply("system");
-        });
-      })();
-    </script>
-  </head>
-  <body class="min-h-screen bg-white text-ink-900 dark:bg-ink-950 dark:text-ink-100">
-    <Header />
-
-    <main>
+<BaseLayout title={title} description={description}>
       {/* ── Top: title + search + sticky toolbar ── */}
       <section
         class="border-b border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-950"
@@ -404,10 +360,6 @@ if (initialLens) filterSummary.push(`lens: ${initialLens}`);
           </div>
         </Container>
       </section>
-    </main>
-
-    <Footer />
-
     {/* Initial state for the search form is server-rendered; this script
         only handles debounced search updates + chip removal so the URL
         stays canonical and SSR matches client expectations. */}
@@ -504,5 +456,4 @@ if (initialLens) filterSummary.push(`lens: ${initialLens}`);
         display: none;
       }
     </style>
-  </body>
-</html>
+</BaseLayout>

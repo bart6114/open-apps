@@ -1,8 +1,6 @@
 ---
-import "../styles/global.css";
+import BaseLayout from "../components/layout/BaseLayout.astro";
 import Container from "../components/layout/Container.astro";
-import Header from "../components/layout/Header.astro";
-import Footer from "../components/layout/Footer.astro";
 import { stacks } from "../data/stacks";
 import { categories } from "../data/categories";
 
@@ -24,44 +22,12 @@ const distributionOptions = [
   { type: "testflight", label: "TestFlight", platform: "ios", placeholder: "https://testflight.apple.com/join/..." },
   { type: "website", label: "Website download", platform: "web", placeholder: "https://example.com/download" },
 ];
+
+const title = "Submit App - Open Source Apps";
+const description = "Submit an open-source app to Open Source Apps.";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Submit an open-source app to Open Source Apps." />
-    <title>Submit App - Open Source Apps</title>
-    <script is:inline>
-      (function () {
-        var STORAGE_KEY = "open-apps-theme";
-        function getMode() {
-          var stored = localStorage.getItem(STORAGE_KEY);
-          if (stored === "light" || stored === "dark" || stored === "system") return stored;
-          return "system";
-        }
-        function apply(mode) {
-          var resolved =
-            mode === "system"
-              ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-              : mode;
-          var root = document.documentElement;
-          if (resolved === "dark") root.classList.add("dark");
-          else root.classList.remove("dark");
-          root.dataset.theme = mode;
-          root.dataset.resolvedTheme = resolved;
-        }
-        apply(getMode());
-        window.addEventListener("theme:set", function (e) { apply(e.detail); });
-      })();
-    </script>
-  </head>
-  <body class="min-h-screen bg-white text-ink-900 dark:bg-ink-950 dark:text-ink-100">
-    <Header />
-
-    <main>
+<BaseLayout title={title} description={description}>
       <Container>
         <section class="py-10 sm:py-14">
           <div class="max-w-3xl">
@@ -188,9 +154,6 @@ const distributionOptions = [
           </div>
         </section>
       </Container>
-    </main>
-
-    <Footer />
 
     <style>
       @reference "../styles/global.css";
@@ -443,5 +406,4 @@ const distributionOptions = [
 
       document.querySelector("#submit-form").addEventListener("input", refreshYaml);
     </script>
-  </body>
-</html>
+</BaseLayout>
