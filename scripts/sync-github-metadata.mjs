@@ -8,12 +8,17 @@
  * This intentionally skips legacy flat YAML files until the catalog migration
  * happens, because stringifying legacy files would erase comments and create a
  * noisy PR. After migration, this becomes the main metadata sync job.
+ *
+ * Uses a 2-attempt retry with exponential backoff for transient
+ * 5xx errors and pauses for the X-RateLimit-Reset window on 403/429
+ * instead of killing the whole run.
  */
 
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseAppYaml, stringifyAppYaml } from "./app-schema.mjs";
+import { ghFetch, pLimit } from "./_github.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -26,22 +31,15 @@ if (!TOKEN) {
   process.exit(1);
 }
 
-const HEADERS = {
-  Accept: "application/vnd.github+json",
-  Authorization: `Bearer ${TOKEN}`,
-  "X-GitHub-Api-Version": "2022-11-28",
-  "User-Agent": "open-apps-bot",
-};
-
 async function gh(path) {
-  const res = await fetch(`https://api.github.com${path}`, { headers: HEADERS });
+  const res = await ghFetch(path, { token: TOKEN });
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`${path}: ${res.status} ${res.statusText}`);
   return res.json();
 }
 
 async function ghWithHeaders(path) {
-  const res = await fetch(`https://api.github.com${path}`, { headers: HEADERS });
+  const res = await ghFetch(path, { token: TOKEN });
   if (res.status === 404) return { data: null, headers: res.headers };
   if (!res.ok) throw new Error(`${path}: ${res.status} ${res.statusText}`);
   return { data: await res.json(), headers: res.headers };
@@ -154,28 +152,33 @@ async function syncOne(raw) {
   return raw;
 }
 
+async function processFile(file) {
+  const path = join(APPS_DIR, file);
+  const slug = basename(file, ".yml");
+  const original = await readFile(path, "utf8");
+  const raw = parseAppYaml(original, slug);
+  if (raw.schemaVersion !== 1) {
+    return { updated: 0, skipped: 1 };
+  }
+  const next = stringifyAppYaml(await syncOne(raw));
+  if (next !== original) {
+    await writeFile(path, next, "utf8");
+    console.log(`[sync-github] ${slug}: updated`);
+    return { updated: 1, skipped: 0 };
+  }
+  return { updated: 0, skipped: 0 };
+}
+
 async function main() {
   const entries = (await readdir(APPS_DIR)).filter((f) => f.endsWith(".yml")).sort();
   const files = LIMIT > 0 ? entries.slice(0, LIMIT) : entries;
-  let updated = 0;
-  let skipped = 0;
 
-  for (const file of files) {
-    const path = join(APPS_DIR, file);
-    const slug = basename(file, ".yml");
-    const original = await readFile(path, "utf8");
-    const raw = parseAppYaml(original, slug);
-    if (raw.schemaVersion !== 1) {
-      skipped++;
-      continue;
-    }
-    const next = stringifyAppYaml(await syncOne(raw));
-    if (next !== original) {
-      await writeFile(path, next, "utf8");
-      updated++;
-      console.log(`[sync-github] ${slug}: updated`);
-    }
-  }
+  // 3 in-flight keeps us under the 5000/hr token rate limit while
+  // still cutting the wall time to ~1/3 of the sequential version.
+  const CONCURRENCY = 3;
+  const results = await pLimit(CONCURRENCY, files, processFile);
+  const updated = results.reduce((s, r) => s + r.updated, 0);
+  const skipped = results.reduce((s, r) => s + r.skipped, 0);
 
   console.log(`[sync-github] done updated=${updated} skipped=${skipped} total=${files.length}`);
 }

@@ -17,12 +17,17 @@
  * Run with: `node scripts/refresh-apps-activity.mjs [limit]`
  * Requires GITHUB_TOKEN env var (60k req/hr with token, 60/hr
  * without — use a token).
+ *
+ * Uses a 2-attempt retry with exponential backoff for transient
+ * 5xx errors and pauses for the X-RateLimit-Reset window on 403/429
+ * instead of killing the whole run.
  */
 
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
+import { ghFetch, pLimit } from "./_github.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -37,14 +42,6 @@ if (!TOKEN) {
   process.exit(1);
 }
 
-const API = "https://api.github.com";
-const HEADERS = {
-  Accept: "application/vnd.github+json",
-  Authorization: `Bearer ${TOKEN}`,
-  "X-GitHub-Api-Version": "2022-11-28",
-  "User-Agent": "open-apps-bot",
-};
-
 function parseRepo(url) {
   if (!url) return null;
   const m = url.match(/github\.com\/([^/]+)\/([^/?#]+)/);
@@ -53,28 +50,18 @@ function parseRepo(url) {
 }
 
 async function gh(path) {
-  const res = await fetch(`${API}${path}`, { headers: HEADERS });
+  const res = await ghFetch(path, { token: TOKEN });
+  if (res.status === 404) return null;
   if (!res.ok) {
-    if (res.status === 404) return null;
-    if (res.status === 403) {
-      const reset = res.headers.get("x-ratelimit-reset");
-      console.error(`[refresh] rate limited until ${reset}`);
-      process.exit(1);
-    }
     throw new Error(`GitHub API ${path} → ${res.status} ${res.statusText}`);
   }
   return res.json();
 }
 
 async function ghWithHeaders(path) {
-  const res = await fetch(`${API}${path}`, { headers: HEADERS });
+  const res = await ghFetch(path, { token: TOKEN });
+  if (res.status === 404) return { data: null, headers: res.headers };
   if (!res.ok) {
-    if (res.status === 404) return { data: null, headers: res.headers };
-    if (res.status === 403) {
-      const reset = res.headers.get("x-ratelimit-reset");
-      console.error(`[refresh] rate limited until ${reset}`);
-      process.exit(1);
-    }
     throw new Error(`GitHub API ${path} → ${res.status} ${res.statusText}`);
   }
   return { data: await res.json(), headers: res.headers };
@@ -209,45 +196,49 @@ function patchYmlActivity(text, activity) {
   return text.replace(/\s*$/, "") + "\n\n" + block + "\n";
 }
 
+async function processFile(file) {
+  const slug = basename(file, ".yml");
+  const path = join(APPS_DIR, file);
+  const text = await readFile(path, "utf8");
+  const repoMatch = text.match(/^repoUrl:\s*(\S+)/m);
+  if (!repoMatch) {
+    console.warn(`[refresh] ${slug}: no repoUrl, skipping`);
+    return { updated: 0, failed: 0 };
+  }
+  try {
+    const activity = await fetchActivity(repoMatch[1]);
+    if (!activity) {
+      console.warn(`[refresh] ${slug}: repo not found, skipping`);
+      return { updated: 0, failed: 1 };
+    }
+    const updated_yml = patchYmlActivity(text, activity);
+    if (updated_yml !== text) {
+      await writeFile(path, updated_yml, "utf8");
+      console.log(
+        `[refresh] ${slug}: stars=${activity.stars} forks=${activity.forks} last=${activity.lastCommitAt}`,
+      );
+      return { updated: 1, failed: 0 };
+    }
+    console.log(`[refresh] ${slug}: no change`);
+    return { updated: 0, failed: 0 };
+  } catch (err) {
+    console.error(`[refresh] ${slug}: ${err.message}`);
+    return { updated: 0, failed: 1 };
+  }
+}
+
 async function main() {
   const entries = (await readdir(APPS_DIR)).filter((f) => f.endsWith(".yml"));
   const files = LIMIT > 0 ? entries.slice(0, LIMIT) : entries;
   console.log(`[refresh] processing ${files.length} of ${entries.length} apps`);
 
-  let updated = 0;
-  let failed = 0;
-
-  for (const file of files) {
-    const slug = basename(file, ".yml");
-    const path = join(APPS_DIR, file);
-    const text = await readFile(path, "utf8");
-    const repoMatch = text.match(/^repoUrl:\s*(\S+)/m);
-    if (!repoMatch) {
-      console.warn(`[refresh] ${slug}: no repoUrl, skipping`);
-      continue;
-    }
-    try {
-      const activity = await fetchActivity(repoMatch[1]);
-      if (!activity) {
-        console.warn(`[refresh] ${slug}: repo not found, skipping`);
-        failed++;
-        continue;
-      }
-      const updated_yml = patchYmlActivity(text, activity);
-      if (updated_yml !== text) {
-        await writeFile(path, updated_yml, "utf8");
-        updated++;
-        console.log(
-          `[refresh] ${slug}: stars=${activity.stars} forks=${activity.forks} last=${activity.lastCommitAt}`,
-        );
-      } else {
-        console.log(`[refresh] ${slug}: no change`);
-      }
-    } catch (err) {
-      failed++;
-      console.error(`[refresh] ${slug}: ${err.message}`);
-    }
-  }
+  // 5 in-flight requests is well within the 5000/hr token rate limit
+  // for 85 apps × 5 endpoints ≈ 425 reqs. Tune CONCURRENCY down if
+  // the 06:00 UTC job starts tripping the secondary rate limiter.
+  const CONCURRENCY = 5;
+  const results = await pLimit(CONCURRENCY, files, processFile);
+  const updated = results.reduce((s, r) => s + r.updated, 0);
+  const failed = results.reduce((s, r) => s + r.failed, 0);
 
   console.log(`[refresh] done. updated=${updated} failed=${failed} total=${files.length}`);
 }

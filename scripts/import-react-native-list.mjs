@@ -16,23 +16,21 @@
  *
  * Usage: node scripts/import-react-native-list.mjs
  *        GITHUB_TOKEN=ghp_xxx node scripts/import-react-native-list.mjs
+ *
+ * Uses a 2-attempt retry with exponential backoff for transient
+ * 5xx errors and pauses for the X-RateLimit-Reset window on 403/429.
  */
 
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { ghFetch } from "./_github.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const OUT = join(ROOT, "data", "generated", "react-native-candidates.json");
 
 const TOKEN = process.env.GITHUB_TOKEN;
-const HEADERS = {
-  Accept: "application/vnd.github+json",
-  "X-GitHub-Api-Version": "2022-11-28",
-  "User-Agent": "open-apps-import",
-  ...(TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}),
-};
 
 // Candidate list from awesome-react-native "Open Source Apps" section.
 // Format: [slug, owner, repo, name, category]
@@ -106,12 +104,14 @@ const CANDIDATES = [
 ];
 
 async function fetchRepo(owner, repo) {
-  const url = `https://api.github.com/repos/${owner}/${repo}`;
-  const res = await fetch(url, { headers: HEADERS });
+  const res = await ghFetch(`/repos/${owner}/${repo}`, {
+    token: TOKEN,
+    userAgent: "open-apps-import",
+  });
   if (res.status === 404) return { notFound: true };
   if (!res.ok) {
     const body = await res.text().catch(() => "");
-    throw new Error(`${url}: ${res.status} ${res.statusText}\n${body.slice(0, 200)}`);
+    throw new Error(`/repos/${owner}/${repo}: ${res.status} ${res.statusText}\n${body.slice(0, 200)}`);
   }
   return res.json();
 }

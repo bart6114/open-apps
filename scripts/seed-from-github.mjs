@@ -22,14 +22,14 @@
  * changed).
  */
 
-import { readFile, writeFile, readdir, mkdir } from "node:fs/promises";
+import { readFile, writeFile, readdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { ghFetch, rateLimitWaitMs, sleep } from "./_github.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const APPS_DIR = join(ROOT, "data", "apps");
-const CACHE_DIR = join(ROOT, "data", ".cache");
 
 const SEARCH_QUERIES = [
   // Cover the long tail: 500+ stars, plus a small slop for 250+ to
@@ -39,15 +39,17 @@ const SEARCH_QUERIES = [
 ];
 
 async function searchRepos(q, page = 1, perPage = 100) {
-  const url = `https://api.github.com/search/repositories?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=${perPage}&page=${page}`;
-  const res = await fetch(url, {
-    headers: { Accept: "application/vnd.github+json", "User-Agent": "open-apps-seed" },
-  });
-  if (!res.ok) {
-    if (res.status === 403) {
-      const reset = res.headers.get("x-ratelimit-reset");
-      throw new Error(`rate limited; reset at ${new Date(+reset * 1000).toISOString()}`);
+  const path = `/search/repositories?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=${perPage}&page=${page}`;
+  const res = await ghFetch(path, { userAgent: "open-apps-seed" });
+  if (res.status === 403 || res.status === 429) {
+    const wait = rateLimitWaitMs(res);
+    if (wait > 0) {
+      console.warn(`[seed] rate limited, waiting ${Math.round(wait / 1000)}s`);
+      await sleep(wait);
     }
+    throw new Error(`rate limited for query ${q}`);
+  }
+  if (!res.ok) {
     throw new Error(`search ${q} → ${res.status}`);
   }
   return res.json();
@@ -117,7 +119,6 @@ function patchActivity(text, stars, pushedAt) {
 }
 
 async function main() {
-  await mkdir(CACHE_DIR, { recursive: true });
   const ymls = await loadYmls();
   console.log(`[seed] loaded ${ymls.size} ymls`);
 

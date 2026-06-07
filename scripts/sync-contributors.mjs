@@ -30,6 +30,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { ghFetch } from "./_github.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -38,13 +39,6 @@ const REPO_STATS_TARGET = join(ROOT, "data", "generated", "repo-stats.json");
 
 const REPO = process.env.OPEN_APPS_REPO ?? "tortuvshin/open-apps";
 const TOKEN = process.env.GITHUB_TOKEN;
-
-const HEADERS = {
-  Accept: "application/vnd.github+json",
-  "X-GitHub-Api-Version": "2022-11-28",
-  "User-Agent": "open-apps-contributors-sync",
-  ...(TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}),
-};
 
 function nextPageUrl(linkHeader) {
   if (!linkHeader) return null;
@@ -62,7 +56,11 @@ async function* paginate(path) {
   const sep = base.includes("?") ? "&" : "?";
   let url = `${base}${sep}per_page=100&anon=1`;
   while (url) {
-    const res = await fetch(url, { headers: HEADERS });
+    const path = url.replace(/^https:\/\/api\.github\.com/, "");
+    const res = await ghFetch(path, {
+      token: TOKEN,
+      userAgent: "open-apps-contributors-sync",
+    });
     if (!res.ok) {
       const body = await res.text().catch(() => "");
       throw new Error(`${url}: ${res.status} ${res.statusText}\n${body.slice(0, 200)}`);
@@ -104,7 +102,10 @@ async function fetchContributors() {
 }
 
 async function fetchRepoStats() {
-  const res = await fetch(`https://api.github.com/repos/${REPO}`, { headers: HEADERS });
+  const res = await ghFetch(`/repos/${REPO}`, {
+    token: TOKEN,
+    userAgent: "open-apps-contributors-sync",
+  });
   if (!res.ok) {
     const body = await res.text().catch(() => "");
     throw new Error(`GET /repos/${REPO}: ${res.status} ${res.statusText}\n${body.slice(0, 200)}`);
