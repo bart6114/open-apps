@@ -14,6 +14,16 @@ const platformOptions = [
   { id: "windows", name: "Windows" },
   { id: "linux", name: "Linux" },
 ];
+
+const distributionOptions = [
+  { type: "app-store", label: "App Store", platform: "ios", placeholder: "https://apps.apple.com/..." },
+  { type: "play-store", label: "Play Store", platform: "android", placeholder: "https://play.google.com/store/apps/details?id=..." },
+  { type: "fdroid", label: "F-Droid", platform: "android", placeholder: "https://f-droid.org/packages/..." },
+  { type: "github-releases", label: "GitHub Releases", platform: "android", placeholder: "https://github.com/owner/repo/releases" },
+  { type: "apk", label: "APK download", platform: "android", placeholder: "https://example.com/app.apk" },
+  { type: "testflight", label: "TestFlight", platform: "ios", placeholder: "https://testflight.apple.com/join/..." },
+  { type: "website", label: "Website download", platform: "web", placeholder: "https://example.com/download" },
+];
 ---
 
 <!doctype html>
@@ -137,6 +147,27 @@ const platformOptions = [
                   <input id="app-tags" type="text" placeholder="self-hosted, photos, offline-first" class="field" />
                 </label>
 
+                <fieldset class="grid gap-2">
+                  <legend class="text-2xs font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">
+                    Download links
+                  </legend>
+                  <div class="grid gap-2">
+                    {distributionOptions.map((option) => (
+                      <label class="grid gap-1 rounded-md border border-ink-200 p-2 dark:border-ink-800">
+                        <span class="text-xs font-medium text-ink-700 dark:text-ink-200">{option.label}</span>
+                        <input
+                          type="url"
+                          data-distribution-type={option.type}
+                          data-distribution-label={option.label}
+                          data-distribution-platform={option.platform}
+                          placeholder={option.placeholder}
+                          class="field min-h-9 text-xs"
+                        />
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+
                 <label class="grid gap-1.5">
                   <span class="text-2xs font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">Best for</span>
                   <textarea id="best-for" rows="3" class="field resize-y"></textarea>
@@ -236,6 +267,17 @@ const platformOptions = [
         return [...document.querySelectorAll("input[name='platform']:checked")].map((input) => input.value);
       }
 
+      function distributionChannels() {
+        return [...document.querySelectorAll("[data-distribution-type]")]
+          .map((input) => ({
+            type: input.dataset.distributionType,
+            label: input.dataset.distributionLabel,
+            platform: input.dataset.distributionPlatform,
+            url: input.value.trim(),
+          }))
+          .filter((channel) => channel.url);
+      }
+
       function listLines(values, indent) {
         return values.map((value) => `${" ".repeat(indent)}- ${value}`).join("\n");
       }
@@ -253,6 +295,7 @@ const platformOptions = [
         const tags = fields.tags.value.split(",").map((tag) => tag.trim()).filter(Boolean);
         const bestFor = fields.bestFor.value.split("\n").map((line) => line.trim()).filter(Boolean);
         const platforms = selectedPlatforms();
+        const distribution = distributionChannels();
         const stack = fields.primaryStack.value;
         const topics = repository.topics || [];
         const technologies = [...new Set([stack, String(repository.language || "").toLowerCase(), ...topics])].filter(Boolean);
@@ -279,6 +322,19 @@ const platformOptions = [
           platforms.length ? listLines(platforms, 4) : "    - ios",
           "  tags:",
           tags.length ? listLines(tags, 4) : listLines(topics.slice(0, 5), 4),
+          ...(distribution.length
+            ? [
+                "  distribution:",
+                "    channels:",
+                ...distribution.map((channel) => [
+                  `      - type: ${channel.type}`,
+                  `        platform: ${channel.platform}`,
+                  `        label: ${yamlQuote(channel.label)}`,
+                  `        url: ${channel.url}`,
+                  "        verified: false",
+                ].join("\n")),
+              ]
+            : []),
           "",
           "stack:",
           `  primary: ${stack}`,

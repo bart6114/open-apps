@@ -54,6 +54,23 @@ app:
     - self-hosted
     - backup
     - photos
+  distribution:
+    channels:
+      - type: app-store
+        platform: ios
+        label: App Store
+        url: https://apps.apple.com/app/example
+        verified: false
+      - type: play-store
+        platform: android
+        label: Play Store
+        url: https://play.google.com/store/apps/details?id=app.example
+        verified: false
+      - type: github-releases
+        platform: android
+        label: APK releases
+        url: https://github.com/owner/repo/releases
+        verified: false
 
 stack:
   primary: flutter
@@ -179,6 +196,50 @@ Important distinction:
 - `stack.primary` means the discovery family: `flutter`, `react-native`,
   `ios`, `android`, `capacitor`.
 - `stack.technologies` means actual technology inside the repo.
+
+## Distribution Channels
+
+`app.distribution.channels` lists where users can install or download the app.
+It is separate from `github.repository.homepage` because an app can have many
+install channels.
+
+Supported channel types:
+
+| Type | Use for |
+|------|---------|
+| `app-store` | Apple App Store listings. |
+| `play-store` | Google Play Store listings. |
+| `fdroid` | F-Droid package pages. |
+| `github-releases` | GitHub Releases pages with binaries/APKs. |
+| `apk` | Direct APK downloads. |
+| `testflight` | Apple TestFlight invites. |
+| `website` | Official download pages. |
+| `snapcraft` | Snap packages. |
+| `flathub` | Flatpak packages. |
+| `microsoft-store` | Microsoft Store listings. |
+| `other` | Any install channel that does not fit above. |
+
+Example:
+
+```yaml
+app:
+  distribution:
+    channels:
+      - type: fdroid
+        platform: android
+        label: F-Droid
+        url: https://f-droid.org/packages/org.example.app/
+        verified: true
+      - type: apk
+        platform: android
+        label: APK
+        url: https://example.com/download/app.apk
+        verified: false
+        notes: Direct download from the maintainer website.
+```
+
+`verified: true` means a curator confirmed the link belongs to the canonical
+project. Submit form drafts should default to `verified: false`.
 
 ## Generated Data
 

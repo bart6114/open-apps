@@ -68,6 +68,25 @@ const finalAppSchema = z
         projectType: z.string().optional(),
         platforms: z.array(z.string()).min(1),
         tags: z.array(z.string()).optional(),
+        distribution: z
+          .object({
+            channels: z
+              .array(
+                z
+                  .object({
+                    type: z.string().min(1),
+                    platform: z.string().optional(),
+                    label: z.string().optional(),
+                    url: z.string().url(),
+                    verified: z.boolean().optional(),
+                    notes: z.string().optional(),
+                  })
+                  .passthrough(),
+              )
+              .optional(),
+          })
+          .passthrough()
+          .optional(),
       })
       .passthrough(),
     stack: z
@@ -228,6 +247,7 @@ function normalizeFinal(raw, fileSlug) {
     stack: parsed.stack.primary,
     stacks: secondaryStacks,
     platforms: parsed.app.platforms,
+    distribution: parsed.app.distribution,
     category: parsed.app.category,
     tags: compactArray([...(parsed.app.tags ?? []), ...(repo?.topics ?? [])]),
     license: repo?.license?.spdx_id || undefined,
@@ -291,6 +311,7 @@ function normalizeLegacy(raw, fileSlug) {
       projectType: parsed.projectType,
       platforms: parsed.platforms,
       tags: parsed.tags,
+      distribution: parsed.distribution,
     },
     stack: primaryStack,
     stackModel: {
@@ -344,6 +365,7 @@ export function toIndexApp(app) {
     homepageUrl: app.homepageUrl,
     category: app.category,
     platforms: app.platforms ?? [],
+    distribution: app.distribution,
     primaryStack: app.stack,
     stack: app.stack,
     stacks: app.stacks ?? [],
