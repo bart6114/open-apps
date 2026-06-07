@@ -96,6 +96,11 @@ keeps activity fresh for legacy records, while
 syncs final `schemaVersion: 1` records using GitHub's own field names. Cleanup
 automation reports stale apps before they are hidden or removed.
 
+The rendered site never calls the GitHub API per visitor. Stars, forks,
+contributors, open issues, pull requests, releases, and commit activity are
+synced on a schedule, committed through reviewable bot PRs, and served as
+static generated data.
+
 ---
 
 ## The schema
