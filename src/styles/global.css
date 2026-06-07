@@ -65,6 +65,9 @@
   .badge-mature {
     @apply border-blue-300/60 dark:border-blue-800/60 bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300;
   }
+  .badge-stale {
+    @apply border-amber-300/60 dark:border-amber-800/60 bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300;
+  }
   /* Outline button */
   .btn {
     @apply inline-flex items-center justify-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors;
