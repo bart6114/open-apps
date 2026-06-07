@@ -3,16 +3,16 @@ export type Stack = {
   name: string;
   blurb: string;
   status: "live" | "expanding" | "planned";
-  count?: number;
 };
 
+// Static taxonomy. Counts are NOT stored here — they are computed at
+// build time from data/generated/apps.json. See src/lib/stack-counts.ts.
 export const stacks: Stack[] = [
   {
     slug: "flutter",
     name: "Flutter",
-    blurb: "Original collection — Dart-based, cross-platform mobile apps.",
+    blurb: "Dart-based, cross-platform mobile apps.",
     status: "live",
-    count: 150,
   },
   {
     slug: "react-native",
