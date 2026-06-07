@@ -283,7 +283,9 @@ function normalizeLegacy(raw, fileSlug) {
     language: typeof parsed.stack === "string" ? parsed.stack : undefined,
     license: parsed.license ? { spdx_id: parsed.license } : undefined,
     stargazers_count: activity.stars ?? parsed.stars,
+    watchers_count: activity.watchers,
     forks_count: activity.forks,
+    open_issues_count: activity.openIssues,
     subscribers_count: activity.contributors,
     pushed_at: activity.lastCommitAt,
     updated_at: activity.updatedAt,
@@ -324,6 +326,7 @@ function normalizeLegacy(raw, fileSlug) {
         monthlyCommits,
         totalCommitsKnown: activity.totalCommitsKnown,
         contributorsKnown: activity.contributors,
+        openPullRequests: activity.openPullRequests,
       },
       sync: {
         syncedAt: activity.updatedAt,

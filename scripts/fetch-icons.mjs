@@ -82,7 +82,7 @@ async function exists(path) {
 async function download(url, dest) {
   if (await exists(dest)) return false; // already cached
   const res = await fetch(url, {
-    headers: { "user-agent": "open-apps-web/0.1 (https://github.com/tortuvshin/open-source-flutter-apps)" },
+    headers: { "user-agent": "open-apps-web/0.1 (https://github.com/tortuvshin/open-apps)" },
   });
   if (!res.ok) {
     throw new Error(`HTTP ${res.ok} ${res.statusText} for ${url}`);

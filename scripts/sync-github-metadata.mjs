@@ -40,6 +40,30 @@ async function gh(path) {
   return res.json();
 }
 
+async function ghWithHeaders(path) {
+  const res = await fetch(`https://api.github.com${path}`, { headers: HEADERS });
+  if (res.status === 404) return { data: null, headers: res.headers };
+  if (!res.ok) throw new Error(`${path}: ${res.status} ${res.statusText}`);
+  return { data: await res.json(), headers: res.headers };
+}
+
+function countFromLinkHeader(linkHeader, fallbackCount) {
+  if (!linkHeader) return fallbackCount;
+  const last = linkHeader
+    .split(",")
+    .map((part) => part.trim())
+    .find((part) => part.includes('rel="last"'));
+  if (!last) return fallbackCount;
+  const match = last.match(/[?&]page=(\d+)/);
+  return match ? Number(match[1]) : fallbackCount;
+}
+
+async function countEndpoint(path) {
+  const { data, headers } = await ghWithHeaders(`${path}${path.includes("?") ? "&" : "?"}per_page=1`);
+  if (!Array.isArray(data)) return 0;
+  return countFromLinkHeader(headers.get("link"), data.length);
+}
+
 async function exists(path) {
   const result = await gh(path);
   return Boolean(result);
@@ -50,12 +74,14 @@ async function syncOne(raw) {
   const repo = raw.source?.repo;
   if (!owner || !repo) return raw;
 
-  const [repository, languages, latestRelease, labels, pulls] = await Promise.all([
+  const [repository, languages, latestRelease, labels, openPullRequests, contributorsKnown, totalCommitsKnown] = await Promise.all([
     gh(`/repos/${owner}/${repo}`),
     gh(`/repos/${owner}/${repo}/languages`),
     gh(`/repos/${owner}/${repo}/releases/latest`),
     gh(`/repos/${owner}/${repo}/labels?per_page=100`),
-    gh(`/repos/${owner}/${repo}/pulls?state=open&per_page=1`),
+    countEndpoint(`/repos/${owner}/${repo}/pulls?state=open`),
+    countEndpoint(`/repos/${owner}/${repo}/contributors?anon=true`),
+    countEndpoint(`/repos/${owner}/${repo}/commits`),
   ]);
 
   if (!repository) return raw;
@@ -97,7 +123,9 @@ async function syncOne(raw) {
     activity: {
       ...(raw.github?.activity ?? {}),
       monthlyCommits: [...monthly.entries()].map(([month, count]) => ({ month, commits: count })),
-      openPullRequests: Number(pulls?.length ?? 0),
+      totalCommitsKnown,
+      contributorsKnown,
+      openPullRequests,
     },
     files: {
       readme,

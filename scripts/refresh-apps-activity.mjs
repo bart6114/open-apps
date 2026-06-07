@@ -11,8 +11,7 @@
  *   - stars        (stargazers_count)
  *   - forks        (forks_count)
  *   - lastCommitAt (default branch's most recent commit)
- *   - contributors (subscribers_count as a cheap proxy; swap to a
- *                    contributors API call if you need accuracy)
+ *   - contributors (GitHub contributors endpoint count)
  *   - updatedAt    (today)
  *
  * Run with: `node scripts/refresh-apps-activity.mjs [limit]`
@@ -67,6 +66,87 @@ async function gh(path) {
   return res.json();
 }
 
+async function ghWithHeaders(path) {
+  const res = await fetch(`${API}${path}`, { headers: HEADERS });
+  if (!res.ok) {
+    if (res.status === 404) return { data: null, headers: res.headers };
+    if (res.status === 403) {
+      const reset = res.headers.get("x-ratelimit-reset");
+      console.error(`[refresh] rate limited until ${reset}`);
+      process.exit(1);
+    }
+    throw new Error(`GitHub API ${path} → ${res.status} ${res.statusText}`);
+  }
+  return { data: await res.json(), headers: res.headers };
+}
+
+function countFromLinkHeader(linkHeader, fallbackCount) {
+  if (!linkHeader) return fallbackCount;
+  const last = linkHeader
+    .split(",")
+    .map((part) => part.trim())
+    .find((part) => part.includes('rel="last"'));
+  if (!last) return fallbackCount;
+  const match = last.match(/[?&]page=(\d+)/);
+  return match ? Number(match[1]) : fallbackCount;
+}
+
+async function countEndpoint(path) {
+  const { data, headers } = await ghWithHeaders(`${path}${path.includes("?") ? "&" : "?"}per_page=1`);
+  if (!Array.isArray(data)) return 0;
+  return countFromLinkHeader(headers.get("link"), data.length);
+}
+
+function emptyMonthlyBuckets() {
+  const buckets = new Map();
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date();
+    d.setUTCDate(1);
+    d.setUTCHours(0, 0, 0, 0);
+    d.setUTCMonth(d.getUTCMonth() - i);
+    buckets.set(d.toISOString().slice(0, 7), 0);
+  }
+  return buckets;
+}
+
+async function fetchMonthlyCommits(owner, repo) {
+  const buckets = emptyMonthlyBuckets();
+
+  // Preferred endpoint: one request, 52 weeks of cached commit activity.
+  // GitHub can return 202 while computing stats; fallback below keeps sync robust.
+  try {
+    const weeks = await gh(`/repos/${owner}/${repo}/stats/commit_activity`);
+    if (Array.isArray(weeks)) {
+      for (const week of weeks) {
+        if (!week?.week) continue;
+        const month = new Date(week.week * 1000).toISOString().slice(0, 7);
+        if (buckets.has(month)) buckets.set(month, buckets.get(month) + (week.total ?? 0));
+      }
+      return [...buckets.values()];
+    }
+  } catch {
+    // Fall back to commits API below.
+  }
+
+  const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+  for (let page = 1; page <= 10; page++) {
+    const commits = await gh(
+      `/repos/${owner}/${repo}/commits?per_page=100&page=${page}&since=${sixMonthsAgo.toISOString()}`,
+    );
+    if (!Array.isArray(commits) || commits.length === 0) break;
+    for (const commit of commits) {
+      const date = commit.commit?.committer?.date || commit.commit?.author?.date;
+      if (!date) continue;
+      const month = new Date(date).toISOString().slice(0, 7);
+      if (buckets.has(month)) buckets.set(month, buckets.get(month) + 1);
+    }
+    if (commits.length < 100) break;
+  }
+
+  return [...buckets.values()];
+}
+
 async function fetchActivity(repoUrl) {
   const parsed = parseRepo(repoUrl);
   if (!parsed) return null;
@@ -75,54 +155,24 @@ async function fetchActivity(repoUrl) {
   const data = await gh(`/repos/${owner}/${repo}`);
   if (!data) return null;
 
-  // Pull last 6 months of commit activity in one paginated request.
-  // The GitHub Commits API returns up to 100 per page; 6 months of
-  // activity rarely exceeds that, so a single page is enough for
-  // our purposes. Increase this if a repo has very heavy monthly
-  // commit volume (>100 in the last 6 months).
-  const sixMonthsAgo = new Date();
-  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-  const monthly = [0, 0, 0, 0, 0, 0];
-  const now = new Date();
-  const currentMonth = now.getUTCMonth();
-  const currentYear = now.getUTCFullYear();
-
   let lastCommitAt = data.pushed_at || data.updated_at;
-  try {
-    // per_page=100 covers the vast majority of monthly commit volumes
-    // in a 6-month window. We could paginate if needed, but for the
-    // bar logic (>= 1 commit per month) we just need a presence check.
-    const commits = await gh(
-      `/repos/${owner}/${repo}/commits?per_page=100&since=${sixMonthsAgo.toISOString()}`,
-    );
-    if (Array.isArray(commits)) {
-      // Reset and recount.
-      for (let i = 0; i < 6; i++) monthly[i] = 0;
-      for (const c of commits) {
-        const d = c.commit?.committer?.date || c.commit?.author?.date;
-        if (!d) continue;
-        const date = new Date(d);
-        const monthsAgo =
-          (currentYear - date.getUTCFullYear()) * 12 +
-          (currentMonth - date.getUTCMonth());
-        if (monthsAgo >= 0 && monthsAgo < 6) {
-          monthly[5 - monthsAgo]++;
-        }
-        if (!lastCommitAt || d > lastCommitAt) {
-          lastCommitAt = d;
-        }
-      }
-    }
-  } catch {
-    // keep the fallback
-  }
+  const [monthly, contributors, totalCommitsKnown, openPullRequests] = await Promise.all([
+    fetchMonthlyCommits(owner, repo),
+    countEndpoint(`/repos/${owner}/${repo}/contributors?anon=true`),
+    countEndpoint(`/repos/${owner}/${repo}/commits`),
+    countEndpoint(`/repos/${owner}/${repo}/pulls?state=open`),
+  ]);
 
   return {
     stars: data.stargazers_count ?? 0,
     forks: data.forks_count ?? 0,
+    watchers: data.watchers_count ?? 0,
+    openIssues: data.open_issues_count ?? 0,
     monthlyCommits: monthly,
     lastCommitAt: lastCommitAt ? lastCommitAt.slice(0, 10) : null,
-    contributors: data.subscribers_count ?? 0,
+    totalCommitsKnown,
+    contributors,
+    openPullRequests,
     updatedAt: new Date().toISOString().slice(0, 10),
   };
 }
@@ -138,9 +188,13 @@ function patchYmlActivity(text, activity) {
     "activity:",
     `  stars: ${activity.stars}`,
     `  forks: ${activity.forks}`,
+    `  watchers: ${activity.watchers}`,
+    `  openIssues: ${activity.openIssues}`,
     `  monthlyCommits: ${monthly}`,
     `  lastCommitAt: ${activity.lastCommitAt ?? "null"}`,
+    `  totalCommitsKnown: ${activity.totalCommitsKnown}`,
     `  contributors: ${activity.contributors}`,
+    `  openPullRequests: ${activity.openPullRequests}`,
     `  updatedAt: ${activity.updatedAt}`,
   ].join("\n");
 

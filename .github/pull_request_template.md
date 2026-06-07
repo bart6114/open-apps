@@ -10,7 +10,7 @@ metadata themselves.
 ## What this PR does
 
 <!-- One or two sentences. "Adds <app> to data/apps/" or "Fixes typo in
-     2048.yml" or "Refreshes activity block for ..." -->
+     2048.yml" or "Refreshes synced GitHub metadata for ..." -->
 
 - [ ] Adds a new app (`data/apps/<slug>.yml`)
 - [ ] Updates an existing app
@@ -36,8 +36,8 @@ metadata themselves.
 ## Checklist
 
 - [ ] I read [`CONTRIBUTING.md`](./CONTRIBUTING.md)
-- [ ] I did NOT hand-edit the `activity:` block — the daily workflow
-      will refresh it. (Touching it is fine, but the next run overwrites.)
+- [ ] I did NOT hand-edit synced `github:` / `health:` data unless this PR
+      is explicitly fixing automation output.
 - [ ] I ran `npm run build:data` and `npm run build` locally and both
       succeeded
 - [ ] The yml file is named `<slug>.yml` and `slug:` inside matches the
