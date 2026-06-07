@@ -1,113 +1,98 @@
 # Open Source Apps
 
-> A hand-picked, self-refreshing directory of real open-source application
-> codebases — chosen for what you can **learn** from them and what you can
-> actually **contribute** to.
+> A curated, self-refreshing directory of real open-source application
+> codebases - built for developers who want to learn from production apps and
+> find projects worth contributing to.
 
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![Node ≥ 20](https://img.shields.io/badge/node-%E2%89%A520-339933.svg)](./package.json)
+[![Node >= 20](https://img.shields.io/badge/node-%3E%3D20-339933.svg)](./package.json)
 [![Astro](https://img.shields.io/badge/built%20with-Astro-FF5D01.svg)](https://astro.build)
 [![Apps tracked](https://img.shields.io/badge/apps-79-lightgrey.svg)](./data/apps)
 
-GitHub hosts tens of millions of public repos. Most of them are not worth your
-time as either a reader or a contributor. This directory is an attempt to
-surface the few that are: real applications, with architecture worth reading,
-maintainers worth talking to, and recent commits worth tracking.
+GitHub is full of repositories, but only a small slice are useful as examples
+of real application engineering. This project keeps that slice visible: apps
+with readable architecture, active maintainers, clear licenses, and enough
+substance to study.
 
----
+The site is static. The data is structured. GitHub metadata is synced ahead of
+time. Visitors never trigger GitHub API calls just to browse the directory.
 
-## What you can do here
+## What This Is
 
-### Learn — read how real apps are built
+Open Source Apps is a directory of application codebases, not a scraped list of
+links. Every app is represented by one YAML file, enriched with curation notes,
+taxonomy-backed platform and stack data, and scheduled GitHub activity signals.
 
-Every entry in the directory has hand-written notes on the _patterns_ inside
-the repo, not just the description from the README.
+Use it to:
 
-```yaml
-# data/apps/invoice-ninja.yml (excerpt)
-bestFor:
-  - Real commercial product with open codebase
-  - Subscription & payment integration patterns
-  - Multi-currency / multi-language business app
-  - Companion-app architecture (mobile + hosted backend)
-whyListed:
-  - Real production app used by paying customers
-  - Active commercial sponsor (Hillel Coren)
-caveats:
-  - Tightly coupled to the hosted Invoice Ninja platform
-```
+- **Learn from real apps:** inspect production patterns, architecture choices,
+  platform support, and implementation tradeoffs.
+- **Find contribution targets:** look for active repos with issue templates,
+  contribution docs, good-first-issue labels, and recent commits.
+- **Compare ecosystems:** browse apps by category, stack, platform, activity,
+  contribution readiness, and distribution channel.
+- **Maintain a living catalog:** let automation refresh GitHub-shaped metadata
+  while humans focus on curation.
 
-Pick a category you care about — payments, offline-first sync, plugin
-systems, theming, real-time, search — and you'll find at least one app
-that solved it for real, with code you can actually read.
+## Inclusion Bar
 
-### Contribute — find projects that will answer your PR
+A repository belongs here only when it is useful to read or contribute to. The
+baseline bar is intentionally simple:
 
-"Open source" and "welcoming to new contributors" are not the same thing.
-The directory tracks contribution-readiness per app:
+- Real application codebase, not a tutorial, demo, template, or package-only
+  library.
+- At least **50 stars** and **50 lifetime commits** on the primary public repo.
+- Clear license and enough project context to understand what the app does.
+- Recent activity, or a strong reason to keep an archived project for learning
+  value.
+- Human curation notes that explain why the app is worth listing.
 
-- `goodFirstIssues` — direct link to labelled issues
-- `contributionGuide` — link to the project's own CONTRIBUTING.md
-- `github.repository.pushed_at` — is anyone merging PRs this quarter?
-- `labels: [new]` — apps with low-friction entry points
+Stars alone are not enough. A smaller, readable app can be more valuable than a
+popular repository that is stale, opaque, or impossible to contribute to.
 
-If the last commit is over a year old, the app falls out of the directory
-automatically. Stale projects do not waste your time here.
+## How The Data Works
 
-### Discover — a curated view across millions of repos
-
-The seed for this directory was [tortuvshin/open-source-flutter-apps][legacy]
-(254 hand-picked Flutter apps, still preserved verbatim in
-[`README-LEGACY.md`](./README-LEGACY.md)). From there, we apply a single
-honest bar:
-
-- **Real application codebase** — not a tutorial, demo, or template
-- **Active** — a commit in the last 180 days, or it falls off
-- **Substance** — at least 50 stars **and** 50 lifetime commits
-- **Clear license** — MIT / Apache / BSD / etc.
-- **Readable** — a README, examples, a contribution guide
-
-Stars alone are not enough. A small clean app beats a popular one that
-no one can read. An archived app can stay if it teaches a pattern clearly.
-Everything is decided in the open, in pull requests, on `data/apps/`.
-
----
-
-## How the data stays honest
-
-```
+```text
 data/apps/*.yml
-   │  (GitHub Actions: sync GitHub-shaped metadata)
-   ▼
-data/apps/*.yml        ← github.repository / github.activity updated in place
-   │  (build step: validate + normalize)
-   ▼
+   |
+   |  validate schema and normalize records
+   v
 data/generated/apps.full.json
 data/generated/apps.index.json
-   │
-   ▼
-src/pages/**/*.astro       ← static pages, fully cacheable
+   |
+   |  render static Astro routes
+   v
+dist/
 ```
 
-You do not maintain a list. You maintain a **bar**. A daily GitHub Action
-([`.github/workflows/update-apps.yml`](./.github/workflows/update-apps.yml))
-keeps activity fresh for legacy records, while
-[`sync-github-metadata.yml`](./.github/workflows/sync-github-metadata.yml)
-syncs final `schemaVersion: 1` records using GitHub's own field names. Cleanup
-automation reports stale apps before they are hidden or removed.
+The source of truth is `data/apps/*.yml`. Generated JSON is created during the
+build and stays out of git.
 
-The rendered site never calls the GitHub API per visitor. Stars, forks,
-contributors, open issues, pull requests, releases, and commit activity are
-synced on a schedule, committed through reviewable bot PRs, and served as
-static generated data.
+GitHub metadata is stored under `github:` using GitHub's own field names
+(`full_name`, `html_url`, `stargazers_count`, `pushed_at`, and so on). Scheduled
+workflows update that metadata and create reviewable changes. Human-owned
+fields live in `app:`, `stack:`, and `curation:`.
 
----
+Key automation:
 
-## The schema
+- [`validate-data.yml`](./.github/workflows/validate-data.yml) checks schema
+  and data integrity in PRs.
+- [`update-apps.yml`](./.github/workflows/update-apps.yml) refreshes legacy
+  activity data.
+- [`sync-github-metadata.yml`](./.github/workflows/sync-github-metadata.yml)
+  syncs `schemaVersion: 1` GitHub metadata.
+- [`cleanup-stale-apps.yml`](./.github/workflows/cleanup-stale-apps.yml)
+  reports stale or below-bar entries before removal.
 
-One app, one file. Contributors should use `/submit`; the form drafts YAML from
-a GitHub URL and taxonomy-backed choices. Hand-write curation, let automation
-own the `github:` and `health:` blocks.
+## App Record Shape
+
+One app, one file:
+
+```text
+data/apps/<slug>.yml
+```
+
+Short example:
 
 ```yaml
 schemaVersion: 1
@@ -136,82 +121,110 @@ stack:
     - id: dart
       role: language
 
-github:
-  repository:
-    full_name: invoiceninja/flutter-mobile
-    html_url: https://github.com/invoiceninja/flutter-mobile
-    stargazers_count: 1744
-    pushed_at: 2026-06-04T00:00:00Z
-
 curation:
   reviewed: false
   bestFor:
-    - Real commercial product with open codebase.
+    - Studying a real commercial mobile companion app.
+  caveats:
+    - Tightly coupled to the hosted Invoice Ninja platform.
 ```
 
-See [`docs/SCHEMA.md`](./docs/SCHEMA.md) for the complete contract and
-[`CONTRIBUTING.md`](./CONTRIBUTING.md) for the adding / updating / removing
-flow.
+See [`docs/SCHEMA.md`](./docs/SCHEMA.md) for the full contract, including
+GitHub metadata, health fields, distribution channels, and ownership rules.
 
----
+## Project Layout
 
-## Project layout
-
-```
+```text
 .
-├── data/
-│   ├── apps/                 # one yml per app (source of truth, 79 files)
-│   └── generated/
-│       ├── apps.full.json    # build artifact, gitignored
-│       ├── apps.index.json   # build artifact, gitignored
-│       └── apps.json         # compatibility alias, gitignored
-├── scripts/
-│   ├── build-apps-json.mjs   # yml → full/index json
-│   ├── validate-apps.mjs
-│   ├── sync-github-metadata.mjs
-│   ├── refresh-apps-activity.mjs
-│   ├── seed-from-github.mjs
-│   ├── parse-legacy-readme.mjs
-│   ├── fetch-icons.mjs
-│   └── *.test.mjs            # node --test
-├── .github/workflows/
-│   ├── validate-data.yml
-│   ├── sync-github-metadata.yml
-│   └── update-apps.yml       # legacy activity refresh
-├── src/
-│   ├── pages/                # Astro pages
-│   ├── components/           # UI
-│   └── lib/                  # search, scoring, repo helpers
-└── public/icons/             # platform + stack svgs, fetched
+|-- data/
+|   |-- apps/                 # one YAML source file per app
+|   |-- generated/            # build artifacts, gitignored
+|   `-- taxonomy/             # categories, stacks, platforms, channels
+|-- docs/
+|   `-- SCHEMA.md             # app data contract
+|-- scripts/
+|   |-- app-schema.mjs
+|   |-- build-apps-json.mjs
+|   |-- validate-apps.mjs
+|   |-- sync-github-metadata.mjs
+|   |-- refresh-apps-activity.mjs
+|   |-- report-cleanup-candidates.mjs
+|   |-- fetch-icons.mjs
+|   `-- *.test.mjs
+|-- src/
+|   |-- components/           # Astro UI components
+|   |-- data/                 # typed data loaders and summaries
+|   |-- lib/                  # search, scoring, taxonomy helpers
+|   `-- pages/                # static routes
+`-- public/icons/             # platform and stack SVG icons
 ```
 
-## Local development
+## Local Development
+
+Requirements:
+
+- Node.js 20 or newer
+- npm
 
 ```sh
 npm install
-npm run build:data   # yml → json, drops stale + below-bar entries
-npm run build        # astro build, reads generated app data
-npm run dev          # local dev server
-npm run check        # astro type / lint check
-node --test scripts/*.test.mjs
+npm run build:data
+npm run build
+npm run dev
 ```
 
-## What this project is not
+Useful commands:
 
-- Not a SaaS
-- Not a Product Hunt competitor
-- Not a GitHub scraper
-- Not an "AI coding platform"
+| Command | Purpose |
+|---------|---------|
+| `npm run validate:data` | Validate `data/apps/*.yml` against the schema. |
+| `npm run build:data` | Validate and generate app JSON. |
+| `npm run build` | Build the full static Astro site. |
+| `npm run dev` | Generate data and start the local dev server. |
+| `npm run check` | Run Astro type checks. |
+| `npm test` | Run Node test files under `scripts/`. |
 
-It is a directory. The work is curation, not scale. The hard part is
-deciding what to leave out.
+## Contributing
+
+The easiest way to add an app is through `/submit` on the site. Paste a public
+GitHub repository URL, review the drafted fields, then open a PR with the new
+`data/apps/<slug>.yml` file.
+
+Before opening a PR:
+
+```sh
+npm run build:data
+npm run build
+npm test
+```
+
+Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the inclusion bar, YAML style,
+review expectations, and removal process.
+
+## What This Is Not
+
+- Not a Product Hunt clone.
+- Not a GitHub scraper.
+- Not a complete index of open-source apps.
+- Not a popularity contest.
+- Not a SaaS.
+
+The value is curation. The hard part is deciding what to leave out.
+
+## Provenance
+
+This project began as a structured extraction from
+[`tortuvshin/open-source-flutter-apps`][legacy], a public-domain collection of
+Flutter apps. The original list is preserved in
+[`README-LEGACY.md`](./README-LEGACY.md), and selected records have been
+converted into the current YAML schema.
 
 ## License
 
-App metadata is released under [CC BY-SA 4.0](./LICENSE) (see file for
-the original CC0 attribution preserved for `README-LEGACY.md`). The
-website code is MIT.
+The website code and project files are released under the [MIT License](./LICENSE).
 
-The original Flutter list, which seeded this directory, lives at
-[`README-LEGACY.md`](./README-LEGACY.md) and
-[tortuvshin/open-source-flutter-apps][legacy].
+The legacy source list is preserved with its original CC0 provenance in
+[`README-LEGACY.md`](./README-LEGACY.md). See the note at the bottom of
+[`LICENSE`](./LICENSE) for details.
+
+[legacy]: https://github.com/tortuvshin/open-source-flutter-apps
