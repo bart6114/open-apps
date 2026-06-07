@@ -48,7 +48,7 @@ The directory tracks contribution-readiness per app:
 
 - `goodFirstIssues` — direct link to labelled issues
 - `contributionGuide` — link to the project's own CONTRIBUTING.md
-- `activity.lastCommitAt` — is anyone merging PRs this quarter?
+- `github.repository.pushed_at` — is anyone merging PRs this quarter?
 - `labels: [new]` — apps with low-friction entry points
 
 If the last commit is over a year old, the app falls out of the directory
@@ -77,12 +77,13 @@ Everything is decided in the open, in pull requests, on `data/apps/`.
 
 ```
 data/apps/*.yml
-   │  (GitHub Actions: daily, fetch stars/forks/last-commit/contributors)
+   │  (GitHub Actions: sync GitHub-shaped metadata)
    ▼
-data/apps/*.yml        ← activity block updated in place
-   │  (build step: yml → json, drop stale + below-bar entries)
+data/apps/*.yml        ← github.repository / github.activity updated in place
+   │  (build step: validate + normalize)
    ▼
-data/generated/apps.json   ← single source for the site
+data/generated/apps.full.json
+data/generated/apps.index.json
    │
    ▼
 src/pages/**/*.astro       ← static pages, fully cacheable
@@ -90,66 +91,62 @@ src/pages/**/*.astro       ← static pages, fully cacheable
 
 You do not maintain a list. You maintain a **bar**. A daily GitHub Action
 ([`.github/workflows/update-apps.yml`](./.github/workflows/update-apps.yml))
-refreshes the `activity:` block on every YAML; the build drops anything
-whose last commit is older than 180 days. PRs that hand-edit the activity
-block are accepted — the next workflow run will overwrite them. That is
-the point.
+keeps activity fresh for legacy records, while
+[`sync-github-metadata.yml`](./.github/workflows/sync-github-metadata.yml)
+syncs final `schemaVersion: 1` records using GitHub's own field names. Cleanup
+automation reports stale apps before they are hidden or removed.
 
 ---
 
 ## The schema
 
-One app, one file. Hand-write the curation fields, let automation handle
-the activity block.
+One app, one file. Contributors should use `/submit`; the form drafts YAML from
+a GitHub URL and taxonomy-backed choices. Hand-write curation, let automation
+own the `github:` and `health:` blocks.
 
 ```yaml
-# Required — the app record. These never move without a rename PR.
+schemaVersion: 1
+id: github:invoiceninja/flutter-mobile
 slug: invoice-ninja
-name: Invoice Ninja
-repoUrl: https://github.com/invoiceninja/flutter-mobile
-description: >-
-  Companion app for the Invoice Ninja platform. Invoicing, expenses,
-  time-billing, payments.
-stack: Flutter
-platforms: [Android, iOS]
-category: Business
 
-# Curated by hand, optional, slow to change.
-homepageUrl: https://invoiceninja.com
-license: AGPL-3.0
-status: active
-stateManagement: Provider
-backend: REST API (Laravel)
-architecture: Feature-based
-difficulty: intermediate
-codebaseSize: large
-bestFor:
-  - Real commercial product with open codebase
-  - Subscription & payment integration patterns
-whyListed:
-  - Real production app used by paying customers
-caveats:
-  - Tightly coupled to the hosted Invoice Ninja platform
-goodFirstIssues: https://github.com/invoiceninja/flutter-mobile/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
-contributionGuide: https://github.com/invoiceninja/flutter-mobile/blob/master/CONTRIBUTING.md
-scores:
-  activity: 65
-  maturity: 92
-  learning: 78
-  contribution: 70
-  docs: 62
-  overall: 76
+source:
+  provider: github
+  owner: invoiceninja
+  repo: flutter-mobile
+  url: https://github.com/invoiceninja/flutter-mobile
 
-# Auto-updated daily by .github/workflows/update-apps.yml.
-# Don't edit by hand — the next workflow run will overwrite it.
-activity:
-  stars: 1744
-  lastCommitAt: 2026-06-04
-  updatedAt: 2026-06-06
+app:
+  name: Invoice Ninja
+  description: Companion app for the Invoice Ninja platform.
+  category: business
+  projectType: production
+  platforms: [android, ios]
+  tags: [invoicing, payments]
+
+stack:
+  primary: flutter
+  technologies:
+    - id: flutter
+      role: mobile-framework
+    - id: dart
+      role: language
+
+github:
+  repository:
+    full_name: invoiceninja/flutter-mobile
+    html_url: https://github.com/invoiceninja/flutter-mobile
+    stargazers_count: 1744
+    pushed_at: 2026-06-04T00:00:00Z
+
+curation:
+  reviewed: false
+  bestFor:
+    - Real commercial product with open codebase.
 ```
 
-See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the full bar, the adding /
-updating / removing flow, and the style guide.
+See [`docs/SCHEMA.md`](./docs/SCHEMA.md) for the complete contract and
+[`CONTRIBUTING.md`](./CONTRIBUTING.md) for the adding / updating / removing
+flow.
 
 ---
 
@@ -160,16 +157,22 @@ updating / removing flow, and the style guide.
 ├── data/
 │   ├── apps/                 # one yml per app (source of truth, 79 files)
 │   └── generated/
-│       └── apps.json         # build artifact, gitignored
+│       ├── apps.full.json    # build artifact, gitignored
+│       ├── apps.index.json   # build artifact, gitignored
+│       └── apps.json         # compatibility alias, gitignored
 ├── scripts/
-│   ├── build-apps-json.mjs   # yml → json + bar + staleness filter
+│   ├── build-apps-json.mjs   # yml → full/index json
+│   ├── validate-apps.mjs
+│   ├── sync-github-metadata.mjs
 │   ├── refresh-apps-activity.mjs
 │   ├── seed-from-github.mjs
 │   ├── parse-legacy-readme.mjs
 │   ├── fetch-icons.mjs
 │   └── *.test.mjs            # node --test
 ├── .github/workflows/
-│   └── update-apps.yml       # daily activity refresh
+│   ├── validate-data.yml
+│   ├── sync-github-metadata.yml
+│   └── update-apps.yml       # legacy activity refresh
 ├── src/
 │   ├── pages/                # Astro pages
 │   ├── components/           # UI
@@ -182,7 +185,7 @@ updating / removing flow, and the style guide.
 ```sh
 npm install
 npm run build:data   # yml → json, drops stale + below-bar entries
-npm run build        # astro build, reads data/generated/apps.json
+npm run build        # astro build, reads generated app data
 npm run dev          # local dev server
 npm run check        # astro type / lint check
 node --test scripts/*.test.mjs
