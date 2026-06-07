@@ -38,3 +38,6 @@ jobs:
 
       - name: Build generated data
         run: pnpm run build:data
+
+      - name: Run unit tests
+        run: pnpm test

@@ -15,7 +15,7 @@
  * the legacy schema — the next step in the pipeline.
  *
  * Usage: node scripts/import-react-native-list.mjs
- *        TOKEN=ghp_xxx node scripts/import-react-native-list.mjs
+ *        GITHUB_TOKEN=ghp_xxx node scripts/import-react-native-list.mjs
  */
 
 import { mkdir, writeFile } from "node:fs/promises";
@@ -26,7 +26,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const OUT = join(ROOT, "data", "generated", "react-native-candidates.json");
 
-const TOKEN = process.env.TOKEN;
+const TOKEN = process.env.GITHUB_TOKEN;
 const HEADERS = {
   Accept: "application/vnd.github+json",
   "X-GitHub-Api-Version": "2022-11-28",

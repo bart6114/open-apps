@@ -181,14 +181,19 @@ test("daysSince: returns a small number for yesterday", () => {
 
 test("integration: real yml file parses without throwing", async () => {
   // Pick a known yml. The fixtures are small; this guards against
-  // accidental schema changes.
+  // accidental schema changes. After the schemaVersion 1 migration,
+  // stars live at `github.repository.stargazers_count` rather than
+  // the legacy top-level `activity.stars`.
   const text = await readFile(
     new URL("../data/apps/invoice-ninja.yml", import.meta.url),
     "utf8",
   );
   const out = parseYaml(text);
   assert.equal(out.slug, "invoice-ninja");
-  assert.equal(out.name, "Invoice Ninja");
-  assert.ok(out.activity);
-  assert.equal(typeof out.activity.stars, "number");
+  assert.equal(out.app?.name ?? out.name, "Invoice Ninja");
+  assert.ok(out.github?.repository);
+  assert.equal(
+    typeof out.github.repository.stargazers_count,
+    "number",
+  );
 });
