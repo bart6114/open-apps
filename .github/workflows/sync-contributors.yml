@@ -1,8 +1,12 @@
-name: Sync contributors
+name: Sync repo metadata
 
-# Weekly on Mondays at 07:00 UTC. Refreshes `src/data/contributors.ts`
-# from the GitHub REST API and opens a PR if anything changed. The site
-# is rebuilt on merge.
+# Weekly on Mondays at 07:00 UTC. Refreshes the open-apps repo's
+# contributors list and stars/forks/issues from the GitHub REST API
+# and opens a PR if anything changed. The site is rebuilt on merge.
+#
+# `scripts/sync-contributors.mjs` writes both:
+#   - src/data/contributors.ts           (contributors grid + hero/footer stat)
+#   - data/generated/repo-stats.json     (header GitHub button + hero + OriginalCollection)
 
 on:
   schedule:
@@ -35,7 +39,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Sync contributors from GitHub
+      - name: Sync repo metadata from GitHub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm run sync:contributors
@@ -45,16 +49,17 @@ jobs:
 
       - name: Open PR if anything changed
         run: |
-          if [ -n "$(git diff --name-only src/data/contributors.ts)" ]; then
+          CHANGED=$(git diff --name-only src/data/contributors.ts data/generated/repo-stats.json)
+          if [ -n "$CHANGED" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git checkout -b chore/sync-contributors-$(date -u +%Y%m%d)
-            git add src/data/contributors.ts
-            git commit -m "chore(data): sync contributors from GitHub"
+            git checkout -b chore/sync-repo-meta-$(date -u +%Y%m%d)
+            git add src/data/contributors.ts data/generated/repo-stats.json
+            git commit -m "chore(data): sync repo metadata from GitHub"
             git push -u origin HEAD
             gh pr create \
-              --title "chore(data): sync contributors from GitHub" \
-              --body "Weekly refresh of repo contributors from the GitHub REST API." \
+              --title "chore(data): sync repo metadata from GitHub" \
+              --body "Weekly refresh of contributors and stars/forks for the open-apps repo from the GitHub REST API." \
               --head "$(git rev-parse --abbrev-ref HEAD)" \
               --base main
           else

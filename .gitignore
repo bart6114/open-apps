@@ -8,9 +8,15 @@ dist
 .vercel
 .netlify
 
-# Build-time generated data. Re-derived from data/apps/*.yml on every
-# build and every GitHub Actions refresh — never commit it.
-data/generated/
+# Build-time generated data. The `apps*.json` files are re-derived
+# from data/apps/*.yml on every build and every GitHub Actions
+# refresh — never commit them. `repo-stats.json` is the exception:
+# it comes from the GitHub API for the open-apps repo itself, not
+# from app YAMLs, and is the source of truth for the hero/header
+# star and fork counts, so it IS tracked.
+data/generated/apps.json
+data/generated/apps.full.json
+data/generated/apps.index.json
 
 # IDE / editor cruft
 .idea/

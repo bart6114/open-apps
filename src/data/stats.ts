@@ -1,12 +1,15 @@
-// Site stats, derived from data/generated/apps.json at build time.
+// Site stats, derived from generated JSON files at build time.
 //
 // This file imports the same JSON the rest of the app uses, so the numbers
 // here always match what's actually rendered. No hand-tuned magic numbers.
 //
-// Numbers in the rendered UI (hero, footer, etc.) come from this module.
-// If a number looks wrong, regenerate the JSON (`pnpm run build:data`) and
-// re-build — the stats recompute from the fresh data.
+// Numbers in the rendered UI (hero, header, OriginalCollection) come from
+// this module. If a number looks wrong, refresh the source data:
+//   - pnpm run sync:repo-stats    → data/generated/repo-stats.json (open-apps repo)
+//   - pnpm run sync:contributors  → src/data/contributors.ts
+//   - pnpm run refresh:activity   → data/apps/*.yml (per-app activity, then build:data)
 import generatedJson from "../../data/generated/apps.json";
+import repoStats from "../../data/generated/repo-stats.json";
 import { categories } from "./categories";
 import { contributors } from "./contributors";
 
@@ -30,32 +33,29 @@ type GeneratedApp = {
   };
 };
 
+type RepoStats = {
+  stars: number;
+  forks: number;
+  watchers?: number;
+  openIssues?: number;
+  defaultBranch?: string;
+  pushedAt?: string;
+  syncedAt?: string;
+};
+
 const raw = generatedJson as { apps?: GeneratedApp[] };
 const apps: GeneratedApp[] = raw.apps ?? [];
+const repo = repoStats as RepoStats;
 
 const platforms = new Set<string>();
-let totalForks = 0;
-let totalStars = 0;
 let starsKnown = 0;
-let totalContributors = 0;
 let contributorsKnown = 0;
 for (const a of apps) {
   for (const p of a.platforms ?? []) platforms.add(p);
-  const forks = a.github?.repository?.forks_count ?? a.activity?.forks;
   const stars = a.github?.repository?.stargazers_count ?? a.activity?.stars;
   const contributorsCount = a.github?.activity?.contributorsKnown ?? a.activity?.contributors;
-
-  if (typeof forks === "number" && forks > 0) {
-    totalForks += forks;
-  }
-  if (typeof stars === "number" && stars > 0) {
-    totalStars += stars;
-    starsKnown += 1;
-  }
-  if (typeof contributorsCount === "number" && contributorsCount > 0) {
-    totalContributors += contributorsCount;
-    contributorsKnown += 1;
-  }
+  if (typeof stars === "number" && stars > 0) starsKnown += 1;
+  if (typeof contributorsCount === "number" && contributorsCount > 0) contributorsKnown += 1;
 }
 
 export type SiteStats = {
@@ -71,14 +71,21 @@ export type SiteStats = {
 
 export const stats: SiteStats = {
   apps: apps.length,
-  contributors: totalContributors || contributors.length,
-  stars: totalStars,
-  forks: totalForks,
+  contributors: contributors.length,
+  // Stars/forks are the open-apps repo's own — sourced from
+  // data/generated/repo-stats.json, refreshed weekly by the
+  // sync-repo-stats workflow. Previously these were summed across
+  // every app in the directory, which produced 6-figure numbers
+  // for a 4k-star repo.
+  stars: repo.stars,
+  forks: repo.forks,
   categories: categories.length,
   stacks: new Set(apps.map((a) => a.stack).filter(Boolean)).size,
   platforms: platforms.size,
   originalRepo: "https://github.com/tortuvshin/open-apps",
 };
 
-// Counts of apps with synced readings. Useful for honest diagnostics.
+// Counts of apps with synced readings. Useful for honest diagnostics
+// on per-app data quality; the displayed site stats no longer use
+// per-app aggregation.
 export const statsDebug = { starsKnown, contributorsKnown };

@@ -3,15 +3,20 @@
 // SPDX-License-Identifier: MIT
 
 /**
- * Sync the open-apps repo contributors from GitHub into
- * `src/data/contributors.ts`. The file is the single source of truth
- * for the homepage contributors grid and the hero/footer stat.
+ * Sync the open-apps repo's own metadata from GitHub into two files:
  *
- * Idempotent: re-running with no upstream changes is a no-op. The
- * generated file is git-tracked so builds stay deterministic and
- * offline-friendly. A weekly GitHub Actions workflow refreshes it
- * (`.github/workflows/sync-contributors.yml`) — this script is the
- * local/CI implementation.
+ *   src/data/contributors.ts             — homepage contributors grid + hero/footer stat
+ *   data/generated/repo-stats.json       — stars/forks/issues shown in the header
+ *                                           GitHub button, hero, and OriginalCollection
+ *
+ * Both files were previously hand-curated (the contributors list was
+ * the "V1 static list" comment that never got a V2). This script is
+ * the V2 — the single source of truth, refreshed weekly by
+ * `.github/workflows/sync-contributors.yml`.
+ *
+ * Idempotent: re-running with no upstream changes is a no-op (writes
+ * nothing, exits 0). The generated files are git-tracked so builds
+ * stay deterministic and offline-friendly.
  *
  * Usage:
  *   node scripts/sync-contributors.mjs
@@ -22,13 +27,14 @@
  * (Unauth works for public repos at 60 req/hr; token raises to 5000.)
  */
 
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const TARGET = join(ROOT, "src", "data", "contributors.ts");
+const CONTRIBUTORS_TARGET = join(ROOT, "src", "data", "contributors.ts");
+const REPO_STATS_TARGET = join(ROOT, "data", "generated", "repo-stats.json");
 
 const REPO = process.env.OPEN_APPS_REPO ?? "tortuvshin/open-apps";
 const TOKEN = process.env.GITHUB_TOKEN;
@@ -97,7 +103,33 @@ async function fetchContributors() {
   return out;
 }
 
-function render(contributors) {
+async function fetchRepoStats() {
+  const res = await fetch(`https://api.github.com/repos/${REPO}`, { headers: HEADERS });
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`GET /repos/${REPO}: ${res.status} ${res.statusText}\n${body.slice(0, 200)}`);
+  }
+  const data = await res.json();
+  if (typeof data.stargazers_count !== "number" || typeof data.forks_count !== "number") {
+    throw new Error(
+      `Unexpected payload for ${REPO}: stars=${data.stargazers_count} forks=${data.forks_count} — aborting to avoid writing garbage.`,
+    );
+  }
+  // No `syncedAt` here on purpose — it would change every run and break
+  // the diff-stable check, producing a "no real change" PR weekly.
+  // Git history already records when the file was last touched; the
+  // `pushedAt` field tracks the upstream state.
+  return {
+    stars: data.stargazers_count,
+    forks: data.forks_count,
+    watchers: data.subscribers_count,
+    openIssues: data.open_issues_count,
+    defaultBranch: data.default_branch,
+    pushedAt: data.pushed_at,
+  };
+}
+
+function renderContributors(contributors) {
   const lines = [];
   lines.push("export type Contributor = {");
   lines.push("  username: string;");
@@ -136,21 +168,50 @@ function render(contributors) {
   return lines.join("\n");
 }
 
+function renderRepoStats(stats) {
+  return JSON.stringify(stats, null, 2) + "\n";
+}
+
+async function writeIfChanged(path, next) {
+  const current = await readFile(path, "utf8").catch(() => "");
+  if (current === next) return false;
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, next, "utf8");
+  return true;
+}
+
 async function main() {
-  const contributors = await fetchContributors();
+  // Run in parallel — independent endpoints, no shared state.
+  const [contributors, repoStats] = await Promise.all([
+    fetchContributors(),
+    fetchRepoStats(),
+  ]);
+
   if (contributors.length === 0) {
     throw new Error(
       `No named contributors returned for ${REPO}. Aborting to avoid wiping the file.`,
     );
   }
-  const next = render(contributors);
-  const current = await readFile(TARGET, "utf8").catch(() => "");
-  if (current === next) {
-    console.log(`[sync-contributors] ${REPO}: no changes (${contributors.length} contributors).`);
+
+  const contribChanged = await writeIfChanged(
+    CONTRIBUTORS_TARGET,
+    renderContributors(contributors),
+  );
+  const statsChanged = await writeIfChanged(
+    REPO_STATS_TARGET,
+    renderRepoStats(repoStats),
+  );
+
+  if (!contribChanged && !statsChanged) {
+    console.log(
+      `[sync-contributors] ${REPO}: no changes (contributors=${contributors.length}, stars=${repoStats.stars}, forks=${repoStats.forks}).`,
+    );
     return;
   }
-  await writeFile(TARGET, next, "utf8");
-  console.log(`[sync-contributors] ${REPO}: wrote ${contributors.length} contributors to ${TARGET}.`);
+  const parts = [];
+  if (contribChanged) parts.push(`contributors.ts (${contributors.length})`);
+  if (statsChanged) parts.push(`repo-stats.json (stars=${repoStats.stars} forks=${repoStats.forks})`);
+  console.log(`[sync-contributors] ${REPO}: wrote ${parts.join(", ")}.`);
 }
 
 main().catch((err) => {
