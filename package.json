@@ -12,11 +12,11 @@
   "scripts": {
     "icons": "node scripts/fetch-icons.mjs",
     "predev": "node scripts/fetch-icons.mjs",
-    "prebuild": "node scripts/fetch-icons.mjs && node scripts/build-llms-full.mjs",
+    "prebuild": "node scripts/fetch-icons.mjs",
     "validate:data": "node scripts/validate-apps.mjs",
     "build:data": "node scripts/validate-apps.mjs && node scripts/build-apps-json.mjs",
     "build:llms-full": "node scripts/build-llms-full.mjs",
-    "build": "pnpm run build:data && astro build",
+    "build": "pnpm run build:data && pnpm run build:llms-full && astro build",
     "dev": "pnpm run build:data && astro dev",
     "start": "astro dev",
     "preview": "astro preview",
