@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+// SPDX-License-Identifier: MIT
+
+
 /**
  * Parse README-LEGACY.md → data/apps/<slug>.yml
  *
@@ -23,6 +27,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const README = join(ROOT, "README-LEGACY.md");
 const APPS_DIR = join(ROOT, "data", "apps");
+
 
 function slugify(name) {
   return name
@@ -54,7 +59,7 @@ function extractLinks(text) {
  * Parse one `- [Name](repoUrl) - desc` line.
  * Returns { name, repoUrl, description, author } or null on miss.
  */
-function parseEntry(line) {
+export function parseEntry(line) {
   // Strip the leading bullet + whitespace.
   const body = line.replace(/^\s*-\s+/, "").trim();
   if (!body) return null;
@@ -211,7 +216,11 @@ async function main() {
   );
 }
 
-main().catch((err) => {
-  console.error("[parse-legacy] failed:", err);
-  process.exit(1);
-});
+// Only run main() when this file is invoked directly, not when imported.
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((err) => {
+    console.error("[parse-legacy] failed:", err);
+    process.exit(1);
+  });
+}
+

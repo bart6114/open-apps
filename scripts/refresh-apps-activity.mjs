@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+// SPDX-License-Identifier: MIT
+
+
 /**
  * Refresh script: data/apps/*.yml → updated activity from GitHub.
  *

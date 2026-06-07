@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+// SPDX-License-Identifier: MIT
+
+
 /**
  * Build script: data/apps/*.yml → data/generated/apps.json
  *

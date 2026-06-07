@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+// SPDX-License-Identifier: MIT
+
+
 // scripts/fetch-icons.mjs
 //
 // Downloads brand icons from the public `xandemon/developer-icons`

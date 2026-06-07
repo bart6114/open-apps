@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+// SPDX-License-Identifier: MIT
+
+
 /**
  * Seed script: pull the top Flutter repos from GitHub and update
  * matching yml files with real stars + last commit date.
