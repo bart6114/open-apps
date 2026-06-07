@@ -63,16 +63,10 @@ const description = `Every person who has shaped the Open Source Apps directory.
         class="mt-8 grid list-none grid-cols-1 gap-x-6 gap-y-3 p-0 sm:grid-cols-2 lg:grid-cols-3"
       >
         {
-          contributors.map((c, i) => (
+          contributors.map((c) => (
             <li
               class="flex items-center gap-3 rounded-lg border border-ink-200 bg-white p-3 transition-colors hover:border-ink-300 dark:border-ink-800 dark:bg-ink-950 dark:hover:border-ink-700"
             >
-              <span
-                class="w-6 shrink-0 text-right text-2xs font-mono text-ink-400 dark:text-ink-500"
-                aria-hidden="true"
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
               <img
                 src={c.avatarUrl}
                 alt={`${c.name ?? c.username} avatar`}
@@ -90,19 +84,11 @@ const description = `Every person who has shaped the Open Source Apps directory.
                 >
                   {c.name ?? c.username}
                 </a>
-                <div class="mt-0.5 flex items-center gap-2 text-2xs text-ink-500 dark:text-ink-400">
-                  {c.name && (
-                    <span class="truncate">@{c.username}</span>
-                  )}
-                  {typeof c.contributions === "number" && (
-                    <>
-                      {c.name && <span aria-hidden="true">·</span>}
-                      <span class="font-mono">
-                        {c.contributions.toLocaleString()} {c.contributions === 1 ? "commit" : "commits"}
-                      </span>
-                    </>
-                  )}
-                </div>
+                {c.name && (
+                  <div class="mt-0.5 truncate text-2xs text-ink-500 dark:text-ink-400">
+                    @{c.username}
+                  </div>
+                )}
               </div>
               <a
                 href={c.profileUrl}
