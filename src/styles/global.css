@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
 
 @layer base {
   :root {
@@ -71,12 +70,12 @@
     @apply inline-flex items-center justify-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors;
   }
   .btn-ghost {
-    @apply btn border-transparent text-ink-700 dark:text-ink-300 hover:bg-ink-100 dark:hover:bg-ink-900;
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors border-transparent text-ink-700 dark:text-ink-300 hover:bg-ink-100 dark:hover:bg-ink-900;
   }
   .btn-outline {
-    @apply btn border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-950 text-ink-900 dark:text-ink-100 hover:border-ink-300 dark:hover:border-ink-700 hover:bg-ink-50 dark:hover:bg-ink-900/40;
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-950 text-ink-900 dark:text-ink-100 hover:border-ink-300 dark:hover:border-ink-700 hover:bg-ink-50 dark:hover:bg-ink-900/40;
   }
   .btn-primary {
-    @apply btn border-ink-900 dark:border-ink-100 bg-ink-900 dark:bg-ink-100 text-white dark:text-ink-900 hover:bg-ink-800 dark:hover:bg-white;
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors border-ink-900 dark:border-ink-100 bg-ink-900 dark:bg-ink-100 text-white dark:text-ink-900 hover:bg-ink-800 dark:hover:bg-white;
   }
 }
