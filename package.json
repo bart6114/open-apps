@@ -22,7 +22,10 @@
     "astro": "astro",
     "check": "astro check",
     "refresh:activity": "node scripts/refresh-apps-activity.mjs",
-    "test": "node --test scripts/*.test.mjs"
+    "test": "node --test scripts/*.test.mjs",
+    "sync:contributors": "node scripts/sync-contributors.mjs",
+    "prewrangler:deploy": "pnpm run build",
+    "wrangler:deploy": "npx wrangler deploy"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
