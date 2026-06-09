@@ -30,29 +30,29 @@ const description =
 
       <AppSection
         id="hot"
-        title="Hot open-source apps"
+        title="Trending now"
         description="Projects gaining stars, activity, or attention recently."
         apps={hotList}
         viewAllHref="/apps?label=hot"
-        viewAllLabel="View hot apps"
+        viewAllLabel="View all trending"
       />
 
       <AppSection
         id="new"
-        title="New open-source apps"
-        description="Recently added apps from the community."
+        title="Recently added"
+        description="Apps added to the directory in the last few weeks."
         apps={newList}
         viewAllHref="/apps?label=new"
-        viewAllLabel="View all new"
+        viewAllLabel="View all recently added"
       />
 
       <AppSection
         id="mature"
-        title="Mature open-source apps"
-        description="Established apps with strong history, active maintainers, and real-world usage."
+        title="Established apps"
+        description="Long-running apps with strong history, active maintainers, and real-world usage."
         apps={matureList}
         viewAllHref="/apps?label=mature"
-        viewAllLabel="View mature apps"
+        viewAllLabel="View all established"
       />
 
       <StackGrid stacks={stacks} />
