@@ -1,5 +1,5 @@
 ---
-import { LENSES, PRIMARY_LENSES, isLensActive, type LensId } from "../../lib/lenses";
+import { LENSES, PRIMARY_LENSES, isLensActive, hrefForLens } from "../../lib/lenses";
 
 interface Props {
   currentParams: URLSearchParams;
@@ -10,28 +10,6 @@ const { currentParams, class: className = "" } = Astro.props;
 
 // Render only the 6 primary lenses, in declared order.
 const tabs = PRIMARY_LENSES.map((id) => LENSES.find((l) => l.id === id)!).filter(Boolean);
-
-// Build href for a lens: merge lens's params on top of current search.
-function hrefFor(lensId: LensId): string {
-  const sp = new URLSearchParams(currentParams);
-  // Clear any existing lens
-  sp.delete("lens");
-  if (lensId !== "all") {
-    const def = LENSES.find((l) => l.id === lensId);
-    if (def) {
-      for (const [k, v] of Object.entries(def.toParams())) {
-        if (Array.isArray(v)) {
-          sp.delete(k);
-          for (const item of v) sp.append(k, item);
-        } else {
-          sp.set(k, v);
-        }
-      }
-    }
-  }
-  const qs = sp.toString();
-  return qs ? `/apps?${qs}` : "/apps";
-}
 ---
 
 <nav
@@ -45,7 +23,7 @@ function hrefFor(lensId: LensId): string {
         return (
           <li>
             <a
-              href={hrefFor(lens.id)}
+              href={hrefForLens(lens.id, currentParams)}
               data-lens-id={lens.id}
               class={`lens-tab inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-2xs font-medium transition-colors ${
                 isActive

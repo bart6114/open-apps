@@ -1,4 +1,5 @@
 import type { OpenSourceApp } from "../data/types";
+import { labelDisplay, lensDisplay, statusDisplay } from "./display";
 
 /**
  * URL-driven filter state for the /apps discovery page.
@@ -20,8 +21,6 @@ export type AppsFilters = {
   sort?: AppsSort;
   /** 1-based page number. */
   page?: number;
-  /** "comfortable" (default) or "compact" list density. */
-  density?: "comfortable" | "compact";
 };
 
 /** Available sort orders, in UI order. */
@@ -29,7 +28,7 @@ export const SORT_OPTIONS = [
   { value: "recently-updated", label: "Recently updated" },
   { value: "most-starred", label: "Most starred" },
   { value: "recently-added", label: "Recently added" },
-  { value: "most-mature", label: "Most mature" },
+  { value: "best-overall", label: "Best overall" },
   { value: "alphabetical", label: "Alphabetical" },
 ] as const;
 
@@ -50,7 +49,6 @@ const KEYS = {
   lens: "lens",
   sort: "sort",
   page: "page",
-  density: "density",
 } as const;
 
 /**
@@ -59,15 +57,14 @@ const KEYS = {
  */
 export function filtersFromSearchParams(sp: URLSearchParams): AppsFilters {
   const rawSort = sp.get(KEYS.sort);
+  // Backwards-compat: old "most-mature" sort now maps to "best-overall".
+  const normalizedSort = rawSort === "most-mature" ? "best-overall" : rawSort;
   const sort: AppsSort | undefined =
-    rawSort && SORT_OPTIONS.some((o) => o.value === rawSort)
-      ? (rawSort as AppsSort)
+    normalizedSort && SORT_OPTIONS.some((o) => o.value === normalizedSort)
+      ? (normalizedSort as AppsSort)
       : undefined;
   const rawPage = Number(sp.get(KEYS.page));
   const page = Number.isFinite(rawPage) && rawPage >= 1 ? Math.floor(rawPage) : undefined;
-  const rawDensity = sp.get(KEYS.density);
-  const density =
-    rawDensity === "compact" || rawDensity === "comfortable" ? rawDensity : undefined;
   return {
     q: sp.get(KEYS.q) ?? undefined,
     stacks: sp.getAll(KEYS.stacks).filter(Boolean),
@@ -79,7 +76,6 @@ export function filtersFromSearchParams(sp: URLSearchParams): AppsFilters {
     lens: sp.get(KEYS.lens) ?? undefined,
     sort,
     page,
-    density,
   };
 }
 
@@ -100,7 +96,6 @@ export function searchParamsFromFilters(f: AppsFilters): URLSearchParams {
   if (f.lens) sp.set(KEYS.lens, f.lens);
   if (f.sort && f.sort !== DEFAULT_SORT) sp.set(KEYS.sort, f.sort);
   if (f.page && f.page !== DEFAULT_PAGE) sp.set(KEYS.page, String(f.page));
-  if (f.density && f.density !== "comfortable") sp.set(KEYS.density, f.density);
   return sp;
 }
 
@@ -139,11 +134,29 @@ export function applySort(apps: OpenSourceApp[], sort: AppsSort): OpenSourceApp[
     case "recently-added":
       arr.sort((a, b) => ts(b.addedAt) - ts(a.addedAt));
       break;
-    case "most-mature":
-      // Mature = stars >= 500 OR has a "mature" label, but for the sort
-      // we treat stars as the proxy: higher stars → more mature.
-      arr.sort((a, b) => (b.stars ?? 0) - (a.stars ?? 0));
+    case "best-overall": {
+      // Composite: scores.overall → scores.maturity → scores.activity →
+      // active status → license present → stars. Avoids ranking by
+      // stars alone.
+      const score = (a: OpenSourceApp, k: "overall" | "maturity" | "activity") =>
+        typeof a.scores?.[k] === "number" ? (a.scores![k] as number) : 0;
+      const active = (a: OpenSourceApp) => (a.status === "active" ? 1 : 0);
+      const licensed = (a: OpenSourceApp) => (a.license ? 1 : 0);
+      arr.sort((a, b) => {
+        const sOverall = score(b, "overall") - score(a, "overall");
+        if (sOverall !== 0) return sOverall;
+        const sMaturity = score(b, "maturity") - score(a, "maturity");
+        if (sMaturity !== 0) return sMaturity;
+        const sActivity = score(b, "activity") - score(a, "activity");
+        if (sActivity !== 0) return sActivity;
+        const sActive = active(b) - active(a);
+        if (sActive !== 0) return sActive;
+        const sLicensed = licensed(b) - licensed(a);
+        if (sLicensed !== 0) return sLicensed;
+        return (b.stars ?? 0) - (a.stars ?? 0);
+      });
       break;
+    }
     case "alphabetical":
       arr.sort((a, b) => a.name.localeCompare(b.name));
       break;
@@ -172,11 +185,6 @@ export function effectivePage(f: AppsFilters): number {
   return f.page ?? DEFAULT_PAGE;
 }
 
-/** Resolve the effective density from a filters object, applying default. */
-export function effectiveDensity(f: AppsFilters): "comfortable" | "compact" {
-  return f.density ?? "comfortable";
-}
-
 /**
  * Return the subset of apps that match all active filters (AND across
  * dimensions, OR within a dimension).
@@ -194,10 +202,28 @@ export function filterApps(apps: OpenSourceApp[], f: AppsFilters): OpenSourceApp
   const statuses = f.statuses?.length ? new Set(f.statuses) : null;
 
   return apps.filter((a) => {
-    // Text search — match any of: name, owner (from repoUrl), description, category
+    // Text search — match name, owner, description, category, stack,
+    // stacks, platforms, tags, backend, architecture, stateManagement,
+    // bestFor, whyListed, license, status.
     if (q) {
       const ownerMatch = /github\.com\/([^/]+)\//.exec(a.repoUrl)?.[1]?.toLowerCase() ?? "";
-      const haystack = [a.name, ownerMatch, a.description, a.category]
+      const haystack = [
+        a.name,
+        ownerMatch,
+        a.description,
+        a.category,
+        a.stack,
+        ...(a.stacks ?? []),
+        ...(a.platforms ?? []),
+        ...(a.tags ?? []),
+        a.backend ?? "",
+        a.architecture ?? "",
+        a.stateManagement ?? "",
+        ...(a.bestFor ?? []),
+        ...(a.whyListed ?? []),
+        a.license ?? "",
+        statusDisplay(a.status),
+      ]
         .join(" ")
         .toLowerCase();
       if (!haystack.includes(q)) return false;
@@ -246,22 +272,33 @@ export function activeFilterChips(
     out.push({ key: "q", value: "", label: `“${f.q}”` });
   }
   for (const v of f.stacks ?? []) {
-    out.push({ key: "stacks", value: v, label: `stack: ${v}` });
+    out.push({ key: "stacks", value: v, label: `Stack: ${v}` });
   }
   for (const v of f.platforms ?? []) {
-    out.push({ key: "platforms", value: v, label: `platform: ${v}` });
+    out.push({ key: "platforms", value: v, label: `Platform: ${v}` });
   }
   for (const v of f.categories ?? []) {
-    out.push({ key: "categories", value: v, label: `category: ${v}` });
+    out.push({ key: "categories", value: v, label: `Category: ${v}` });
   }
   for (const v of f.labels ?? []) {
-    out.push({ key: "labels", value: v, label: v });
+    out.push({ key: "labels", value: v, label: labelDisplay(v) ?? v });
   }
   for (const v of f.licenses ?? []) {
-    out.push({ key: "licenses", value: v, label: `license: ${v}` });
+    out.push({ key: "licenses", value: v, label: `License: ${v}` });
   }
   if (f.lens) {
-    out.push({ key: "lens", value: f.lens, label: `lens: ${f.lens}` });
+    out.push({ key: "lens", value: f.lens, label: lensDisplay(f.lens) });
+  }
+  // Status: collapse the "stale,quiet" composite into a single chip.
+  if (f.statuses && f.statuses.length) {
+    const joined = f.statuses.join(",");
+    if (joined === "stale,quiet") {
+      out.push({ key: "statuses", value: "stale,quiet", label: statusDisplay("needs-maintainer") });
+    } else {
+      for (const v of f.statuses) {
+        out.push({ key: "statuses", value: v, label: statusDisplay(v) });
+      }
+    }
   }
 
   return out;

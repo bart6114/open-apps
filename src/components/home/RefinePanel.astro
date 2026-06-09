@@ -43,11 +43,19 @@ const groups: FilterGroup[] = [
   { label: "License", filterKey: "licenses", options: facets.licenses, initial: initial.licenses ?? [], single: true },
 ];
 
+/** Pretty-print a slug ("react-native") as a label ("React Native"). */
+function pretty(value: string): string {
+  return value
+    .split(/[-_]/)
+    .map((p) => (p ? p[0].toUpperCase() + p.slice(1) : p))
+    .join(" ");
+}
+
 /** Build the trigger label: "Stack" when empty, "Stack: 2" when 2 selected. */
 function triggerLabel(g: FilterGroup): string {
   const n = g.initial.length;
   if (n === 0) return `${g.label}: Any`;
-  if (n === 1) return `${g.label}: ${g.initial[0]}`;
+  if (n === 1) return `${g.label}: ${pretty(g.initial[0])}`;
   return `${g.label}: ${n} selected`;
 }
 ---
@@ -125,7 +133,7 @@ function triggerLabel(g: FilterGroup): string {
                               data-filter-single={g.single ? "true" : undefined}
                               checked={checked}
                             />
-                            <span class="truncate">{opt.value}</span>
+                            <span class="truncate">{pretty(opt.value)}</span>
                           </span>
                           <span class="shrink-0 font-mono text-2xs tabular-nums text-ink-500 dark:text-ink-400">
                             {opt.count}
@@ -164,22 +172,45 @@ function triggerLabel(g: FilterGroup): string {
    * Dropdown behavior for each filter group:
    *   - click trigger → toggle popover
    *   - click outside / ESC → close
-   *   - Apply / Clear / Single-select fire `applyFilterPatch()` which
-   *     is a host-page hook (defined in `src/pages/apps/index.astro`).
-   *     The hook updates the URL via `history.pushState` (no reload)
-   *     and re-runs the row filter so the result list updates
-   *     immediately. Static pages don't filter on the server, so
-   *     this is the only way the filter actually narrows the list.
+   *   - Apply / Clear / Single-select navigate to a new URL. The
+   *     server renders the new filtered list. No client-side filter
+   *     layer means the URL is the only source of truth.
    */
-  function applyFilterPatch(patch: Record<string, string[] | null>) {
-    const fn = (window as unknown as { __applyFilters?: (p: typeof patch) => void }).__applyFilters;
-    if (typeof fn === "function") fn(patch);
-    else location.assign(location.pathname); // graceful fallback
-  }
-
   (() => {
     const groups = document.querySelectorAll<HTMLElement>(".apps-filter");
     if (!groups.length) return;
+
+    // URL key ↔ filter-group-key mapping. Keeps multi-value keys
+    // (stack, platform, ...) as repeated params, single-value as
+    // a single key. `status` joins values with `,` so the
+    // "needs-maintainer" composite can round-trip.
+    const KEY = {
+      stacks: "stack",
+      platforms: "platform",
+      categories: "category",
+      labels: "label",
+      licenses: "license",
+    } as const;
+
+    function buildUrl(patch: Record<string, string[] | null>): string {
+      const sp = new URLSearchParams(location.search);
+      // Always reset to page 1 on a filter change.
+      sp.delete("page");
+      for (const [filterKey, values] of Object.entries(patch)) {
+        const urlKey = KEY[filterKey as keyof typeof KEY];
+        if (!urlKey) continue;
+        sp.delete(urlKey);
+        if (values && values.length) {
+          for (const v of values) sp.append(urlKey, v);
+        }
+      }
+      const qs = sp.toString();
+      return qs ? `?${qs}` : location.pathname;
+    }
+
+    function navigate(patch: Record<string, string[] | null>) {
+      location.assign(buildUrl(patch));
+    }
 
     function closeAll(except?: HTMLElement) {
       groups.forEach((g) => {
@@ -227,18 +258,18 @@ function triggerLabel(g: FilterGroup): string {
         else openGroup(g);
       });
 
-      // Single-select: click any input immediately applies + closes.
+      // Single-select (e.g. License): pick one → navigate + close.
       if (isSingle) {
         pop.querySelectorAll<HTMLInputElement>(".apps-filter-input").forEach((input) => {
           input.addEventListener("change", () => {
             const key = input.dataset.filterKey!;
             const value = input.dataset.filterValue!;
-            applyFilterPatch({ [key]: [value] });
+            navigate({ [key]: [value] });
           });
         });
       }
 
-      // Apply: read checked inputs, write URL.
+      // Apply: read checked inputs, navigate.
       applyBtn?.addEventListener("click", (e) => {
         e.stopPropagation();
         const key = g.dataset.filterGroupKey!;
@@ -247,24 +278,24 @@ function triggerLabel(g: FilterGroup): string {
         inputs.forEach((i) => {
           if (i.checked) chosen.push(i.dataset.filterValue!);
         });
-        applyFilterPatch({ [key]: chosen });
+        navigate({ [key]: chosen });
+        closeGroup(g);
       });
 
-      // Clear: uncheck all in this group, remove from URL.
+      // Clear: drop this filter group from the URL.
       clearBtn?.addEventListener("click", (e) => {
         e.stopPropagation();
         const key = g.dataset.filterGroupKey!;
-        applyFilterPatch({ [key]: null });
+        navigate({ [key]: null });
+        closeGroup(g);
       });
 
-      // Prevent clicks inside the popover from closing it (e.g. the
-      // scrollbar area).
+      // Don't bubble — keep popover open while user toggles checks.
       pop.addEventListener("click", (e) => e.stopPropagation());
     });
 
-    // Close on outside click.
+    // Close on outside click / ESC.
     document.addEventListener("click", () => closeAll());
-    // Close on ESC.
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeAll();
     });

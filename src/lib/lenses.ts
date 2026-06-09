@@ -45,25 +45,25 @@ export const LENSES: LensDef[] = [
   { id: "all", label: "All apps", description: "Every app in the directory", toParams: () => ({}) },
   {
     id: "new",
-    label: "Newly added",
-    description: "Recently added to the directory",
+    label: "Recently added",
+    description: "Apps recently added to the directory",
     toParams: () => ({ label: "new" }),
   },
   {
     id: "hot",
-    label: "Hot right now",
-    description: "Apps gaining attention or recent activity",
+    label: "Trending",
+    description: "Apps with recent activity and attention",
     toParams: () => ({ label: "hot" }),
   },
   {
     id: "mature",
-    label: "Mature",
-    description: "Established long-running projects",
+    label: "Established",
+    description: "Long-running projects with stable history",
     toParams: () => ({ label: "mature" }),
   },
   {
     id: "production-like",
-    label: "Production-grade",
+    label: "Production-like",
     description: "Real apps, not toy projects",
     toParams: () => ({ lens: "production-like" }),
   },
@@ -94,8 +94,8 @@ export const LENSES: LensDef[] = [
   },
   {
     id: "actively-developed",
-    label: "Actively developed",
-    description: "Recent commits, releases, issue activity",
+    label: "Active",
+    description: "Apps with recent commits, releases, and issue activity",
     toParams: () => ({ status: "active" }),
   },
   {
@@ -183,4 +183,33 @@ export function lensFromSearchParams(sp: URLSearchParams): LensId | null {
   if (!v) return null;
   if (LENSES.some((l) => l.id === v)) return v as LensId;
   return null;
+}
+
+/**
+ * Build a `href` for a lens tab. Per the single-select-view rule,
+ * clicking a lens resets the "view" params (lens, label, status, page)
+ * and applies only the chosen lens's params. Stack/Platform/Category/
+ * License/q/sort/density filters are preserved.
+ */
+export function hrefForLens(lensId: LensId | null | undefined, current: URLSearchParams): string {
+  const sp = new URLSearchParams(current);
+  sp.delete("lens");
+  sp.delete("label");
+  sp.delete("status");
+  sp.delete("page");
+  if (lensId && lensId !== "all") {
+    const def = lensById(lensId);
+    if (def) {
+      for (const [k, v] of Object.entries(def.toParams())) {
+        if (Array.isArray(v)) {
+          sp.delete(k);
+          for (const item of v) sp.append(k, item);
+        } else {
+          sp.set(k, v);
+        }
+      }
+    }
+  }
+  const qs = sp.toString();
+  return qs ? `/apps?${qs}` : "/apps";
 }
