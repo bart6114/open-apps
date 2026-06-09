@@ -3,6 +3,7 @@ import type { OpenSourceApp } from "../../data/types";
 import Icon from "../icons/Icon.astro";
 import { getOwnerAndRepoFromRepoUrl, getOwnerAvatarUrl } from "../../lib/repo";
 import { formatStars, formatRelative } from "../../lib/format";
+import { statusDisplay } from "../../lib/display";
 
 interface Props {
   app: OpenSourceApp;
@@ -10,30 +11,9 @@ interface Props {
 
 const { app } = Astro.props;
 
-// Stale apps: a repo with no commits in 365+ days is not really
-// "mature" — it's a snapshot. Override the label so we don't show
-// "Mature" on a 6-year-old fork. (See healthFromSignals in
-// scripts/app-schema.mjs for how status is computed.)
-const isStale = app.status === "stale";
-
-const label = isStale
-  ? "stale"
-  : app.labels?.find((l) => l === "new" || l === "hot" || l === "mature") ??
-    app.labels?.[0];
-
-const labelClass = label === "new"
-  ? "badge-new"
-  : label === "hot"
-    ? "badge-hot"
-    : label === "mature"
-      ? "badge-mature"
-      : label === "stale"
-        ? "badge-stale"
-        : "";
-
-// Curated = at least one of the hand-written fields is filled in. These
-// are the apps a human actually looked at. Shown as a "verified" mark
-// next to the label badge so it doesn't dominate the card.
+// Curated = at least one of the hand-written fields is filled in.
+// Stays on the card because it's an objective fact about whether a
+// human reviewed the entry, not a subjective curation label.
 const isCurated = Boolean(
   app.bestFor?.length || app.whyListed?.length || app.caveats?.length || app.scores,
 );
@@ -68,12 +48,13 @@ const updatedLabel = formatRelative(app.lastCommitAt);
 
 const detailHref = `/apps/${app.slug}`;
 const repoHref = app.repoUrl;
+const statusText = statusDisplay(app.status);
 ---
 
 <article
   class="card card-hover group relative flex h-full flex-col gap-3 p-4"
 >
-  {/* Top row: logo + name + label badge. */}
+  {/* Top row: logo + name + (optional) status + curated mark. */}
   <header class="relative z-10 flex items-start gap-3">
     <a
       href={detailHref}
@@ -126,31 +107,38 @@ const repoHref = app.repoUrl;
             </a>
             <span class="mx-1 text-ink-300 dark:text-ink-700">·</span>
             {app.category}
+            {app.status && (
+              <>
+                <span class="mx-1 text-ink-300 dark:text-ink-700">·</span>
+                <span class="text-ink-500 dark:text-ink-400">{statusText}</span>
+              </>
+            )}
           </>
         ) : (
-          app.category
+          <>
+            {app.category}
+            {app.status && (
+              <>
+                <span class="mx-1 text-ink-300 dark:text-ink-700">·</span>
+                <span class="text-ink-500 dark:text-ink-400">{statusText}</span>
+              </>
+            )}
+          </>
         )}
       </span>
     </div>
 
-    <div class="flex shrink-0 flex-col items-end gap-1">
-      {label && (
-        <span class={`badge ${labelClass} text-[10px] leading-none`}>
-          {label}
-        </span>
-      )}
-      {isCurated && (
-        <span
-          class="inline-flex items-center gap-1 text-[10px] font-medium uppercase tracking-wider text-emerald-700 dark:text-emerald-400"
-          title="Hand-curated entry: bestFor, whyListed, caveats, or scores are filled in"
-        >
-          <svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true" fill="currentColor">
-            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm3.41 5.09a.75.75 0 0 0-1.06 0L6.75 8.69 5.65 7.59a.75.75 0 1 0-1.06 1.06l1.65 1.65a.75.75 0 0 0 1.06 0l4.11-4.11a.75.75 0 0 0 0-1.06Z"/>
-          </svg>
-          curated
-        </span>
-      )}
-    </div>
+    {isCurated && (
+      <span
+        class="inline-flex shrink-0 items-center gap-1 text-[10px] font-medium uppercase tracking-wider text-emerald-700 dark:text-emerald-400"
+        title="Hand-curated entry: bestFor, whyListed, caveats, or scores are filled in"
+      >
+        <svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true" fill="currentColor">
+          <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm3.41 5.09a.75.75 0 0 0-1.06 0L6.75 8.69 5.65 7.59a.75.75 0 1 0-1.06 1.06l1.65 1.65a.75.75 0 0 0 1.06 0l4.11-4.11a.75.75 0 0 0 0-1.06Z"/>
+        </svg>
+        curated
+      </span>
+    )}
   </header>
 
   {/* Description */}

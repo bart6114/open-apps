@@ -6,6 +6,7 @@ import {
   getOwnerAvatarUrl,
 } from "../../lib/repo";
 import { formatStars } from "../../lib/format";
+import { statusDisplay } from "../../lib/display";
 
 interface Props {
   app: OpenSourceApp;
@@ -15,10 +16,6 @@ const { app } = Astro.props;
 
 const { owner, repo } = getOwnerAndRepoFromRepoUrl(app.repoUrl);
 const avatar = app.logoUrl ?? getOwnerAvatarUrl(owner, 80);
-
-const label =
-  app.labels?.find((l) => l === "new" || l === "hot" || l === "mature") ??
-  app.labels?.[0];
 
 const allStacks = [app.stack, ...(app.stacks ?? [])].filter(Boolean);
 const visibleStacks = allStacks.slice(0, 5);
@@ -30,6 +27,7 @@ const platformOverflow = app.platforms.length - visiblePlatforms.length;
 const detailHref = `/apps/${app.slug}`;
 
 const isCurated = !!app.curation;
+const statusText = statusDisplay(app.status);
 
 const projectTypeLabel = (() => {
   switch (app.projectType) {
@@ -92,19 +90,6 @@ const starsLabel = formatStars(app.stars);
             {projectTypeLabel}
           </span>
         )}
-        {label && (
-          <span
-            class={`inline-flex items-center rounded border px-1.5 py-0 text-[10px] font-medium uppercase tracking-wider ${
-              label === "new"
-                ? "border-emerald-300/60 bg-emerald-50 text-emerald-800 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300"
-                : label === "hot"
-                  ? "border-orange-300/60 bg-orange-50 text-orange-800 dark:border-orange-800/60 dark:bg-orange-950/40 dark:text-orange-300"
-                  : "border-blue-300/60 bg-blue-50 text-blue-800 dark:border-blue-800/60 dark:bg-blue-950/40 dark:text-blue-300"
-            }`}
-          >
-            {label}
-          </span>
-        )}
         {isCurated && !app.curation?.reviewed && (
           <span class="inline-flex items-center gap-1 rounded border border-amber-300/60 bg-amber-50 px-1.5 py-0 text-[10px] font-medium text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300">
             <svg viewBox="0 0 16 16" width="9" height="9" aria-hidden="true" fill="currentColor">
@@ -139,7 +124,7 @@ const starsLabel = formatStars(app.stars);
         {app.status && (
           <>
             <span class="text-ink-300 dark:text-ink-700">·</span>
-            <span class="capitalize">{app.status}</span>
+            <span>{statusText}</span>
           </>
         )}
         {starsLabel && (

@@ -6,6 +6,7 @@ import {
   getOwnerAvatarUrl,
 } from "../../lib/repo";
 import { formatStars, formatRelative } from "../../lib/format";
+import { statusDisplay } from "../../lib/display";
 
 interface Props {
   app: OpenSourceApp;
@@ -15,19 +16,6 @@ const { app } = Astro.props;
 
 const { owner, repo } = getOwnerAndRepoFromRepoUrl(app.repoUrl);
 const avatar = app.logoUrl ?? getOwnerAvatarUrl(owner, 80);
-
-// "Mature" wins over "Hot" wins over "New" wins over anything else.
-const label =
-  app.labels?.find((l) => l === "mature" || l === "hot" || l === "new") ??
-  app.labels?.[0];
-
-const labelClass = label === "new"
-  ? "border-emerald-300/60 bg-emerald-50 text-emerald-800 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300"
-  : label === "hot"
-    ? "border-orange-300/60 bg-orange-50 text-orange-800 dark:border-orange-800/60 dark:bg-orange-950/40 dark:text-orange-300"
-    : label === "mature"
-      ? "border-blue-300/60 bg-blue-50 text-blue-800 dark:border-blue-800/60 dark:bg-blue-950/40 dark:text-blue-300"
-      : "border-ink-200 bg-ink-50 text-ink-700 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-300";
 
 const isCurated = Boolean(
   app.bestFor?.length || app.whyListed?.length || app.caveats?.length || app.scores,
@@ -54,6 +42,8 @@ const updatedLabel = formatRelative(app.lastCommitAt);
 
 const detailHref = `/apps/${app.slug}`;
 const repoHref = app.repoUrl;
+const statusText = statusDisplay(app.status);
+const statusAttr = statusText.toLowerCase();
 ---
 
 <article
@@ -65,14 +55,22 @@ const repoHref = app.repoUrl;
   data-platforms={(app.platforms ?? []).join("|")}
   data-labels={(app.labels ?? []).join("|")}
   data-status={app.status ?? ""}
+  data-status-display={statusAttr}
   data-license={app.license ?? ""}
+  data-license-display={(app.license ?? "").toLowerCase()}
   data-stars={app.stars ?? 0}
   data-updated={app.lastCommitAt ?? ""}
   data-name={app.name.toLowerCase()}
   data-owner={(owner ?? "").toLowerCase()}
   data-q={(app.description ?? "").toLowerCase()}
+  data-tags={(app.tags ?? []).join("|").toLowerCase()}
+  data-backend={(app.backend ?? "").toLowerCase()}
+  data-architecture={(app.architecture ?? "").toLowerCase()}
+  data-state-mgmt={(app.stateManagement ?? "").toLowerCase()}
+  data-best-for={(app.bestFor ?? []).join("|").toLowerCase()}
+  data-why-listed={(app.whyListed ?? []).join("|").toLowerCase()}
 >
-  {/* Header: avatar + name + label */}
+  {/* Header: avatar + name + curated mark */}
   <header class="flex items-start gap-3">
     <a
       href={detailHref}
@@ -109,13 +107,6 @@ const repoHref = app.repoUrl;
             {app.name}
           </a>
         </h3>
-        {label && (
-          <span
-            class={`inline-flex items-center rounded border px-1.5 py-0 text-[10px] font-medium uppercase tracking-wider ${labelClass}`}
-          >
-            {label}
-          </span>
-        )}
         {isCurated && (
           <span
             class="inline-flex items-center gap-1 text-[10px] font-medium uppercase tracking-wider text-emerald-700 dark:text-emerald-400"
@@ -142,6 +133,12 @@ const repoHref = app.repoUrl;
         )}
         {owner && <span class="text-ink-300 dark:text-ink-700">·</span>}
         <span>{app.category}</span>
+        {app.status && (
+          <>
+            <span class="text-ink-300 dark:text-ink-700">·</span>
+            <span>{statusText}</span>
+          </>
+        )}
       </div>
     </div>
   </header>
@@ -175,9 +172,7 @@ const repoHref = app.repoUrl;
     </div>
   </dl>
 
-  {/* Medium-priority metadata: platforms + stacks. Hidden in compact mode
-      (controlled by parent via the `data-density` attribute on the
-      results container). */}
+  {/* Medium-priority metadata: platforms + stacks. */}
   <div class="apps-row-chips flex flex-col gap-1.5">
     <div class="flex flex-wrap items-center gap-1.5">
       {visiblePlatforms.map((p) => (
