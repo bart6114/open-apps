@@ -404,9 +404,19 @@ const description =
       if (searchInput) {
         let timer: number | undefined;
         const submit = () => {
+          const term = searchInput.value.trim();
           const f = readFilters();
-          f.q = searchInput.value.trim() || undefined;
+          f.q = term || undefined;
           f.page = 1;
+          // GA4 — fire a `search` event on every submitted query
+          // (including empty strings, which clear the search). Page
+          // nav and the URL-based page_view are emitted by the
+          // BaseLayout gtag snippet; this event is for the
+          // search-specific report.
+          const gtag = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
+          if (typeof gtag === "function") {
+            gtag("event", "search", { search_term: term });
+          }
           writeFilters(f);
         };
         searchInput.addEventListener("input", () => {

@@ -101,6 +101,9 @@ const statusText = statusDisplay(app.status);
               href={repoHref}
               target="_blank"
               rel="noopener noreferrer"
+              data-event="external_repo_click"
+              data-event-source="card_owner"
+              data-event-app={app.slug}
               class="relative z-10 font-mono text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
             >
               <span class="text-ink-400 dark:text-ink-500">@</span>{owner}{repo ? <span class="text-ink-400 dark:text-ink-500">/{repo}</span> : ""}
@@ -207,6 +210,9 @@ const statusText = statusDisplay(app.status);
       href={repoHref}
       target="_blank"
       rel="noopener noreferrer"
+      data-event="external_repo_click"
+      data-event-source="card_view_repo"
+      data-event-app={app.slug}
       class="relative z-10 inline-flex items-center gap-1 font-medium text-ink-700 transition-colors hover:text-ink-900 dark:text-ink-300 dark:hover:text-ink-100"
     >
       View repo

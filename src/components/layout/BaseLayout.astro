@@ -30,6 +30,13 @@ const {
 
 const favicon =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2318181b'/%3E%3C/svg%3E";
+
+// Google Analytics 4 — hard-coded Measurement ID for the
+// open-apps.dev.mn property. The gtag snippet is injected on every
+// page; if you need to silence it for a local preview, comment the
+// gtag <script> block below out.
+const GA_ID = "G-MB9GWW1LVX";
+const gaEnabled = true;
 ---
 
 <!doctype html>
@@ -43,6 +50,29 @@ const favicon =
     <link rel="icon" href={favicon} />
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM usage guidance" />
+
+    {gaEnabled && (
+      <>
+        {/* GA4 — gtag.js loader. We send the initial page_view with
+            the current path + query string so the dashboard
+            distinguishes /apps?stack=flutter from /apps?stack=react
+            (otherwise they'd all collapse to /apps). */}
+        <script
+          is:inline
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        />
+        <script is:inline define:vars={{ GA_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag("js", new Date());
+          gtag("config", GA_ID, {
+            page_path: window.location.pathname + window.location.search,
+            page_title: document.title,
+          });
+        </script>
+      </>
+    )}
 
     <Seo
       title={title}
@@ -90,5 +120,63 @@ const favicon =
 
     <Footer />
     <slot name="body-end" />
+
+    {gaEnabled && (
+      <script is:inline define:vars={{ GA_ID }}>
+        // Mirror in-page SPA navigation (history.pushState /
+        // replaceState) into GA4 page_view events so filter
+        // changes on /apps show up as separate page views in
+        // the dashboard instead of one inflated session.
+        (function () {
+          var last = location.pathname + location.search;
+          function report() {
+            var next = location.pathname + location.search;
+            if (next === last) return;
+            last = next;
+            window.gtag("event", "page_view", {
+              page_path: next,
+              page_title: document.title,
+              page_location: location.href,
+            });
+          }
+          window.addEventListener("popstate", report);
+          var origPush = history.pushState;
+          var origReplace = history.replaceState;
+          history.pushState = function () {
+            origPush.apply(this, arguments);
+            report();
+          };
+          history.replaceState = function () {
+            origReplace.apply(this, arguments);
+            report();
+          };
+        })();
+      </script>
+    )}
+
+    {gaEnabled && (
+      <script is:inline>
+        // Delegated click handler for `data-event` elements. We do
+        // this in one place so individual components just emit
+        // data attributes and stay declarative.
+        (function () {
+          document.addEventListener("click", function (e) {
+            var el = e.target instanceof Element
+              ? e.target.closest("[data-event]")
+              : null;
+            if (!el) return;
+            var name = el.getAttribute("data-event");
+            if (!name) return;
+            var params = {
+              source: el.getAttribute("data-event-source") || undefined,
+              app_slug: el.getAttribute("data-event-app") || undefined,
+              channel: el.getAttribute("data-event-channel") || undefined,
+              link_url: el.getAttribute("href") || undefined,
+            };
+            window.gtag("event", name, params);
+          });
+        })();
+      </script>
+    )}
   </body>
 </html>

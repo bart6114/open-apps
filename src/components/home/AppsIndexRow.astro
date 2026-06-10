@@ -125,6 +125,9 @@ const statusAttr = statusText.toLowerCase();
             href={repoHref}
             target="_blank"
             rel="noopener noreferrer"
+            data-event="external_repo_click"
+            data-event-source="row_owner"
+            data-event-app={app.slug}
             class="relative z-10 font-mono hover:text-ink-900 dark:hover:text-ink-100"
           >
             <span class="text-ink-400 dark:text-ink-500">@</span>{owner}
@@ -214,6 +217,9 @@ const statusAttr = statusText.toLowerCase();
       href={repoHref}
       target="_blank"
       rel="noopener noreferrer"
+      data-event="external_repo_click"
+      data-event-source="row_github"
+      data-event-app={app.slug}
       class="relative z-10 inline-flex items-center gap-1 rounded-md border border-ink-200 bg-white px-2 py-1 font-medium text-ink-700 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-300 dark:hover:border-ink-700 dark:hover:bg-ink-900/60"
     >
       <svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" fill="currentColor">
