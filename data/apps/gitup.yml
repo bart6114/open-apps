@@ -1,0 +1,77 @@
+schemaVersion: 1
+id: github:git-up/GitUp
+slug: gitup
+source:
+  provider: github
+  owner: git-up
+  repo: GitUp
+  url: https://github.com/git-up/GitUp
+app:
+  name: GitUp
+  description: The Git interface you've been missing all your life has finally arrived.
+  category: tools
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - objc
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: objective-c
+      role: language-or-framework
+github:
+  repository:
+    id: 40638363
+    node_id: MDEwOlJlcG9zaXRvcnk0MDYzODM2Mw==
+    name: GitUp
+    full_name: git-up/GitUp
+    html_url: https://github.com/git-up/GitUp
+    description: The Git interface you've been missing all your life has finally arrived.
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: master
+    language: Objective-C
+    topics: []
+    license:
+      key: gpl-3.0
+      name: GNU General Public License v3.0
+      spdx_id: GPL-3.0
+      url: https://api.github.com/licenses/gpl-3.0
+      node_id: MDc6TGljZW5zZTk=
+    stargazers_count: 12011
+    watchers_count: 12011
+    forks_count: 1468
+    open_issues_count: 371
+    subscribers_count: 182
+    size: 70102
+    created_at: 2015-08-13T04:11:10Z
+    updated_at: 2026-06-12T15:11:15Z
+    pushed_at: 2026-06-12T15:10:15Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.850Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (12,011 stars on GitHub).
+

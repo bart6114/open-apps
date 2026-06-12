@@ -1,0 +1,78 @@
+schemaVersion: 1
+id: github:noodlewerk/NWPusher
+slug: nwpusher
+source:
+  provider: github
+  owner: noodlewerk
+  repo: NWPusher
+  url: https://github.com/noodlewerk/NWPusher
+app:
+  name: NWPusher
+  description: OS X and iOS application and framework to play with the Apple Push Notification service (APNs).
+  category: tools
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - objc
+    - apns
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: objective-c
+      role: language-or-framework
+github:
+  repository:
+    id: 5741345
+    node_id: MDEwOlJlcG9zaXRvcnk1NzQxMzQ1
+    name: NWPusher
+    full_name: noodlewerk/NWPusher
+    html_url: https://github.com/noodlewerk/NWPusher
+    description: OS X and iOS application and framework to play with the Apple Push Notification service (APNs)
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: master
+    language: Objective-C
+    topics: []
+    license:
+      key: bsd-2-clause
+      name: BSD 2-Clause "Simplified" License
+      spdx_id: BSD-2-Clause
+      url: https://api.github.com/licenses/bsd-2-clause
+      node_id: MDc6TGljZW5zZTQ=
+    stargazers_count: 6311
+    watchers_count: 6311
+    forks_count: 667
+    open_issues_count: 29
+    subscribers_count: 163
+    size: 2838
+    created_at: 2012-09-09T20:23:33Z
+    updated_at: 2026-06-12T09:41:25Z
+    pushed_at: 2021-03-30T07:00:58Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.853Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (6,311 stars on GitHub).
+

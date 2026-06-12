@@ -1,0 +1,79 @@
+schemaVersion: 1
+id: github:ISBX/apprtc-ios
+slug: apprtc-ios
+source:
+  provider: github
+  owner: ISBX
+  repo: apprtc-ios
+  url: https://github.com/ISBX/apprtc-ios
+app:
+  name: apprtc-ios
+  description: A native iOS video chat app based on WebRTC.
+  category: communication
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - objc
+    - webrtc
+    - google
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: objective-c
+      role: language-or-framework
+github:
+  repository:
+    id: 31817869
+    node_id: MDEwOlJlcG9zaXRvcnkzMTgxNzg2OQ==
+    name: apprtc-ios
+    full_name: ISBX/apprtc-ios
+    html_url: https://github.com/ISBX/apprtc-ios
+    description: A native iOS video chat app based on WebRTC
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: master
+    language: Objective-C
+    topics: []
+    license:
+      key: bsd-3-clause
+      name: BSD 3-Clause "New" or "Revised" License
+      spdx_id: BSD-3-Clause
+      url: https://api.github.com/licenses/bsd-3-clause
+      node_id: MDc6TGljZW5zZTU=
+    stargazers_count: 1354
+    watchers_count: 1354
+    forks_count: 408
+    open_issues_count: 117
+    subscribers_count: 77
+    size: 61616
+    created_at: 2015-03-07T16:14:32Z
+    updated_at: 2026-06-12T09:49:08Z
+    pushed_at: 2019-12-03T00:43:28Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.868Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (1,354 stars on GitHub).
+

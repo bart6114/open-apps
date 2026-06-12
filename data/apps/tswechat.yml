@@ -1,0 +1,87 @@
+schemaVersion: 1
+id: github:hilen/TSWeChat
+slug: tswechat
+source:
+  provider: github
+  owner: hilen
+  repo: TSWeChat
+  url: https://github.com/hilen/TSWeChat
+app:
+  name: TSWeChat
+  description: A WeChat alternative. Written in Swift 5.
+  category: communication
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - swift
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swift
+      role: language-or-framework
+github:
+  repository:
+    id: 52660585
+    node_id: MDEwOlJlcG9zaXRvcnk1MjY2MDU4NQ==
+    name: TSWeChat
+    full_name: hilen/TSWeChat
+    html_url: https://github.com/hilen/TSWeChat
+    description: A WeChat alternative. Written in Swift 5.
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: master
+    language: Swift
+    topics:
+      - alamofire
+      - audio
+      - json
+      - keyboard
+      - project
+      - rxswift
+      - snapkit
+      - swift-3
+      - ui
+      - wechat
+    license:
+      key: mit
+      name: MIT License
+      spdx_id: MIT
+      url: https://api.github.com/licenses/mit
+      node_id: MDc6TGljZW5zZTEz
+    stargazers_count: 3751
+    watchers_count: 3751
+    forks_count: 772
+    open_issues_count: 22
+    subscribers_count: 146
+    size: 29643
+    created_at: 2016-02-27T10:01:20Z
+    updated_at: 2026-06-12T09:50:30Z
+    pushed_at: 2019-07-28T08:57:46Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.856Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (3,751 stars on GitHub).
+

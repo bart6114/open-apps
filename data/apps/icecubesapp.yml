@@ -1,0 +1,84 @@
+schemaVersion: 1
+id: github:Dimillian/IceCubesApp
+slug: icecubesapp
+source:
+  provider: github
+  owner: Dimillian
+  repo: IceCubesApp
+  url: https://github.com/Dimillian/IceCubesApp
+app:
+  name: IceCubesApp
+  description: A SwiftUI Mastodon client.
+  category: social-network
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - swift
+    - swiftui
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swift
+      role: language-or-framework
+    - id: swiftui
+      role: language-or-framework
+github:
+  repository:
+    id: 568430347
+    node_id: R_kgDOIeGPCw
+    name: IceCubesApp
+    full_name: Dimillian/IceCubesApp
+    html_url: https://github.com/Dimillian/IceCubesApp
+    description: A SwiftUI Mastodon client
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: main
+    language: Swift
+    topics:
+      - ios
+      - mastodon
+      - swift
+      - swiftui
+    license:
+      key: agpl-3.0
+      name: GNU Affero General Public License v3.0
+      spdx_id: AGPL-3.0
+      url: https://api.github.com/licenses/agpl-3.0
+      node_id: MDc6TGljZW5zZTE=
+    stargazers_count: 7001
+    watchers_count: 7001
+    forks_count: 709
+    open_issues_count: 575
+    subscribers_count: 53
+    size: 224718
+    created_at: 2022-11-20T14:10:57Z
+    updated_at: 2026-06-12T16:33:50Z
+    pushed_at: 2026-06-09T13:15:36Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.852Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (7,001 stars on GitHub).
+

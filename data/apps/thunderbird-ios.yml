@@ -1,0 +1,77 @@
+schemaVersion: 1
+id: github:thunderbird/thunderbird-ios
+slug: thunderbird-ios
+source:
+  provider: github
+  owner: thunderbird
+  repo: thunderbird-ios
+  url: https://github.com/thunderbird/thunderbird-ios
+app:
+  name: thunderbird-ios
+  description: Thunderbird for iOS – Open Source Email App for iOS.
+  category: communication
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - swiftui
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swiftui
+      role: language-or-framework
+github:
+  repository:
+    id: 919524655
+    node_id: R_kgDONs7VLw
+    name: thunderbird-ios
+    full_name: thunderbird/thunderbird-ios
+    html_url: https://github.com/thunderbird/thunderbird-ios
+    description: Thunderbird for iOS – Open Source Email App for iOS
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: main
+    language: Swift
+    topics: []
+    license:
+      key: mpl-2.0
+      name: Mozilla Public License 2.0
+      spdx_id: MPL-2.0
+      url: https://api.github.com/licenses/mpl-2.0
+      node_id: MDc6TGljZW5zZTE0
+    stargazers_count: 1026
+    watchers_count: 1026
+    forks_count: 35
+    open_issues_count: 52
+    subscribers_count: 25
+    size: 9918
+    created_at: 2025-01-20T14:50:57Z
+    updated_at: 2026-06-11T16:27:51Z
+    pushed_at: 2026-06-09T15:43:44Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.871Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (1,026 stars on GitHub).
+

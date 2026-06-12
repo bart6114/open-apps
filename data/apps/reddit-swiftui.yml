@@ -1,0 +1,92 @@
+schemaVersion: 1
+id: github:carson-katri/reddit-swiftui
+slug: reddit-swiftui
+source:
+  provider: github
+  owner: carson-katri
+  repo: reddit-swiftui
+  url: https://github.com/carson-katri/reddit-swiftui
+app:
+  name: reddit-swiftui
+  description: A cross-platform Reddit client built in SwiftUI.
+  category: tools
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - swift
+    - swiftui
+    - macos
+    - watchos
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swift
+      role: language-or-framework
+    - id: swiftui
+      role: language-or-framework
+    - id: macos
+      role: supporting
+    - id: watchos
+      role: supporting
+github:
+  repository:
+    id: 199358885
+    node_id: MDEwOlJlcG9zaXRvcnkxOTkzNTg4ODU=
+    name: reddit-swiftui
+    full_name: carson-katri/reddit-swiftui
+    html_url: https://github.com/carson-katri/reddit-swiftui
+    description: A cross-platform Reddit client built in SwiftUI
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: master
+    language: Swift
+    topics:
+      - ios
+      - macos
+      - reddit
+      - swiftui
+      - swiftui-example
+      - watchos
+    license:
+      key: mit
+      name: MIT License
+      spdx_id: MIT
+      url: https://api.github.com/licenses/mit
+      node_id: MDc6TGljZW5zZTEz
+    stargazers_count: 1283
+    watchers_count: 1283
+    forks_count: 86
+    open_issues_count: 7
+    subscribers_count: 21
+    size: 933
+    created_at: 2019-07-29T01:48:20Z
+    updated_at: 2026-06-11T12:43:39Z
+    pushed_at: 2022-09-19T05:26:54Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.869Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (1,283 stars on GitHub).
+

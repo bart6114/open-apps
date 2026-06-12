@@ -1,0 +1,100 @@
+schemaVersion: 1
+id: github:joreilly/PeopleInSpace
+slug: peopleinspace
+source:
+  provider: github
+  owner: joreilly
+  repo: PeopleInSpace
+  url: https://github.com/joreilly/PeopleInSpace
+app:
+  name: PeopleInSpace
+  description: Kotlin Multiplatform sample with SwiftUI, Jetpack Compose, Compose for Wear, Compose for Desktop, and
+    Compose for Web clients along with Ktor backend.
+  category: tools
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - kmm
+    - kotlin
+    - swiftui
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swiftui
+      role: language-or-framework
+github:
+  repository:
+    id: 229625157
+    node_id: MDEwOlJlcG9zaXRvcnkyMjk2MjUxNTc=
+    name: PeopleInSpace
+    full_name: joreilly/PeopleInSpace
+    html_url: https://github.com/joreilly/PeopleInSpace
+    description: Kotlin Multiplatform sample with SwiftUI, Jetpack Compose, Compose for Wear, Compose for Desktop, and
+      Compose for Web clients along with Ktor backend.
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: main
+    language: Kotlin
+    topics:
+      - android
+      - compose-desktop
+      - compose-ios
+      - compose-multiplatform
+      - compose-web
+      - ios
+      - jetpack-compose
+      - kmp
+      - kmp-sample
+      - koin
+      - kotlin
+      - kotlin-coroutines
+      - kotlin-multiplatform
+      - kotlin-native
+      - ktor
+      - mcp
+      - swift
+      - swiftui
+      - wasm
+    license:
+      key: apache-2.0
+      name: Apache License 2.0
+      spdx_id: Apache-2.0
+      url: https://api.github.com/licenses/apache-2.0
+      node_id: MDc6TGljZW5zZTI=
+    stargazers_count: 3347
+    watchers_count: 3347
+    forks_count: 298
+    open_issues_count: 15
+    subscribers_count: 36
+    size: 73612
+    created_at: 2019-12-22T20:19:16Z
+    updated_at: 2026-06-12T06:05:09Z
+    pushed_at: 2026-06-07T21:05:53Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.857Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (3,347 stars on GitHub).
+

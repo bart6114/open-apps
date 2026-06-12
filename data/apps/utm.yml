@@ -1,13 +1,19 @@
 schemaVersion: 1
+<<<<<<< HEAD
 
 id: github:utmapp/UTM
 slug: utm
 
+=======
+id: github:utmapp/UTM
+slug: utm
+>>>>>>> 263c162 (feat: update React Native candidate list ingestion script)
 source:
   provider: github
   owner: utmapp
   repo: UTM
   url: https://github.com/utmapp/UTM
+<<<<<<< HEAD
 
 app:
   name: "UTM"
@@ -51,6 +57,24 @@ stack:
     - id: vm
       role: technology
 
+=======
+app:
+  name: UTM
+  description: Virtual machines for iOS and macOS.
+  category: tools
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - objc
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: objective-c
+      role: language-or-framework
+>>>>>>> 263c162 (feat: update React Native candidate list ingestion script)
 github:
   repository:
     id: 181042062
@@ -58,18 +82,28 @@ github:
     name: UTM
     full_name: utmapp/UTM
     html_url: https://github.com/utmapp/UTM
+<<<<<<< HEAD
     clone_url: https://github.com/utmapp/UTM.git
     ssh_url: git@github.com:utmapp/UTM.git
     homepage: "https://getutm.app"
     description: "Virtual machines for iOS and macOS"
+=======
+    description: Virtual machines for iOS and macOS
+>>>>>>> 263c162 (feat: update React Native candidate list ingestion script)
     fork: false
     archived: false
     disabled: false
     private: false
+<<<<<<< HEAD
     is_template: false
     visibility: public
     default_branch: main
     language: "Swift"
+=======
+    visibility: public
+    default_branch: main
+    language: Swift
+>>>>>>> 263c162 (feat: update React Native candidate list ingestion script)
     topics:
       - apple
       - emulation
@@ -82,8 +116,15 @@ github:
       - vm
     license:
       key: apache-2.0
+<<<<<<< HEAD
       name: "Apache License 2.0"
       spdx_id: Apache-2.0
+=======
+      name: Apache License 2.0
+      spdx_id: Apache-2.0
+      url: https://api.github.com/licenses/apache-2.0
+      node_id: MDc6TGljZW5zZTI=
+>>>>>>> 263c162 (feat: update React Native candidate list ingestion script)
     stargazers_count: 34369
     watchers_count: 34369
     forks_count: 1730
@@ -93,16 +134,40 @@ github:
     created_at: 2019-04-12T16:09:24Z
     updated_at: 2026-06-12T17:58:59Z
     pushed_at: 2026-06-08T16:07:02Z
+<<<<<<< HEAD
   sync:
     syncedAt: 2026-06-12T19:10:47.932Z
     apiVersion: rest-v3
     source: submit-page
 
+=======
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.806Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+>>>>>>> 263c162 (feat: update React Native candidate list ingestion script)
 curation:
   reviewed: false
   reviewedBy: null
   reviewedAt: null
+<<<<<<< HEAD
   bestFor:
     []
   caveats:
     []
+=======
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (34,369 stars on GitHub).
+
+>>>>>>> 263c162 (feat: update React Native candidate list ingestion script)

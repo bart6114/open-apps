@@ -1,0 +1,95 @@
+schemaVersion: 1
+id: github:Jaennaet/pISSStream
+slug: pissstream
+source:
+  provider: github
+  owner: Jaennaet
+  repo: pISSStream
+  url: https://github.com/Jaennaet/pISSStream
+app:
+  name: pISSStream
+  description: App that shows how full the International Space Station's urine tank is in real time, available for macOS
+    (menu bar), iOS, watchOS and visionOS.
+  category: entertainment
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - swift
+    - swiftui
+    - vision
+    - visionos
+    - apple-watch
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swift
+      role: language-or-framework
+    - id: swiftui
+      role: language-or-framework
+    - id: visionos
+      role: supporting
+github:
+  repository:
+    id: 905341353
+    node_id: R_kgDONfZpqQ
+    name: pISSStream
+    full_name: Jaennaet/pISSStream
+    html_url: https://github.com/Jaennaet/pISSStream
+    description: App that shows how full the International Space Station's urine tank is in real time, available for macOS
+      (menu bar), iOS, watchOS and visionOS
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: main
+    language: Swift
+    topics:
+      - humor
+      - humour
+      - international-space-station
+      - ios
+      - macos
+      - metrics-gathering
+      - visionos
+      - watchos
+    license:
+      key: bsd-3-clause
+      name: BSD 3-Clause "New" or "Revised" License
+      spdx_id: BSD-3-Clause
+      url: https://api.github.com/licenses/bsd-3-clause
+      node_id: MDc6TGljZW5zZTU=
+    stargazers_count: 1913
+    watchers_count: 1913
+    forks_count: 32
+    open_issues_count: 7
+    subscribers_count: 16
+    size: 16090
+    created_at: 2024-12-18T16:20:56Z
+    updated_at: 2026-06-09T16:17:15Z
+    pushed_at: 2025-09-10T15:03:22Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.864Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: quiet
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (1,913 stars on GitHub).
+

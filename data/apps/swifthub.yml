@@ -1,0 +1,95 @@
+schemaVersion: 1
+id: github:khoren93/SwiftHub
+slug: swifthub
+source:
+  provider: github
+  owner: khoren93
+  repo: SwiftHub
+  url: https://github.com/khoren93/SwiftHub
+app:
+  name: SwiftHub
+  description: GitHub iOS client in RxSwift and MVVM-C clean architecture.
+  category: tools
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - swift
+    - rxswift
+    - mvvm
+    - moya
+    - fastlane
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swift
+      role: language-or-framework
+    - id: rxswift
+      role: supporting
+github:
+  repository:
+    id: 78011995
+    node_id: MDEwOlJlcG9zaXRvcnk3ODAxMTk5NQ==
+    name: SwiftHub
+    full_name: khoren93/SwiftHub
+    html_url: https://github.com/khoren93/SwiftHub
+    description: GitHub iOS client in RxSwift and MVVM-C clean architecture
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: master
+    language: Swift
+    topics:
+      - cleanarchitecture
+      - fastlane
+      - github
+      - graphql
+      - moya
+      - mvvm
+      - mvvm-architecture
+      - networking
+      - open-source
+      - rest
+      - rxswift
+      - swift
+    license:
+      key: mit
+      name: MIT License
+      spdx_id: MIT
+      url: https://api.github.com/licenses/mit
+      node_id: MDc6TGljZW5zZTEz
+    stargazers_count: 3111
+    watchers_count: 3111
+    forks_count: 541
+    open_issues_count: 27
+    subscribers_count: 55
+    size: 13231
+    created_at: 2017-01-04T12:02:59Z
+    updated_at: 2026-06-06T16:07:29Z
+    pushed_at: 2026-02-15T16:15:53Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.859Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (3,111 stars on GitHub).
+

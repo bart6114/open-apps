@@ -1,0 +1,75 @@
+schemaVersion: 1
+id: github:zzanehip/The-OldOS-Project
+slug: the-oldos-project
+source:
+  provider: github
+  owner: zzanehip
+  repo: The-OldOS-Project
+  url: https://github.com/zzanehip/The-OldOS-Project
+app:
+  name: The-OldOS-Project
+  description: Recreating a fully functional version of iOS 4 in SwiftUI. .
+  category: tools
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - swift
+    - swiftui
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swift
+      role: language-or-framework
+    - id: swiftui
+      role: language-or-framework
+github:
+  repository:
+    id: 375227836
+    node_id: MDEwOlJlcG9zaXRvcnkzNzUyMjc4MzY=
+    name: The-OldOS-Project
+    full_name: zzanehip/The-OldOS-Project
+    html_url: https://github.com/zzanehip/The-OldOS-Project
+    description: "Recreating a fully functional version of iOS 4 in SwiftUI. "
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: master
+    language: C++
+    topics: []
+    license: null
+    stargazers_count: 3483
+    watchers_count: 3483
+    forks_count: 210
+    open_issues_count: 88
+    subscribers_count: 53
+    size: 154419
+    created_at: 2021-06-09T04:42:29Z
+    updated_at: 2026-06-10T18:04:48Z
+    pushed_at: 2026-02-01T17:49:15Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.857Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: active
+  tier: curated
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (3,483 stars on GitHub).
+

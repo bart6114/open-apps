@@ -1,0 +1,90 @@
+schemaVersion: 1
+id: github:rajdeep/proton
+slug: proton
+source:
+  provider: github
+  owner: rajdeep
+  repo: proton
+  url: https://github.com/rajdeep/proton
+app:
+  name: proton
+  description: Purely native and extensible rich text editor for iOS and macOS Catalyst apps.
+  category: productivity
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - swift
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swift
+      role: language-or-framework
+github:
+  repository:
+    id: 231039479
+    node_id: MDEwOlJlcG9zaXRvcnkyMzEwMzk0Nzk=
+    name: proton
+    full_name: rajdeep/proton
+    html_url: https://github.com/rajdeep/proton
+    description: Purely native and extensible rich text editor for iOS and macOS Catalyst apps
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: main
+    language: Swift
+    topics:
+      - editor
+      - extensible
+      - ios
+      - maccatalyst
+      - native
+      - plugin-architecture
+      - rich-text-editor
+      - richtexteditor
+      - swift
+      - text
+      - textkit
+      - wysiwyg
+      - wysiwyg-editor
+    license:
+      key: other
+      name: Other
+      spdx_id: NOASSERTION
+      url: null
+      node_id: MDc6TGljZW5zZTA=
+    stargazers_count: 1372
+    watchers_count: 1372
+    forks_count: 88
+    open_issues_count: 28
+    subscribers_count: 25
+    size: 84598
+    created_at: 2019-12-31T06:33:40Z
+    updated_at: 2026-06-02T06:47:54Z
+    pushed_at: 2025-04-21T09:20:06Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.867Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (1,372 stars on GitHub).
+

@@ -1,0 +1,81 @@
+schemaVersion: 1
+id: github:gabrieloc/GIOVANNI
+slug: giovanni
+source:
+  provider: github
+  owner: gabrieloc
+  repo: GIOVANNI
+  url: https://github.com/gabrieloc/GIOVANNI
+app:
+  name: GIOVANNI
+  description: A Gameboy Emulator for the Apple Watch.
+  category: tools
+  projectType: real-app
+  platforms:
+    - ios
+  tags:
+    - swift
+stack:
+  primary: ios
+  families:
+    - native
+  technologies:
+    - id: swift
+      role: language-or-framework
+github:
+  repository:
+    id: 85166749
+    node_id: MDEwOlJlcG9zaXRvcnk4NTE2Njc0OQ==
+    name: GIOVANNI
+    full_name: gabrieloc/GIOVANNI
+    html_url: https://github.com/gabrieloc/GIOVANNI
+    description: A Gameboy Emulator for the Apple Watch
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: master
+    language: Swift
+    topics:
+      - emulation
+      - emulator
+      - gameboy
+      - watchos
+    license:
+      key: mit
+      name: MIT License
+      spdx_id: MIT
+      url: https://api.github.com/licenses/mit
+      node_id: MDc6TGljZW5zZTEz
+    stargazers_count: 963
+    watchers_count: 963
+    forks_count: 75
+    open_issues_count: 17
+    subscribers_count: 35
+    size: 6925
+    created_at: 2017-03-16T07:40:00Z
+    updated_at: 2026-05-25T12:18:44Z
+    pushed_at: 2019-10-12T11:19:01Z
+  activity:
+    monthlyCommits: []
+    totalCommitsKnown: 0
+    openPullRequests: 0
+  sync:
+    syncedAt: 2026-06-12T18:54:36.872Z
+    apiVersion: rest-v3
+    source: ios-list-seed
+health:
+  status: stale
+  tier: curated
+  visibility: listed
+  cleanupCandidate: true
+  staleReason: no_commits_365_days
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
+  whyListed: Top entry from dkhamsing/open-source-ios-apps curated list (963 stars on GitHub).
+
