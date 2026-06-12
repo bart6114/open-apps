@@ -31,7 +31,7 @@ app:
         verified: false
 
 stack:
-  primary: 
+  primary: ios
   technologies:
     - id: c
       role: technology
