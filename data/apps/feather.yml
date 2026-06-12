@@ -1,0 +1,110 @@
+schemaVersion: 1
+
+id: github:claration/Feather
+slug: feather
+
+source:
+  provider: github
+  owner: claration
+  repo: Feather
+  url: https://github.com/claration/Feather
+
+app:
+  name: "Feather"
+  description: "Free on-device iOS/iPadOS application manager/installer, using certificates part of the Apple Developer Program."
+  category: productivity
+  projectType: production
+  platforms:
+    - ios
+  tags:
+    - esign
+    - ios
+    - ipa
+    - ipados
+    - kravasign
+    - sideload
+    - sideloading
+    - sign
+
+stack:
+  primary: ios
+  technologies:
+    - id: ios
+      role: technology
+    - id: swift
+      role: technology
+    - id: esign
+      role: technology
+    - id: ipa
+      role: technology
+    - id: ipados
+      role: technology
+    - id: kravasign
+      role: technology
+    - id: sideload
+      role: technology
+    - id: sideloading
+      role: technology
+    - id: sign
+      role: technology
+    - id: signature
+      role: technology
+
+github:
+  repository:
+    id: 802953062
+    node_id: R_kgDOL9wXZg
+    name: Feather
+    full_name: claration/Feather
+    html_url: https://github.com/claration/Feather
+    clone_url: https://github.com/claration/Feather.git
+    ssh_url: git@github.com:claration/Feather.git
+    homepage: "https://feather.claration.dev"
+    description: "Free on-device iOS/iPadOS application manager/installer, using certificates part of the Apple Developer Program."
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    is_template: false
+    visibility: public
+    default_branch: main
+    language: "Swift"
+    topics:
+      - esign
+      - ios
+      - ipa
+      - ipados
+      - kravasign
+      - sideload
+      - sideloading
+      - sign
+      - signature
+      - signer
+      - signing
+      - zsign
+    license:
+      key: gpl-3.0
+      name: "GNU General Public License v3.0"
+      spdx_id: GPL-3.0
+    stargazers_count: 4193
+    watchers_count: 4193
+    forks_count: 364
+    open_issues_count: 28
+    subscribers_count: 41
+    size: 49894
+    created_at: 2024-05-19T17:44:22Z
+    updated_at: 2026-06-12T18:26:15Z
+    pushed_at: 2026-06-05T07:43:54Z
+  sync:
+    syncedAt: 2026-06-12T19:01:15.921Z
+    apiVersion: rest-v3
+    source: submit-page
+
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor:
+    []
+  caveats:
+    []
