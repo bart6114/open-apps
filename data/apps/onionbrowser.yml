@@ -1,0 +1,117 @@
+schemaVersion: 1
+
+id: github:OnionBrowser/OnionBrowser
+slug: onionbrowser
+
+source:
+  provider: github
+  owner: OnionBrowser
+  repo: OnionBrowser
+  url: https://github.com/OnionBrowser/OnionBrowser
+
+app:
+  name: "OnionBrowser"
+  description: "An open-source, privacy-enhancing web browser for iOS, utilizing the Tor anonymity network"
+  category: productivity
+  projectType: production
+  platforms:
+    - ios
+  tags:
+    - anonymity
+    - browser
+    - ios
+    - mobile
+    - mpl
+    - objective-c
+    - onion
+    - privacy
+  distribution:
+    channels:
+      - type: app-store
+        platform: ios
+        label: "App Store"
+        url: https://apps.apple.com/us/app/onion-browser/id519296448
+        verified: false
+
+stack:
+  primary: ios
+  technologies:
+    - id: ios
+      role: technology
+    - id: swift
+      role: technology
+    - id: anonymity
+      role: technology
+    - id: browser
+      role: technology
+    - id: mobile
+      role: technology
+    - id: mpl
+      role: technology
+    - id: objective-c
+      role: technology
+    - id: onion
+      role: technology
+    - id: privacy
+      role: technology
+    - id: security
+      role: technology
+
+github:
+  repository:
+    id: 3534119
+    node_id: MDEwOlJlcG9zaXRvcnkzNTM0MTE5
+    name: OnionBrowser
+    full_name: OnionBrowser/OnionBrowser
+    html_url: https://github.com/OnionBrowser/OnionBrowser
+    clone_url: https://github.com/OnionBrowser/OnionBrowser.git
+    ssh_url: git@github.com:OnionBrowser/OnionBrowser.git
+    homepage: "https://onionbrowser.com"
+    description: "An open-source, privacy-enhancing web browser for iOS, utilizing the Tor anonymity network"
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    is_template: false
+    visibility: public
+    default_branch: 3.X
+    language: "Swift"
+    topics:
+      - anonymity
+      - browser
+      - ios
+      - mobile
+      - mpl
+      - objective-c
+      - onion
+      - privacy
+      - security
+      - tor
+      - tor-network
+      - web-browser
+    license:
+      key: other
+      name: "Other"
+      spdx_id: NOASSERTION
+    stargazers_count: 2591
+    watchers_count: 2591
+    forks_count: 528
+    open_issues_count: 7
+    subscribers_count: 165
+    size: 132916
+    created_at: 2012-02-24T08:50:51Z
+    updated_at: 2026-06-12T12:52:10Z
+    pushed_at: 2026-06-11T11:10:30Z
+  sync:
+    syncedAt: 2026-06-12T18:50:15.119Z
+    apiVersion: rest-v3
+    source: submit-page
+
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor:
+    []
+  caveats:
+    []
