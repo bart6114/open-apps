@@ -1,0 +1,84 @@
+schemaVersion: 1
+id: github:mattermost/mattermost-mobile
+slug: mattermost-mobile
+
+source:
+  provider: github
+  owner: mattermost
+  repo: mattermost-mobile
+  url: https://github.com/mattermost/mattermost-mobile
+
+app:
+  name: Mattermost Mobile
+  description: "Next generation iOS and Android apps for Mattermost in React Native."
+  category: communication
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+  distribution:
+    channels:
+      - type: github-releases
+        platform: android
+        label: GitHub Releases
+        url: https://github.com/mattermost/mattermost-mobile/releases
+        verified: false
+      - type: github-releases
+        platform: ios
+        label: GitHub Releases
+        url: https://github.com/mattermost/mattermost-mobile/releases
+        verified: false
+
+stack:
+  primary: react-native
+  families:
+    - cross-platform
+  technologies:
+    - id: react-native
+      role: mobile-framework
+    - id: javascript
+      role: language
+    - id: typescript
+      role: language
+
+github:
+  repository:
+    full_name: mattermost/mattermost-mobile
+    html_url: https://github.com/mattermost/mattermost-mobile
+    description: "Next generation iOS and Android apps for Mattermost in React Native."
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: main
+    language: TypeScript
+    stargazers_count: 2676
+    watchers_count: 2676
+    forks_count: 1623
+    open_issues_count: 291
+    subscribers_count: 92
+    size: 188557
+    created_at: 2016-10-07T16:52:32Z
+    updated_at: 2026-06-12T11:22:02Z
+    pushed_at: 2026-06-12T13:12:01Z
+    license:
+      spdx_id: Apache-2.0
+      name: Apache License 2.0
+      key: apache-2.0
+    topics: ["hacktoberfest","mattermost-mobile"]
+
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []

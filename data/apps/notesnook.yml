@@ -1,0 +1,84 @@
+schemaVersion: 1
+id: github:streetwriters/notesnook
+slug: notesnook
+
+source:
+  provider: github
+  owner: streetwriters
+  repo: notesnook
+  url: https://github.com/streetwriters/notesnook
+
+app:
+  name: Notesnook
+  description: "A fully open source & end-to-end encrypted note taking alternative to Evernote."
+  category: productivity
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+  distribution:
+    channels:
+      - type: github-releases
+        platform: android
+        label: GitHub Releases
+        url: https://github.com/streetwriters/notesnook/releases
+        verified: false
+      - type: github-releases
+        platform: ios
+        label: GitHub Releases
+        url: https://github.com/streetwriters/notesnook/releases
+        verified: false
+
+stack:
+  primary: react-native
+  families:
+    - cross-platform
+  technologies:
+    - id: react-native
+      role: mobile-framework
+    - id: javascript
+      role: language
+    - id: typescript
+      role: language
+
+github:
+  repository:
+    full_name: streetwriters/notesnook
+    html_url: https://github.com/streetwriters/notesnook
+    description: "A fully open source & end-to-end encrypted note taking alternative to Evernote."
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: master
+    language: TypeScript
+    stargazers_count: 14137
+    watchers_count: 14137
+    forks_count: 955
+    open_issues_count: 924
+    subscribers_count: 74
+    size: 287900
+    created_at: 2021-04-01T17:25:54Z
+    updated_at: 2026-06-12T13:12:03Z
+    pushed_at: 2026-06-12T10:46:56Z
+    license:
+      spdx_id: GPL-3.0
+      name: GNU General Public License v3.0
+      key: gpl-3.0
+    topics: ["asp-net-core","dotnet-core","electron","foss","hacktoberfest","note-managment","note-taking","note-taking-app","notebook","notes","notes-app","open-source","opensource","privacy","productivity","react","react-native","reactjs","self-hosted"]
+
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []

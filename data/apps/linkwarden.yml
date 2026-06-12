@@ -1,0 +1,84 @@
+schemaVersion: 1
+id: github:linkwarden/linkwarden
+slug: linkwarden
+
+source:
+  provider: github
+  owner: linkwarden
+  repo: linkwarden
+  url: https://github.com/linkwarden/linkwarden
+
+app:
+  name: Linkwarden
+  description: "⚡️⚡️⚡️ Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters, all in one place."
+  category: productivity
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+  distribution:
+    channels:
+      - type: github-releases
+        platform: android
+        label: GitHub Releases
+        url: https://github.com/linkwarden/linkwarden/releases
+        verified: false
+      - type: github-releases
+        platform: ios
+        label: GitHub Releases
+        url: https://github.com/linkwarden/linkwarden/releases
+        verified: false
+
+stack:
+  primary: react-native
+  families:
+    - cross-platform
+  technologies:
+    - id: react-native
+      role: mobile-framework
+    - id: javascript
+      role: language
+    - id: typescript
+      role: language
+
+github:
+  repository:
+    full_name: linkwarden/linkwarden
+    html_url: https://github.com/linkwarden/linkwarden
+    description: "⚡️⚡️⚡️ Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters, all in one place."
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: main
+    language: TypeScript
+    stargazers_count: 18593
+    watchers_count: 18593
+    forks_count: 789
+    open_issues_count: 640
+    subscribers_count: 43
+    size: 37036
+    created_at: 2022-04-09T07:53:01Z
+    updated_at: 2026-06-12T15:04:11Z
+    pushed_at: 2026-06-09T17:04:03Z
+    license:
+      spdx_id: AGPL-3.0
+      name: GNU Affero General Public License v3.0
+      key: agpl-3.0
+    topics: ["bookmark","bookmark-manager","collaboration","nextjs","react-native","read-it-later","self-hosted","typescript"]
+
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []

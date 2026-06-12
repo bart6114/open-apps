@@ -1,0 +1,84 @@
+schemaVersion: 1
+id: github:karakeep-app/karakeep
+slug: karakeep
+
+source:
+  provider: github
+  owner: karakeep-app
+  repo: karakeep
+  url: https://github.com/karakeep-app/karakeep
+
+app:
+  name: Karakeep
+  description: "A self-hostable bookmark-everything app (links, notes and images) with AI-based automatic tagging and full text search."
+  category: productivity
+  projectType: real-app
+  platforms:
+    - android
+    - ios
+  tags: []
+  distribution:
+    channels:
+      - type: github-releases
+        platform: android
+        label: GitHub Releases
+        url: https://github.com/karakeep-app/karakeep/releases
+        verified: false
+      - type: github-releases
+        platform: ios
+        label: GitHub Releases
+        url: https://github.com/karakeep-app/karakeep/releases
+        verified: false
+
+stack:
+  primary: react-native
+  families:
+    - cross-platform
+  technologies:
+    - id: react-native
+      role: mobile-framework
+    - id: javascript
+      role: language
+    - id: typescript
+      role: language
+
+github:
+  repository:
+    full_name: karakeep-app/karakeep
+    html_url: https://github.com/karakeep-app/karakeep
+    description: "A self-hostable bookmark-everything app (links, notes and images) with AI-based automatic tagging and full text search."
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    visibility: public
+    default_branch: main
+    language: TypeScript
+    stargazers_count: 25979
+    watchers_count: 25979
+    forks_count: 1249
+    open_issues_count: 649
+    subscribers_count: 76
+    size: 98650
+    created_at: 2024-02-06T12:28:31Z
+    updated_at: 2026-06-12T14:52:00Z
+    pushed_at: 2026-05-31T18:56:06Z
+    license:
+      spdx_id: AGPL-3.0
+      name: GNU Affero General Public License v3.0
+      key: agpl-3.0
+    topics: ["bookmark-manager","bookmarks","bookmarks-manager","nextjs","react-native","read-it-later","self-hosted"]
+
+health:
+  status: active
+  tier: listed
+  visibility: listed
+  cleanupCandidate: false
+  staleReason: null
+
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor: []
+  caveats: []
