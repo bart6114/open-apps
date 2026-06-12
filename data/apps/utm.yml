@@ -1,0 +1,108 @@
+schemaVersion: 1
+
+id: github:utmapp/UTM
+slug: utm
+
+source:
+  provider: github
+  owner: utmapp
+  repo: UTM
+  url: https://github.com/utmapp/UTM
+
+app:
+  name: "UTM"
+  description: "Virtual machines for iOS and macOS"
+  category: productivity
+  projectType: production
+  platforms:
+    - ios
+    - macos
+  tags:
+    - apple
+    - emulation
+    - ios
+    - jailbreak
+    - macos
+    - qemu
+    - utm
+    - virtual-machines
+
+stack:
+  primary: ios
+  technologies:
+    - id: ios
+      role: technology
+    - id: swift
+      role: technology
+    - id: apple
+      role: technology
+    - id: emulation
+      role: technology
+    - id: jailbreak
+      role: technology
+    - id: macos
+      role: technology
+    - id: qemu
+      role: technology
+    - id: utm
+      role: technology
+    - id: virtual-machines
+      role: technology
+    - id: vm
+      role: technology
+
+github:
+  repository:
+    id: 181042062
+    node_id: MDEwOlJlcG9zaXRvcnkxODEwNDIwNjI=
+    name: UTM
+    full_name: utmapp/UTM
+    html_url: https://github.com/utmapp/UTM
+    clone_url: https://github.com/utmapp/UTM.git
+    ssh_url: git@github.com:utmapp/UTM.git
+    homepage: "https://getutm.app"
+    description: "Virtual machines for iOS and macOS"
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    is_template: false
+    visibility: public
+    default_branch: main
+    language: "Swift"
+    topics:
+      - apple
+      - emulation
+      - ios
+      - jailbreak
+      - macos
+      - qemu
+      - utm
+      - virtual-machines
+      - vm
+    license:
+      key: apache-2.0
+      name: "Apache License 2.0"
+      spdx_id: Apache-2.0
+    stargazers_count: 34369
+    watchers_count: 34369
+    forks_count: 1730
+    open_issues_count: 1060
+    subscribers_count: 381
+    size: 50567
+    created_at: 2019-04-12T16:09:24Z
+    updated_at: 2026-06-12T17:58:59Z
+    pushed_at: 2026-06-08T16:07:02Z
+  sync:
+    syncedAt: 2026-06-12T19:10:47.932Z
+    apiVersion: rest-v3
+    source: submit-page
+
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor:
+    []
+  caveats:
+    []
