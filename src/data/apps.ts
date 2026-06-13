@@ -109,7 +109,16 @@ function normalize(g: GeneratedApp): OpenSourceApp {
     difficulty: g.difficulty,
     codebaseSize: g.codebaseSize,
     bestFor: g.bestFor,
-    whyListed: g.whyListed,
+    // Seed-data ymls sometimes carry `whyListed` as a single string
+    // (e.g. "Top entry from dkhamsing/open-source-ios-apps curated list
+    // (N stars on GitHub).") even though the OpenSourceApp contract
+    // declares `string[]`. Coerce here so downstream `.map()` calls
+    // on the slug page and search index don't blow up at build time.
+    whyListed: Array.isArray(g.whyListed)
+      ? g.whyListed
+      : typeof g.whyListed === "string" && g.whyListed.length > 0
+        ? [g.whyListed]
+        : g.whyListed,
     caveats: g.caveats,
     goodFirstIssues: g.goodFirstIssues,
     contributionGuide: g.contributionGuide,
