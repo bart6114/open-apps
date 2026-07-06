@@ -1,0 +1,123 @@
+schemaVersion: 1
+
+id: github:AppFlowy-IO/AppFlowy
+slug: appflowy
+
+source:
+  provider: github
+  owner: AppFlowy-IO
+  repo: AppFlowy
+  url: https://github.com/AppFlowy-IO/AppFlowy
+
+app:
+  name: "AppFlowy"
+  description: "Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative workspace where you achieve more without losing control of your data. The leading open source Notion alternative."
+  category: productivity
+  projectType: production
+  platforms:
+    - ios
+    - android
+  tags:
+    - blog
+    - confluence-alternative
+    - content-management
+    - content-services
+    - documentation
+    - flutter
+    - note-taking
+    - notion-alternative
+  distribution:
+    channels:
+      - type: app-store
+        platform: ios
+        label: "App Store"
+        url: https://apps.apple.com/us/app/appflowy/id6457261352
+        verified: false
+      - type: play-store
+        platform: android
+        label: "Play Store"
+        url: https://play.google.com/store/apps/details?id=io.appflowy.appflowy&pli=1
+        verified: false
+
+stack:
+  primary: flutter
+  technologies:
+    - id: flutter
+      role: technology
+    - id: dart
+      role: technology
+    - id: blog
+      role: technology
+    - id: confluence-alternative
+      role: technology
+    - id: content-management
+      role: technology
+    - id: content-services
+      role: technology
+    - id: documentation
+      role: technology
+    - id: note-taking
+      role: technology
+    - id: notion-alternative
+      role: technology
+    - id: project-management
+      role: technology
+
+github:
+  repository:
+    id: 377496562
+    node_id: MDEwOlJlcG9zaXRvcnkzNzc0OTY1NjI=
+    name: AppFlowy
+    full_name: AppFlowy-IO/AppFlowy
+    html_url: https://github.com/AppFlowy-IO/AppFlowy
+    clone_url: https://github.com/AppFlowy-IO/AppFlowy.git
+    ssh_url: git@github.com:AppFlowy-IO/AppFlowy.git
+    homepage: "https://appflowy.com"
+    description: "Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative workspace where you achieve more without losing control of your data. The leading open source Notion alternative."
+    fork: false
+    archived: false
+    disabled: false
+    private: false
+    is_template: false
+    visibility: public
+    default_branch: main
+    language: "Dart"
+    topics:
+      - blog
+      - confluence-alternative
+      - content-management
+      - content-services
+      - documentation
+      - flutter
+      - note-taking
+      - notion-alternative
+      - project-management
+      - task-management
+      - team-collaboration
+      - wiki
+    license:
+      key: agpl-3.0
+      name: "GNU Affero General Public License v3.0"
+      spdx_id: AGPL-3.0
+    stargazers_count: 73341
+    watchers_count: 73341
+    forks_count: 5575
+    open_issues_count: 1001
+    subscribers_count: 384
+    size: 93897
+    created_at: 2021-06-16T12:56:48Z
+    updated_at: 2026-07-06T02:51:06Z
+    pushed_at: 2026-06-26T02:35:46Z
+  sync:
+    syncedAt: 2026-07-06T03:00:02.534Z
+    apiVersion: rest-v3
+    source: submit-page
+
+curation:
+  reviewed: false
+  reviewedBy: null
+  reviewedAt: null
+  bestFor:
+    []
+  caveats:
+    []
