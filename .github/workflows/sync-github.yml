@@ -1,16 +1,17 @@
-name: Sync contributors
+name: Sync GitHub
 
 on:
   schedule:
-    - cron: "0 4 * * 0"
+    - cron: "0 3 * * 0"
   workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -19,10 +20,12 @@ jobs:
           node-version: "24"
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec grove sync contributors
+      - run: pnpm exec grove sync github
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: stefanzweifel/git-auto-commit-action@v6
+      - uses: peter-evans/create-pull-request@v6
         with:
-          commit_message: "chore(data): sync contributors"
-          file_pattern: data/generated/contributors.json data/generated/repo-stats.json
+          commit-message: "chore(data): sync GitHub metadata"
+          title: "Sync GitHub metadata"
+          branch: chore/sync-github
+          delete-branch: true
