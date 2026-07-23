@@ -1,100 +1,55 @@
-# Contributing to Open Source Apps
+# Contributing to Open Apps
 
-Thanks for helping build a directory of real, useful open-source applications.
-This guide covers how to add, fix, or curate entries.
+Thanks for helping maintain a useful directory of real open-source apps.
 
-The goal: a structured directory whose data stays fresh by itself. Every app
-gets a YAML file under `data/apps/`, the build pipeline validates and
-normalizes it, and the Astro site renders generated JSON. GitHub-shaped
-metadata lives under `github:` and is refreshed by GitHub Actions.
+## Inclusion criteria
 
-## The bar for inclusion
+A submission should be a usable application, not a library, tutorial,
+boilerplate, one-screen demo, or marketing-only page. It needs a public source
+repository, a verifiable open-source license, and enough documentation or
+project history for another developer to evaluate it.
 
-A repo is included only if it **passes both**:
+Popularity is useful context, not an automatic pass. Reviewers consider
+product scope, source quality, maintenance, documentation, and learning value.
 
-- **stars ≥ 50** on its primary public repo
-- **totalCommits ≥ 50** in the lifetime of the project
+## Add an app
 
-Apps failing either signal are excluded from the directory. Archived, demo,
-template, and tutorial repos are excluded by the curation tier but the bar
-applies uniformly — popularity is not a substitute for substance, and a
-small, clean codebase is more useful than a popular one that no one can read.
+1. Open `/submit` on the site and paste the canonical GitHub repository URL.
+2. Review the generated YAML draft.
+3. Choose category, primary stack, platforms, and free-form tags carefully.
+   Categories and stacks come from `data/taxonomy/`; tags do not replace them.
+4. Add the draft as `data/records/<slug>.yml`.
+5. Run `pnpm exec grove check` and `pnpm build`.
+6. Open a pull request explaining why the app is useful to run or study.
 
-The build script (`scripts/build-apps-json.mjs`) computes health and listing
-tier from GitHub signals. Cleanup automation reports stale apps first; hiding
-or deleting records should happen through reviewable PRs.
+## Update an app
 
-## Adding a new app
+Human-owned fields such as description, taxonomy, `bestFor`, `whyListed`,
+`caveats`, and curation labels may be edited directly. GitHub metadata and
+health signals are refreshed by Grove workflows; avoid hand-editing those
+blocks unless the change specifically fixes bad automation output.
 
-1. Open `/submit` locally or on the deployed site.
-2. Paste a public GitHub repository URL.
-3. Review the drafted name, description, category, platforms, stack, tags,
-   and curation notes.
-4. Open a PR with the generated `data/apps/<slug>.yml`.
-5. CI runs `pnpm run validate:data` and `pnpm run build:data`.
-
-Advanced contributors may still write YAML by hand. Use
-[`docs/SCHEMA.md`](./docs/SCHEMA.md) as the contract and prefer
-`schemaVersion: 1`.
-
-## Updating an existing app
-
-- Edit human-owned blocks directly: `app`, `stack`, and `curation`.
-- Avoid hand-editing `github` and `health`; automation owns those blocks.
-- If you're adding a new curation field (e.g. `whyListed`) for an app
-  that has none, prefer copy-pasting from a similar app as a template.
-- If the app moved (repo URL changed), update `repoUrl` only after
-  confirming the new repo is the canonical one.
-
-## Removing an app
-
-- If the app's repo was deleted, marked as malware, or no longer fits
-  the bar, cleanup automation should mark it as a candidate first.
-- If you want to force a removal (e.g. copyright issue, take-down
-  request), open an issue first describing the reason, then a PR that
-  deletes the yml.
-
-## Reporting issues
-
-- **Bug or data error**: open an issue with the slug and what's wrong.
-- **App submission**: open a PR with the new yml file.
-- **Security or DMCA**: see `SECURITY.md` — do not open a public issue.
+If a repository moved, verify the canonical replacement before changing its
+URL. For removal, open an issue or pull request with the reason. Security,
+malware, copyright, and takedown concerns should follow `SECURITY.md`.
 
 ## Style
 
-- One app per pull request. Group updates (e.g. fixing typos across many
-  yml files) into a single PR.
-- Don't edit `github` or `health` by hand unless the PR is explicitly fixing
-  automation output.
-- Match the formatting of nearby yml files (2-space indent, sorted keys
-  where it makes sense).
-- Don't mention the framework in the description — it's implied by
-  `stack`.
-- End descriptions with a full stop.
-- No trailing whitespace.
+- Keep one app per YAML file and use two-space indentation.
+- Write plain-language descriptions ending with a full stop.
+- Do not repeat category or primary stack values as a substitute for useful
+  tags.
+- Keep generated files and one-off scripts out of the repository.
+- Do not add a new taxonomy value for a single synonym; reuse an existing
+  controlled value when it describes the project accurately.
 
-## Local development
+## Local checks
 
 ```sh
 corepack enable
 pnpm install
-pnpm run build:data   # yml → json, drops stale entries
-pnpm run build        # full Astro build
-pnpm run dev          # local dev server
-pnpm run check        # astro type / lint check
+pnpm exec grove check
+pnpm build
 ```
 
-## Tests
-
-```sh
-pnpm test
-```
-
-See `scripts/build-apps-json.test.mjs` and
-`scripts/parse-legacy-readme.test.mjs` for examples.
-
-## Code of Conduct
-
-By participating, you agree to abide by the
-[Contributor Covenant](CODE_OF_CONDUCT.md). Be welcoming, be precise,
-be patient with first-time contributors.
+By participating, you agree to the [Code of Conduct](./CODE_OF_CONDUCT.md).

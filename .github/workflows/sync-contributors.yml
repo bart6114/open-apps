@@ -1,69 +1,28 @@
-name: Sync repo metadata
-
-# Weekly on Mondays at 07:00 UTC. Refreshes the open-apps repo's
-# contributors list and stars/forks/issues from the GitHub REST API
-# and opens a PR if anything changed. The site is rebuilt on merge.
-#
-# `scripts/sync-contributors.mjs` writes both:
-#   - src/data/contributors.ts           (contributors grid + hero/footer stat)
-#   - data/generated/repo-stats.json     (header GitHub button + hero + OriginalCollection)
+name: Sync contributors
 
 on:
   schedule:
-    - cron: "0 7 * * 1"
+    - cron: "0 4 * * 0"
   workflow_dispatch:
-
-permissions:
-  contents: read
-  pull-requests: write
 
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: write
-      pull-requests: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Sync repo metadata from GitHub
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm run sync:contributors
-
-      - name: Validate generated data
-        run: pnpm run build:data
-
-      - name: Open PR if anything changed
-        run: |
-          CHANGED=$(git diff --name-only src/data/contributors.ts data/generated/repo-stats.json)
-          if [ -n "$CHANGED" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git checkout -b chore/sync-repo-meta-$(date -u +%Y%m%d)
-            git add src/data/contributors.ts data/generated/repo-stats.json
-            git commit -m "chore(data): sync repo metadata from GitHub"
-            git push -u origin HEAD
-            gh pr create \
-              --title "chore(data): sync repo metadata from GitHub" \
-              --body "Weekly refresh of contributors and stars/forks for the open-apps repo from the GitHub REST API." \
-              --head "$(git rev-parse --abbrev-ref HEAD)" \
-              --base main
-          else
-            echo "No changes detected — skipping PR."
-          fi
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec grove sync contributors
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: "chore(data): sync contributors"
+          file_pattern: data/generated/contributors.json data/generated/repo-stats.json

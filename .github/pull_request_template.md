@@ -1,49 +1,27 @@
-<!--
-Thanks for contributing! A few things to confirm before you submit.
-
-If you are adding a NEW app, please also fill in the "New app details"
-section below — this gives reviewers what they need to verify the bar
-(stars ≥ 50 AND totalCommits ≥ 50) without having to fetch the repo
-metadata themselves.
--->
-
 ## What this PR does
 
-<!-- One or two sentences. "Adds <app> to data/apps/" or "Fixes typo in
-     2048.yml" or "Refreshes synced GitHub metadata for ..." -->
+A short summary of the change. One or two sentences. If it closes an
+issue, write "Closes #123" so it auto-links.
 
-- [ ] Adds a new app (`data/apps/<slug>.yml`)
-- [ ] Updates an existing app
-- [ ] Fixes a bug in scripts or the build pipeline
-- [ ] Updates docs / metadata (README, CONTRIBUTING, etc.)
-- [ ] Other (describe below)
+## Why
 
-## New app details
+The motivation. Link to any relevant issues or discussions. If this
+is a UI change, attach a before/after screenshot.
 
-<!-- Required for new apps. Skip if you're not adding one. -->
+## How to verify
 
-- **Repo URL**: https://github.com/owner/name
-- **App name**:
-- **Category** (Business, Communication, Education, etc.):
-- **Primary stack** (Flutter, React Native, etc.):
-- **Platforms** (Android, iOS, Web, etc.):
-- **Stars (today)**: <!-- look at github.com/owner/name -->
-- **Total commits (lifetime)**: <!-- rough order of magnitude is fine -->
-- **One-line description**:
-- **Homepage** (optional):
-- **License** (MIT, Apache-2.0, etc.):
+Steps for a reviewer to follow:
+
+1. `pnpm install`
+2. `pnpm exec grove validate`
+3. `pnpm grove:dev` and open `…`
+4. Confirm that `…`
 
 ## Checklist
 
-- [ ] I read [`CONTRIBUTING.md`](./CONTRIBUTING.md)
-- [ ] I did NOT hand-edit synced `github:` / `health:` data unless this PR
-      is explicitly fixing automation output.
-- [ ] I ran `pnpm run build:data` and `pnpm run build` locally and both
-      succeeded
-- [ ] The yml file is named `<slug>.yml` and `slug:` inside matches the
-      filename
-- [ ] The new app passes the bar (stars ≥ 50 AND totalCommits ≥ 50)
-
-## Notes for reviewers
-
-<!-- Anything else — context, screenshots, links to similar PRs, etc. -->
+- [ ] `pnpm exec grove validate` passes
+- [ ] `pnpm run build` succeeds locally
+- [ ] For record changes: the `slug` is unique and matches the
+      filename (`data/records/<slug>.yml`)
+- [ ] For new categories / stacks / platforms: the field appears
+      sensibly in `Browse by category` and `Browse by stack`

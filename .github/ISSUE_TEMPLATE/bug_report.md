@@ -1,40 +1,33 @@
 ---
 name: Bug report
-description: Something is wrong with the data, the build, or the rendered site.
+about: Something is broken on the site
 title: "[bug] "
-labels: ["bug", "needs-triage"]
+labels: ["bug"]
 assignees: []
 ---
 
 ## What happened
 
-<!-- One sentence: what broke. -->
+A clear, concise description of the bug.
 
 ## Steps to reproduce
 
-1.
-2.
-3.
+1. Go to '…'
+2. Click on '…'
+3. Scroll down to '…'
+4. See error
 
 ## What I expected
 
-<!-- What should have happened instead. -->
+A clear, concise description of what you expected to happen.
 
-## What actually happened
+## What I saw
 
-<!-- The error message, the wrong data, the broken layout, etc. -->
+Screenshots, error messages, console output — anything that helps.
 
 ## Environment
 
-- Browser + version:
+- Browser:
 - OS:
-- App slug (if relevant): `data/apps/<slug>.yml` or `/apps/<slug>/`
-
-## Screenshots / logs
-
-<!-- Drag in screenshots, paste error output, link to the live page. -->
-
-## Checklist
-
-- [ ] I searched [existing issues](../../issues) for a duplicate
-- [ ] I read [`CONTRIBUTING.md`](../../blob/main/CONTRIBUTING.md)
+- Page URL:
+- Viewport size (rough):

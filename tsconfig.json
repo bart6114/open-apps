@@ -1,8 +1,13 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "types": ["node"]
+    "moduleResolution": "Bundler",
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@grove/generated/*": ["data/generated/*"]
+    }
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "scripts"]
+  "exclude": ["dist"]
 }

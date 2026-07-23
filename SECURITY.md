@@ -2,44 +2,23 @@
 
 ## Reporting a vulnerability
 
-If you find a security issue in **this repository** (the directory site,
-build scripts, or GitHub Actions), please report it privately:
+Report security issues in this repository through a private GitHub security
+advisory:
 
-- **Open a private security advisory** on GitHub:
-  <https://github.com/tortuvshin/open-source-flutter-apps/security/advisories/new>
-- Or email a maintainer (see `git log` for active committers; the address
-  is the one on the commit metadata).
+<https://github.com/tortuvshin/open-apps/security/advisories/new>
 
-Do **not** open a public GitHub issue for a security problem — it gives
-attackers a head start.
+Do not open a public issue for an undisclosed vulnerability. You may also
+contact an active maintainer using the email address in repository commit
+metadata.
 
-## What to expect
-
-- **Acknowledgement** within 3 working days.
-- **Status update** within 7 working days, with a triage outcome
-  (accepted / won't fix / duplicate) and a tentative fix timeline.
-- **Credit** in the fix commit unless you prefer to stay anonymous.
-- **Disclosure timeline** agreed on a case-by-case basis. We aim to
-  patch critical issues within 30 days of confirmation.
+We aim to acknowledge reports within three working days, provide a triage
+update within seven, and agree on a disclosure timeline with the reporter.
 
 ## Scope
 
-In scope: the build pipeline (`scripts/`), the Astro site (`src/`), the
-GitHub Actions workflows (`.github/workflows/`), and any committed
-dependencies. The yml files in `data/apps/` describe external repos —
-issues with those repos should go to **their** maintainers, not here.
-Same for `README-LEGACY.md` which is a curated index of public URLs.
+The Astro application, Grove integration, GitHub Actions, deployment
+configuration, and committed dependencies are in scope. The apps listed in
+`data/records/` are external projects; report vulnerabilities in those apps to
+their own maintainers.
 
-## Supported versions
-
-Only the latest commit on `main` receives security fixes. Older tags
-are not maintained.
-
-## Out of scope
-
-- Repos linked from `data/apps/*.yml` — those are external projects.
-  File issues in their own trackers.
-- The `dist/` build output — it's regenerated on every build; if you
-  find a problem in the live site, file a regular bug.
-- Dependency CVEs without a working PoC — we'll bump when there's
-  reason to.
+Only the latest commit on `main` receives security fixes.

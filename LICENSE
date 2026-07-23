@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024–2026 Open Source Apps contributors
+Copyright (c) 2024–2026 Open Apps contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,13 +20,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
-
-Note on the legacy dataset: the curated list at `README-LEGACY.md` is adapted
-from the public-domain collection at
-https://github.com/tortuvshin/open-source-flutter-apps (CC0 1.0 Universal).
-The list itself is a small set of GitHub URLs, project names, and one-line
-descriptions — facts, not creative expression — and is intended to remain
-freely reusable. If you want to use the legacy list under CC0 terms, see
-`README-LEGACY.md` for the original provenance and the CC0 deed at
-https://creativecommons.org/publicdomain/zero/1.0/.
+The legacy seed list was published under CC0 1.0 Universal. Its provenance is
+documented in README-LEGACY.md.
