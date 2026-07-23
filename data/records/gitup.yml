@@ -1,0 +1,353 @@
+kind: project
+name: GitUp
+slug: gitup
+description: The Git interface you've been missing all your life has finally arrived.
+category: tools
+tags:
+  - objc
+  - native
+stack: ios
+platforms:
+  - ios
+projectType: real-app
+repoUrl: https://github.com/git-up/GitUp
+links:
+  github: https://github.com/git-up/GitUp
+bestFor: []
+whyListed:
+  - Top entry from dkhamsing/open-source-ios-apps curated list (12,011 stars on GitHub).
+caveats: []
+distribution:
+  channels: []
+source:
+  type: import
+  provider: github
+  owner: git-up
+  repo: GitUp
+  url: https://github.com/git-up/GitUp
+curation:
+  reviewed: false
+  reviewedAt: 2026-06-13T03:31:57+08:00
+  labels:
+    - mature
+    - hot
+  lenses:
+    - good-to-learn
+visibility: keep
+github:
+  repository:
+    id: 40638363
+    node_id: MDEwOlJlcG9zaXRvcnk0MDYzODM2Mw==
+    name: GitUp
+    full_name: git-up/GitUp
+    private: false
+    owner:
+      login: git-up
+      id: 10783260
+      node_id: MDEyOk9yZ2FuaXphdGlvbjEwNzgzMjYw
+      avatar_url: https://avatars.githubusercontent.com/u/10783260?v=4
+      gravatar_id: ""
+      url: https://api.github.com/users/git-up
+      html_url: https://github.com/git-up
+      followers_url: https://api.github.com/users/git-up/followers
+      following_url: https://api.github.com/users/git-up/following{/other_user}
+      gists_url: https://api.github.com/users/git-up/gists{/gist_id}
+      starred_url: https://api.github.com/users/git-up/starred{/owner}{/repo}
+      subscriptions_url: https://api.github.com/users/git-up/subscriptions
+      organizations_url: https://api.github.com/users/git-up/orgs
+      repos_url: https://api.github.com/users/git-up/repos
+      events_url: https://api.github.com/users/git-up/events{/privacy}
+      received_events_url: https://api.github.com/users/git-up/received_events
+      type: Organization
+      user_view_type: public
+      site_admin: false
+    html_url: https://github.com/git-up/GitUp
+    description: The Git interface you've been missing all your life has finally arrived.
+    fork: false
+    url: https://api.github.com/repos/git-up/GitUp
+    forks_url: https://api.github.com/repos/git-up/GitUp/forks
+    keys_url: https://api.github.com/repos/git-up/GitUp/keys{/key_id}
+    collaborators_url: https://api.github.com/repos/git-up/GitUp/collaborators{/collaborator}
+    teams_url: https://api.github.com/repos/git-up/GitUp/teams
+    hooks_url: https://api.github.com/repos/git-up/GitUp/hooks
+    issue_events_url: https://api.github.com/repos/git-up/GitUp/issues/events{/number}
+    events_url: https://api.github.com/repos/git-up/GitUp/events
+    assignees_url: https://api.github.com/repos/git-up/GitUp/assignees{/user}
+    branches_url: https://api.github.com/repos/git-up/GitUp/branches{/branch}
+    tags_url: https://api.github.com/repos/git-up/GitUp/tags
+    blobs_url: https://api.github.com/repos/git-up/GitUp/git/blobs{/sha}
+    git_tags_url: https://api.github.com/repos/git-up/GitUp/git/tags{/sha}
+    git_refs_url: https://api.github.com/repos/git-up/GitUp/git/refs{/sha}
+    trees_url: https://api.github.com/repos/git-up/GitUp/git/trees{/sha}
+    statuses_url: https://api.github.com/repos/git-up/GitUp/statuses/{sha}
+    languages_url: https://api.github.com/repos/git-up/GitUp/languages
+    stargazers_url: https://api.github.com/repos/git-up/GitUp/stargazers
+    contributors_url: https://api.github.com/repos/git-up/GitUp/contributors
+    subscribers_url: https://api.github.com/repos/git-up/GitUp/subscribers
+    subscription_url: https://api.github.com/repos/git-up/GitUp/subscription
+    commits_url: https://api.github.com/repos/git-up/GitUp/commits{/sha}
+    git_commits_url: https://api.github.com/repos/git-up/GitUp/git/commits{/sha}
+    comments_url: https://api.github.com/repos/git-up/GitUp/comments{/number}
+    issue_comment_url: https://api.github.com/repos/git-up/GitUp/issues/comments{/number}
+    contents_url: https://api.github.com/repos/git-up/GitUp/contents/{+path}
+    compare_url: https://api.github.com/repos/git-up/GitUp/compare/{base}...{head}
+    merges_url: https://api.github.com/repos/git-up/GitUp/merges
+    archive_url: https://api.github.com/repos/git-up/GitUp/{archive_format}{/ref}
+    downloads_url: https://api.github.com/repos/git-up/GitUp/downloads
+    issues_url: https://api.github.com/repos/git-up/GitUp/issues{/number}
+    pulls_url: https://api.github.com/repos/git-up/GitUp/pulls{/number}
+    milestones_url: https://api.github.com/repos/git-up/GitUp/milestones{/number}
+    notifications_url: https://api.github.com/repos/git-up/GitUp/notifications{?since,all,participating}
+    labels_url: https://api.github.com/repos/git-up/GitUp/labels{/name}
+    releases_url: https://api.github.com/repos/git-up/GitUp/releases{/id}
+    deployments_url: https://api.github.com/repos/git-up/GitUp/deployments
+    created_at: 2015-08-13T04:11:10Z
+    updated_at: 2026-07-21T18:07:50Z
+    pushed_at: 2026-07-18T02:06:09Z
+    git_url: git://github.com/git-up/GitUp.git
+    ssh_url: git@github.com:git-up/GitUp.git
+    clone_url: https://github.com/git-up/GitUp.git
+    svn_url: https://github.com/git-up/GitUp
+    homepage: http://gitup.co
+    size: 68003
+    stargazers_count: 12060
+    watchers_count: 12060
+    language: Objective-C
+    has_issues: true
+    has_projects: false
+    has_downloads: false
+    has_wiki: true
+    has_pages: false
+    has_discussions: false
+    forks_count: 1477
+    mirror_url: null
+    archived: false
+    disabled: false
+    open_issues_count: 369
+    license:
+      key: gpl-3.0
+      name: GNU General Public License v3.0
+      spdx_id: GPL-3.0
+      url: https://api.github.com/licenses/gpl-3.0
+      node_id: MDc6TGljZW5zZTk=
+    allow_forking: true
+    is_template: false
+    web_commit_signoff_required: false
+    has_pull_requests: true
+    pull_request_creation_policy: all
+    topics: []
+    visibility: public
+    forks: 1477
+    open_issues: 369
+    watchers: 12060
+    default_branch: master
+    permissions:
+      admin: false
+      maintain: false
+      push: false
+      triage: false
+      pull: false
+    temp_clone_token: ""
+    custom_properties: {}
+    organization:
+      login: git-up
+      id: 10783260
+      node_id: MDEyOk9yZ2FuaXphdGlvbjEwNzgzMjYw
+      avatar_url: https://avatars.githubusercontent.com/u/10783260?v=4
+      gravatar_id: ""
+      url: https://api.github.com/users/git-up
+      html_url: https://github.com/git-up
+      followers_url: https://api.github.com/users/git-up/followers
+      following_url: https://api.github.com/users/git-up/following{/other_user}
+      gists_url: https://api.github.com/users/git-up/gists{/gist_id}
+      starred_url: https://api.github.com/users/git-up/starred{/owner}{/repo}
+      subscriptions_url: https://api.github.com/users/git-up/subscriptions
+      organizations_url: https://api.github.com/users/git-up/orgs
+      repos_url: https://api.github.com/users/git-up/repos
+      events_url: https://api.github.com/users/git-up/events{/privacy}
+      received_events_url: https://api.github.com/users/git-up/received_events
+      type: Organization
+      user_view_type: public
+      site_admin: false
+    network_count: 1477
+    subscribers_count: 188
+  activity:
+    monthlyCommits:
+      - month: 2026-02
+        commits: 1
+      - month: 2026-03
+        commits: 0
+      - month: 2026-04
+        commits: 1
+      - month: 2026-05
+        commits: 6
+      - month: 2026-06
+        commits: 13
+      - month: 2026-07
+        commits: 6
+    totalCommitsKnown: 563
+    openPullRequests: 2
+    contributorsKnown: 62
+  sync:
+    syncedAt: 2026-07-22T09:29:15.694Z
+    apiVersion: rest-v3
+    source: github-actions
+  languages:
+    Objective-C: 1791093
+    Shell: 6054
+    C: 3425
+  latestRelease:
+    url: https://api.github.com/repos/git-up/GitUp/releases/354150599
+    assets_url: https://api.github.com/repos/git-up/GitUp/releases/354150599/assets
+    upload_url: https://uploads.github.com/repos/git-up/GitUp/releases/354150599/assets{?name,label}
+    html_url: https://github.com/git-up/GitUp/releases/tag/v1.5.0
+    id: 354150599
+    author:
+      login: lucasderraugh
+      id: 714282
+      node_id: MDQ6VXNlcjcxNDI4Mg==
+      avatar_url: https://avatars.githubusercontent.com/u/714282?v=4
+      gravatar_id: ""
+      url: https://api.github.com/users/lucasderraugh
+      html_url: https://github.com/lucasderraugh
+      followers_url: https://api.github.com/users/lucasderraugh/followers
+      following_url: https://api.github.com/users/lucasderraugh/following{/other_user}
+      gists_url: https://api.github.com/users/lucasderraugh/gists{/gist_id}
+      starred_url: https://api.github.com/users/lucasderraugh/starred{/owner}{/repo}
+      subscriptions_url: https://api.github.com/users/lucasderraugh/subscriptions
+      organizations_url: https://api.github.com/users/lucasderraugh/orgs
+      repos_url: https://api.github.com/users/lucasderraugh/repos
+      events_url: https://api.github.com/users/lucasderraugh/events{/privacy}
+      received_events_url: https://api.github.com/users/lucasderraugh/received_events
+      type: User
+      user_view_type: public
+      site_admin: false
+    node_id: RE_kwDOAmwXm84VG-jH
+    tag_name: v1.5.0
+    target_commitish: master
+    name: v1.5.0 Tahoe Release
+    draft: false
+    immutable: false
+    prerelease: false
+    created_at: 2026-07-03T00:33:52Z
+    updated_at: 2026-07-15T01:08:07Z
+    published_at: 2026-07-15T01:07:50Z
+    assets:
+      - url: https://api.github.com/repos/git-up/GitUp/releases/assets/477359764
+        id: 477359764
+        node_id: RA_kwDOAmwXm84cc-6U
+        name: GitUp.zip
+        label: null
+        uploader:
+          login: lucasderraugh
+          id: 714282
+          node_id: MDQ6VXNlcjcxNDI4Mg==
+          avatar_url: https://avatars.githubusercontent.com/u/714282?v=4
+          gravatar_id: ""
+          url: https://api.github.com/users/lucasderraugh
+          html_url: https://github.com/lucasderraugh
+          followers_url: https://api.github.com/users/lucasderraugh/followers
+          following_url: https://api.github.com/users/lucasderraugh/following{/other_user}
+          gists_url: https://api.github.com/users/lucasderraugh/gists{/gist_id}
+          starred_url: https://api.github.com/users/lucasderraugh/starred{/owner}{/repo}
+          subscriptions_url: https://api.github.com/users/lucasderraugh/subscriptions
+          organizations_url: https://api.github.com/users/lucasderraugh/orgs
+          repos_url: https://api.github.com/users/lucasderraugh/repos
+          events_url: https://api.github.com/users/lucasderraugh/events{/privacy}
+          received_events_url: https://api.github.com/users/lucasderraugh/received_events
+          type: User
+          user_view_type: public
+          site_admin: false
+        content_type: application/zip
+        state: uploaded
+        size: 4789559
+        digest: sha256:5e1d915ed533334e1691f9c01eb3cb9d2e5f459fb7aa2631b71120ff59ad585b
+        download_count: 5007
+        created_at: 2026-07-15T01:06:05Z
+        updated_at: 2026-07-15T01:06:08Z
+        browser_download_url: https://github.com/git-up/GitUp/releases/download/v1.5.0/GitUp.zip
+    tarball_url: https://api.github.com/repos/git-up/GitUp/tarball/v1.5.0
+    zipball_url: https://api.github.com/repos/git-up/GitUp/zipball/v1.5.0
+    body: "## What's Changed\r
+
+      ### The highlights for this release are as follows:\r
+
+      - Updated Tahoe design with modern Sparkle updater APIs\r
+
+      - Updated to libgit2 from version 1.4.4 to 1.9.0, this provides support for:\r
+
+      \  - OpenSSH so no more struggling to just use your system SSH keys\r
+
+      \  - Shallow clones\r
+
+      \r
+
+      ### A whole bunch of updates from GitHub PRs:\r
+
+      * Fix some “Stage All” special cases by @Cykelero in https://github.com/git-up/GitUp/pull/1037\r
+
+      * Update libgit2 fork to v1.9.0 by @Cykelero in https://github.com/git-up/GitUp/pull/2683\r
+
+      * Update Homebrew cask name in README by @Quintisimo in https://github.com/git-up/GitUp/pull/2726\r
+
+      * Make reloadHistory tip hiding much faster by @Cykelero in https://github.com/git-up/GitUp/pull/2707\r
+
+      * Make the Text Size preference apply to the text in the diff view, not just the line numbers by @mluisbrown in https://github.com/git-up/GitUp/pull/2727\r
+
+      * Fix highlight range computation for non-ascii characters by @lucasderraugh in https://github.com/git-up/GitUp/pull/2742\r
+
+      * Fix crash when staging lines with the index locked by @Cykelero in https://github.com/git-up/GitUp/pull/2771\r
+
+      * Add GitUpKit to readme intro by @Cykelero in https://github.com/git-up/GitUp/pull/2776\r
+
+      * Allow opening containing repo from subdirectory by @lucasderraugh in https://github.com/git-up/GitUp/pull/2777\r
+
+      * Improve selected files performance lag in Commit View by @delacrixmorgan in https://github.com/git-up/GitUp/pull/2780\r
+
+      * Bump to macOS 12.4 min target by @lucasderraugh in https://github.com/git-up/GitUp/pull/2785\r
+
+      * Move back to CMake for libgit2 compilation by @lucasderraugh in https://github.com/git-up/GitUp/pull/2786\r
+
+      * Use ssh_exec from libgit2 by @lucasderraugh in https://github.com/git-up/GitUp/pull/2787\r
+
+      \r
+
+      ## New Contributors\r
+
+      * @Quintisimo made their first contribution in https://github.com/git-up/GitUp/pull/2726\r
+
+      * @mluisbrown made their first contribution in https://github.com/git-up/GitUp/pull/2727\r
+
+      * @delacrixmorgan made their first contribution in https://github.com/git-up/GitUp/pull/2780\r
+
+      \r
+
+      **Full Changelog**: https://github.com/git-up/GitUp/compare/v1.4.3...v1.5.0"
+    reactions:
+      url: https://api.github.com/repos/git-up/GitUp/releases/354150599/reactions
+      total_count: 14
+      "+1": 3
+      "-1": 0
+      laugh: 0
+      hooray: 6
+      confused: 0
+      heart: 5
+      rocket: 0
+      eyes: 0
+    mentions_count: 5
+  files:
+    readme: true
+    contributing: true
+    codeOfConduct: false
+    security: false
+    issueTemplates: false
+    pullRequestTemplate: false
+  labels:
+    - name: good first issue
+      color: a4ea59
+      description: A change that shouldn't involve too much insider knowledge
+health:
+  status: active
+  tier: curated
+  visibility: keep
+  cleanupCandidate: false
