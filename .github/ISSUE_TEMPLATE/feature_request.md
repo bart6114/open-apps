@@ -1,25 +1,20 @@
 ---
 name: Feature request
-description: Suggest a new feature for the directory or build pipeline.
+about: Suggest an improvement to the site
 title: "[feature] "
-labels: ["enhancement", "needs-triage"]
+labels: ["enhancement"]
 assignees: []
 ---
 
-## What you'd like
+## The problem
 
-<!-- A short description of the feature. -->
+What's missing or awkward today?
 
-## Why it's useful
+## The proposed solution
 
-<!-- Who benefits and how. Be concrete — "this would be nice" is hard to
-     act on; "I tried to filter apps by X and couldn't" is actionable. -->
-
-## Possible implementation
-
-<!-- Optional: a sketch of how you'd build it, or a link to a similar
-     project. -->
+What would you like to see? Mockups, links, references — anything
+that helps us understand the shape of the change.
 
 ## Alternatives considered
 
-<!-- Optional: things you considered and rejected, and why. -->
+Any other approaches you weighed, and why this one wins.
