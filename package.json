@@ -1,49 +1,33 @@
 {
-  "name": "open-apps-web",
+  "name": "open-apps",
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "A static, community-curated directory of real open-source application codebases. Each app is a YAML file; activity is refreshed daily; the build pipeline renders an Astro site.",
+  "description": "A Grove-powered directory of production open-source apps.",
   "license": "MIT",
   "packageManager": "pnpm@10.12.1",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12.0"
   },
   "scripts": {
-    "icons": "node scripts/fetch-icons.mjs",
-    "predev": "node scripts/fetch-icons.mjs",
-    "prebuild": "node scripts/fetch-icons.mjs",
-    "validate:data": "node scripts/validate-apps.mjs",
-    "build:data": "node scripts/validate-apps.mjs && node scripts/build-apps-json.mjs",
-    "build:llms-full": "node scripts/build-llms-full.mjs",
-    "build": "pnpm run build:data && pnpm run build:llms-full && astro build",
-    "dev": "pnpm run build:data && astro dev",
+    "build": "astro build",
+    "dev": "astro dev",
     "start": "astro dev",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro check",
-    "refresh:activity": "node scripts/refresh-apps-activity.mjs",
-    "test": "node --test scripts/*.test.mjs",
-    "sync:contributors": "node scripts/sync-contributors.mjs",
-    "enrich:github": "node scripts/enrich-github-metadata.mjs",
-    "prewrangler:deploy": "pnpm run build",
-    "wrangler:deploy": "npx wrangler deploy"
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
+    "@grove-dev/astro": "^0.3.4",
+    "@grove-dev/cli": "^0.3.4",
+    "@grove-dev/core": "^0.3.4",
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "^7.1.0",
+    "astro": "^7.1.3",
     "tailwindcss": "^4.3.0",
-    "typescript": "^6.0.3",
-    "yaml": "^2.9.0",
-    "zod": "^4.4.3"
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@types/node": "^25.9.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "yaml": "^2.9.0"
-    }
   }
 }
