@@ -1,80 +1,215 @@
 # Open Apps
 
-[Open Apps](https://open-apps.dev.mn) is a curated directory of real
-open-source applications with codebases developers can run, study, compare,
-and contribute to.
+> A curated directory of real open-source applications you can run, study,
+> compare, and contribute to.
 
-The catalog currently contains 149 mobile and cross-platform apps. It began
-with the public-domain Open Source Flutter Apps collection and now includes
-Flutter, React Native, native iOS, and other production app stacks.
+[![Website](https://img.shields.io/badge/explore-open--apps.dev.mn-111827?style=flat-square)](https://open-apps.dev.mn)
+[![Validate app data](https://img.shields.io/github/actions/workflow/status/tortuvshin/open-apps/validate-data.yml?branch=main&style=flat-square&label=data)](https://github.com/tortuvshin/open-apps/actions/workflows/validate-data.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-22c55e?style=flat-square)](LICENSE)
+[![Astro](https://img.shields.io/badge/built%20with-Astro-ff5d01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 
-## What belongs here
+[Explore the directory](https://open-apps.dev.mn/apps) ·
+[Submit an app](https://open-apps.dev.mn/submit) ·
+[Read the contribution guide](CONTRIBUTING.md)
 
-Open Apps favors complete applications with:
+![Open Apps — discover open-source apps worth studying](public/og-image.svg)
 
-- a public source repository and clear license;
-- enough documentation or project structure to evaluate;
-- meaningful product scope beyond a demo, tutorial, or starter;
-- useful architecture, UI, data, testing, or deployment patterns.
+## Why Open Apps?
 
-Stars and recent activity are signals, not the sole inclusion criteria.
-Long-running or historically useful projects can remain valuable learning
-resources.
+GitHub is excellent when you already know what to search for. Traditional
+awesome lists are useful for discovery, but a repository name and star count
+rarely tell you whether a codebase is worth your time.
 
-## Repository structure
+Open Apps adds the context developers need to make that decision:
+
+- **Real applications, not toy projects** — complete products with meaningful
+  scope, structure, and a clear license.
+- **Practical discovery** — browse by category, platform, stack, activity, and
+  maturity.
+- **Useful learning signals** — understand what a project is best for, how
+  difficult it is, and what architectural ideas it demonstrates.
+- **Fresh repository metadata** — scheduled automation refreshes activity and
+  contributor data through reviewable pull requests.
+- **Open, portable data** — every catalog entry is a human-readable YAML file
+  in this repository.
+
+Stars are a signal, not a ranking system. The goal is to surface codebases
+that are useful to read, run, learn from, or improve.
+
+## What belongs in the directory?
+
+Open Apps covers mobile, web, desktop, full-stack, and developer-facing
+applications. A project must be a genuine application with a public source
+repository, an identifiable license, at least 50 stars, and at least 50
+lifetime commits.
+
+The directory does not accept:
+
+- tutorials, snippets, or one-screen demos;
+- boilerplates and starter templates;
+- package-only libraries and SDKs;
+- archived projects with no enduring learning value;
+- repositories with an unclear license or purpose.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete curation and submission
+rules.
+
+## Catalog data
+
+Each app lives in its own file:
 
 ```text
-data/records/       one validated YAML file per app
-data/taxonomy/      controlled categories, stacks, and platforms
-data/generated/     Grove-managed metadata committed only when CI needs it
-src/pages/          Open Apps-owned Astro pages
-public/icons/       custom stack and platform assets
-grove.config.ts     brand, navigation, footer, analytics, facets, and routes
+data/apps/<slug>.yml
 ```
 
-Grove owns the reusable data contracts, UI components, generated artifacts,
-and maintenance commands. This repository permanently owns its pages, copy,
-data, deployment, and any future product-specific features.
+Records combine human curation with GitHub metadata:
+
+| Area | Examples | Maintained by |
+| --- | --- | --- |
+| App identity | name, description, category, platforms | contributors and curators |
+| Technology | primary stack, languages, frameworks | contributors and curators |
+| Repository | stars, forks, releases, activity | scheduled GitHub sync |
+| Health | status, listing tier, cleanup candidacy | build and cleanup automation |
+| Curation | learning value, caveats, review notes | curators |
+
+The canonical field definitions, ownership rules, taxonomy IDs, and a complete
+record example are documented in [docs/SCHEMA.md](docs/SCHEMA.md).
+
+### Data pipeline
+
+```text
+data/apps/*.yml
+      │
+      ├─ validate schema and taxonomy
+      ├─ normalize and score records
+      └─ generate build-time JSON
+             ├─ apps.index.json  → lightweight search and listing data
+             ├─ apps.full.json   → complete app records
+             └─ apps.json        → compatibility payload
+                      │
+                      └─ Astro static site → dist/
+```
+
+Files under `data/generated/` are derived artifacts unless explicitly tracked.
+Edit the YAML source records rather than generated JSON.
 
 ## Local development
 
-Node.js 22.12 or newer and pnpm are required.
+### Requirements
+
+- [Node.js](https://nodejs.org/) 20 or newer
+- [pnpm](https://pnpm.io/) 10.12.1 (the version is pinned in `package.json`)
+
+### Start the site
 
 ```sh
+git clone https://github.com/tortuvshin/open-apps.git
+cd open-apps
 corepack enable
-pnpm install
+pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Before opening a pull request:
+The development server prints its local URL, normally
+`http://localhost:4321`.
 
-```sh
-pnpm exec grove check
-pnpm build
+### Useful commands
+
+| Command | Purpose |
+| --- | --- |
+| `pnpm dev` | Generate app data and start the Astro development server |
+| `pnpm build` | Validate data, generate AI-readable files, and build the site |
+| `pnpm preview` | Preview the production build locally |
+| `pnpm check` | Run Astro and TypeScript checks |
+| `pnpm test` | Run the Node.js test suite |
+| `pnpm validate:data` | Validate every app record without building the site |
+| `pnpm build:data` | Validate YAML and regenerate catalog JSON |
+| `pnpm refresh:activity` | Refresh per-app activity from the GitHub API |
+| `pnpm sync:contributors` | Refresh this repository's contributor metadata |
+
+GitHub API scripts use `GITHUB_TOKEN` when available. Routine local development,
+validation, and builds do not require a token.
+
+## Project structure
+
+```text
+.
+├── data/
+│   ├── apps/             # one YAML source record per app
+│   ├── generated/        # build-time catalog output
+│   └── taxonomy/         # allowed categories, platforms, stacks, and channels
+├── docs/
+│   └── SCHEMA.md         # catalog schema and ownership contract
+├── public/               # static assets and AI-readable endpoints
+├── scripts/              # validation, generation, sync, and migration tools
+├── src/
+│   ├── components/       # Astro UI components
+│   ├── data/             # typed catalog adapters and site metadata
+│   ├── lib/              # search, scoring, formatting, and taxonomy helpers
+│   └── pages/            # static routes and app detail pages
+└── .github/workflows/    # validation and scheduled metadata maintenance
 ```
 
-No repository-owned generation scripts are required. The Grove Astro
-integration prepares normalized data, sitemap, robots, social preview, and
-LLM-readable files when Astro starts.
+The site is built with [Astro](https://astro.build), TypeScript, and
+[Tailwind CSS](https://tailwindcss.com/). It produces static assets in `dist/`
+and is configured for deployment with Cloudflare Wrangler.
 
-## Maintenance
+## Add or update an app
 
-```sh
-pnpm exec grove sync github
-pnpm exec grove sync contributors
-pnpm exec grove cleanup
-```
+The fastest submission path is the
+[web form](https://open-apps.dev.mn/submit). It drafts a YAML record from a
+public GitHub URL; you review the metadata and open a pull request.
 
-The five workflows under `.github/workflows/` validate builds, report cleanup
-candidates, refresh GitHub metadata, sync contributors, and produce the static
-production artifact. Cloudflare deploys `dist/` through the repository's
-existing Git integration and `wrangler.jsonc`.
+For a manual contribution:
 
-## Contributing and license
+1. Create or edit `data/apps/<slug>.yml`.
+2. Keep human-owned fields under `app`, `stack`, and `curation`.
+3. Do not hand-edit automation-owned `github` or `health` fields.
+4. Run `pnpm validate:data`, `pnpm test`, and `pnpm build`.
+5. Open a focused pull request.
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for the app criteria and YAML workflow,
-[CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for community expectations, and
-[SECURITY.md](./SECURITY.md) for private vulnerability reporting.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting data or code.
+All participants must follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
-The application code is MIT licensed. The legacy seed collection is retained
-under CC0 provenance; see [README-LEGACY.md](./README-LEGACY.md).
+## Automation
+
+GitHub Actions keeps changes visible and reviewable:
+
+- pull requests that touch catalog data run schema validation, data generation,
+  and unit tests;
+- app activity and GitHub-shaped metadata are refreshed daily;
+- repository contributor statistics are refreshed weekly;
+- stale-app candidates are reported weekly for curator review.
+
+Scheduled jobs open pull requests when source data changes. They do not silently
+remove catalog entries.
+
+## AI-readable catalog
+
+The deployed site publishes:
+
+- [`llms.txt`](https://open-apps.dev.mn/llms.txt) — a compact guide to the site;
+- [`llms-full.txt`](https://open-apps.dev.mn/llms-full.txt) — the expanded
+  catalog for AI assistants and retrieval tools.
+
+These files are generated from the same source data as the website.
+
+## Project history
+
+Open Apps grew from
+[`open-source-flutter-apps`](https://github.com/tortuvshin/open-source-flutter-apps).
+The original README-only collection is preserved in
+[README-LEGACY.md](README-LEGACY.md), while this project evolves it into a
+structured, searchable, multi-stack directory.
+
+## Security
+
+Please report vulnerabilities and sensitive issues using the private process in
+[SECURITY.md](SECURITY.md). Do not open a public issue for security reports,
+credentials, or takedown requests.
+
+## License
+
+The website code and catalog tooling are available under the
+[MIT License](LICENSE). Provenance and licensing notes for the legacy dataset
+are included in the license file.
