@@ -1,157 +1,80 @@
 # Open Apps
 
-Open Apps is a directory of open-source apps with real codebases.
+[Open Apps](https://open-apps.dev.mn) is a curated directory of real
+open-source applications with codebases developers can run, study, compare,
+and contribute to.
 
-It is built for developers who want to find apps they can read, run, use, compare, and learn from — not just repositories with many stars.
+The catalog currently contains 149 mobile and cross-platform apps. It began
+with the public-domain Open Source Flutter Apps collection and now includes
+Flutter, React Native, native iOS, and other production app stacks.
 
-Website: https://open-apps.dev.mn
+## What belongs here
 
----
+Open Apps favors complete applications with:
 
-## Why this exists
+- a public source repository and clear license;
+- enough documentation or project structure to evaluate;
+- meaningful product scope beyond a demo, tutorial, or starter;
+- useful architecture, UI, data, testing, or deployment patterns.
 
-Finding open-source apps is harder than it should be.
+Stars and recent activity are signals, not the sole inclusion criteria.
+Long-running or historically useful projects can remain valuable learning
+resources.
 
-GitHub is great when you already know what to search for.  
-Awesome lists are useful, but most of them are just long link collections.
+## Repository structure
 
-Open Apps tries to answer a different question:
+```text
+data/records/       one validated YAML file per app
+data/taxonomy/      controlled categories, stacks, and platforms
+data/generated/     Grove-managed metadata committed only when CI needs it
+src/pages/          Open Apps-owned Astro pages
+public/icons/       custom stack and platform assets
+grove.config.ts     brand, navigation, footer, analytics, facets, and routes
+```
 
-> “Which open-source apps are actually useful to study?”
+Grove owns the reusable data contracts, UI components, generated artifacts,
+and maintenance commands. This repository permanently owns its pages, copy,
+data, deployment, and any future product-specific features.
 
-That means the project focuses on apps with real structure, real product scope, readable code, clear metadata, and enough context to understand why the repo is useful.
+## Local development
 
-This is not a complete index of open source.  
-It is a curated directory.
+Node.js 22.12 or newer and pnpm are required.
 
----
+```sh
+corepack enable
+pnpm install
+pnpm dev
+```
 
-## What is included
+Before opening a pull request:
 
-Open Apps focuses on real applications.
+```sh
+pnpm exec grove check
+pnpm build
+```
 
-Examples:
+No repository-owned generation scripts are required. The Grove Astro
+integration prepares normalized data, sitemap, robots, social preview, and
+LLM-readable files when Astro starts.
 
-- mobile apps
-- web apps
-- desktop apps
-- developer tools with app-like structure
-- full-stack products
-- apps useful for studying architecture, UI, data flow, auth, state management, testing, deployment, or product structure
+## Maintenance
 
-Not included:
+```sh
+pnpm exec grove sync github
+pnpm exec grove sync contributors
+pnpm exec grove cleanup
+```
 
-- simple demos
-- tutorials
-- boilerplates
-- starter templates
-- package-only libraries
-- abandoned repos with no learning value
-- repos with unclear license or purpose
+The five workflows under `.github/workflows/` validate builds, report cleanup
+candidates, refresh GitHub metadata, sync contributors, and produce the static
+production artifact. Cloudflare deploys `dist/` through the repository's
+existing Git integration and `wrangler.jsonc`.
 
----
+## Contributing and license
 
-## What you can do with it
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the app criteria and YAML workflow,
+[CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for community expectations, and
+[SECURITY.md](./SECURITY.md) for private vulnerability reporting.
 
-Use Open Apps to:
-
-- find real apps to study
-- compare how different projects are structured
-- discover apps worth contributing to
-- look for implementation examples from working products
-- find open-source alternatives by category
-- explore projects beyond GitHub stars and trending pages
-
----
-
-## How apps are reviewed
-
-Each app is reviewed with a few practical questions:
-
-- Is this a real app?
-- Can a developer understand what it does?
-- Is the codebase useful to study?
-- Is the license clear?
-- Is the project active, mature, or historically useful?
-- Does it have enough documentation or structure?
-- Would this help someone build or improve a real product?
-
-Stars are useful signal, but they are not the main filter.
-
-A small clean app can be more useful than a large popular repo if it is easier to understand and learn from.
-
----
-
-## App data
-
-Each listed app can include:
-
-- name
-- description
-- category
-- platform
-- tech stack
-- license
-- GitHub stars
-- forks
-- contributors
-- last commit date
-- activity score
-- maturity score
-- learning score
-- contribution score
-- documentation score
-- review notes
-
-The goal is to make each app easier to evaluate before opening the repository.
-
----
-
-## Current status
-
-Open Apps currently contains 79 curated apps.
-
-The directory is still early.  
-The focus right now is quality over volume.
-
-More apps, categories, review notes, and metadata will be added over time.
-
----
-
-## Submit an app
-
-If you know a real open-source app that should be listed, submit it here:
-
-https://open-apps.dev.mn/submit
-
-Good submissions are apps that are useful to read, run, learn from, or contribute to.
-
-Please avoid submitting simple demos, starter templates, or libraries without a real app around them.
-
----
-
-## For AI tools
-
-The site provides AI-readable files:
-
-- https://open-apps.dev.mn/llms.txt
-- https://open-apps.dev.mn/llms-full.txt
-
-These files help AI assistants understand the directory and reference the listed apps more accurately.
-
----
-
-## Background
-
-This project started from the `open-source-flutter-apps` list.
-
-That list became useful, but README-only lists have limits.  
-Open Apps is the next version: a structured, searchable, reviewable directory of real open-source apps.
-
-The old list is kept in `README-LEGACY.md`.
-
----
-
-## License
-
-MIT
+The application code is MIT licensed. The legacy seed collection is retained
+under CC0 provenance; see [README-LEGACY.md](./README-LEGACY.md).
