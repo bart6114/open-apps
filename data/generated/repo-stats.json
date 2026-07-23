@@ -1,8 +1,10 @@
 {
-  "stars": 4333,
+  "repoUrl": "https://github.com/tortuvshin/open-apps",
+  "stars": 4334,
   "forks": 788,
   "watchers": 134,
-  "openIssues": 0,
+  "openIssues": 1,
+  "contributors": 85,
   "defaultBranch": "main",
-  "pushedAt": "2026-07-19T09:11:08Z"
+  "pushedAt": "2026-07-23T09:27:37Z"
 }
