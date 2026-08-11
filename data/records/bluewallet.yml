@@ -35,13 +35,14 @@ source:
   repo: BlueWallet
   url: https://github.com/BlueWallet/BlueWallet
 curation:
-  reviewed: false
-  reviewedAt: 2026-06-13T00:29:01+08:00
+  reviewed: true
+  reviewedAt: 2026-08-11
   labels:
     - mature
     - hot
   lenses:
     - production-like
+  reviewedBy: Open Apps curators
 visibility: keep
 github:
   repository:

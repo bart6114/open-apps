@@ -29,9 +29,11 @@ source:
   owner: CapSoftware
   repo: cap
 curation:
-  reviewed: false
+  reviewed: true
   labels: []
   lenses: []
+  reviewedBy: Open Apps curators
+  reviewedAt: 2026-08-11
 github:
   html:
     license: null

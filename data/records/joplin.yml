@@ -25,12 +25,13 @@ source:
   repo: joplin
   url: https://github.com/laurent22/joplin
 curation:
-  reviewed: false
-  reviewedAt: 2026-06-07T23:19:27+08:00
+  reviewed: true
+  reviewedAt: 2026-08-11
   labels:
     - mature
     - hot
   lenses: []
+  reviewedBy: Open Apps curators
 visibility: keep
 github:
   repository:
