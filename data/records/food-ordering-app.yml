@@ -1,7 +1,7 @@
 kind: project
 name: Food Ordering App
 slug: food-ordering-app
-description: Food delivery App UI designed
+description: A food delivery app UI demo with restaurant listings and cart flow screens.
 category: lifestyle
 tags:
   - cross-platform
@@ -59,9 +59,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/Tarikul711/flutter-food-delivery-app-ui
-    description: The food ordering & delivery application designed based on the real-life scenario.
-      Anyone can use this code on their own purpose. If you are interested please make your
-      contribution to the code.
+    description: The food ordering & delivery application designed based on the real-life scenario. Anyone can use this code on their own purpose. If you are interested please make your contribution to the code.
     fork: false
     url: https://api.github.com/repos/Tarikul711/flutter-food-delivery-app-ui
     forks_url: https://api.github.com/repos/Tarikul711/flutter-food-delivery-app-ui/forks

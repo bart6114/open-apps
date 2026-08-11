@@ -1,7 +1,7 @@
 kind: project
 name: ish
 slug: ish
-description: Linux shell for iOS
+description: A Linux shell environment running on iOS, useful for command-line work on mobile devices.
 category: productivity
 tags:
   - emulator

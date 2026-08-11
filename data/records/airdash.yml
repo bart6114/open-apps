@@ -1,7 +1,7 @@
 kind: project
 name: Airdash
 slug: airdash
-description: Share files to any device
+description: AirDrop-style file sharing to nearby devices over Wi-Fi and Bluetooth, no internet required.
 category: tools
 tags:
   - cross-platform

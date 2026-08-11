@@ -1,7 +1,7 @@
 kind: project
 name: Slide Puzzle
 slug: slide-puzzle
-description: Classic slide (15) puzzle
+description: A classic 15-slide puzzle game with a clean minimal interface.
 category: games
 tags:
   - cross-platform

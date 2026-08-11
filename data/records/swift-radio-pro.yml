@@ -1,7 +1,7 @@
 kind: project
 name: Swift-Radio-Pro
 slug: swift-radio-pro
-description: Professional Radio Station App for iOS!
+description: A professional radio station app for iOS with streaming, favorites, and live metadata.
 category: media
 tags:
   - swift

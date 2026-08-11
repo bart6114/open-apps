@@ -1,7 +1,7 @@
 kind: project
 name: iOS-Depth-Sampler
 slug: ios-depth-sampler
-description: Code examples for Depth APIs in iOS.
+description: Code examples for working with Apple Depth APIs (LiDAR, ARKit, scene depth).
 category: media
 tags:
   - screenshot 4

@@ -1,7 +1,7 @@
 kind: project
 name: TermiWatch
 slug: termiwatch
-description: Terminal Watch Face for Apple Watch.
+description: A terminal-styled watch face for Apple Watch with a blinking cursor and theme support.
 category: tools
 tags:
   - swift

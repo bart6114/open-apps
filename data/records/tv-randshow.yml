@@ -1,7 +1,7 @@
 kind: project
 name: TV Randshow
 slug: tv-randshow
-description: App to choose a random TV show episode
+description: An app that picks a random episode from a TV show when you cannot decide what to watch.
 category: entertainment
 tags:
   - cross-platform

@@ -1,7 +1,7 @@
 kind: project
 name: Flip
 slug: flip
-description: Reversi game
+description: A Reversi board game implementation with a clean interface for casual play.
 category: games
 tags:
   - cross-platform

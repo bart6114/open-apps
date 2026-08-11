@@ -1,7 +1,7 @@
 kind: project
 name: Open E-Commerce App
 slug: open-e-commerce-app
-description: Open Flutter Project E-commerce App
+description: An open-source Flutter e-commerce starter with cart, checkout, and product flows.
 category: business
 tags:
   - cross-platform

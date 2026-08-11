@@ -1,7 +1,7 @@
 kind: project
 name: Hacki
 slug: hacki
-description: A Hacker News reader
+description: A clean Hacker News reader for iOS, with offline support and custom themes.
 category: news
 tags:
   - cross-platform

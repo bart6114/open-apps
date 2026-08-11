@@ -1,7 +1,7 @@
 kind: project
 name: Beer-Me-Up
 slug: beer-me-up
-description: Beer tracking nicely designed
+description: Beer tracking app with a clean design for logging tastings, ratings, and personal reviews.
 category: lifestyle
 tags:
   - cross-platform

@@ -1,7 +1,7 @@
 kind: project
 name: MovieLab
 slug: movielab
-description: A useful and modern movie database app
+description: A modern movie database app with discovery, lists, and personal watch tracking.
 category: media
 tags:
   - cross-platform

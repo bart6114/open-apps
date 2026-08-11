@@ -1,7 +1,7 @@
 kind: project
 name: FlutterWhatsAppClone
 slug: flutterwhatsappclone
-description: Building a WhatsApp Clone in Flutter
+description: An open-source WhatsApp clone built in Flutter, useful as a chat UI reference.
 category: social-network
 tags:
   - cross-platform

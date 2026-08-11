@@ -1,7 +1,7 @@
 kind: project
 name: Flutter Music
 slug: flutter-music
-description: A Flutter music player to play songs
+description: A Flutter music player to play local songs, with playlist support and a clean UI.
 category: media
 tags:
   - cross-platform

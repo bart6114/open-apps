@@ -1,7 +1,7 @@
 kind: project
 name: Tinder Card
 slug: tinder-card
-description: Tinder like cards swipe effect
+description: A swipe-card interaction demo built in Flutter, useful as a gesture reference.
 category: social-network
 tags:
   - cross-platform

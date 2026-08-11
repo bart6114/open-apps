@@ -1,7 +1,7 @@
 kind: project
 name: DOOM-iOS
 slug: doom-ios
-description: DOOM Classic for iOS Source Release.
+description: Source release of the original DOOM Classic port to iOS, preserved as a buildable archive.
 category: games
 tags:
   - objc

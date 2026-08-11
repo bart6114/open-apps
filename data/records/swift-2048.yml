@@ -1,7 +1,7 @@
 kind: project
 name: swift-2048
 slug: swift-2048
-description: 2048 for Swift.
+description: The 2048 number puzzle game implemented in Swift for iOS.
 category: games
 tags:
   - swift

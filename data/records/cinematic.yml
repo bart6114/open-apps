@@ -1,7 +1,7 @@
 kind: project
 name: Cinematic
 slug: cinematic
-description: UI for Movie DB Public API
+description: A movie database UI built on top of The Movie DB public API, focused on browsing popular titles.
 category: media
 tags:
   - cross-platform

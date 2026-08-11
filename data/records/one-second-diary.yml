@@ -1,7 +1,7 @@
 kind: project
 name: One Second Diary
 slug: one-second-diary
-description: Minimalist Video Diary app
+description: A minimalist video diary app that records one second of footage each day.
 category: tools
 tags:
   - cross-platform

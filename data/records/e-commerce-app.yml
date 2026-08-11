@@ -1,7 +1,7 @@
 kind: project
 name: E-Commerce App
 slug: e-commerce-app
-description: Ecommerce app UI and API integration
+description: A reference e-commerce mobile UI with product grid, cart flow, and API integration.
 category: shopping
 tags:
   - cross-platform

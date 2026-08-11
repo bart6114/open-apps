@@ -1,7 +1,7 @@
 kind: project
 name: WhatTodo
 slug: whattodo
-description: Todoist like UI
+description: A Todoist-inspired to-do list app with a clean Material interface and quick capture.
 category: productivity
 tags:
   - cross-platform

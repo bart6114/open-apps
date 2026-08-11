@@ -1,7 +1,7 @@
 kind: project
 name: Flutter Browser App
 slug: flutter-browser-app
-description: A Full-Featured Mobile Browser App
+description: A full-featured mobile browser built in Flutter, focused on reading mode and ad blocking.
 category: tools
 tags:
   - cross-platform

@@ -1,7 +1,7 @@
 kind: project
 name: ShareACab
 slug: shareacab
-description: Cab Sharing App for college students
+description: A cab-sharing app designed for college students to coordinate rides on campus.
 category: travel
 tags:
   - cross-platform

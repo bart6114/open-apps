@@ -1,7 +1,7 @@
 kind: project
 name: FlutterWeather
 slug: flutterweather
-description: Weather App with clean and modern UI
+description: A weather app with a clean and modern UI, using public weather APIs for forecasts.
 category: tools
 tags:
   - cross-platform

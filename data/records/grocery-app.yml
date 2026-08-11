@@ -1,7 +1,7 @@
 kind: project
 name: Grocery-App
 slug: grocery-app
-description: Flutter Grocery Shopping App
+description: A Flutter grocery shopping app with list management and price tracking.
 category: shopping
 tags:
   - cross-platform

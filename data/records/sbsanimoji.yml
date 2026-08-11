@@ -1,7 +1,7 @@
 kind: project
 name: SBSAnimoji
 slug: sbsanimoji
-description: 🐵 Animoji app using Apples AvatarKit.
+description: An Animoji-style app using Apple AvatarKit to mirror the user into animated characters.
 category: media
 tags:
   - swift

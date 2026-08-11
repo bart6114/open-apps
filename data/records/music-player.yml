@@ -1,7 +1,7 @@
 kind: project
 name: Music Player
 slug: music-player
-description: Full featured music player
+description: A full-featured music player for local files, with queue, playlists, and EQ.
 category: media
 tags:
   - cross-platform

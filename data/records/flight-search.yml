@@ -1,7 +1,7 @@
 kind: project
 name: Flight search
 slug: flight-search
-description: Flight search app
+description: A flight search companion app that helps users find deals across dates and origins.
 category: travel
 tags:
   - cross-platform

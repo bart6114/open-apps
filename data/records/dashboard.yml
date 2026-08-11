@@ -1,7 +1,7 @@
 kind: project
 name: Dashboard
 slug: dashboard
-description: Dashboard concept made
+description: A dashboard layout concept built with Flutter, demonstrating animated charts and tiles.
 category: personalization
 tags:
   - cross-platform

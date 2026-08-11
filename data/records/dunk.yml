@@ -1,7 +1,7 @@
 kind: project
 name: Dunk
 slug: dunk
-description: Dunk is Dribbble client.:basketball:.
+description: A Dribbble client for browsing design shots, with smooth scrolling and pull-to-refresh.
 category: media
 tags:
   - swift

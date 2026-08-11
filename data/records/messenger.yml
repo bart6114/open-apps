@@ -1,7 +1,7 @@
 kind: project
 name: Messenger
 slug: messenger
-description: Messenger.
+description: A minimal native messaging UI demo, useful as a starting point for chat apps.
 category: tools
 tags:
   - swift

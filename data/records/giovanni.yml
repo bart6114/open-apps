@@ -1,7 +1,7 @@
 kind: project
 name: GIOVANNI
 slug: giovanni
-description: A Gameboy Emulator for the Apple Watch.
+description: A Game Boy emulator that runs on Apple Watch, useful for retro gaming experiments.
 category: tools
 tags:
   - swift

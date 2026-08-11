@@ -1,7 +1,7 @@
 kind: project
 name: Dai-Hentai
 slug: dai-hentai
-description: 一個普通的看漫畫 App.
+description: A cross-platform comic reader focused on the EHentai / nHentai public APIs.
 category: media
 tags:
   - objc

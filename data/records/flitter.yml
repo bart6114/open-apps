@@ -1,7 +1,7 @@
 kind: project
 name: Flitter
 slug: flitter
-description: Glitter app
+description: A small Flutter demo app used for blog tutorials and minimal scaffold examples.
 category: tools
 tags:
   - cross-platform

@@ -1,7 +1,7 @@
 kind: project
 name: Pokedex
 slug: pokedex
-description: Pokedex app built
+description: A Pokédex reference app built in Flutter, using the public PokéAPI.
 category: games
 tags:
   - cross-platform

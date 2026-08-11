@@ -1,7 +1,7 @@
 kind: project
 name: InKino
 slug: inkino
-description: A multiplatform Dart movie app
+description: A multi-platform Flutter movie app for browsing local cinema showtimes in Finland.
 category: media
 tags:
   - cross-platform

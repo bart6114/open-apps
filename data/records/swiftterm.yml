@@ -1,7 +1,7 @@
 kind: project
 name: SwiftTerm
 slug: swiftterm
-description: Xterm/VT100 Terminal emulator in Swift.
+description: An Xterm/VT100-compatible terminal emulator implemented in Swift for iOS.
 category: tools
 tags:
   - swift

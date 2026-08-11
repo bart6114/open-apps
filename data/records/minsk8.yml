@@ -1,7 +1,7 @@
 kind: project
 name: Minsk8
 slug: minsk8
-description: Marketplace with Hasura & Firebase
+description: A community marketplace app built with Hasura and Firebase for the Minsk region.
 category: business
 tags:
   - cross-platform

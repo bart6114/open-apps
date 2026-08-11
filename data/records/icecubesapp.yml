@@ -1,7 +1,7 @@
 kind: project
 name: IceCubesApp
 slug: icecubesapp
-description: A SwiftUI Mastodon client.
+description: A SwiftUI-native Mastodon client with a focus on performance and Material You theming.
 category: social-network
 tags:
   - swift

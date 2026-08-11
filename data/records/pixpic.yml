@@ -1,7 +1,7 @@
 kind: project
 name: PixPic
 slug: pixpic
-description: PixPic, a Photo Editing App.
+description: PixPic, a photo editing app built with Flutter, focused on filters and stickers.
 category: media
 tags:
   - swift

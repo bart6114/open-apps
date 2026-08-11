@@ -1,7 +1,7 @@
 kind: project
 name: Filterpedia
 slug: filterpedia
-description: Core Image Filter Explorer & Showcase.
+description: An interactive explorer for Apple Core Image filters, with live previews and source code.
 category: media
 tags:
   - swift

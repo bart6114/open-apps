@@ -1,7 +1,7 @@
 kind: project
 name: Sudoku
 slug: sudoku
-description: Sudoku Game built
+description: A Sudoku game built in Flutter, with multiple difficulty levels and daily puzzles.
 category: games
 tags:
   - cross-platform
