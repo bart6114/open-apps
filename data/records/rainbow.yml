@@ -1,7 +1,10 @@
 kind: project
 name: Rainbow
 slug: rainbow
-description: 🌈‒ the Ethereum wallet that lives in your pocket.
+description: Rainbow is a multi-chain Ethereum wallet for iOS and Android, built on React Native with Reanimated 3 and Shopify FlashList for fast mobile UX and broad NFT, DeFi, and swap coverage.
+summary: Rainbow is a React Native mobile wallet that combines Ethereum mainnet and L2 support with built-in swap routing, an NFT gallery, a dapp browser, and Hyperliquid perpetuals, with the slick feel that comes from Reanimated 3 plus FlashList. The project was acquired by OrangeFun in 2024 and remains actively developed under the rainbow-me organization.
+sourceDescription: 🌈‒ the Ethereum wallet that lives in your pocket.
+content: ./content/records/rainbow.md
 category: finance
 tags:
   - cross-platform
