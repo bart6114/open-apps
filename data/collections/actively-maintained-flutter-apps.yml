@@ -1,13 +1,18 @@
 slug: actively-maintained-flutter-apps
 kind: curated
 title: Actively Maintained Flutter Apps
-description: Flutter apps with current activity — useful today, not just historically interesting.
+description: Flutter apps with current activity — pushed or released in the last six months.
 query:
   stacks: [flutter]
+  excludeStatuses: [archived, stale, inactive]
 ranking:
   preset: active
 editorial:
-  selectionNote: Sorted by recency of commits and ongoing maintenance signals.
+  lastReviewedAt: "2026-08-11"
+  selectionNote: |
+    Stack is `flutter`. Status is `active` (a push or release within the
+    last ~6 months). Archived, stale, and inactive records are excluded.
+    Ranked by recent commit and release activity.
 seo:
   index: true
   title: Actively Maintained Open Source Flutter Apps

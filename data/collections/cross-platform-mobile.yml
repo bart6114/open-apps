@@ -1,14 +1,18 @@
 slug: cross-platform-mobile
 kind: curated
 title: Cross-Platform Mobile Apps
-description: React Native and other cross-platform apps shipping on both iOS and Android.
+description: Production apps shipping on both iOS and Android from a single codebase.
 query:
-  stacks: [react-native]
+  stacks: [react-native, flutter, capacitor, kmp]
   excludeStatuses: [archived]
 ranking:
   preset: quality
 editorial:
-  selectionNote: Ranked by curation score and recent activity.
+  lastReviewedAt: "2026-08-11"
+  selectionNote: |
+    Stack is one of `react-native`, `flutter`, `capacitor`, `kmp` (each
+    ships to both iOS and Android from a single codebase). Archived
+    records are excluded. Ranked by curation score.
 seo:
   index: true
   title: Cross-Platform Open Source Mobile Apps

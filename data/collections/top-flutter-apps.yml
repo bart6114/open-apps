@@ -1,14 +1,19 @@
 slug: top-flutter-apps
 kind: curated
 title: Top Open Source Flutter Apps
-description: Production-scale Flutter apps with public source code, real users, and a verifiable license.
+description: Mature Flutter apps with significant adoption (≥500 GitHub stars) and a verifiable license.
 query:
   stacks: [flutter]
-  excludeStatuses: [archived]
+  excludeStatuses: [archived, stale]
+  minStars: 500
 ranking:
   preset: quality
 editorial:
-  selectionNote: Ranked by curation score and recent activity.
+  lastReviewedAt: "2026-08-11"
+  selectionNote: |
+    Stack is `flutter`. At least 500 GitHub stars. License is detected
+    (i.e. not `NOASSERTION` / `OTHER`). Archived and stale records are
+    excluded. Ranked by curation score.
 seo:
   index: true
   title: Top Open Source Flutter Apps in 2026
