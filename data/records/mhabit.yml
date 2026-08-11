@@ -1,0 +1,53 @@
+---
+kind: project
+name: mhabit
+slug: mhabit
+description: Open-source Flutter habit tracker with smart scoring, WebDAV sync, local-first storage, privacy-focused design, and support for Android, iOS, Windows, macOS, and Linux.
+category: productivity
+tags:
+- android
+- cross-platform
+- dart
+- flutter
+- goal-tracking
+- habit-tracker
+- habit-tracking
+- ios
+- linux
+- local-first
+- macos
+- material3
+- micro-habit
+- offline-first
+- open-source
+- privacy-focused
+- productivity
+- self-improvement
+- webdav
+- windows
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/FriesI23/mhabit
+links:
+  github: https://github.com/FriesI23/mhabit
+source:
+  type: github-topic
+  owner: friesi23
+  repo: mhabit
+  url: https://github.com/FriesI23/mhabit
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- apache-2.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

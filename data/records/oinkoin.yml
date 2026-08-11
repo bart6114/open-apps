@@ -1,0 +1,33 @@
+---
+kind: project
+name: oinkoin
+slug: oinkoin
+description: Oinkoin is a flutter app for helping you managing your expenses. No internet required.
+category: finance
+tags: []
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/emavgl/oinkoin
+links:
+  github: https://github.com/emavgl/oinkoin
+source:
+  type: github-topic
+  owner: emavgl
+  repo: oinkoin
+  url: https://github.com/emavgl/oinkoin
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- gpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

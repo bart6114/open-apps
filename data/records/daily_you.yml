@@ -1,0 +1,33 @@
+---
+kind: project
+name: Daily_You
+slug: daily_you
+description: Daily diary & journaling app
+category: tools
+tags: []
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/Demizo/Daily_You
+links:
+  github: https://github.com/Demizo/Daily_You
+source:
+  type: github-topic
+  owner: demizo
+  repo: daily_you
+  url: https://github.com/Demizo/Daily_You
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- gpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

@@ -1,0 +1,41 @@
+---
+kind: project
+name: admin-portal
+slug: admin-portal
+description: 'Invoice Ninja: Desktop/mobile admin portal built with Flutter'
+category: tools
+tags:
+- android
+- flutter
+- invoice
+- ios
+- linux
+- macos
+- redux
+- windows
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/invoiceninja/admin-portal
+links:
+  github: https://github.com/invoiceninja/admin-portal
+source:
+  type: github-topic
+  owner: invoiceninja
+  repo: admin-portal
+  url: https://github.com/invoiceninja/admin-portal
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- noassertion
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

@@ -1,0 +1,42 @@
+---
+kind: project
+name: medito-app
+slug: medito-app
+description: The Medito app is a 100% free meditation app built with flutter. The app is available on Android and iOS.
+category: health-and-fitness
+tags:
+- android
+- flutter
+- ios
+- meditation
+- meditation-app
+- meditation-practice
+- medito-foundation
+- mindfulness
+- wellbeing
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/meditohq/medito-app
+links:
+  github: https://github.com/meditohq/medito-app
+source:
+  type: github-topic
+  owner: meditohq
+  repo: medito-app
+  url: https://github.com/meditohq/medito-app
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- agpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

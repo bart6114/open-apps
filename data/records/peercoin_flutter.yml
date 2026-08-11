@@ -1,0 +1,41 @@
+---
+kind: project
+name: peercoin_flutter
+slug: peercoin_flutter
+description: Light Peercoin wallet written in Flutter, deployable on Android, iOS and Web.
+category: finance
+tags:
+- android
+- dart
+- flutter
+- flutter-app
+- ios
+- peercoin
+- proof-of-stake
+- wallet
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/peercoin/peercoin_flutter
+links:
+  github: https://github.com/peercoin/peercoin_flutter
+source:
+  type: github-topic
+  owner: peercoin
+  repo: peercoin_flutter
+  url: https://github.com/peercoin/peercoin_flutter
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- agpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

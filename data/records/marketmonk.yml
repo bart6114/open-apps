@@ -1,0 +1,37 @@
+---
+kind: project
+name: MarketMonk
+slug: marketmonk
+description: Graph stocks on any platform  💹
+category: tools
+tags:
+- flutter-app
+- portfolio-tracker
+- stock-portfolio
+- stock-tracker
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/brandonp2412/MarketMonk
+links:
+  github: https://github.com/brandonp2412/MarketMonk
+source:
+  type: github-topic
+  owner: brandonp2412
+  repo: marketmonk
+  url: https://github.com/brandonp2412/MarketMonk
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- mit
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

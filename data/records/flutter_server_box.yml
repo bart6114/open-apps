@@ -1,0 +1,41 @@
+---
+kind: project
+name: flutter_server_box
+slug: flutter_server_box
+description: ServerBox - server status & toolbox
+category: tools
+tags:
+- android
+- dart
+- flutter
+- ios
+- server
+- ssh
+- status
+- vps
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/lollipopkit/flutter_server_box
+links:
+  github: https://github.com/lollipopkit/flutter_server_box
+source:
+  type: github-topic
+  owner: lollipopkit
+  repo: flutter_server_box
+  url: https://github.com/lollipopkit/flutter_server_box
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- agpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

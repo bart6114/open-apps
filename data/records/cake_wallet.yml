@@ -1,0 +1,51 @@
+---
+kind: project
+name: cake_wallet
+slug: cake_wallet
+description: The open source repository for Cake Wallet, a noncustodial multi-currency wallet, and Monero.com, a noncustodial Monero-only wallet. Need help? Check out https://docs.cakewallet.com
+category: finance
+tags:
+- android
+- bitcoin
+- bitcoin-cash
+- btc
+- cryptocurrency
+- ethereum
+- haven
+- ios
+- linux
+- litecoin
+- ltc
+- macos
+- monero
+- nano
+- polygon
+- solana
+- wallet
+- xmr
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/cake-tech/cake_wallet
+links:
+  github: https://github.com/cake-tech/cake_wallet
+source:
+  type: github-topic
+  owner: cake-tech
+  repo: cake_wallet
+  url: https://github.com/cake-tech/cake_wallet
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- mit
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

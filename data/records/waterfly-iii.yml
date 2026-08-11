@@ -1,0 +1,39 @@
+---
+kind: project
+name: waterfly-iii
+slug: waterfly-iii
+description: Unofficial Android App for Firefly III, a free and open source personal finance manager.
+category: finance
+tags:
+- android
+- application
+- firefly-iii
+- fireflyiii
+- flutter
+- material-design-3
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/dreautall/waterfly-iii
+links:
+  github: https://github.com/dreautall/waterfly-iii
+source:
+  type: github-topic
+  owner: dreautall
+  repo: waterfly-iii
+  url: https://github.com/dreautall/waterfly-iii
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- mit
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

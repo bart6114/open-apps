@@ -1,0 +1,37 @@
+---
+kind: project
+name: sossoldi
+slug: sossoldi
+description: '"Sossoldi" is a wealth management / personal finance / Net Worth tracking app, made with Flutter.'
+category: finance
+tags:
+- dart
+- flutter
+- personal-finance
+- wealth-management
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/RIP-Comm/sossoldi
+links:
+  github: https://github.com/RIP-Comm/sossoldi
+source:
+  type: github-topic
+  owner: RIP-Comm
+  repo: sossoldi
+  url: https://github.com/RIP-Comm/sossoldi
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- mit
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

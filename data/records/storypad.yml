@@ -1,0 +1,41 @@
+---
+kind: project
+name: storypad
+slug: storypad
+description: An open source diary & journal app with over 100k downloads 🪴
+category: productivity
+tags:
+- cross-platform
+- diary
+- diary-app
+- journal-app
+- journals
+- minimalist
+- notes-app
+- offline-first
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/theachoem/storypad
+links:
+  github: https://github.com/theachoem/storypad
+source:
+  type: github-topic
+  owner: theachoem
+  repo: storypad
+  url: https://github.com/theachoem/storypad
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- gpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

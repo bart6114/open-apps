@@ -1,0 +1,38 @@
+---
+kind: project
+name: flutter-pos-system
+slug: flutter-pos-system
+description: An open-source Flutter POS system designed for small restaurants and businesses.
+category: developer-tools
+tags:
+- android-app
+- app
+- flutter
+- ios-app
+- possystem
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/evan361425/flutter-pos-system
+links:
+  github: https://github.com/evan361425/flutter-pos-system
+source:
+  type: github-topic
+  owner: evan361425
+  repo: flutter-pos-system
+  url: https://github.com/evan361425/flutter-pos-system
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- apache-2.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

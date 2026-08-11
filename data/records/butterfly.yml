@@ -1,0 +1,52 @@
+---
+kind: project
+name: Butterfly
+slug: butterfly
+description: 🎨 Powerful, minimalistic, cross-platform, opensource note-taking app
+category: productivity
+tags:
+- android
+- app
+- cross-platform
+- customizable
+- dart
+- dartlang
+- drawing
+- flutter
+- linux
+- note
+- note-taking
+- notes
+- notes-app
+- onenote
+- opensource
+- productivity
+- web
+- windows
+- writing
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/LinwoodDev/Butterfly
+links:
+  github: https://github.com/LinwoodDev/Butterfly
+source:
+  type: github-topic
+  owner: LinwoodDev
+  repo: Butterfly
+  url: https://github.com/LinwoodDev/Butterfly
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- agpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

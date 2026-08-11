@@ -1,0 +1,40 @@
+---
+kind: project
+name: Monekin
+slug: monekin
+description: A 100% Open Source app that tries to make personal finances easier. Fast, simple, without ads, without the need for an Internet connection and with a groundbreaking design, that's Monekin.
+category: finance
+tags:
+- finance-management
+- flutter-app
+- hybrid-app
+- material-design
+- money-manager
+- open-source
+- personal-finances
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/enrique-lozano/Monekin
+links:
+  github: https://github.com/enrique-lozano/Monekin
+source:
+  type: github-topic
+  owner: enrique-lozano
+  repo: Monekin
+  url: https://github.com/enrique-lozano/Monekin
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- agpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

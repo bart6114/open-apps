@@ -1,0 +1,37 @@
+---
+kind: project
+name: one_second_diary
+slug: one_second_diary
+description: Minimalist video diary app.
+category: media
+tags:
+- android
+- diary
+- flutter
+- flutter-app
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/KyleKun/one_second_diary
+links:
+  github: https://github.com/KyleKun/one_second_diary
+source:
+  type: github-topic
+  owner: KyleKun
+  repo: one_second_diary
+  url: https://github.com/KyleKun/one_second_diary
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- mit
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

@@ -1,0 +1,44 @@
+---
+kind: project
+name: app-finance
+slug: app-finance
+description: Fingrom -- open-source platform-agnostic financial accounting application
+category: finance
+tags:
+- accounting
+- budget-app
+- budget-tracker
+- finance-app
+- finance-application
+- finance-management
+- finance-tracker
+- flutter-app
+- money-manager
+- open-source
+- personal-finances
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/lyskouski/app-finance
+links:
+  github: https://github.com/lyskouski/app-finance
+source:
+  type: github-topic
+  owner: lyskouski
+  repo: app-finance
+  url: https://github.com/lyskouski/app-finance
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- noassertion
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

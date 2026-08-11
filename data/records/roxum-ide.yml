@@ -1,0 +1,39 @@
+---
+kind: project
+name: roxum-ide
+slug: roxum-ide
+description: A minimal and powerful IDE/Code editor for Android
+category: developer-tools
+tags:
+- android-code-editor
+- android-ide
+- code-editor
+- roxum
+- vscode
+- vscode-mobile
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/heckmon/roxum-ide
+links:
+  github: https://github.com/heckmon/roxum-ide
+source:
+  type: github-topic
+  owner: heckmon
+  repo: roxum-ide
+  url: https://github.com/heckmon/roxum-ide
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- mit
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

@@ -1,0 +1,33 @@
+---
+kind: project
+name: localmind
+slug: localmind
+description: A mobile application designed to provide a beautiful, fast, and privacy-respecting interface for on device LLM and local LLM servers and cloud providers
+category: developer-tools
+tags: []
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/abdulmominsakib/localmind
+links:
+  github: https://github.com/abdulmominsakib/localmind
+source:
+  type: github-topic
+  owner: abdulmominsakib
+  repo: localmind
+  url: https://github.com/abdulmominsakib/localmind
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- mit
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

@@ -1,0 +1,52 @@
+---
+kind: project
+name: rustdesk
+slug: rustdesk
+description: An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.
+category: developer-tools
+tags:
+- android
+- anydesk
+- dart
+- flatpak
+- flutter
+- flutter-apps
+- ios
+- linux
+- macos
+- p2p
+- rdp
+- remote-control
+- remote-desktop
+- rust
+- rust-lang
+- teamviewer
+- vnc
+- wayland
+- windows
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/rustdesk/rustdesk
+links:
+  github: https://github.com/rustdesk/rustdesk
+source:
+  type: github-topic
+  owner: rustdesk
+  repo: rustdesk
+  url: https://github.com/rustdesk/rustdesk
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- agpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

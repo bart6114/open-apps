@@ -1,0 +1,53 @@
+---
+kind: project
+name: apidash
+slug: apidash
+description: API Dash is a beautiful AI-powered open-source cross-platform (Desktop & Mobile) API Client built using Flutter which can help you easily create & customize your HTTP & GraphQL API requests,
+  visually inspect responses and generate API integration code. A lightweight alternative to postman/insomnia.
+category: tools
+tags:
+- api
+- api-client
+- api-testing
+- dart
+- developer-tools
+- flutter
+- flutter-apps
+- flutter-desktop
+- graphql
+- graphql-api
+- graphql-client
+- gssoc
+- hacktoberfest
+- http-client
+- http-requests
+- postman
+- rest-api
+- server-sent-events
+- websocket
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/foss42/apidash
+links:
+  github: https://github.com/foss42/apidash
+source:
+  type: github-topic
+  owner: foss42
+  repo: apidash
+  url: https://github.com/foss42/apidash
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- apache-2.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...

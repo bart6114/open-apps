@@ -1,0 +1,33 @@
+---
+kind: project
+name: brethap
+slug: brethap
+description: ''
+category: tools
+tags: []
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/jithware/brethap
+links:
+  github: https://github.com/jithware/brethap
+source:
+  type: github-topic
+  owner: jithware
+  repo: brethap
+  url: https://github.com/jithware/brethap
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+- gpl-3.0
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+  - active-development
+...
