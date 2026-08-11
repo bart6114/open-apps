@@ -2,7 +2,10 @@
 kind: project
 name: Butterfly
 slug: butterfly
-description: 🎨 Powerful, minimalistic, cross-platform, opensource note-taking app
+description: Butterfly is a Flutter note-taking and drawing app whose central object is an infinite canvas — pages hold freehand ink, text, shapes, images, areas, and waypoints in a custom `.bfly` document model, with optional WebDAV sync, OneNote import, and PDF/SVG export.
+summary: A Linwood-maintained visual-notes app where a `butterfly_api` package owns the document format and protocol while the Flutter client layers a Bloc/Cubit state machine, perfect-freehand ink rendering, a WebDAV-backed file system, and an optional separately-licensed `api/` server for sync and collaboration.
+sourceDescription: 🎨 Powerful, minimalistic, cross-platform, opensource note-taking app
+content: ./content/records/butterfly.md
 category: productivity
 tags:
 - android
