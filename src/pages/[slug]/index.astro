@@ -56,6 +56,14 @@ function hrefForRemove(key: keyof IndexFilters, value: string): string {
 
 const clearQuery = searchParamsFromFilters({ sort }).toString();
 const clearFiltersHref = clearQuery ? `/${slug}?${clearQuery}` : `/${slug}`;
+
+// Arbitrary filter / search states are not worth indexing — the
+// canonical browse route (/apps/) already covers the same content
+// with the same ranking. We only index the bare browse route and
+// pagination states. Since browse pages are statically generated
+// (same HTML for every URL), the noindex check runs client-side
+// via the inline script below.
+const ALLOWED_INDEXED_KEYS = new Set(["page", "sort"]);
 ---
 
 <BaseLayout
@@ -241,3 +249,21 @@ const clearFiltersHref = clearQuery ? `/${slug}?${clearQuery}` : `/${slug}`;
     taxonomy={taxonomy}
   />
 </BaseLayout>
+
+<script is:inline>
+  // The browse page is statically generated — same HTML for every
+  // /apps URL. Filter / search states are not worth indexing;
+  // canonical URL already points to /apps/ but we also tag them
+  // with `<meta name="robots" content="noindex,follow">` so search
+  // engines don't spend crawl budget on combinations.
+  (function () {
+    var ALLOWED = ["page", "sort"];
+    var hasFilter = Array.from(new URLSearchParams(location.search).keys())
+      .some(function (k) { return ALLOWED.indexOf(k) === -1; });
+    if (!hasFilter) return;
+    var meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex,follow";
+    document.head.appendChild(meta);
+  })();
+</script>
