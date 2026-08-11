@@ -202,6 +202,9 @@ The original README-only collection is preserved in
 [README-LEGACY.md](README-LEGACY.md), while this project evolves it into a
 structured, searchable, multi-stack directory.
 
+<!-- grove-readme:start -->
+<!-- grove-readme:end -->
+
 ## Security
 
 Please report vulnerabilities and sensitive issues using the private process in

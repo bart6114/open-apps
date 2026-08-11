@@ -69,7 +69,7 @@ export default defineConfig({
     ],
   },
 
-  facets: ["category", "stack", "platform", "tags"],
+  facets: ["category", "stack", "platform", "license", "tags"],
   routes: { directory: "apps", item: "app" },
   labels: { singular: "app", plural: "apps" },
 
@@ -80,5 +80,32 @@ export default defineConfig({
     radius: "soft",
     density: "comfortable",
     containerWidth: "72rem",
+  },
+
+  audit: {
+    baseUrl: "http://127.0.0.1:4321",
+    pages: [
+      { path: "/", type: "home", label: "Homepage" },
+      { path: "/apps/", type: "directory", label: "Directory index" },
+      { path: "/collections/top-flutter-apps/", type: "collection", label: "Top Flutter Apps collection" },
+      { path: "/apps/immich/", type: "record", label: "Record detail" },
+      { path: "/about/", type: "content", label: "About page" },
+      { path: "/empty/", type: "empty", label: "Empty state" },
+      { path: "/this-page-does-not-exist/", type: "404", label: "404 page" },
+    ],
+  },
+
+  readme: {
+    title: "Open Apps — a directory of real open-source applications",
+    tagline: "Hand-picked apps worth running, studying, and extending.",
+    url: "https://open-apps.dev.mn",
+    browseLabel: "Browse the directory →",
+    intro: [
+      "## Why this list",
+      "",
+      "Each app below is **actively maintained**, **well documented**, and",
+      "**useful in production**. Submit a new entry via the web form or",
+      "by opening a pull request against `data/records/`.",
+    ].join("\n"),
   },
 });
