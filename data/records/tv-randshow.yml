@@ -264,15 +264,13 @@ github:
     zipball_url: https://api.github.com/repos/deandreamatias/tv-randshow/zipball/2.5.0
     body: "## What's Changed\r
 
-      * initial fastlane structures from IzzyOnDroid by @IzzySoft in
-      https://github.com/deandreamatias/tv-randshow/pull/16\r
+      * initial fastlane structures from IzzyOnDroid by @IzzySoft in https://github.com/deandreamatias/tv-randshow/pull/16\r
 
       \r
 
       ## New Contributors\r
 
-      * @IzzySoft made their first contribution in
-      https://github.com/deandreamatias/tv-randshow/pull/16\r
+      * @IzzySoft made their first contribution in https://github.com/deandreamatias/tv-randshow/pull/16\r
 
       \r
 
@@ -301,3 +299,5 @@ health:
   tier: listed
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - gpl-3.0

@@ -1,8 +1,7 @@
 kind: project
 name: Tachidesk-Sorayomi
 slug: tachidesk-sorayomi
-description: Frontend for [Tachidesk-server](github.com/Suwayomi/Tachidesk-server/), based on
-  Tachiyomi to read manga in desktop
+description: Frontend for [Tachidesk-server](github.com/Suwayomi/Tachidesk-server/), based on Tachiyomi to read manga in desktop
 category: entertainment
 tags:
   - cross-platform
@@ -621,8 +620,7 @@ github:
     zipball_url: https://api.github.com/repos/Suwayomi/Tachidesk-Sorayomi/zipball/0.6.3
     body: "## What's Changed\r
 
-      * fixed port number picker by @DattatreyaReddy in
-      https://github.com/Suwayomi/Tachidesk-Sorayomi/pull/336\r
+      * fixed port number picker by @DattatreyaReddy in https://github.com/Suwayomi/Tachidesk-Sorayomi/pull/336\r
 
       \r
 
@@ -664,3 +662,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - mpl-2.0

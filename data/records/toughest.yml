@@ -60,8 +60,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/MDSADABWASIM/Toughest
-    description: Interview questions and answers for preparation, built in pure flutter also have CI
-      implementation for learning.
+    description: Interview questions and answers for preparation, built in pure flutter also have CI implementation for learning.
     fork: false
     url: https://api.github.com/repos/MDSADABWASIM/Toughest
     forks_url: https://api.github.com/repos/MDSADABWASIM/Toughest/forks
@@ -206,3 +205,5 @@ health:
   tier: listed
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - mit

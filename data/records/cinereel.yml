@@ -59,8 +59,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/kserko/CineReel
-    description: " A TMDB client built with Flutter using the BLoC pattern. This app is my way of
-      learning Flutter, so take what you see here with a grain of salt"
+    description: " A TMDB client built with Flutter using the BLoC pattern. This app is my way of learning Flutter, so take what you see here with a grain of salt"
     fork: false
     url: https://api.github.com/repos/kserko/CineReel
     forks_url: https://api.github.com/repos/kserko/CineReel/forks
@@ -200,3 +199,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - gpl-3.0

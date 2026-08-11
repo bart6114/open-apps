@@ -1,9 +1,7 @@
 kind: project
 name: Memex
 slug: memex
-description: An open-source, local-first AI journal for iOS and Android that turns text, photo and
-  voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A.
-  methodology
+description: An open-source, local-first AI journal for iOS and Android that turns text, photo and voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A. methodology
 category: productivity
 tags:
   - cross-platform
@@ -63,9 +61,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/memex-lab/memex
-    description: Open-source, local-first AI journal app for iOS and Android. Capture text, photos, and
-      voice — AI agents organize them into timeline cards and insights. Your data stays on your
-      device. Bring your own LLM (OpenAI, Claude, Gemini, Ollama, and more).
+    description: Open-source, local-first AI journal app for iOS and Android. Capture text, photos, and voice — AI agents organize them into timeline cards and insights. Your data stays on your device. Bring your own LLM (OpenAI, Claude, Gemini, Ollama, and more).
     fork: false
     url: https://api.github.com/repos/memex-lab/memex
     forks_url: https://api.github.com/repos/memex-lab/memex/forks
@@ -292,21 +288,15 @@ github:
         browser_download_url: https://github.com/memex-lab/memex/releases/download/v1.0.37/app-global-release.apk
     tarball_url: https://api.github.com/repos/memex-lab/memex/tarball/v1.0.37
     zipball_url: https://api.github.com/repos/memex-lab/memex/zipball/v1.0.37
-    body: >-
+    body: |-
       ## English
 
-
       1. Added UI-linked cards to the Agent conversation page.
-
-      2. Optimized several performance issues, including loading dynamic card images and
-      reading/writing messages on the conversation page.
-
+      2. Optimized several performance issues, including loading dynamic card images and reading/writing messages on the conversation page.
 
       ## 简体中文
 
-
       1. Agent 会话页新增 UI 联动卡片。
-
       2. 优化动态卡片图片加载以及会话页消息读写等若干性能问题。
   files:
     readme: true
@@ -331,3 +321,5 @@ health:
   tier: listed
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - gpl-3.0

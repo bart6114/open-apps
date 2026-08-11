@@ -59,8 +59,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/theankurkedia/newsbuzz
-    description: News App created in Flutter using News API for fetching realtime data and Firebase as
-      the backend and authenticator.
+    description: News App created in Flutter using News API for fetching realtime data and Firebase as the backend and authenticator.
     fork: false
     url: https://api.github.com/repos/theankurkedia/newsbuzz
     forks_url: https://api.github.com/repos/theankurkedia/newsbuzz/forks
@@ -198,3 +197,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - mit

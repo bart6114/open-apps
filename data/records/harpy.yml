@@ -421,14 +421,11 @@ github:
 
       \r
 
-      This release updated the user profile to use the old v1 api instead of the non-free v2 api to
-      make profiles work again.\r
+      This release updated the user profile to use the old v1 api instead of the non-free v2 api to make profiles work again.\r
 
       \r
 
-      Please note that this doesn't mean that harpy will be maintained again, seeing as Twitter will
-      most likely shut down access to their legacy api (again) soon and third party apps are still
-      against their TOS."
+      Please note that this doesn't mean that harpy will be maintained again, seeing as Twitter will most likely shut down access to their legacy api (again) soon and third party apps are still against their TOS."
     reactions:
       url: https://api.github.com/repos/robertodoering/harpy/releases/111495938/reactions
       total_count: 34
@@ -458,3 +455,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - gpl-3.0

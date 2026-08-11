@@ -210,3 +210,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - gpl-2.0

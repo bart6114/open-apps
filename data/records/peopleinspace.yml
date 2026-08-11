@@ -1,8 +1,7 @@
 kind: project
 name: PeopleInSpace
 slug: peopleinspace
-description: Kotlin Multiplatform sample with SwiftUI, Jetpack Compose, Compose for Wear, Compose
-  for Desktop, and Compose for Web clients along with Ktor backend.
+description: Kotlin Multiplatform sample with SwiftUI, Jetpack Compose, Compose for Wear, Compose for Desktop, and Compose for Web clients along with Ktor backend.
 category: tools
 tags:
   - kmm
@@ -65,8 +64,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/joreilly/PeopleInSpace
-    description: Kotlin Multiplatform sample with SwiftUI, Jetpack Compose, Compose for Wear, Compose
-      for Desktop, and Compose for Web clients along with Ktor backend.
+    description: Kotlin Multiplatform sample with SwiftUI, Jetpack Compose, Compose for Wear, Compose for Desktop, and Compose for Web clients along with Ktor backend.
     fork: false
     url: https://api.github.com/repos/joreilly/PeopleInSpace
     forks_url: https://api.github.com/repos/joreilly/PeopleInSpace/forks
@@ -223,3 +221,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - apache-2.0

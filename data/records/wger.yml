@@ -544,17 +544,12 @@ github:
         browser_download_url: https://github.com/wger-project/flutter/releases/download/2.0.1/windows-x64.zip
     tarball_url: https://api.github.com/repos/wger-project/flutter/tarball/2.0.1
     zipball_url: https://api.github.com/repos/wger-project/flutter/zipball/2.0.1
-    body: >-
+    body: |-
       <!-- Release notes generated using configuration in .github/release.yml at 2.0.1 -->
 
-
       ## What's Changed
-
       ### Features
-
-      * Refactor/nutrition meals components by @pankaj-basnet in
-      https://github.com/wger-project/flutter/pull/1224
-
+      * Refactor/nutrition meals components by @pankaj-basnet in https://github.com/wger-project/flutter/pull/1224
 
 
       **Full Changelog**: https://github.com/wger-project/flutter/compare/2.0.0...2.0.1
@@ -579,3 +574,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - agpl-3.0

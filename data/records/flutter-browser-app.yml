@@ -59,8 +59,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/pichillilorenzo/flutter_browser_app
-    description: A Full-Featured Mobile and Desktop Browser App (such as the Google Chrome mobile
-      browser) created using Flutter and the features offered by the flutter_inappwebview plugin.
+    description: A Full-Featured Mobile and Desktop Browser App (such as the Google Chrome mobile browser) created using Flutter and the features offered by the flutter_inappwebview plugin.
     fork: false
     url: https://api.github.com/repos/pichillilorenzo/flutter_browser_app
     forks_url: https://api.github.com/repos/pichillilorenzo/flutter_browser_app/forks
@@ -496,8 +495,7 @@ github:
         browser_download_url: https://github.com/pichillilorenzo/flutter_browser_app/releases/download/v3.1.0%2B9/ios_no_sign.ipa
     tarball_url: https://api.github.com/repos/pichillilorenzo/flutter_browser_app/tarball/v3.1.0+9
     zipball_url: https://api.github.com/repos/pichillilorenzo/flutter_browser_app/zipball/v3.1.0+9
-    body: "- Added Multi-Window Support on Desktop using my new
-      [window_manager_plus](https://pub.dev/packages/window_manager_plus) package"
+    body: "- Added Multi-Window Support on Desktop using my new [window_manager_plus](https://pub.dev/packages/window_manager_plus) package"
   files:
     readme: true
     contributing: false
@@ -522,3 +520,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - apache-2.0

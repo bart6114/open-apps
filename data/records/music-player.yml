@@ -59,8 +59,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/iampawan/Flutter-Music-Player
-    description: Flutter Music Player - First Open Source Flutter based material design music player
-      with audio plugin to play local music files.
+    description: Flutter Music Player - First Open Source Flutter based material design music player with audio plugin to play local music files.
     fork: false
     url: https://api.github.com/repos/iampawan/Flutter-Music-Player
     forks_url: https://api.github.com/repos/iampawan/Flutter-Music-Player/forks
@@ -209,3 +208,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - apache-2.0

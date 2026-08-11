@@ -1,8 +1,7 @@
 kind: project
 name: HorizonCalendar
 slug: horizoncalendar
-description: A declarative, performant, iOS calendar UI component that supports use cases ranging
-  from simple date pickers all the way up to fully-featured calendar apps.
+description: A declarative, performant, iOS calendar UI component that supports use cases ranging from simple date pickers all the way up to fully-featured calendar apps.
 category: productivity
 tags:
   - swift
@@ -63,8 +62,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/airbnb/HorizonCalendar
-    description: A declarative, performant, iOS calendar UI component that supports use cases ranging
-      from simple date pickers all the way up to fully-featured calendar apps.
+    description: A declarative, performant, iOS calendar UI component that supports use cases ranging from simple date pickers all the way up to fully-featured calendar apps.
     fork: false
     url: https://api.github.com/repos/airbnb/HorizonCalendar
     forks_url: https://api.github.com/repos/airbnb/HorizonCalendar/forks
@@ -220,3 +218,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - apache-2.0

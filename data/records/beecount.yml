@@ -1,8 +1,7 @@
 kind: project
 name: BeeCount
 slug: beecount
-description: Privacy-first cross-platform expense tracker with self-hostable cloud sync (BeeCount
-  Cloud, iCloud, Supabase, WebDAV, S3) and offline-first design
+description: Privacy-first cross-platform expense tracker with self-hostable cloud sync (BeeCount Cloud, iCloud, Supabase, WebDAV, S3) and offline-first design
 category: finance
 tags:
   - cross-platform
@@ -61,8 +60,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/TNT-Likely/BeeCount
-    description: Local-first bookkeeping for iOS/Android/Web · Self-hosted cloud + iCloud/WebDAV/S3 sync
-      · AI capture · MCP | 本地优先的跨端记账 · 自建云 + iCloud/WebDAV/S3 同步 · AI 记账 · MCP
+    description: Local-first bookkeeping for iOS/Android/Web · Self-hosted cloud + iCloud/WebDAV/S3 sync · AI capture · MCP | 本地优先的跨端记账 · 自建云 + iCloud/WebDAV/S3 同步 · AI 记账 · MCP
     fork: false
     url: https://api.github.com/repos/TNT-Likely/BeeCount
     forks_url: https://api.github.com/repos/TNT-Likely/BeeCount/forks
@@ -571,3 +569,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - noassertion

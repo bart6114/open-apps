@@ -61,8 +61,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/woosignal/flutter-woocommerce-app
-    description: WooCommerce App template that uses Flutter. Integrated to work with WooCommerce stores,
-      connect and create an IOS and Android app from Flutter for IOS and Android
+    description: WooCommerce App template that uses Flutter. Integrated to work with WooCommerce stores, connect and create an IOS and Android app from Flutter for IOS and Android
     fork: false
     url: https://api.github.com/repos/woosignal/flutter-woocommerce-app
     forks_url: https://api.github.com/repos/woosignal/flutter-woocommerce-app/forks
@@ -277,3 +276,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - bsd-2-clause

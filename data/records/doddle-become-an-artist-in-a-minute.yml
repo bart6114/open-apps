@@ -1,8 +1,7 @@
 kind: project
 name: Doddle- (become an artist in a minute)
 slug: doddle-become-an-artist-in-a-minute
-description: 💚Amazing magical doodle drawing app/game provide a creative doodle world for you
-  🖌💛🌸💚 [Naser Elziadna](
+description: 💚Amazing magical doodle drawing app/game provide a creative doodle world for you 🖌💛🌸💚 [Naser Elziadna](
 category: entertainment
 tags:
   - cross-platform
@@ -221,3 +220,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - gpl-3.0

@@ -1,8 +1,7 @@
 kind: project
 name: Artsy
 slug: eigen
-description: The mobile app for artsy.net — discover fine art, browse artists and artworks, follow
-  galleries, and bid in auctions from your phone.
+description: The mobile app for artsy.net — discover fine art, browse artists and artworks, follow galleries, and bid in auctions from your phone.
 category: shopping
 tags:
   - cross-platform
@@ -319,3 +318,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - mit

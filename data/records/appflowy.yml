@@ -1,9 +1,7 @@
 kind: project
 name: AppFlowy
 slug: appflowy
-description: Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative
-  workspace where you achieve more without losing control of your data. The leading open source
-  Notion alternative.
+description: Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative workspace where you achieve more without losing control of your data. The leading open source Notion alternative.
 category: productivity
 tags:
   - blog
@@ -79,9 +77,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/AppFlowy-IO/AppFlowy
-    description: Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative
-      workspace where you achieve more without losing control of your data. The leading open source
-      Notion alternative.
+    description: Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative workspace where you achieve more without losing control of your data. The leading open source Notion alternative.
     fork: false
     url: https://api.github.com/repos/AppFlowy-IO/AppFlowy
     forks_url: https://api.github.com/repos/AppFlowy-IO/AppFlowy/forks
@@ -800,8 +796,7 @@ github:
 
       \r
 
-      - Fix: stale WebSocket connection occasionally caused writes to disk to fail, which could lead
-      to data loss in rare cases.\r
+      - Fix: stale WebSocket connection occasionally caused writes to disk to fail, which could lead to data loss in rare cases.\r
 
       \r
 
@@ -813,8 +808,7 @@ github:
 
       \r
 
-      - Fix: stale WebSocket connection occasionally caused writes to disk to fail, which could lead
-      to data loss in rare cases.\r
+      - Fix: stale WebSocket connection occasionally caused writes to disk to fail, which could lead to data loss in rare cases.\r
 
       \r
 
@@ -822,10 +816,7 @@ github:
 
       \r
 
-      This Windows release is signed with a newly renewed code-signing certificate. Because Windows
-      SmartScreen builds reputation per certificate, you may temporarily see an \"unrecognized app\"
-      warning. This build is properly signed and safe — if prompted, select **More info → Run
-      anyway**. The warning will clear as the certificate establishes reputation."
+      This Windows release is signed with a newly renewed code-signing certificate. Because Windows SmartScreen builds reputation per certificate, you may temporarily see an \"unrecognized app\" warning. This build is properly signed and safe — if prompted, select **More info → Run anyway**. The warning will clear as the certificate establishes reputation."
     reactions:
       url: https://api.github.com/repos/AppFlowy-IO/AppFlowy/releases/343527689/reactions
       total_count: 8
@@ -876,3 +867,5 @@ health:
   tier: listed
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - agpl-3.0

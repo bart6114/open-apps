@@ -1,8 +1,7 @@
 kind: project
 name: Linkwarden
 slug: linkwarden
-description: ⚡️⚡️⚡️ Self-hosted collaborative bookmark manager to collect, read, annotate, and fully
-  preserve what matters, all in one place.
+description: ⚡️⚡️⚡️ Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters, all in one place.
 category: productivity
 tags:
   - cross-platform
@@ -73,8 +72,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/linkwarden/linkwarden
-    description: ⚡️⚡️⚡️ Self-hosted collaborative bookmark manager to collect, read, annotate, and fully
-      preserve what matters, all in one place.
+    description: ⚡️⚡️⚡️ Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters, all in one place.
     fork: false
     url: https://api.github.com/repos/linkwarden/linkwarden
     forks_url: https://api.github.com/repos/linkwarden/linkwarden/forks
@@ -301,3 +299,5 @@ health:
   tier: listed
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - agpl-3.0

@@ -260,16 +260,13 @@ github:
     zipball_url: https://api.github.com/repos/ErfanRht/MovieLab/zipball/v3.0.1
     body: "## What's Changed\r
 
-      * Feature/popular genres in the home page by @ErfanRht in
-      https://github.com/ErfanRht/MovieLab/pull/32\r
+      * Feature/popular genres in the home page by @ErfanRht in https://github.com/ErfanRht/MovieLab/pull/32\r
 
       * Improvement/ui by @ErfanRht in https://github.com/ErfanRht/MovieLab/pull/33\r
 
-      * Bugfix/bug while saving items to lists by @ErfanRht in
-      https://github.com/ErfanRht/MovieLab/pull/35\r
+      * Bugfix/bug while saving items to lists by @ErfanRht in https://github.com/ErfanRht/MovieLab/pull/35\r
 
-      * Feature/image-quality-increaser by @ErfanRht in
-      https://github.com/ErfanRht/MovieLab/pull/36\r
+      * Feature/image-quality-increaser by @ErfanRht in https://github.com/ErfanRht/MovieLab/pull/36\r
 
       * Feature/history-timeline by @ErfanRht in https://github.com/ErfanRht/MovieLab/pull/38\r
 
@@ -319,3 +316,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - apache-2.0

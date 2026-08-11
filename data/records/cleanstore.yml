@@ -1,9 +1,7 @@
 kind: project
 name: CleanStore
 slug: cleanstore
-description: A sample iOS app built using the Clean Swift architecture. Clean Swift is Uncle Bob's
-  Clean Architecture applied to iOS and Mac projects. CleanStore demonstrates Clean Swift by
-  implementing the create order use case described by in Uncle Bob's talks.
+description: A sample iOS app built using the Clean Swift architecture. Clean Swift is Uncle Bob's Clean Architecture applied to iOS and Mac projects. CleanStore demonstrates Clean Swift by implementing the create order use case described by in Uncle Bob's talks.
 category: tools
 tags:
   - swift
@@ -62,9 +60,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/Clean-Swift/CleanStore
-    description: A sample iOS app built using the Clean Swift architecture. Clean Swift is Uncle Bob's
-      Clean Architecture applied to iOS and Mac projects. CleanStore demonstrates Clean Swift by
-      implementing the create order use case described by in Uncle Bob's talks.
+    description: A sample iOS app built using the Clean Swift architecture. Clean Swift is Uncle Bob's Clean Architecture applied to iOS and Mac projects. CleanStore demonstrates Clean Swift by implementing the create order use case described by in Uncle Bob's talks.
     fork: false
     url: https://api.github.com/repos/Clean-Swift/CleanStore
     forks_url: https://api.github.com/repos/Clean-Swift/CleanStore/forks
@@ -215,3 +211,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - mit

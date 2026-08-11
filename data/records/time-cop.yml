@@ -283,8 +283,7 @@ github:
         browser_download_url: https://github.com/hamaluik/timecop/releases/download/v1.8.0/timecop-linux-x86_64.tar.xz
     tarball_url: https://api.github.com/repos/hamaluik/timecop/tarball/v1.8.0
     zipball_url: https://api.github.com/repos/hamaluik/timecop/zipball/v1.8.0
-    body: "Thanks to all the Hacktoberfest participants, translators, and other volunteers for helping
-      out!\r
+    body: "Thanks to all the Hacktoberfest participants, translators, and other volunteers for helping out!\r
 
       \r
 
@@ -385,3 +384,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - apache-2.0
