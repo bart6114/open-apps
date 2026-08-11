@@ -2,7 +2,10 @@
 kind: project
 name: one_second_diary
 slug: one_second_diary
-description: Minimalist video diary app.
+description: One Second Diary is a minimalist Flutter video diary app that lets you capture a one-to-ten second clip each day, then stitch your recordings into a shareable compilation movie of your life.
+summary: A privacy-first Flutter diary that captures one short video per day and uses an FFmpeg pipeline to render overlays, geotag subtitles, and concatenate clips into a yearly compilation movie.
+sourceDescription: Minimalist video diary app.
+content: ./content/records/one_second_diary.md
 category: media
 tags:
 - android
