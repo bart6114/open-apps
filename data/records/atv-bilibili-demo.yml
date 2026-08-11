@@ -1,7 +1,10 @@
 kind: project
 name: ATV-Bilibili-demo
 slug: atv-bilibili-demo
-description: BiliBili Client Demo for Apple TV (tvOS).
+description: ATV-Bilibili-demo is an open-source Bilibili client demo built for Apple TV and its tvOS focus-driven interface.
+summary: Often described as an early SwiftUI tvOS experiment, this Bilibili client demo now demonstrates a substantial UIKit-based Apple TV experience.
+sourceDescription: BiliBili Client Demo for Apple TV (tvOS).
+content: ./content/records/atv-bilibili-demo.md
 category: entertainment
 tags:
   - swift
