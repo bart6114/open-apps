@@ -2,7 +2,10 @@
 kind: project
 name: Habo
 slug: habo
-description: Privacy-first habit tracker for iOS and Android. E2EE sync, self-hostable, built with Flutter.
+description: Habo is a Flutter-based, privacy-first habit tracker for iOS and Android that keeps every habit, note, and streak on-device by default and only syncs through an end-to-end encrypted Supabase backend.
+summary: Built by a single maintainer as a minimalist alternative to gamified habit apps, Habo supports boolean and numeric habits, an Atomic-Habits-style cue/routine/reward model, calendars and streaks, and optional zero-knowledge sync that can be pointed at a self-hosted Supabase instance. The codebase is a clean ~23k-line Flutter app with a dedicated encryption service, a sync manager, and a RevenueCat-backed subscription for the hosted sync tier.
+sourceDescription: Privacy-first habit tracker for iOS and Android. E2EE sync, self-hostable, built with Flutter.
+content: ./content/records/habo.md
 category: productivity
 tags:
 - android
