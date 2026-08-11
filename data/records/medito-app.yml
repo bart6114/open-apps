@@ -2,7 +2,10 @@
 kind: project
 name: medito-app
 slug: medito-app
-description: The Medito app is a 100% free meditation app built with flutter. The app is available on Android and iOS.
+description: Medito is a permanently-free Flutter meditation app maintained by the Medito Foundation that streams guided sessions, multi-day courses, and themed packs from a CMS-backed catalogue, pairing each track with a `just_audio` + `audio_service` foreground player and an optional background-sound bed.
+summary: The same Dart codebase targets Android and iOS, with Riverpod driving state, Pigeon bridging native sides, and a Mock run mode that intercepts every network call so volunteers can build and exercise the full UI without API keys, Firebase, or Stripe. Content is organised into Packs (themed collections), Paths (ordered multi-day courses), and standalone Tracks, and an in-app Stats screen plus a favorites list turn completed sessions into a private practice log.
+sourceDescription: The Medito app is a 100% free meditation app built with flutter. The app is available on Android and iOS.
+content: ./content/records/medito-app.md
 category: health-and-fitness
 tags:
 - android
