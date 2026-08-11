@@ -83,6 +83,11 @@ export default defineConfig({
     containerWidth: "72rem",
   },
 
+  // Per-user contribution counts are noisy here — the contributors
+  // grid is a community wall, not a leaderboard, so we hide the
+  // "N contributions" label and just show the avatar + handle.
+  contributors: { showContributionCount: false },
+
   audit: {
     baseUrl: "http://127.0.0.1:4321",
     pages: [
