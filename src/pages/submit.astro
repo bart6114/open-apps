@@ -18,22 +18,12 @@ const {
   existingFullNames,
   platformOptions,
 } = getSubmissionPageModel(siteConfig);
-const goodSubmissions = [
-  ...(copy.good?.length ? copy.good : [
-    `A real, usable ${singular}, not a tutorial or one-screen demo`,
-    "A public repository with a clear open-source license",
-    "Enough documentation to understand, run, or contribute",
-    "Recent maintenance, releases, or meaningful project history",
-  ]),
-];
-const pleaseAvoid = [
-  ...(copy.avoid?.length ? copy.avoid : [
-    "Snippets, exercises, abandoned experiments, or duplicate entries",
-    "Private repositories or projects without source",
-    "Marketing pages with no usable project behind them",
-    "Records with no license or verifiable repository",
-  ]),
-];
+// `copy.good` and `copy.avoid` are always set in `grove.config.ts`,
+// so the inline fallback is intentionally omitted. If you ever want
+// a default for a blueprint that doesn't define them, add it to
+// the framework's `submission.copy` schema, not here.
+const goodSubmissions = copy.good ?? [];
+const pleaseAvoid = copy.avoid ?? [];
 ---
 
 <BaseLayout title={title} description={description} site={siteConfig} noindex>

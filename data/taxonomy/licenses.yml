@@ -58,3 +58,14 @@
   name: BSD License (unspecified clause set)
   family: permissive
   url: https://spdx.org/licenses/BSD-3-Clause.html
+# SPDX `NOASSERTION` is what the GitHub API returns when it cannot
+# determine a license. It is not a license itself — it is a
+# placeholder. We surface it as a taxonomy bucket so the 14 records
+# affected are not invisible in the licenses facet, and we tag the
+# family as `unknown` so it never sorts into permissive / copyleft
+# buckets. Curator follow-up: a real SPDX id should replace this
+# entry once the README is read.
+- id: noassertion
+  name: Unknown / undetected
+  family: unknown
+  url: https://spdx.dev/specifications/

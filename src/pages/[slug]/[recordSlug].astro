@@ -57,13 +57,17 @@ const { record, name, title, description, itemSingular, jsonLd } = detail;
 // Runs at build time so the sidebar can list "Also in: ..." links
 // without a second client round-trip. Empty array if no
 // collections are configured.
+//
+// Spread into a new object instead of mutating `detail` — the
+// framework return value is treated as read-only so we don't
+// shadow any future setter or invariant in `getRecordDetailModel`.
 const collections = await loadCollections(process.cwd());
 const entries = recordsToCollectionEntries(
   (records as { records: unknown[] }).records as never,
   siteConfig,
 );
 const collectionMembership = findCollectionsFor(record, collections, entries);
-detail.collectionMembership = collectionMembership;
+const detailModel = { ...detail, collectionMembership };
 ---
 
 <BaseLayout
@@ -85,18 +89,18 @@ detail.collectionMembership = collectionMembership;
         <span class="text-ink-700 dark:text-ink-300">{name}</span>
       </nav>
 
-      <RecordHeader detail={detail} />
+      <RecordHeader detail={detailModel} />
 
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_340px]">
         <div class="min-w-0">
-          <EditorialSummary bestFor={detail.bestFor} caveats={detail.caveats} />
-          <TableOfContents items={detail.toc} />
+          <EditorialSummary bestFor={detailModel.bestFor} caveats={detailModel.caveats} />
+          <TableOfContents items={detailModel.toc} />
           <MarkdownBody
             recordSlug={record.slug}
             fallback={record.content ? undefined : "This record doesn't have notes yet."}
           />
         </div>
-        <RecordSidebar detail={detail} />
+        <RecordSidebar detail={detailModel} />
       </div>
     </div>
   </article>

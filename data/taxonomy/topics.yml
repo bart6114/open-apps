@@ -11,14 +11,20 @@
 # browse dropdown + submit-form suggestions filter to this list
 # so the dropdown stays scannable. The full tag list continues to
 # power the detail-page chips and the text search.
+#
+# Canonical ids:
+#   - `open-source` is the canonical id for "the project is open
+#     source." The legacy `foss` id is treated as an alias and is
+#     not enumerated here; if a record's source data lists `foss`,
+#     remap it to `open-source` on import.
+#   - `foss-alternative` is a distinct concept ("FOSS alternative
+#     to a proprietary tool") and is kept as its own id.
 - id: self-hosted
   name: Self-hosted
 - id: cross-platform
   name: Cross-platform
 - id: open-source
   name: Open source
-- id: foss
-  name: Free / open-source software
 - id: foss-alternative
   name: FOSS alternative to a proprietary tool
 - id: offline-first

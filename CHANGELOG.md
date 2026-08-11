@@ -4,10 +4,12 @@ All notable changes to Open Apps are documented here.
 
 ## [Unreleased]
 
-### Changed
+### Grove rebuild context (PR #212)
 
-- Rebuilt the directory as a consumer-owned Astro application powered by
-  Grove packages.
+The directory was rebuilt as a consumer-owned Astro application powered by
+Grove packages (see #212). The lines below record the rebuild so the
+canary work in the next subsection can be read in context.
+
 - Migrated 150 app records into the Grove schema under `data/records/` while
   preserving project identity, taxonomy, repository metadata, curation, and
   original added dates.
@@ -15,6 +17,9 @@ All notable changes to Open Apps are documented here.
   integration commands.
 - Kept Open Apps pages, copy, analytics, assets, and Cloudflare deployment
   configuration in this repository so the product remains fully customizable.
+
+### Changed — 0.5.0-next.0 canary adoption
+
 - Adopted the Grove `0.5.0-next.0` canary (`@grove-dev/astro`, `cli`, and
   `core`) and rewrote the record detail page on the canary components
   (`RecordHeader`, `EditorialSummary`, `TableOfContents`, `MarkdownBody`,
@@ -31,7 +36,10 @@ All notable changes to Open Apps are documented here.
 - Enriched 126 records with a top-level `licenses: [<spdx_id>]` field
   sourced from `github.repository.license.spdx_id`. The `licenses`
   facet is now exercised end-to-end: the MIT page lists 48 records,
-  AGPL-3.0 lists 12, etc.
+  AGPL-3.0 lists 12, etc. A `noassertion` family was added to the
+  licenses taxonomy so the 14 records whose GitHub license is
+  `NOASSERTION` are surfaced under "Unknown / undetected" rather than
+  dropping out of the facet.
 - Added long-form `MarkdownBody` prose for five flagship records
   (immich, appflowy, joplin, cap, bluewallet) plus the `content:`
   field on each. Each body follows the same four-section structure
@@ -58,7 +66,10 @@ All notable changes to Open Apps are documented here.
   curation signals and no longer collapse the result list unexpectedly.
 - Category, primary stack, platforms, and free-form tags remain separate
   discovery dimensions.
-- Restored contributor data, repository statistics, the Tauri icon, legal
+
+### Restored from the Grove rebuild
+
+- Contributor data, repository statistics, the Tauri icon, legal
   documents, security reporting, and legacy collection provenance.
 
 ### Deferred
@@ -72,6 +83,19 @@ All notable changes to Open Apps are documented here.
 - `pnpm exec grove audit` has its `grove.config.ts` manifest in place
   but has not been run against a live build yet — the manifest exists
   as a fixture that the next Lighthouse CI run will validate.
+
+### Notes
+
+- **Canary pin (intentional).** The `@grove-dev/*` dependencies in
+  `package.json` are exact-pinned to `0.5.0-next.0` (not `^`). npm
+  semver excludes pre-release versions from caret ranges by default,
+  so a caret on a canary does not match. When the canary promotes to
+  `latest` and ships as `0.5.0`, the follow-up bump is a deliberate
+  single-line change. Do not "loosen" the pin in a drive-by edit —
+  it is load-bearing for this branch.
+- The 92-record stale cut from the 0.5.0-next.0 branch is documented
+  in `docs/stale-exclusion-2026-08-11.md` for future sweeps to
+  reference.
 
 ### Audit follow-up (2026-08-11)
 

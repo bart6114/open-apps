@@ -6,7 +6,12 @@ Total records inspected: **150**
 - Kept (active): **58**
 - Excluded (no activity for 6+ months): **92**
 
-Each excluded record was tagged in `data/records/<slug>.yml` with:
+Each excluded record was **deleted** from `data/records/<slug>.yml` on
+2026-08-11. The policy is captured here as a written record of the cut so
+the next sweep has a precedent to follow; the `curation.excludedReason` /
+`visibility: remove` tagging pattern shown below is a fallback that the
+sync script can apply if a future sweep prefers a soft-exclude (e.g. to
+preserve history in the repo while hiding the record from the build).
 
 ```yaml
 curation:
