@@ -20,7 +20,8 @@ export default defineConfig({
   nav: [
     { label: "Home", href: "/" },
     { label: "Browse", href: "/apps" },
-    { label: "Recently added", href: "/apps?sort=recently-added" },
+    { label: "Collections", href: "/collections" },
+    { label: "Community", href: "/contributors" },
     { label: "About", href: "/about" },
   ],
 
