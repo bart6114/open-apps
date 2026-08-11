@@ -25,14 +25,15 @@ const entries = recordsToCollectionEntries(
 );
 const model = getCollectionPageModel(collection, entries, collections, {
   name: siteConfig.name,
-  url: siteConfig.url,
+  url: (siteConfig as { url?: string }).url,
 });
+const jsonLd = model.jsonLd as Record<string, unknown> | Record<string, unknown>[] | undefined;
 ---
 <BaseLayout
   title={model.collection.title}
   description={model.collection.description}
   site={siteConfig}
-  jsonLd={model.jsonLd}
+  jsonLd={jsonLd}
 >
   <CollectionPage
     model={model}

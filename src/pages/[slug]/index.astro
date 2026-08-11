@@ -63,7 +63,6 @@ const clearFiltersHref = clearQuery ? `/${slug}?${clearQuery}` : `/${slug}`;
 // pagination states. Since browse pages are statically generated
 // (same HTML for every URL), the noindex check runs client-side
 // via the inline script below.
-const ALLOWED_INDEXED_KEYS = new Set(["page", "sort"]);
 ---
 
 <BaseLayout
