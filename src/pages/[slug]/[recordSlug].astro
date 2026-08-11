@@ -25,8 +25,12 @@
  *  Shiki themes, dark-mode treatment, activity badges, etc.).
  */
 import siteConfig from "@grove/generated/site-config.json";
+import records from "@grove/generated/records.json";
 import {
+  findCollectionsFor,
   getRecordDetailModel,
+  loadCollections,
+  recordsToCollectionEntries,
   recordDetailPaths,
 } from "@grove-dev/astro/server";
 import BaseLayout from "@grove-dev/astro/layouts/BaseLayout.astro";
@@ -48,6 +52,18 @@ const detail = getRecordDetailModel(
 );
 if (!detail) return Astro.redirect(`/${dirSlug}`);
 const { record, name, title, description, itemSingular, jsonLd } = detail;
+
+// Reverse lookup: which curated collections include this record?
+// Runs at build time so the sidebar can list "Also in: ..." links
+// without a second client round-trip. Empty array if no
+// collections are configured.
+const collections = await loadCollections(process.cwd());
+const entries = recordsToCollectionEntries(
+  (records as { records: unknown[] }).records as never,
+  siteConfig,
+);
+const collectionMembership = findCollectionsFor(record, collections, entries);
+detail.collectionMembership = collectionMembership;
 ---
 
 <BaseLayout
