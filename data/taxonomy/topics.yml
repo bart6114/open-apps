@@ -1,0 +1,85 @@
+# Curated tag vocabulary. Each entry is a concept that is:
+#   - useful as a discovery facet (e.g. "self-hosted" tells the
+#     reader something they cannot infer from category / stack /
+#     platform alone),
+#   - short enough to render as a chip,
+#   - stable enough that consumers can rely on the id across
+#     imports.
+#
+# Records can still carry arbitrary tags on disk (e.g. one-off
+# GitHub topics inherited from the awesome-list source). The
+# browse dropdown + submit-form suggestions filter to this list
+# so the dropdown stays scannable. The full tag list continues to
+# power the detail-page chips and the text search.
+- id: self-hosted
+  name: Self-hosted
+- id: cross-platform
+  name: Cross-platform
+- id: open-source
+  name: Open source
+- id: foss
+  name: Free / open-source software
+- id: foss-alternative
+  name: FOSS alternative to a proprietary tool
+- id: offline-first
+  name: Offline-first
+- id: mobile-app
+  name: Mobile app
+- id: desktop-app
+  name: Desktop app
+- id: web-app
+  name: Web app
+- id: cli
+  name: Command-line
+- id: library
+  name: Library / SDK
+- id: framework
+  name: Framework
+- id: real-app
+  name: Production application
+- id: demo
+  name: Demo
+- id: template
+  name: Template
+- id: documentation
+  name: Documentation
+- id: tutorial
+  name: Tutorial
+- id: developer-tools
+  name: Developer tools
+- id: design-tools
+  name: Design tools
+- id: productivity
+  name: Productivity
+- id: privacy
+  name: Privacy
+- id: security
+  name: Security
+- id: encryption
+  name: Encryption
+- id: sync
+  name: Sync
+- id: backup
+  name: Backup
+- id: notes
+  name: Notes
+- id: chat
+  name: Chat / messaging
+- id: finance
+  name: Finance
+- id: media
+  name: Media
+- id: education
+  name: Education
+- id: games
+  name: Games
+- id: health
+  name: Health
+- id: travel
+  name: Travel
+- id: shopping
+  name: Shopping
+- id: news
+  name: News
+- id: social
+  name: Social
