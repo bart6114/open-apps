@@ -1,8 +1,11 @@
 kind: project
 name: The-OldOS-Project
 slug: the-oldos-project
-description: Recreating a fully functional version of iOS 4 in SwiftUI. .
+description: A SwiftUI recreation of classic iOS 4 aesthetics — a pixel-perfect, fully-functional throwback built as a single Xcode app for nostalgia and SwiftUI skeuomorphism reference.
+summary: A SwiftUI recreation of classic iOS aesthetics — the leather, wood, and linen textures of iOS 6 and earlier rebuilt in a modern framework as both a working iPhone app and a nostalgia piece.
+sourceDescription: Recreating a fully functional version of iOS 4 in SwiftUI. .
 category: tools
+content: ./content/records/the-oldos-project.md
 tags:
   - swift
   - swiftui
