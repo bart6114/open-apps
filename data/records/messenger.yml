@@ -1,7 +1,10 @@
 kind: project
 name: Messenger
 slug: messenger
-description: A minimal native messaging UI demo, useful as a starting point for chat apps.
+description: "Related Code's Messenger is an open-source SwiftUI recreation of Facebook Messenger's chat UI that talks to Messenger's internal GraphQL endpoints, and is widely used as a SwiftUI chat UI reference implementation rather than a working client."
+summary: "A SwiftUI clone of Facebook Messenger's chat UI used as a reference implementation for iOS chat apps; it targets Messenger's internal GraphQL endpoints (which Meta periodically breaks), so the project is best understood as a UI study, not a production messenger."
+sourceDescription: A minimal native messaging UI demo, useful as a starting point for chat apps.
+content: ./content/records/messenger.md
 category: tools
 tags:
   - swift
