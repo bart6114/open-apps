@@ -1,7 +1,10 @@
 kind: project
 name: Memex
 slug: memex
-description: An open-source, local-first AI journal for iOS and Android that turns text, photo and voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A. methodology
+description: Memex is a Flutter-based, local-first AI journal for iOS and Android that captures text, photo, and voice fragments, runs them through a multi-agent skill system on a BYO-LLM, and weaves them into timeline cards, P.A.R.A.-organized Markdown knowledge, and chart-driven insights.
+summary: Open-source PKM/journal built on dart_agent_core where every entry is Markdown on disk, agents are loadable SKILL.md files that can call fetch() in JS sandboxes, and LLM traffic goes phone-to-provider with no Memex-operated server in the middle.
+sourceDescription: An open-source, local-first AI journal for iOS and Android that turns text, photo and voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A. methodology
+content: ./content/records/memex.md
 category: productivity
 tags:
   - cross-platform
