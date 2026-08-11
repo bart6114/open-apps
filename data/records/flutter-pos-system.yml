@@ -2,7 +2,10 @@
 kind: project
 name: flutter-pos-system
 slug: flutter-pos-system
-description: An open-source Flutter POS system designed for small restaurants and businesses.
+description: An offline-first Flutter point-of-sale app for small restaurants and shops that runs ingredient inventory, menu management, customer demographics, order taking, Bluetooth receipt printing, custom analytics charts, and Google Sheets export entirely on-device with no remote backend.
+summary: A Flutter point-of-sale app that keeps every byte on the device — ingredients, menus, orders, customer demographics, and a Bluetooth receipt printer — wired through Provider state with sqflite and sembast for local storage and Google Sheets as the only egress. Apache-2.0 and currently shipping on Android with iOS in progress.
+sourceDescription: An open-source Flutter POS system designed for small restaurants and businesses.
+content: ./content/records/flutter-pos-system.md
 category: developer-tools
 tags:
 - android-app
