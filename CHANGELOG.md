@@ -28,6 +28,28 @@ All notable changes to Open Apps are documented here.
 - Added `src/pages/licenses/[name].astro` and `src/pages/empty.astro`,
   plus a shared `src/components/TaxonomyList.astro` body used by all three
   taxonomy pages.
+- Enriched 126 records with a top-level `licenses: [<spdx_id>]` field
+  sourced from `github.repository.license.spdx_id`. The `licenses`
+  facet is now exercised end-to-end: the MIT page lists 48 records,
+  AGPL-3.0 lists 12, etc.
+- Added long-form `MarkdownBody` prose for five flagship records
+  (immich, appflowy, joplin, cap, bluewallet) plus the `content:`
+  field on each. Each body follows the same four-section structure
+  (Why it matters / How it works / Caveats / Deployment notes) so
+  the rendered `TableOfContents` and sidebar reading-metrics are
+  consistent across records.
+- Added the matching `categories/[name].astro` and `stacks/[name].astro`
+  taxonomy pages, retargeted to the `apps` vocabulary and reusing the
+  shared `TaxonomyList` body.
+- Moved the about page prose to `content/pages/about.md` and wired
+  the canary `getPageContentHtml("about")` resolver in `about.astro`.
+  The hand-written breadcrumb, header, and CTA button row stay; only
+  the four prose cards move into markdown.
+- First real use of `pnpm exec grove readme generate` against this
+  repository. The script injected an awesome-list section (150 records,
+  16 categories) between the `<!-- grove-readme:start/end -->` markers
+  without touching the hand-written intro or the Security / License
+  tail. README grew from 220 to 448 lines.
 
 ### Fixed
 
@@ -41,15 +63,15 @@ All notable changes to Open Apps are documented here.
 
 ### Deferred
 
-- The long-form `MarkdownBody` slot is wired but every record still falls
-  back to the placeholder copy, because no record carries a `content:`
-  field yet. Populating `content/records/<slug>.md` for a curated subset
-  of records is a follow-up.
-- Per-record `licenses: []` enrichment: `filterRecords` is already
-  license-aware, but the record YAMLs do not declare their SPDX id yet.
-  Wiring `github.repository.license.spdx_id` into a top-level `licenses:`
-  array on each record (or running `grove import` on the source awesome
-  list to refresh metadata) is a follow-up.
+- The 24 records without a synced `github.repository.license` cannot be
+  enriched automatically; their `licenses: []` field requires curator
+  input (the license is on the README, not on the GitHub API).
+- Only 5 of 150 records have a `content: ./content/records/<slug>.md`
+  body. The MarkdownBody pipeline is wired and exercised; expanding the
+  coverage is content work, not framework work.
+- `pnpm exec grove audit` has its `grove.config.ts` manifest in place
+  but has not been run against a live build yet — the manifest exists
+  as a fixture that the next Lighthouse CI run will validate.
 
 ## [0.1.0] — 2024
 
