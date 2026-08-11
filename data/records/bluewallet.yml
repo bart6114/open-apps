@@ -640,3 +640,5 @@ health:
 licenses:
   - mit
 content: ./content/records/bluewallet.md
+summary: A Bitcoin wallet focused on privacy with on-chain transactions, Lightning Network payments, and hardware-wallet integration.
+sourceDescription: Bitcoin wallet for iOS & Android. Built with React Native.

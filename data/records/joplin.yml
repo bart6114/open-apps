@@ -945,3 +945,5 @@ health:
 licenses:
   - noassertion
 content: ./content/records/joplin.md
+summary: An end-to-end encrypted note-taking and to-do application with cross-platform sync via Joplin Cloud, Dropbox, OneDrive, WebDAV, or a local filesystem.
+sourceDescription: Joplin is a free, open source note taking and to-do application. The mobile client is built with React Native and supports full sync via Nextcloud, Dropbox, OneDrive, WebDAV, and Joplin Cloud.

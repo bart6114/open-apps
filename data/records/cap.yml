@@ -80,3 +80,5 @@ github:
 licenses:
   - noassertion
 content: ./content/records/cap.md
+summary: An open-source alternative to Loom — record screen, microphone, and camera simultaneously, then share a link that plays in any browser.
+sourceDescription: Open source Loom alternative. Beautiful, shareable screen recordings.
