@@ -1,10 +1,7 @@
 kind: project
 name: purposeful-ios-animations
 slug: purposeful-ios-animations
-description: Meaningful iOS animations built to inspire you in creating useful animations for your
-  apps. Each of the animations here was cloned with SwiftUI. Have you seen an app animation you love
-  to rebuild and add to this repo?, contact [@amos_gyamfi](https://twitter.com/amos_gyamfi) and
-  [@stefanjblos](https://twitter.com/stefanjblos) on Twitter.
+description: Meaningful iOS animations built to inspire SwiftUI developers. Each animation is cloned from a real app and rebuilt in code with explanation.
 category: tools
 tags:
   - swift
@@ -64,10 +61,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/GetStream/purposeful-ios-animations
-    description: Meaningful iOS animations built to inspire you in creating useful animations for your
-      apps. Each of the animations here was cloned with SwiftUI. Have you seen an app animation you
-      love to rebuild and add to this repo?, contact [@amos_gyamfi](https://twitter.com/amos_gyamfi)
-      and [@stefanjblos](https://twitter.com/stefanjblos) on Twitter.
+    description: Meaningful iOS animations built to inspire you in creating useful animations for your apps. Each of the animations here was cloned with SwiftUI. Have you seen an app animation you love to rebuild and add to this repo?, contact [@amos_gyamfi](https://twitter.com/amos_gyamfi) and [@stefanjblos](https://twitter.com/stefanjblos) on Twitter.
     fork: false
     url: https://api.github.com/repos/GetStream/purposeful-ios-animations
     forks_url: https://api.github.com/repos/GetStream/purposeful-ios-animations/forks

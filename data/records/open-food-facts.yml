@@ -1,7 +1,7 @@
 kind: project
 name: Open Food Facts
 slug: open-food-facts
-description: The new mobile app of Open Food Facts, with other 2 million installs, that allows you to understand the health and environmental impact of your food, as well as to contribute new products to the Open Database [Open Food facts](
+description: The mobile companion to Open Food Facts — scan barcodes, decode ingredient lists, and contribute new products to the open database.
 category: health-and-fitness
 tags:
   - cross-platform

@@ -1,8 +1,7 @@
 kind: project
 name: Mathematics
 slug: mathematics
-description: "Generate MCQ PDF / Question PDF : With Answer and Quiz
-  [J-J-GAJJAR](https://github.com/j-j-gajjar)"
+description: Generate MCQ PDFs and question papers with answers and quiz mode. Useful for educators and students preparing for exams.
 category: education
 tags:
   - cross-platform
@@ -61,9 +60,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/j-j-gajjar/Mathematics
-    description: In this application, we can perform some actions like subtraction, addition,
-      multiplication, and division. And by selecting any of these, you will receive a PDF with the
-      answer key to your MCQ or question!
+    description: In this application, we can perform some actions like subtraction, addition, multiplication, and division. And by selecting any of these, you will receive a PDF with the answer key to your MCQ or question!
     fork: false
     url: https://api.github.com/repos/j-j-gajjar/Mathematics
     forks_url: https://api.github.com/repos/j-j-gajjar/Mathematics/forks
@@ -235,8 +232,7 @@ github:
 
       ## New Contributors\r
 
-      * @Djsmk123 made their first contribution in
-      https://github.com/j-j-gajjar/Mathematics/pull/7\r
+      * @Djsmk123 made their first contribution in https://github.com/j-j-gajjar/Mathematics/pull/7\r
 
       \r
 

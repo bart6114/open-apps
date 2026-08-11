@@ -1,7 +1,7 @@
 kind: project
 name: Harpy
 slug: harpy
-description: A Twitter app built with Flutter [Roberto Doering](
+description: A Twitter client for iOS and Android built with Flutter. Timeline, compose, lists, and a clean Material 3 layout.
 category: social-network
 tags:
   - cross-platform

@@ -1,7 +1,7 @@
 kind: project
 name: wger
 slug: wger
-description: Flutter fitness/workout app for wger by the [wger project](https://github.com/wger-project)
+description: A Flutter workout and fitness tracker that syncs with the self-hosted wger server, supporting routines, exercises, and progress logs.
 category: health-and-fitness
 tags:
   - cross-platform

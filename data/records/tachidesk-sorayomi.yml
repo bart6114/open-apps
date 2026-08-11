@@ -1,7 +1,7 @@
 kind: project
 name: Tachidesk-Sorayomi
 slug: tachidesk-sorayomi
-description: Frontend for [Tachidesk-server](github.com/Suwayomi/Tachidesk-server/), based on Tachiyomi to read manga in desktop
+description: A cross-platform desktop and mobile client for Tachidesk-Sorayomi, used to read manga from a self-hosted Tachidesk server.
 category: entertainment
 tags:
   - cross-platform
