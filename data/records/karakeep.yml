@@ -1,7 +1,7 @@
 kind: project
 name: Karakeep
 slug: karakeep
-description: A self-hostable bookmark-everything app (links, notes and images) with AI-based automatic tagging and full text search.
+description: Karakeep is a self-hostable bookmark-everything application built on Next.js 16 + Hono + tRPC over Drizzle on SQLite with Meilisearch full-text and semantic search, capturing links, notes, images, and PDFs into a tagged personal archive with on-demand AI auto-tagging.
 category: productivity
 tags:
   - cross-platform
@@ -1026,3 +1026,6 @@ health:
   cleanupCandidate: false
 licenses:
   - agpl-3.0
+content: ./content/records/karakeep.md
+summary: A self-hostable bookmark-and-content archive — links, notes, images, and PDFs — that turns the messy act of hoarding the web into a queryable, AI-tagged personal library with first-class mobile apps, browser extensions, a CLI, and an MCP server.
+sourceDescription: A self-hostable bookmark-everything app (links, notes and images) with AI-based automatic tagging and full text search.
