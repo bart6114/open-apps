@@ -2,7 +2,10 @@
 kind: project
 name: storypad
 slug: storypad
-description: An open source diary & journal app with over 100k downloads 🪴
+description: Storypad is an offline-first Flutter diary and journal app that uses a timeline instead of folders, layers mood tracking, photo memories, and customizable typography over a local ObjectBox store with optional Google Drive sync.
+summary: A cross-platform writing app for personal journaling rather than fiction — entries live on a single reverse-chronological timeline with rich-text, 45+ mood tags, and photo attachments, all stored locally behind PIN, FaceID, or fingerprint. The codebase is a clean MVVM Flutter split (lib/models, lib/views, lib/view_models, lib/providers) where the entire writing surface is a customized fork of flutter_quill pinned to a specific commit.
+sourceDescription: An open source diary & journal app with over 100k downloads 🪴
+content: ./content/records/storypad.md
 category: productivity
 tags:
 - cross-platform
