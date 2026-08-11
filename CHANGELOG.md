@@ -8,7 +8,7 @@ All notable changes to Open Apps are documented here.
 
 - Rebuilt the directory as a consumer-owned Astro application powered by
   Grove packages.
-- Migrated 149 app records into the Grove schema under `data/records/` while
+- Migrated 150 app records into the Grove schema under `data/records/` while
   preserving project identity, taxonomy, repository metadata, curation, and
   original added dates.
 - Replaced repository-owned generation scripts with Grove CLI and Astro
