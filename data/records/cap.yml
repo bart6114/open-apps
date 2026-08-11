@@ -79,3 +79,4 @@ github:
   homepage: https://cap.so
 licenses:
   - noassertion
+content: ./content/records/cap.md

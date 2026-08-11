@@ -639,3 +639,4 @@ health:
   cleanupCandidate: false
 licenses:
   - mit
+content: ./content/records/bluewallet.md
