@@ -1,7 +1,10 @@
 kind: project
 name: SwiftHub
 slug: swifthub
-description: GitHub iOS client in RxSwift and MVVM-C clean architecture.
+description: SwiftHub is an iOS GitHub client built on RxSwift and MVVM-C clean architecture, wiring Moya (REST v3) and Apollo (GraphQL v4) behind a flow-coordinator navigation graph with OAuth2 and personal-access-token authentication.
+summary: An iOS GitHub client demonstrating a full RxSwift + MVVM-C clean-architecture build — Moya REST, Apollo GraphQL, Swinject DI, and coordinator-driven navigation across repositories, issues, PRs, and users.
+sourceDescription: GitHub iOS client in RxSwift and MVVM-C clean architecture.
+content: ./content/records/swifthub.md
 category: tools
 tags:
   - swift
