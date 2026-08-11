@@ -1,0 +1,39 @@
+---
+import BaseLayout from "@grove-dev/astro/layouts/BaseLayout.astro";
+import { filterRecords } from "@grove-dev/core";
+import indexPayload from "@grove/generated/records.index.json";
+import siteConfig from "@grove/generated/site-config.json";
+import TaxonomyList from "../../components/TaxonomyList.astro";
+
+export function getStaticPaths() {
+  const stacks = siteConfig.taxonomy?.stacks ?? [];
+  return stacks.map(({ id, name }) => ({
+    params: { name: id },
+    props: { displayName: name },
+  }));
+}
+
+const { displayName } = Astro.props;
+const name = Astro.params.name;
+const indexRecords = (indexPayload as { records: unknown[] }).records as never;
+const stackRecords = filterRecords(indexRecords, { stacks: [name] }) as Array<{
+  slug: string;
+  name?: string;
+  title?: string;
+  description?: string;
+  repoUrl?: string;
+}>;
+---
+
+<BaseLayout
+  title={`${displayName} apps`}
+  description={`Open-source apps built with ${displayName}.`}
+  site={siteConfig}
+>
+  <TaxonomyList
+    eyebrow="Stack"
+    displayName={displayName}
+    lede={`Browse open-source apps in this directory built with ${displayName}.`}
+    records={stackRecords}
+  />
+</BaseLayout>
