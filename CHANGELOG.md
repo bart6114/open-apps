@@ -73,6 +73,93 @@ All notable changes to Open Apps are documented here.
   but has not been run against a live build yet — the manifest exists
   as a fixture that the next Lighthouse CI run will validate.
 
+### Audit follow-up (2026-08-11)
+
+Address every P0 trust-breaking issue and the higher-impact Phase 2-4
+findings from the product / UX / SEO audit. Companion work landed in
+the `grove` monorepo on the `audit/phase-1-trust-fixes` branch; this
+branch (`feat/canary-v0.5-next.0`) consumes those canary changes.
+
+**Phase 1 — Trust fixes:**
+- `licenseDisplay(spdxId)` normalizes `NOASSERTION` / `NONE` /
+  `OTHER` / `UNLICENSED` to "License not detected" / "Other" in
+  every license render path (detail sidebar, browse cards,
+  JSON-LD). 15 NOASSERTION records now show readable copy.
+- Bot accounts filtered from the contributors sync + page; the
+  page header reads "83 human contributors" instead of "85
+  community contributors" (was including
+  `github-actions[bot]` and `dependabot[bot]`).
+- CHANGELOG and `public/og-image.svg` corrected from 149 to
+  150; counts now match across every UI surface.
+- Each curated collection has an auditable inclusion rule
+  printed on the page (`selectionNote` with `Stack`, `Stars`,
+  `Exclude`, `License` clauses). New `minStars` / `minForks`
+  fields on `CollectionQuery`; the four collections now
+  declare 80 / 95 / 80 / 53 records respectively, with real
+  thresholds (was 80 / 80 / 80 / 80 before).
+- 8 broken Markdown descriptions rewritten with complete
+  sentences; `extractDescription` regex hardened so future
+  imports do not re-introduce malformed links.
+- 45 truncated descriptions (under 40 chars) expanded to
+  complete sentences.
+- Submit form gates the `Open PR draft` link behind validation:
+  category / stack / platforms must come from the taxonomy,
+  description must be >= 40 chars, slug must be unique.
+
+**Phase 2 — Detail-page value:**
+- New `summary` (Open Apps-written) and `sourceDescription`
+  (original GitHub) fields on records; the detail page lead
+  paragraph now renders `summary` and the secondary "From the
+  project's README" block renders `sourceDescription`.
+  Populated on the five flagship records that already had a
+  content body.
+- Detail pages now show "Also in: ..." with links to every
+  curated collection the record belongs to (via
+  `findCollectionsFor`).
+- Five flagship records marked as curator-reviewed
+  (`curation.reviewed: true`, `reviewedBy: "Open Apps curators"`,
+  `reviewedAt: "2026-08-11"`).
+- New `screenshots[]` field on records + gallery renderer in
+  `RecordHeader` (no screenshots added yet — curators populate
+  in follow-ups).
+
+**Phase 3 — Discovery architecture:**
+- Tag dropdown filtered against a curated
+  `data/taxonomy/topics.yml` (36 stable ids). Records still
+  carry arbitrary tags on disk; only curated ids contribute to
+  the browse dropdown counts. 81 raw unique tags reduced to a
+  scannable subset.
+- Intersection counts: after selecting Flutter, the Platform
+  facet shows Flutter+Platform counts, not the global count.
+  `buildFacets(items, { filters })` re-runs each facet's count
+  against records that satisfy every OTHER filter.
+- Browse page HTML drops from 1.19 MB to 358 KB (-70%) by
+  server-paginating the SSR markup (`paginate(sorted, page,
+  PAGE_SIZE)` in `getDirectoryIndexModel`).
+- Tag chip link on detail pages switches from `?q=` to `?tag=`
+  for consistency with the Tag facet.
+- Collection pages emit an `ItemList` JSON-LD block listing
+  each entry as a `ListItem` whose `item` is a
+  `SoftwareApplication`. Capped at 50 per page.
+- Browse filter URLs (anything beyond `?page=` and `?sort=`)
+  are tagged with `noindex,follow` via a small client-side
+  script. Bare `/apps/` and pagination states stay indexable.
+
+**Phase 4 — Visual simplification:**
+- Homepage drops one of the three near-identical 6-card lens
+  sections (Established) and trims the other two to 3 cards.
+  The full contributors grid moves from the homepage to its
+  dedicated page; the homepage now shows a single one-line
+  link to `/contributors`.
+- Header nav adds Collections and Community entries between
+  Browse and About.
+
+### Still deferred (after audit follow-up)
+
+- Per-record and per-collection OG images (the audit's D4
+  recommendation) — requires a new build-time image
+  generator. Documented as the next PR.
+
 ## [0.1.0] — 2024
 
 Initial extraction of the Open Source Flutter Apps collection into a
