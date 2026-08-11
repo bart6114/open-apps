@@ -1,7 +1,10 @@
 kind: project
 name: GitUp
 slug: gitup
-description: The Git interface you've been missing all your life has finally arrived.
+description: GitUp is a native macOS Git GUI built on a bespoke in-process Git toolkit (GitUpKit) that wraps a customized libgit2 fork and re-implements everything else — including its own rebase engine — to keep operations and the live commit graph fast on large repositories.
+summary: "A native macOS Git GUI whose edge is the underlying GitUpKit framework: a tight Objective-C wrapper over a customized libgit2 fork, with a custom rebase engine and an in-process observer that streams state, history, status, stashes, and search updates to the UI as the on-disk repo changes."
+sourceDescription: The Git interface you've been missing all your life has finally arrived.
+content: ./content/records/gitup.md
 category: tools
 tags:
   - objc
