@@ -34,13 +34,9 @@ const home = getHomePageModel(siteConfig);
 const { slug, itemSingular, itemPlural } = home;
 
 // ── Lens sectioning (Hot / New / Mature) ────────────────────────
-// The audit called out the homepage as too long with three near-
-// identical 6-card sections. Drop Established from the home page
-// (the curated 'Top Open Source Flutter Apps' / 'Top Open Source
-// iOS Apps' collections cover that lens with auditable
-// criteria). Keep Trending + Recently added and trim each to 3.
-const hotList = home.hot.slice(0, 3);
-const newList = home.recentlyAdded.slice(0, 3);
+const hotList = home.hot;
+const newList = home.recentlyAdded;
+const matureList = home.established;
 
 const { stacks, categories } = home;
 
@@ -109,22 +105,27 @@ const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries,
     viewAllLabel={`View all recently added`}
   />
 
+  <RecordSection
+    id="mature"
+    title="Established"
+    description={`Long-running curated ${itemPlural} with strong history, active maintainers, and real-world usage.`}
+    eyebrow="Mature"
+    items={matureList}
+    hrefFor={(r) => `/${slug}/${r.slug}`}
+    viewAllHref={`/${slug}?label=mature`}
+    viewAllLabel={`View all established`}
+  />
+
   <StackGrid stacks={stacks} pathPrefix={`/${slug}`} itemLabelPlural={itemPlural} />
   <CollectionTeaser model={collectionTeaser} />
   <CategoryGrid categories={categories} pathPrefix={`/${slug}`} itemLabelPlural={itemPlural} />
 
-  <section class="grove-card mt-12 rounded-[var(--radius-lg)] border border-ink-200 bg-background p-5 dark:border-ink-800">
-    <h2 class="grove-card-title m-0 mb-1 text-2xs font-semibold uppercase tracking-wider text-ink-500 dark:text-ink-400">
-      Community
-    </h2>
-    <p class="m-0 text-sm leading-relaxed text-ink-700 dark:text-ink-200">
-      <a href="/contributors" class="text-inherit no-underline hover:underline">
-        {contributors.length} human contributors
-      </a>
-      {" "}have curated or reviewed entries on this directory.{" "}
-      <a href="/contributors" class="text-inherit no-underline hover:underline">See everyone →</a>
-    </p>
-  </section>
+  <ContributorsGrid
+    contributors={contributors}
+    total={contributors.length || undefined}
+    viewAllHref={`/contributors`}
+    viewAllLabel="Meet the community"
+  />
 
   {siteConfig.stats?.originalRepo && (
     <OriginalCollection
