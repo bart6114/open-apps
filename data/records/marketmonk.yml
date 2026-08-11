@@ -2,7 +2,10 @@
 kind: project
 name: MarketMonk
 slug: marketmonk
-description: Graph stocks on any platform  💹
+description: A Flutter stock and portfolio tracker that combines Yahoo Finance market data, interactive charts, local trade records, and multiple account support.
+summary: MarketMonk is a focused desktop-and-mobile investing companion for people who want portfolio visibility without handing their trade history to a hosted service. It pairs quick ticker lookups with durable local records, broker CSV imports, and practical gain and allocation views.
+sourceDescription: Graph stocks on any platform  💹
+content: ./content/records/marketmonk.md
 category: tools
 tags:
 - flutter-app
