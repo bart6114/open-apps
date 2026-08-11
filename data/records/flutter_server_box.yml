@@ -2,8 +2,11 @@
 kind: project
 name: flutter_server_box
 slug: flutter_server_box
-description: ServerBox - server status & toolbox
+description: A Flutter-based, cross-platform client for monitoring and administering remote Linux, Unix, and Windows servers over SSH — combining real-time status charts, an embedded xterm terminal, SFTP file transfer, and Docker / systemd / S.M.A.R.T. management on iOS, Android, macOS, Linux, and Windows.
+summary: ServerBox packages a full SSH workstation into a single Flutter app, turning a phone or laptop into a portable console for Linux VPS, NAS, and Raspberry Pi hosts. It pairs an in-app terminal and SFTP browser with proactive system telemetry, a watchOS companion, and a small server-side agent for background push and home-screen widgets.
+sourceDescription: ServerBox - server status & toolbox
 category: tools
+content: ./content/records/flutter_server_box.md
 tags:
 - android
 - dart
