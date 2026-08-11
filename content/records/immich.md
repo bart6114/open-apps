@@ -1,61 +1,152 @@
 # Immich
 
-Immich is a self-hosted photo and video backup solution that ships a
-native mobile app for iOS and Android plus a web client for desktop
-browsing. It is positioned as a Google Photos alternative you can run
-on your own hardware.
+Immich is a self-hosted photo and video backup service that runs on your own
+hardware and ships native iOS and Android apps written in Flutter. It does
+on-device-class machine learning on the server — face recognition, CLIP-based
+natural-language search, OCR, duplicate detection — without sending your
+library to anyone. The result feels close to Google Photos while keeping your
+data on a disk you control, under an AGPL-3.0 license that the maintainers
+deliberately cannot relicense more permissively.
 
-## Why it matters
+## From a side project to a Google-Photos-shaped standard
 
-- **End-to-end self-host.** Photos never leave your network. The
-  reference install is a single `docker-compose.yml` that brings up
-  the server, PostgreSQL, Redis, and the machine-learning workers.
-- **Modern mobile UX.** Background uploads, Live Photo handling,
-  Memories (date-bucketed auto-albums), facial recognition, and a
-  search bar that runs locally over your library. The mobile app is
-  built in Flutter, so the same code ships to both platforms.
-- **Active ML pipeline.** Immich ships a CLIP-based natural-language
-  search and a face model that runs entirely on your hardware. The
-  quality of these features is the reason most adopters stay after
-  evaluating alternatives.
+Immich is the rare self-hosted app whose UX compares favorably to its
+commercial counterparts. Browse the timeline, the photos you took last summer
+are in the right place. Search for "beach," you get the beach photos, not
+the ones tagged `#beach` in a folder hierarchy. The reason it feels this way
+is the same reason it took seven years to ship: the maintainers built a
+system rather than a front end.
 
-## How it works
+The architecture has three moving parts. The server is a **NestJS**
+application in TypeScript that owns the REST API, the WebSocket layer, and
+the metadata database. The mobile clients are a single **Flutter** codebase
+covering iOS, Android, and the F-Droid build. The machine-learning work —
+face detection, face embeddings, CLIP search, OCR — lives in a **Python
+FastAPI** microservice that talks to the server over HTTP. None of these are
+optional: removing the Python service turns Immich into a less interesting
+photo sync tool.
 
-The server is a NestJS application that stores object keys in
-PostgreSQL and binary assets on the local filesystem or any S3-compatible
-backend. Upload requests flow through a queue (`pg-boss`) to a set of
-workers that run thumbnail generation, EXIF extraction, and ML
-embeddings on demand. The web and mobile clients speak a documented
-REST API; the server is the single source of truth.
+What makes the ML split interesting is the **ONNX-only** inference stack.
+The team does not depend on PyTorch; they ship the **ONNX Runtime** with
+backend flavors for CUDA, ROCm, OpenVINO, ArmNN, and RKNN. Choosing which
+hardware accelerator you want is a Docker image tag. A household with an
+Intel iGPU and a family with an NVIDIA RTX card run the same code with a
+different image name. The Python service caches models in memory, runs ONNX
+directly, and exposes a stable HTTP contract.
 
-The codebase is large (~330k lines) but cleanly split: the server
-side is TypeScript, the mobile side is Flutter/Dart, and the web side
-is Svelte. Each has a focused test suite and a CI pipeline that
-publishes multi-arch container images.
+The **vector search** path is equally deliberate. v3.0 migrated from
+`pgvecto.rs` to a custom **Postgres 14 build with VectorChord** baked in.
+The trade is operational — you run a forked Postgres image — but the
+upside is that vector search is just a column in the same database, not a
+separate service to deploy. The philosophy is: one operational database,
+not three.
 
-## Caveats
+## The license was the point
 
-- **Resource hungry.** Hardware-accelerated transcoding wants a recent
-  Intel iGPU or an NVIDIA GPU. Software transcoding works on any
-  modern CPU but is slow at scale.
-- **Single-user assumption.** Multi-user support exists but admin
-  features are limited compared to mature SaaS offerings.
-- **License is AGPL-3.0.** Acceptable for personal use; commercial
-  forks must publish their modifications.
+In February 2024 the project moved from MIT to **AGPL-3.0**. The
+accompanying discussion on GitHub is unusual in that the maintainers
+explicitly justified *not* adopting a Contributor License Agreement. Their
+reasoning: without a CLA, no future acquirer or hostile fork can relicense
+the codebase. The community response on Hacker News and r/selfhosted was
+overwhelmingly positive — people who self-host care about this more than
+they care about a permissive license, and the AGPL's "network use is
+distribution" clause is exactly the protection they want.
+
+The decision has a cost. Any company that wants to ship a hosted fork of
+Immich must either publish its modifications under AGPL or stay on the last
+MIT release (v1.118.x) and lose new features. That's the intended outcome.
+The team's commercial path is support contracts and a partnership with
+**FUTO** for a managed backup service announced in v2.7.0 — not a SaaS fork
+of the open-source code.
+
+## What the architecture is not
+
+Immich has chosen to be a few things well and to admit what it is not.
+The `UPLOAD_LOCATION` is a filesystem bind mount; **there is no native S3
+backend**. This is a real limitation if you want to back up to Backblaze B2
+or Cloudflare R2 — every "Immich on the cloud" thread rehashes it.
+**External libraries are single-owner** — a family of four cannot pool
+their phone libraries into a single shared library the way Apple Family
+Sharing works. Shared albums do not show up in face recognition or
+full-text search. There is **no encryption at rest**; the upload directory
+is plain files. These are not bugs. They are product decisions the team has
+not yet made.
+
+The **ML pipeline is fragile in ways that matter**. An OCR memory leak in
+v2.2.0 ballooned the container to 12 GB RAM on certain models; an OpenVINO
+regression in v2.5.2 broke Intel hardware acceleration. Both were
+eventually fixed, but the pattern is clear: a young ML pipeline shipped
+under aggressive release cadence will have rough edges. Running multiple
+minor versions behind the latest is a common survival tactic for
+self-hosters.
+
+## Security has matured in public
+
+The **GitHub Security tab** for Immich has 10 published advisories in 2026
+alone, including a critical one-click XSS-to-account-takeover
+(GHSA-8244-8vpr-vp9c, June 2026) and an API key privilege-escalation bug
+(GHSA-237r-x578-h5mv, January 2026). The pattern is familiar for a
+fast-moving app: access-control and OAuth bugs surface as the codebase
+grows. What matters is the response, and the response has been on a normal
+disclosure cadence with patches released alongside.
+
+## Where Immich is the best choice
+
+- A family or individual leaving Google Photos, willing to spend $300–$800
+  on a mini PC or used enterprise desktop, with at least 2 CPU cores and
+  8 GB RAM.
+- A user who values face recognition and natural-language search and is
+  willing to keep the ML container healthy.
+- A tinkerer who wants the same code to run on a Raspberry Pi 5 (slow but
+  functional) and on a Synology (recommended, with QuickSync transcoding).
+
+## Where Immich is not the right choice
+
+- A small business with 50 users and admin needs the project has not
+  invested in. Use **Ente** if E2EE is the headline feature, **PhotoPrism**
+  if you have an existing library and want best-in-class AI, or
+  **Nextcloud Memories** if you are already on Nextcloud.
+- A user who needs S3-backed storage, encryption at rest, or multi-owner
+  external libraries.
+- A user unwilling to keep up with monthly migrations. The 0.5.x → v2.0 →
+  v3.0 transitions each required manual database steps.
 
 ## Deployment notes
 
-```bash
-git clone https://github.com/immich-app/immich.git
-cd immich/docker
-cp .env.example .env
-docker compose up -d
-```
+The reference install is `docker compose up -d` against the official
+`docker/docker-compose.yml`. Five containers: `immich-server` (port 2283),
+`immich-machine-learning` (CPU by default; tag-swap for GPU), `redis`
+(actually **Valkey**), `database` (the custom VectorChord Postgres), and
+`immich-microservices`. Hardware-accelerated transcoding is a separate
+`hwaccel.transcoding.yml` override. Maintainers recommend 6 GB RAM minimum,
+8 GB recommended, with a recent x86-64-v2 CPU; the ML container can take
+another 2–3 GB RAM when the CLIP model is loaded.
 
-**Minimum:** 2 CPU, 4 GB RAM, 50 GB storage for a small personal
-library. 8+ CPU and 16+ GB for a family library with hardware
-transcoding enabled.
+Backups are two-part: a `DatabaseBackup` job that writes a `pg_dump` to
+`BACKUP_LOCATION`, and a separate backup of the `${UPLOAD_LOCATION}` tree.
+Restoring is the reverse: put the upload tree back, restore the SQL dump,
+restart. The two halves are independent — the database is metadata, the
+tree is the bytes — and you must back up both.
 
-**Integration tip:** if you operate an Astro/Grove directory like
-this one, embed Immich as the canonical "see it in action" example
-for any app tagged `self-hosted` or `backup`.
+## Developer lessons worth borrowing
+
+- **The HTTP boundary between server and ML service is the right call.**
+  It buys you GPU isolation, independent scaling, and a clean
+  second-language boundary. For projects that need ML inference alongside
+  a web app, this is the architecture to study.
+- **ONNX-only inference is a "freedom of hardware" decision.** More work
+  than just using PyTorch, but it makes the same code run on CUDA, ROCm,
+  OpenVINO, ArmNN, and RKNN.
+- **Hexagonal architecture in the server** (`src/repositories/` vs
+  `src/services/`) makes swapping storage backends, ML clients, and queue
+  implementations a matter of interface changes.
+- **Custom Postgres builds are not as scary as they sound.** VectorChord
+  was a deliberate "one operational database" choice; the maintenance cost
+  is small relative to running a separate vector store.
+
+## More from this profile
+
+The full editorial profile (research summary, comparison matrix with
+PhotoPrism / Ente / Nextcloud Memories / Lychee, content opportunities,
+verified sources) is available in the directory maintainer's dossier. See
+the project repository for the latest version.

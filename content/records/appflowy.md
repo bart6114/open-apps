@@ -1,61 +1,133 @@
 # AppFlowy
 
-AppFlowy is an open-source collaborative workspace — Notion-style
-pages, databases, and AI features, with the data stored locally or
-on infrastructure you control.
+AppFlowy is a self-hostable, open-source productivity workspace that pairs a
+Notion-style block editor with database views (Grid, Board, Calendar),
+real-time multi-user collaboration, and an optional AI assistant. The data
+plane is Rust with a Yrs CRDT; the UI is a single Flutter codebase covering
+macOS, Windows, Linux, iOS, and Android. The product is genuinely
+local-first, but the open-core split means that a self-hosted multi-seat
+deployment requires a paid commercial license.
 
-## Why it matters
+## What AppFlowy is, and what it isn't trying to be
 
-- **Local-first data model.** Every page is a structured YAML tree
-  on disk. The desktop client is a thin wrapper over that tree; the
-  server is optional and only needed for multi-device sync.
-- **Customizable blocks.** The block system is data-only; the
-  rendering layer is open and documented. Custom block types are a
-  configuration change, not a fork.
-- **AI as a first-class feature.** AppFlowy ships AI assistants that
-  operate over your workspace data. The assistants are pluggable
-  (BYO OpenAI-compatible endpoint), so adopters can keep their data
-  inside their own tenancy.
+AppFlowy's pitch is straightforward: build a Notion-shaped workspace that
+runs on your hardware, with your data in your database, in an open-source
+repository you can fork. The interesting engineering decision is that the
+maintainers did not try to do this in JavaScript. The data layer is
+**Rust** — split across `flowy-core`, `flowy-document`,
+`flowy-database2`, `flowy-folder`, `flowy-ai`, `flowy-search`,
+`flowy-storage` — and the UI is a single **Flutter** codebase that
+produces desktop, mobile, and web builds from one Dart tree. The FFI
+bridge between them is Protobuf-serialized, type-generated, and exposes
+the data layer as a typed API to the UI.
 
-## How it works
+This is the right architecture for a cross-platform productivity app with
+real-time collaboration. Rust gives you SQLite, CRDT, file I/O, and AI
+inference without paying JavaScript's memory tax; Flutter gives you a
+single UI codebase that produces a real native rendering, not a WebView.
+The editor is a first-party `appflowy_editor` Flutter package that
+replaced `flutter_quill` in 2022 — owning your editor is the right call
+when you need Notion-style block behavior with collaborative cursors,
+slash menus, and database views.
 
-AppFlowy's Rust core persists the workspace tree to disk using a
-custom CRDT-style format, then exposes operations through a gRPC API.
-The Flutter desktop and mobile clients render the tree as a
-Notion-style editor; the web client uses Yjs to share state with the
-same gRPC backend. AI features plug into the operation stream, so
-any block can be summarised, expanded, or transformed by the assistant.
+## Local-first, but with strings attached
 
-The project is organized into:
+The "local-first" claim is real. Writes go to local SQLite first, then
+sync to the server. The Yrs CRDT (the Rust port of Yjs) handles conflict
+resolution. But the open-source product is not the same product as the
+hosted one. The community-edition `AppFlowy-Cloud` is AGPL-3.0 and freely
+self-hostable, **but** the documented self-host tier is **one user seat
+plus three guest editors**. Larger seats require a per-server commercial
+license (`SELF_HOST_LICENSE_AGREEMENT.md`) at $11.88/month/server with
+annual renewal. The desktop and mobile clients remain AGPL-3.0.
 
-- `appflowy_flutter` — the mobile + desktop client.
-- `AppFlowy-Cloud` — the optional sync server.
-- `frontend/appflowy_flutter` package — the block / plugin SDK.
+This is a real open-core split. The framework maintainers are explicit
+about it: the AppFlowy-Cloud README states the project is "adopting an
+open-core model" while "AppFlowy Web and AppFlowy Flutter will remain open
+source." The self-host pricing page lists tiers per server, not per seat,
+which is itself a useful operational simplification if you want one
+internal-only deployment for a small team.
 
-## Caveats
+## The "end-to-end encryption" claim is marketing
 
-- **Younger than Notion.** Some advanced Notion features (database
-  relations, formulas) are partial or missing.
-- **Single binary model.** The desktop client is one executable; you
-  cannot embed AppFlowy into another app the way you can with
-  Notion's API.
-- **License is AGPL-3.0** for the server, with the client under a
-  more permissive license. Read the dual-license carefully if you
-  plan to fork.
+The marketing site says "end-to-end encryption." The self-hosting security
+documentation describes TLS in transit and server-side encryption
+(encrypted volumes for PostgreSQL, MinIO server-side encryption with KMS,
+optional S3 AES256). These are different claims. Server-side encryption
+means the cloud operator can read your data; E2EE means they cannot. The
+mismatch has been picked up by reviewers; a Reddit thread titled "Let's
+address the elephant in the room: end-to-end encryption" exists on
+r/AppFlowy. Treat the "E2EE" claim as marketing-grade until proven
+otherwise, and do not put regulated data on an AppFlowy Cloud deployment
+without confirming the actual encryption boundary.
+
+## The sync and import story is the weak link
+
+The two most damaging criticisms in the AppFlowy community are about sync
+reliability and Notion import. The OpenTechHub November 2025 review
+called sync "the true killer issue." An iOS App Store review from July
+2026 says: "I lost data multiple times both on mobile and desktop app." A
+closed issue from October 2025, **#8112** ("Full data loss in case of
+migration problems due to data storage in RocksDB"), was a real incident
+tied to the local store on a migration path before the project reverted
+to SQLite.
+
+The Notion import story is structurally lossy for a reason that is not
+AppFlowy's fault. Notion's official export is Markdown + CSV; **Notion
+does not export Notion databases through the export endpoint**. Whatever
+AppFlowy imports from a Notion export cannot include the database rows,
+properties, or relations that made the original workspace useful. Multiple
+open issues (#8937, #8862, #8789, #8744) complain about "Notion import is
+broken." The right mental model is "import pages, not workspaces."
+
+## Where AppFlowy is the best choice
+
+- A single user or small team that wants Notion-shaped features with
+  local-first writes, can stomach the AGPL-3.0 + commercial self-host
+  split, and is willing to back up the SQLite file.
+- A developer who wants to fork a Notion-shaped productivity app and is
+  willing to maintain a CRDT-based Rust core.
+
+## Where AppFlowy is not the right choice
+
+- A team of 20+ that wants free self-hosting. The commercial self-host
+  license is per-server and not cheap at $11.88/month.
+- A user with regulated data expecting E2EE. The marketing says yes; the
+  docs describe server-side encryption.
+- Anyone whose primary use case is "import my Notion workspace." The
+  import is lossy by design.
+- A mobile-first team. Mobile sync has the most data-loss complaints in
+  the community.
 
 ## Deployment notes
 
-```bash
-# Desktop app — download from GitHub releases
-# https://github.com/AppFlowy-IO/AppFlowy/releases
+The reference install is the `AppFlowy-Cloud` Docker Compose stack:
+`appflowy_cloud` (the Rust server), `gotrue` (auth), `postgres`, `minio`
+(or any S3), `redis`, and a reverse proxy. The maintainers publish a
+self-hosting security guide with an automated backup script that covers
+PostgreSQL dump, MinIO storage, and `.env` (daily cron @ 02:00, 30-day
+retention, optional off-site via AWS S3 sync, rsync, or Restic with 7
+daily / 4 weekly retention).
 
-# Self-hosted cloud (optional)
-docker compose -f AppFlowy-Cloud/docker-compose.yml up -d
-```
+## Developer lessons worth borrowing
 
-**Minimum:** 2 CPU, 4 GB RAM for the cloud container. Clients run on
-any laptop made in the last five years.
+- **Own your editor.** The `appflowy_editor` rewrite from `flutter_quill`
+  was the difference between "Markdown app" and "Notion competitor."
+  The editor is the product, not the chrome around it.
+- **Type your FFI boundary.** Protobuf codegen at the FFI seam (Dart and
+  Rust both consume the same types) is a friction-killer for
+  cross-language refactors. Many "Rust + Flutter" projects get this wrong;
+  AppFlowy gets it right.
+- **Local-first needs a real backup story.** The official self-host
+  backup script is the right answer (PostgreSQL dump + MinIO + `.env`).
+  If you self-host, wire that script to your off-site target on day one.
+- **Open-core is a deliberate trade.** A per-server commercial self-host
+  license at $11.88/month funds the Rust core development. The AGPL-3.0
+  client remains free.
 
-**Integration tip:** AppFlowy's block SDK is the cleanest example in
-this directory of a project that exposes its data model as a public
-API while keeping the renderer proprietary.
+## More from this profile
+
+The full editorial profile (research summary, comparison matrix with
+Notion / Obsidian / Anytype / Logseq / AFFiNE / Outline, content
+opportunities, verified sources) is available in the directory
+maintainer's dossier.
