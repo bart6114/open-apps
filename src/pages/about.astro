@@ -1,46 +1,14 @@
 ---
 import BaseLayout from "@grove-dev/astro/layouts/BaseLayout.astro";
 import Container from "@grove-dev/astro/layouts/Container.astro";
+import { getPageContentHtml } from "@grove-dev/astro/server";
 import siteConfig from "@grove/generated/site-config.json";
 
 const title = `About — ${siteConfig.name}`;
 const description =
   "Why Open Apps curates real open-source application codebases and how the directory is maintained.";
 const githubUrl = siteConfig.repoUrl;
-const cards = [
-  {
-    eyebrow: "Why",
-    title: "Why not just GitHub or an awesome list?",
-    paragraphs: [
-      "GitHub search and README lists optimize for repository names and short descriptions. They rarely tell you whether a project is a real app or a demo, what stack and platforms it uses, how active it is, or whether the license is clear.",
-      "Open Apps turns that flat list into a structured index. Every record carries the context a developer needs before opening the repository.",
-    ],
-  },
-  {
-    eyebrow: "Why real apps",
-    title: "Production history is a better teacher",
-    paragraphs: [
-      "Tutorials and generated prototypes can look complete at first glance. Real applications survive releases, contributors, edge cases, migrations, and years of product decisions.",
-      "That history makes a real codebase useful both to developers and to AI tools that need grounded implementation examples instead of another blank-slate prompt.",
-    ],
-  },
-  {
-    eyebrow: "Mobile first",
-    title: "A focused collection that can grow",
-    paragraphs: [
-      "The directory began with Flutter and now includes React Native, native iOS, and other mobile or cross-platform stacks. Category, primary stack, platform, and tags stay separate so that broader coverage does not make discovery vague.",
-      "The goal is not to index every repository. It is to keep a useful collection of applications worth running, studying, comparing, or contributing to.",
-    ],
-  },
-  {
-    eyebrow: "Open data",
-    title: "Pages, data, and decisions stay in the repository",
-    paragraphs: [
-      "Each app is plain YAML under data/records. Taxonomy, product pages, analytics, and deployment also live here. Grove supplies reusable contracts, UI, and maintenance commands without owning the Open Apps product.",
-      "Anyone can suggest an app, fix incorrect metadata, or improve curation through a pull request. There is no proprietary backend or opaque database.",
-    ],
-  },
-];
+const pageContentHtml = getPageContentHtml("about");
 ---
 
 <BaseLayout title={title} description={description} site={siteConfig}>
@@ -64,30 +32,11 @@ const cards = [
           study, and contribute to — with more context than a repository name
           and star count.
         </p>
-        <p class="m-0 mt-3 max-w-[62ch] text-[0.9375rem] leading-relaxed text-ink-500 dark:text-ink-400">
-          It started from the public-domain Open Source Flutter Apps collection
-          and has grown into 149 structured mobile and cross-platform records.
-        </p>
       </header>
 
-      {cards.map((card, index) => (
-        <section class:list={[
-          "rounded-[calc(var(--radius)+0.25rem)] border-0 bg-muted p-5 shadow-none transition-colors sm:p-6",
-          index === 0 ? "mt-8" : "mt-4",
-        ]}>
-          <span class="text-2xs font-medium uppercase tracking-wider text-ink-500 dark:text-ink-400">
-            {card.eyebrow}
-          </span>
-          <h2 class="m-0 mt-1 text-[1.125rem] font-semibold tracking-tight text-ink-900 sm:text-[1.25rem] dark:text-ink-100">
-            {card.title}
-          </h2>
-          {card.paragraphs.map((paragraph) => (
-            <p class="m-0 mt-3 text-[0.9375rem] leading-relaxed text-ink-700 dark:text-ink-200">
-              {paragraph}
-            </p>
-          ))}
-        </section>
-      ))}
+      {pageContentHtml && (
+        <section class="grove-prose mt-8" set:html={pageContentHtml} />
+      )}
 
       <section class="mt-8 flex flex-wrap items-center gap-3">
         <a href="/apps" class="inline-flex h-8 items-center justify-center rounded-[var(--radius)] bg-primary px-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:bg-primary/90">
