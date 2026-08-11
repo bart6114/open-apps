@@ -1,7 +1,9 @@
 kind: project
 name: IceCubesApp
 slug: icecubesapp
-description: A SwiftUI-native Mastodon client with a focus on performance and Material You theming.
+description: IceCubesApp is a SwiftUI-native, multi-platform Mastodon client for iOS, iPadOS, macOS, and visionOS, built and maintained primarily by a single developer (Dimillian).
+summary: A SwiftUI-native Mastodon client written almost entirely by one maintainer, shipping to iPhone, iPad, Mac, and Vision Pro from a single Swift-package workspace with a modern MVVM core.
+sourceDescription: A SwiftUI-native Mastodon client with a focus on performance and Material You theming.
 category: social-network
 tags:
   - swift
@@ -12,6 +14,7 @@ platforms:
   - ios
 projectType: real-app
 repoUrl: https://github.com/Dimillian/IceCubesApp
+content: ./content/records/icecubesapp.md
 links:
   github: https://github.com/Dimillian/IceCubesApp
 bestFor: []
