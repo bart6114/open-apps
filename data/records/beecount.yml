@@ -1,9 +1,17 @@
 kind: project
 name: BeeCount
 slug: BeeCount
-description: BeeCount is a Flutter-based local-first bookkeeping app for iOS, Android, and Web that offers five interchangeable sync backends (the self-hosted BeeCount Cloud, iCloud, Supabase, WebDAV, and any S3-compatible store), AI-assisted capture via a dual on-device/cloud OCR pipeline, multi-ledger accounting with per-ledger currencies, and offline-first storage on Drift over SQLite.
-summary: Flutter + Riverpod + Drift ledger app whose sync layer is a swappable plugin — the same binary can run against iCloud, Supabase, WebDAV, S3, or a self-hosted BeeCount Cloud without code changes. AI capture pairs an on-device TFLite OCR model with Zhipu GLM-4 in the cloud to read Alipay, WeChat, and UnionPay screenshots, voice notes, or free-form chat.
-sourceDescription: Privacy-first cross-platform expense tracker with self-hostable cloud sync (BeeCount Cloud, iCloud, Supabase, WebDAV, S3) and offline-first design
+description: BeeCount is a Flutter-based local-first bookkeeping app for iOS, Android, and Web that
+  offers five interchangeable sync backends (the self-hosted BeeCount Cloud, iCloud, Supabase,
+  WebDAV, and any S3-compatible store), AI-assisted capture via a dual on-device/cloud OCR pipeline,
+  multi-ledger accounting with per-ledger currencies, and offline-first storage on Drift over
+  SQLite.
+summary: Flutter + Riverpod + Drift ledger app whose sync layer is a swappable plugin — the same
+  binary can run against iCloud, Supabase, WebDAV, S3, or a self-hosted BeeCount Cloud without code
+  changes. AI capture pairs an on-device TFLite OCR model with Zhipu GLM-4 in the cloud to read
+  Alipay, WeChat, and UnionPay screenshots, voice notes, or free-form chat.
+sourceDescription: Privacy-first cross-platform expense tracker with self-hostable cloud sync
+  (BeeCount Cloud, iCloud, Supabase, WebDAV, S3) and offline-first design
 content: ./content/records/BeeCount.md
 category: finance
 tags:
@@ -63,7 +71,8 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/TNT-Likely/BeeCount
-    description: Local-first bookkeeping for iOS/Android/Web · Self-hosted cloud + iCloud/WebDAV/S3 sync · AI capture · MCP | 本地优先的跨端记账 · 自建云 + iCloud/WebDAV/S3 同步 · AI 记账 · MCP
+    description: Local-first bookkeeping for iOS/Android/Web · Self-hosted cloud + iCloud/WebDAV/S3 sync
+      · AI capture · MCP | 本地优先的跨端记账 · 自建云 + iCloud/WebDAV/S3 同步 · AI 记账 · MCP
     fork: false
     url: https://api.github.com/repos/TNT-Likely/BeeCount
     forks_url: https://api.github.com/repos/TNT-Likely/BeeCount/forks
@@ -103,7 +112,7 @@ github:
     releases_url: https://api.github.com/repos/TNT-Likely/BeeCount/releases{/id}
     deployments_url: https://api.github.com/repos/TNT-Likely/BeeCount/deployments
     created_at: 2025-09-06T02:15:06Z
-    updated_at: 2026-08-08T23:04:11Z
+    updated_at: 2026-08-11T09:00:11Z
     pushed_at: 2026-08-07T15:35:55Z
     git_url: git://github.com/TNT-Likely/BeeCount.git
     ssh_url: git@github.com:TNT-Likely/BeeCount.git
@@ -111,7 +120,7 @@ github:
     svn_url: https://github.com/TNT-Likely/BeeCount
     homepage: https://count.beejz.com
     size: 122691
-    stargazers_count: 2063
+    stargazers_count: 2089
     watchers_count: 1960
     language: Dart
     has_issues: true
@@ -120,11 +129,11 @@ github:
     has_wiki: true
     has_pages: false
     has_discussions: true
-    forks_count: 279
+    forks_count: 285
     mirror_url: null
     archived: false
     disabled: false
-    open_issues_count: 98
+    open_issues_count: 101
     license:
       spdx_id: NOASSERTION
       name: NOASSERTION
@@ -183,7 +192,7 @@ github:
     openPullRequests: 12
     contributorsKnown: 11
   sync:
-    syncedAt: 2026-08-09T04:18:25.544Z
+    syncedAt: 2026-08-11T09:33:53.439Z
     source: api
   languages:
     Dart: 6287299

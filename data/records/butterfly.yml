@@ -1,32 +1,36 @@
----
 kind: project
 name: Butterfly
 slug: butterfly
-description: Butterfly is a Flutter note-taking and drawing app whose central object is an infinite canvas — pages hold freehand ink, text, shapes, images, areas, and waypoints in a custom `.bfly` document model, with optional WebDAV sync, OneNote import, and PDF/SVG export.
-summary: A Linwood-maintained visual-notes app where a `butterfly_api` package owns the document format and protocol while the Flutter client layers a Bloc/Cubit state machine, perfect-freehand ink rendering, a WebDAV-backed file system, and an optional separately-licensed `api/` server for sync and collaboration.
+description: Butterfly is a Flutter note-taking and drawing app whose central object is an infinite
+  canvas — pages hold freehand ink, text, shapes, images, areas, and waypoints in a custom `.bfly`
+  document model, with optional WebDAV sync, OneNote import, and PDF/SVG export.
+summary: A Linwood-maintained visual-notes app where a `butterfly_api` package owns the document
+  format and protocol while the Flutter client layers a Bloc/Cubit state machine, perfect-freehand
+  ink rendering, a WebDAV-backed file system, and an optional separately-licensed `api/` server for
+  sync and collaboration.
 sourceDescription: 🎨 Powerful, minimalistic, cross-platform, opensource note-taking app
 content: ./content/records/butterfly.md
 category: productivity
 tags:
-- android
-- app
-- cross-platform
-- customizable
-- dart
-- dartlang
-- drawing
-- flutter
-- linux
-- note
-- note-taking
-- notes
-- notes-app
-- onenote
-- opensource
-- productivity
-- web
-- windows
-- writing
+  - android
+  - app
+  - cross-platform
+  - customizable
+  - dart
+  - dartlang
+  - drawing
+  - flutter
+  - linux
+  - note
+  - note-taking
+  - notes
+  - notes-app
+  - onenote
+  - opensource
+  - productivity
+  - web
+  - windows
+  - writing
 stack: flutter
 projectType: real-app
 repoUrl: https://github.com/LinwoodDev/Butterfly
@@ -43,7 +47,7 @@ curation:
   lenses: []
 visibility: keep
 licenses:
-- agpl-3.0
+  - agpl-3.0
 health:
   status: active
   tier: listed
@@ -51,5 +55,44 @@ health:
   cleanupCandidate: false
   confidence: medium
   reasons:
-  - active-development
-...
+    - active-development
+github:
+  repository:
+    full_name: LinwoodDev/Butterfly
+    stargazers_count: 1951
+    forks_count: 143
+    open_issues_count: 53
+    language: Dart
+    pushed_at: 2026-08-10T12:47:58Z
+    updated_at: 2026-08-11T09:32:37Z
+    archived: false
+    disabled: false
+    default_branch: develop
+    license:
+      spdx_id: AGPL-3.0
+      name: AGPL-3.0
+    topics:
+      - android
+      - app
+      - cross-platform
+      - customizable
+      - dart
+      - dartlang
+      - drawing
+      - flutter
+      - linux
+      - note
+      - note-taking
+      - notes
+      - notes-app
+      - onenote
+      - opensource
+      - productivity
+      - web
+      - windows
+      - writing
+  latestReleaseAt: 2026-08-10T12:27:46Z
+  homepage: https://butterfly.linwood.dev
+  sync:
+    syncedAt: 2026-08-11T09:33:58.875Z
+    source: api

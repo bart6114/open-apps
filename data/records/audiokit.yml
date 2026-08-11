@@ -1,8 +1,13 @@
 kind: project
 name: AudioKit
 slug: audiokit
-description: AudioKit is a Swift audio synthesis, processing, and analysis framework for iOS, macOS, tvOS, and visionOS that wraps AVFoundation and a C-backed DSP engine.
-summary: A Swift-first audio framework for Apple platforms that pairs an AVFoundation-backed node graph with a C++/Objective-C++ DSP engine (AudioKitEX/CAudioKitEX) and a constellation of extension packages — SoundpipeAudioKit for oscillators and filters, DunneAudioKit for samplers, STKAudioKit for physical models — so apps get a high-level Swift API without losing access to the real-time C layer.
+description: AudioKit is a Swift audio synthesis, processing, and analysis framework for iOS, macOS,
+  tvOS, and visionOS that wraps AVFoundation and a C-backed DSP engine.
+summary: A Swift-first audio framework for Apple platforms that pairs an AVFoundation-backed node
+  graph with a C++/Objective-C++ DSP engine (AudioKitEX/CAudioKitEX) and a constellation of
+  extension packages — SoundpipeAudioKit for oscillators and filters, DunneAudioKit for samplers,
+  STKAudioKit for physical models — so apps get a high-level Swift API without losing access to the
+  real-time C layer.
 sourceDescription: Audio synthesis, processing, & analysis platform for iOS, macOS and tvOS.
 content: ./content/records/audiokit.md
 category: media
@@ -104,7 +109,7 @@ github:
     releases_url: https://api.github.com/repos/AudioKit/AudioKit/releases{/id}
     deployments_url: https://api.github.com/repos/AudioKit/AudioKit/deployments
     created_at: 2014-01-21T08:16:07Z
-    updated_at: 2026-08-08T20:19:39Z
+    updated_at: 2026-08-10T18:34:05Z
     pushed_at: 2026-07-26T06:33:02Z
     git_url: git://github.com/AudioKit/AudioKit.git
     ssh_url: git@github.com:AudioKit/AudioKit.git
@@ -112,7 +117,7 @@ github:
     svn_url: https://github.com/AudioKit/AudioKit
     homepage: http://audiokit.io
     size: 119733
-    stargazers_count: 11427
+    stargazers_count: 11430
     watchers_count: 11413
     language: Swift
     has_issues: true
@@ -198,7 +203,7 @@ github:
     openPullRequests: 3
     contributorsKnown: 225
   sync:
-    syncedAt: 2026-08-09T04:18:24.916Z
+    syncedAt: 2026-08-11T09:33:52.620Z
     source: api
   languages:
     Swift: 1093483

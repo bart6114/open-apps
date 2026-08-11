@@ -1,8 +1,13 @@
 kind: project
 name: Swift-Radio-Pro
 slug: swift-radio-pro
-description: Swift-Radio-Pro is a Swift iOS streaming-audio reference app that plays live radio from a list of stations, surfaces now-playing metadata and album art, and integrates with the lock screen and Control Center.
-summary: A long-standing open-source iOS radio app template that demonstrates the end-to-end streaming-radio pattern (live stream playback, ICY metadata, iTunes album art, lock-screen and CarPlay controls), and is now best treated as a reference / starting point rather than an actively shipped product.
+description: Swift-Radio-Pro is a Swift iOS streaming-audio reference app that plays live radio from
+  a list of stations, surfaces now-playing metadata and album art, and integrates with the lock
+  screen and Control Center.
+summary: A long-standing open-source iOS radio app template that demonstrates the end-to-end
+  streaming-radio pattern (live stream playback, ICY metadata, iTunes album art, lock-screen and
+  CarPlay controls), and is now best treated as a reference / starting point rather than an actively
+  shipped product.
 sourceDescription: A professional radio station app for iOS with streaming, favorites, and live metadata.
 content: ./content/records/swift-radio-pro.md
 category: media
@@ -186,7 +191,7 @@ github:
     openPullRequests: 0
     contributorsKnown: 25
   sync:
-    syncedAt: 2026-08-09T04:19:44.067Z
+    syncedAt: 2026-08-11T09:35:14.706Z
     source: html
   languages:
     Swift: 161994
@@ -262,16 +267,31 @@ github:
         browser_download_url: https://github.com/analogcode/Swift-Radio-Pro/releases/download/v3.1.0/swift-radio-v3.1.0-unsigned.ipa
     tarball_url: https://api.github.com/repos/analogcode/Swift-Radio-Pro/tarball/v3.1.0
     zipball_url: https://api.github.com/repos/analogcode/Swift-Radio-Pro/zipball/v3.1.0
-    body: |-
-      The attached `.ipa` is unsigned. Install it by sideloading with [AltStore](https://altstore.io) or [Sideloadly](https://sideloadly.io), which re-sign it with your own Apple ID. Or clone the repo and run it from Xcode with your personal team.
+    body: >-
+      The attached `.ipa` is unsigned. Install it by sideloading with
+      [AltStore](https://altstore.io) or [Sideloadly](https://sideloadly.io), which re-sign it with
+      your own Apple ID. Or clone the repo and run it from Xcode with your personal team.
+
 
       ## What's Changed
+
       * Localize About screen by @fethica in https://github.com/analogcode/Swift-Radio-Pro/pull/206
-      * Add link to Swift Radio Android in README by @fethica in https://github.com/analogcode/Swift-Radio-Pro/pull/209
-      * Move Android link below screenshots by @fethica in https://github.com/analogcode/Swift-Radio-Pro/pull/210
-      * Fix CI builds by using iPhone 17 Pro simulator by @fethica in https://github.com/analogcode/Swift-Radio-Pro/pull/211
-      * CarPlay indicator sync, lock screen fix, new app icon, release automation by @fethica in https://github.com/analogcode/Swift-Radio-Pro/pull/212
-      * Fix iOS app icon: use square full-bleed artwork by @fethica in https://github.com/analogcode/Swift-Radio-Pro/pull/213
+
+      * Add link to Swift Radio Android in README by @fethica in
+      https://github.com/analogcode/Swift-Radio-Pro/pull/209
+
+      * Move Android link below screenshots by @fethica in
+      https://github.com/analogcode/Swift-Radio-Pro/pull/210
+
+      * Fix CI builds by using iPhone 17 Pro simulator by @fethica in
+      https://github.com/analogcode/Swift-Radio-Pro/pull/211
+
+      * CarPlay indicator sync, lock screen fix, new app icon, release automation by @fethica in
+      https://github.com/analogcode/Swift-Radio-Pro/pull/212
+
+      * Fix iOS app icon: use square full-bleed artwork by @fethica in
+      https://github.com/analogcode/Swift-Radio-Pro/pull/213
+
 
 
       **Full Changelog**: https://github.com/analogcode/Swift-Radio-Pro/compare/v3.0.0...v3.1.0

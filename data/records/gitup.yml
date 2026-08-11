@@ -1,8 +1,13 @@
 kind: project
 name: GitUp
 slug: gitup
-description: GitUp is a native macOS Git GUI built on a bespoke in-process Git toolkit (GitUpKit) that wraps a customized libgit2 fork and re-implements everything else — including its own rebase engine — to keep operations and the live commit graph fast on large repositories.
-summary: "A native macOS Git GUI whose edge is the underlying GitUpKit framework: a tight Objective-C wrapper over a customized libgit2 fork, with a custom rebase engine and an in-process observer that streams state, history, status, stashes, and search updates to the UI as the on-disk repo changes."
+description: GitUp is a native macOS Git GUI built on a bespoke in-process Git toolkit (GitUpKit)
+  that wraps a customized libgit2 fork and re-implements everything else — including its own rebase
+  engine — to keep operations and the live commit graph fast on large repositories.
+summary: "A native macOS Git GUI whose edge is the underlying GitUpKit framework: a tight
+  Objective-C wrapper over a customized libgit2 fork, with a custom rebase engine and an in-process
+  observer that streams state, history, status, stashes, and search updates to the UI as the on-disk
+  repo changes."
 sourceDescription: The Git interface you've been missing all your life has finally arrived.
 content: ./content/records/gitup.md
 category: tools
@@ -192,7 +197,7 @@ github:
     openPullRequests: 2
     contributorsKnown: 62
   sync:
-    syncedAt: 2026-08-09T04:18:51.273Z
+    syncedAt: 2026-08-11T09:34:14.332Z
     source: html
   languages:
     Objective-C: 1791093
@@ -286,29 +291,39 @@ github:
 
       ### A whole bunch of updates from GitHub PRs:\r
 
-      * Fix some “Stage All” special cases by @Cykelero in https://github.com/git-up/GitUp/pull/1037\r
+      * Fix some “Stage All” special cases by @Cykelero in
+      https://github.com/git-up/GitUp/pull/1037\r
 
       * Update libgit2 fork to v1.9.0 by @Cykelero in https://github.com/git-up/GitUp/pull/2683\r
 
-      * Update Homebrew cask name in README by @Quintisimo in https://github.com/git-up/GitUp/pull/2726\r
+      * Update Homebrew cask name in README by @Quintisimo in
+      https://github.com/git-up/GitUp/pull/2726\r
 
-      * Make reloadHistory tip hiding much faster by @Cykelero in https://github.com/git-up/GitUp/pull/2707\r
+      * Make reloadHistory tip hiding much faster by @Cykelero in
+      https://github.com/git-up/GitUp/pull/2707\r
 
-      * Make the Text Size preference apply to the text in the diff view, not just the line numbers by @mluisbrown in https://github.com/git-up/GitUp/pull/2727\r
+      * Make the Text Size preference apply to the text in the diff view, not just the line numbers
+      by @mluisbrown in https://github.com/git-up/GitUp/pull/2727\r
 
-      * Fix highlight range computation for non-ascii characters by @lucasderraugh in https://github.com/git-up/GitUp/pull/2742\r
+      * Fix highlight range computation for non-ascii characters by @lucasderraugh in
+      https://github.com/git-up/GitUp/pull/2742\r
 
-      * Fix crash when staging lines with the index locked by @Cykelero in https://github.com/git-up/GitUp/pull/2771\r
+      * Fix crash when staging lines with the index locked by @Cykelero in
+      https://github.com/git-up/GitUp/pull/2771\r
 
       * Add GitUpKit to readme intro by @Cykelero in https://github.com/git-up/GitUp/pull/2776\r
 
-      * Allow opening containing repo from subdirectory by @lucasderraugh in https://github.com/git-up/GitUp/pull/2777\r
+      * Allow opening containing repo from subdirectory by @lucasderraugh in
+      https://github.com/git-up/GitUp/pull/2777\r
 
-      * Improve selected files performance lag in Commit View by @delacrixmorgan in https://github.com/git-up/GitUp/pull/2780\r
+      * Improve selected files performance lag in Commit View by @delacrixmorgan in
+      https://github.com/git-up/GitUp/pull/2780\r
 
-      * Bump to macOS 12.4 min target by @lucasderraugh in https://github.com/git-up/GitUp/pull/2785\r
+      * Bump to macOS 12.4 min target by @lucasderraugh in
+      https://github.com/git-up/GitUp/pull/2785\r
 
-      * Move back to CMake for libgit2 compilation by @lucasderraugh in https://github.com/git-up/GitUp/pull/2786\r
+      * Move back to CMake for libgit2 compilation by @lucasderraugh in
+      https://github.com/git-up/GitUp/pull/2786\r
 
       * Use ssh_exec from libgit2 by @lucasderraugh in https://github.com/git-up/GitUp/pull/2787\r
 

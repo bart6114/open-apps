@@ -1,9 +1,14 @@
 kind: project
 name: Berty
 slug: berty
-description: Berty is a peer-to-peer messenger that runs entirely over the Wesh protocol on top of libp2p, so peers connect directly via mDNS, Bluetooth Low Energy, or Tor with no central server in the loop.
-summary: An open-source messenger built on the Wesh protocol that runs over libp2p with mDNS, BLE, and Tor transports, letting peers exchange messages directly without any central server or trusted infrastructure.
-sourceDescription: Berty is a secure peer-to-peer messaging app that works with or without internet access, cellular data or trust in the network.
+description: Berty is a peer-to-peer messenger that runs entirely over the Wesh protocol on top of
+  libp2p, so peers connect directly via mDNS, Bluetooth Low Energy, or Tor with no central server in
+  the loop.
+summary: An open-source messenger built on the Wesh protocol that runs over libp2p with mDNS, BLE,
+  and Tor transports, letting peers exchange messages directly without any central server or trusted
+  infrastructure.
+sourceDescription: Berty is a secure peer-to-peer messaging app that works with or without internet
+  access, cellular data or trust in the network.
 content: ./content/records/berty.md
 category: communication
 tags:
@@ -74,7 +79,8 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/berty/berty
-    description: Berty is a secure peer-to-peer messaging app that works with or without internet access, cellular data or trust in the network
+    description: Berty is a secure peer-to-peer messaging app that works with or without internet
+      access, cellular data or trust in the network
     fork: false
     url: https://api.github.com/repos/berty/berty
     forks_url: https://api.github.com/repos/berty/berty/forks
@@ -114,7 +120,7 @@ github:
     releases_url: https://api.github.com/repos/berty/berty/releases{/id}
     deployments_url: https://api.github.com/repos/berty/berty/deployments
     created_at: 2018-07-16T05:21:19Z
-    updated_at: 2026-08-08T23:33:46Z
+    updated_at: 2026-08-11T07:36:30Z
     pushed_at: 2026-08-07T06:28:17Z
     git_url: git://github.com/berty/berty.git
     ssh_url: git@github.com:berty/berty.git
@@ -257,13 +263,19 @@ github:
     assets: []
     tarball_url: https://api.github.com/repos/berty/berty/tarball/v2.471.14
     zipball_url: https://api.github.com/repos/berty/berty/zipball/v2.471.14
-    body: |+
+    body: >+
       ## [2.471.14](https://github.com/berty/berty/compare/v2.471.13...v2.471.14) (2026-07-03)
+
 
 
       ### Bug Fixes
 
-      * **bridge-expo:** derive iOS App Group per build variant ([#5151](https://github.com/berty/berty/issues/5151)) ([4623845](https://github.com/berty/berty/commit/46238452c7feef79415b57acc18bbf73b0dd0cdc)), closes [#5006](https://github.com/berty/berty/issues/5006) [#5007](https://github.com/berty/berty/issues/5007)
+
+      * **bridge-expo:** derive iOS App Group per build variant
+      ([#5151](https://github.com/berty/berty/issues/5151))
+      ([4623845](https://github.com/berty/berty/commit/46238452c7feef79415b57acc18bbf73b0dd0cdc)),
+      closes [#5006](https://github.com/berty/berty/issues/5006)
+      [#5007](https://github.com/berty/berty/issues/5007)
 
 
 
@@ -299,7 +311,7 @@ github:
       color: 66f48c
       description: ""
   sync:
-    syncedAt: 2026-08-09T04:18:26.205Z
+    syncedAt: 2026-08-11T09:33:54.263Z
     source: api
   html:
     license: Apache-2.0

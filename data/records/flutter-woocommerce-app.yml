@@ -61,7 +61,8 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/woosignal/flutter-woocommerce-app
-    description: WooCommerce App template that uses Flutter. Integrated to work with WooCommerce stores, connect and create an IOS and Android app from Flutter for IOS and Android
+    description: WooCommerce App template that uses Flutter. Integrated to work with WooCommerce stores,
+      connect and create an IOS and Android app from Flutter for IOS and Android
     fork: false
     url: https://api.github.com/repos/woosignal/flutter-woocommerce-app
     forks_url: https://api.github.com/repos/woosignal/flutter-woocommerce-app/forks
@@ -101,7 +102,7 @@ github:
     releases_url: https://api.github.com/repos/woosignal/flutter-woocommerce-app/releases{/id}
     deployments_url: https://api.github.com/repos/woosignal/flutter-woocommerce-app/deployments
     created_at: 2019-11-01T20:16:52Z
-    updated_at: 2026-07-14T20:10:25Z
+    updated_at: 2026-08-10T16:04:50Z
     pushed_at: 2026-05-23T13:32:20Z
     git_url: git://github.com/woosignal/flutter-woocommerce-app.git
     ssh_url: git@github.com:woosignal/flutter-woocommerce-app.git
@@ -109,7 +110,7 @@ github:
     svn_url: https://github.com/woosignal/flutter-woocommerce-app
     homepage: https://woosignal.com
     size: 4406
-    stargazers_count: 711
+    stargazers_count: 715
     watchers_count: 711
     language: Dart
     has_issues: true
@@ -118,17 +119,14 @@ github:
     has_wiki: true
     has_pages: false
     has_discussions: true
-    forks_count: 243
+    forks_count: 242
     mirror_url: null
     archived: false
     disabled: false
     open_issues_count: 0
     license:
-      key: bsd-2-clause
-      name: BSD 2-Clause "Simplified" License
       spdx_id: BSD-2-Clause
-      url: https://api.github.com/licenses/bsd-2-clause
-      node_id: MDc6TGljZW5zZTQ=
+      name: BSD-2-Clause
     allow_forking: true
     is_template: false
     web_commit_signoff_required: false
@@ -202,8 +200,8 @@ github:
     openPullRequests: 0
     contributorsKnown: 7
   sync:
-    syncedAt: 2026-08-09T04:18:45.719Z
-    source: html
+    syncedAt: 2026-08-11T09:34:10.482Z
+    source: api
   languages:
     Dart: 540390
     Swift: 676
@@ -271,6 +269,8 @@ github:
     license: BSD-2-Clause
     language: null
     topics: []
+  latestReleaseAt: 2026-05-23T13:32:25Z
+  homepage: https://woosignal.com
 health:
   status: active
   tier: curated

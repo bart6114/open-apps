@@ -1,8 +1,12 @@
 kind: project
 name: Notesnook
 slug: notesnook
-description: Notesnook is a cross-platform, end-to-end encrypted note-taking app with web, desktop, and mobile clients that sync through a zero-knowledge server.
-summary: Notesnook encrypts every note on the device with XChaCha20-Poly1305 (via libsodium), derives the master key from the user's password with Argon2id, and pairs a Vite web client, an Electron desktop client, and a React Native mobile client that all sync ciphertext-only to a remote server.
+description: Notesnook is a cross-platform, end-to-end encrypted note-taking app with web, desktop,
+  and mobile clients that sync through a zero-knowledge server.
+summary: Notesnook encrypts every note on the device with XChaCha20-Poly1305 (via libsodium),
+  derives the master key from the user's password with Argon2id, and pairs a Vite web client, an
+  Electron desktop client, and a React Native mobile client that all sync ciphertext-only to a
+  remote server.
 sourceDescription: A fully open source & end-to-end encrypted note taking alternative to Evernote.
 category: productivity
 tags:
@@ -1080,13 +1084,15 @@ github:
         browser_download_url: https://github.com/streetwriters/notesnook/releases/download/v3.4.4/notesnook_win_x64_portable.exe
     tarball_url: https://api.github.com/repos/streetwriters/notesnook/tarball/v3.4.4
     zipball_url: https://api.github.com/repos/streetwriters/notesnook/zipball/v3.4.4
-    body: "[Read about what's new in Notesnook Desktop v3.4.4 on Notesnook's blog](https://blog.notesnook.com/notesnook-desktop-v3.4.4)\r
+    body: "[Read about what's new in Notesnook Desktop v3.4.4 on Notesnook's
+      blog](https://blog.notesnook.com/notesnook-desktop-v3.4.4)\r
 
       \r
 
       ## New Contributors\r
 
-      * @zigzagdev made their first contribution in https://github.com/streetwriters/notesnook/pull/10064\r
+      * @zigzagdev made their first contribution in
+      https://github.com/streetwriters/notesnook/pull/10064\r
 
       \r
 
@@ -1132,7 +1138,7 @@ github:
       color: 062DAB
       description: ""
   sync:
-    syncedAt: 2026-08-09T04:19:24.327Z
+    syncedAt: 2026-08-11T09:34:47.598Z
     source: html
   html:
     license: GPL-3.0

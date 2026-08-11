@@ -1,30 +1,37 @@
----
 kind: project
 name: cake_wallet
 slug: cake_wallet
-description: Cake Wallet is an open-source, non-custodial, multi-currency crypto wallet for iOS, Android, macOS, Linux, and Windows, built with a Flutter UI over per-chain Dart plugin packages that bridge to native C/C++ wallet code (notably the monero_c wrapper around wallet2 for Monero).
-summary: Open-source non-custodial wallet supporting Monero, Bitcoin, Ethereum, Litecoin, Solana, Polygon, Nano, Zano, Decred, and many more chains from a single Flutter app. The architecture splits a Dart UI layer over per-chain `cw_*` plugin packages, with the heavy crypto lifting done in native C/C++ — the monero_c wrapper around monero-project's wallet2, and libsecp256k1/zcash/librustzcash-family libraries for the UTXO and EVM chains.
-sourceDescription: The open source repository for Cake Wallet, a noncustodial multi-currency wallet, and Monero.com, a noncustodial Monero-only wallet. Need help? Check out https://docs.cakewallet.com
+description: Cake Wallet is an open-source, non-custodial, multi-currency crypto wallet for iOS,
+  Android, macOS, Linux, and Windows, built with a Flutter UI over per-chain Dart plugin packages
+  that bridge to native C/C++ wallet code (notably the monero_c wrapper around wallet2 for Monero).
+summary: Open-source non-custodial wallet supporting Monero, Bitcoin, Ethereum, Litecoin, Solana,
+  Polygon, Nano, Zano, Decred, and many more chains from a single Flutter app. The architecture
+  splits a Dart UI layer over per-chain `cw_*` plugin packages, with the heavy crypto lifting done
+  in native C/C++ — the monero_c wrapper around monero-project's wallet2, and
+  libsecp256k1/zcash/librustzcash-family libraries for the UTXO and EVM chains.
+sourceDescription: The open source repository for Cake Wallet, a noncustodial multi-currency wallet,
+  and Monero.com, a noncustodial Monero-only wallet. Need help? Check out
+  https://docs.cakewallet.com
 category: finance
 tags:
-- android
-- bitcoin
-- bitcoin-cash
-- btc
-- cryptocurrency
-- ethereum
-- haven
-- ios
-- linux
-- litecoin
-- ltc
-- macos
-- monero
-- nano
-- polygon
-- solana
-- wallet
-- xmr
+  - android
+  - bitcoin
+  - bitcoin-cash
+  - btc
+  - cryptocurrency
+  - ethereum
+  - haven
+  - ios
+  - linux
+  - litecoin
+  - ltc
+  - macos
+  - monero
+  - nano
+  - polygon
+  - solana
+  - wallet
+  - xmr
 stack: flutter
 projectType: real-app
 repoUrl: https://github.com/cake-tech/cake_wallet
@@ -41,7 +48,7 @@ curation:
   lenses: []
 visibility: keep
 licenses:
-- mit
+  - mit
 health:
   status: active
   tier: listed
@@ -49,6 +56,44 @@ health:
   cleanupCandidate: false
   confidence: medium
   reasons:
-  - active-development
+    - active-development
 content: ./content/records/cake_wallet.md
-...
+github:
+  repository:
+    full_name: cake-tech/cake_wallet
+    stargazers_count: 1837
+    forks_count: 389
+    open_issues_count: 308
+    language: Dart
+    pushed_at: 2026-08-11T09:03:18Z
+    updated_at: 2026-08-11T01:18:11Z
+    archived: false
+    disabled: false
+    default_branch: dev
+    license:
+      spdx_id: MIT
+      name: MIT
+    topics:
+      - android
+      - bitcoin
+      - bitcoin-cash
+      - btc
+      - cryptocurrency
+      - ethereum
+      - haven
+      - ios
+      - linux
+      - litecoin
+      - ltc
+      - macos
+      - monero
+      - nano
+      - polygon
+      - solana
+      - wallet
+      - xmr
+  latestReleaseAt: 2026-07-27T11:21:30Z
+  homepage: https://cakewallet.com
+  sync:
+    syncedAt: 2026-08-11T09:33:59.801Z
+    source: api

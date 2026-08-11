@@ -1,9 +1,16 @@
 kind: project
 name: HorizonCalendar
 slug: horizoncalendar
-description: HorizonCalendar is Airbnb's declarative, performant iOS calendar UI framework that renders month and week views from a single content value type, scaling from simple date pickers up to fully featured calendar apps on virtually infinite date ranges.
-summary: Airbnb's declarative iOS calendar UI library — a data-driven rendering model where a single `CalendarViewContent` value type drives month and week views through provider closures, with a custom (non-`UICollectionView`) layout that keeps memory flat at ~100k years of dates — beautiful and architecturally influential, but now in maintenance mode after Airbnb scaled back its open-source iOS work.
-sourceDescription: A declarative, performant, iOS calendar UI component that supports use cases ranging from simple date pickers all the way up to fully-featured calendar apps.
+description: HorizonCalendar is Airbnb's declarative, performant iOS calendar UI framework that
+  renders month and week views from a single content value type, scaling from simple date pickers up
+  to fully featured calendar apps on virtually infinite date ranges.
+summary: Airbnb's declarative iOS calendar UI library — a data-driven rendering model where a single
+  `CalendarViewContent` value type drives month and week views through provider closures, with a
+  custom (non-`UICollectionView`) layout that keeps memory flat at ~100k years of dates — beautiful
+  and architecturally influential, but now in maintenance mode after Airbnb scaled back its
+  open-source iOS work.
+sourceDescription: A declarative, performant, iOS calendar UI component that supports use cases
+  ranging from simple date pickers all the way up to fully-featured calendar apps.
 content: ./content/records/horizoncalendar.md
 category: productivity
 tags:
@@ -65,7 +72,8 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/airbnb/HorizonCalendar
-    description: A declarative, performant, iOS calendar UI component that supports use cases ranging from simple date pickers all the way up to fully-featured calendar apps.
+    description: A declarative, performant, iOS calendar UI component that supports use cases ranging
+      from simple date pickers all the way up to fully-featured calendar apps.
     fork: false
     url: https://api.github.com/repos/airbnb/HorizonCalendar
     forks_url: https://api.github.com/repos/airbnb/HorizonCalendar/forks
@@ -192,7 +200,7 @@ github:
     openPullRequests: 8
     contributorsKnown: 14
   sync:
-    syncedAt: 2026-08-09T04:18:56.733Z
+    syncedAt: 2026-08-11T09:34:19.458Z
     source: html
   languages:
     Swift: 615725

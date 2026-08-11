@@ -1,7 +1,8 @@
 kind: project
 name: Feather
 slug: feather
-description: Free on-device iOS/iPadOS application manager/installer, using certificates part of the Apple Developer Program.
+description: Free on-device iOS/iPadOS application manager/installer, using certificates part of the
+  Apple Developer Program.
 category: productivity
 tags:
   - esign
@@ -66,7 +67,8 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/claration/Feather
-    description: Free on-device iOS/iPadOS application manager/installer, using certificates part of the Apple Developer Program.
+    description: Free on-device iOS/iPadOS application manager/installer, using certificates part of the
+      Apple Developer Program.
     fork: false
     url: https://api.github.com/repos/claration/Feather
     forks_url: https://api.github.com/repos/claration/Feather/forks
@@ -106,15 +108,15 @@ github:
     releases_url: https://api.github.com/repos/claration/Feather/releases{/id}
     deployments_url: https://api.github.com/repos/claration/Feather/deployments
     created_at: 2024-05-19T17:44:22Z
-    updated_at: 2026-07-22T04:29:42Z
-    pushed_at: 2026-07-19T04:14:13Z
+    updated_at: 2026-08-11T09:20:28Z
+    pushed_at: 2026-07-24T11:13:03Z
     git_url: git://github.com/claration/Feather.git
     ssh_url: git@github.com:claration/Feather.git
     clone_url: https://github.com/claration/Feather.git
     svn_url: https://github.com/claration/Feather
     homepage: https://feather.claration.dev
     size: 49966
-    stargazers_count: 4400
+    stargazers_count: 4501
     watchers_count: 4400
     language: Swift
     has_issues: true
@@ -123,17 +125,14 @@ github:
     has_wiki: true
     has_pages: false
     has_discussions: false
-    forks_count: 393
+    forks_count: 396
     mirror_url: null
     archived: false
     disabled: false
     open_issues_count: 30
     license:
-      key: gpl-3.0
-      name: GNU General Public License v3.0
       spdx_id: GPL-3.0
-      url: https://api.github.com/licenses/gpl-3.0
-      node_id: MDc6TGljZW5zZTk=
+      name: GPL-3.0
     allow_forking: true
     is_template: false
     web_commit_signoff_required: false
@@ -167,8 +166,8 @@ github:
     network_count: 393
     subscribers_count: 41
   sync:
-    syncedAt: 2026-08-09T04:18:35.546Z
-    source: html
+    syncedAt: 2026-08-11T09:34:05.339Z
+    source: api
   languages:
     Swift: 403610
     Objective-C: 13399
@@ -285,7 +284,9 @@ github:
 
       > [!TIP]\r
 
-      > For `idevice` configuration, you can use [Impactor](https://github.com/claration/Impactor?tab=readme-ov-file#pairing-file) for easily retrieving a pairing file for installing!\r
+      > For `idevice` configuration, you can use
+      [Impactor](https://github.com/claration/Impactor?tab=readme-ov-file#pairing-file) for easily
+      retrieving a pairing file for installing!\r
 
       \r
 
@@ -293,7 +294,8 @@ github:
 
       * Added tweak options in default signing options.\r
 
-      * Added ability to search for identifier's in Library @ismailcarlik in https://github.com/claration/Feather/pull/652\r
+      * Added ability to search for identifier's in Library @ismailcarlik in
+      https://github.com/claration/Feather/pull/652\r
 
       * Fixed issue in the file enumeration logic, by using the path property instead of method.\r
 
@@ -305,7 +307,8 @@ github:
 
       ## New Contributors\r
 
-      * @xiangfeidexiaohuo made their first contribution in https://github.com/claration/Feather/pull/634\r
+      * @xiangfeidexiaohuo made their first contribution in
+      https://github.com/claration/Feather/pull/634\r
 
       * @osageling made their first contribution in https://github.com/claration/Feather/pull/642\r
 
@@ -359,6 +362,8 @@ github:
     license: GPL-3.0
     language: null
     topics: []
+  latestReleaseAt: 2026-07-05T02:11:53Z
+  homepage: https://feather.claration.dev
 health:
   status: unknown
   tier: listed

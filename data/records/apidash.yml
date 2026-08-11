@@ -1,32 +1,40 @@
----
 kind: project
 name: apidash
 slug: apidash
-description: API Dash is a Flutter-based cross-platform API client for building, sending, and inspecting HTTP, GraphQL, and SSE requests, with code generation for 20+ languages and an optional LLM assistant called DashBot that runs locally or against a cloud model.
-summary: Open-source API client written in Flutter so one Dart codebase ships to iOS, macOS, Windows, and Linux. Its codegen layer is a thin dispatcher over per-language templates (curl, HAR, Python/requests, Rust/reqwest, JS fetch/axios, Go net/http, etc.) and its import layer covers Postman, cURL, Insomnia, OpenAPI, and HAR — a breadth most paid clients gate behind collaboration tiers.
-sourceDescription: API Dash is a beautiful AI-powered open-source cross-platform (Desktop & Mobile) API Client built using Flutter which can help you easily create & customize your HTTP & GraphQL API requests, visually inspect responses and generate API integration code. A lightweight alternative to postman/insomnia.
+description: API Dash is a Flutter-based cross-platform API client for building, sending, and
+  inspecting HTTP, GraphQL, and SSE requests, with code generation for 20+ languages and an optional
+  LLM assistant called DashBot that runs locally or against a cloud model.
+summary: Open-source API client written in Flutter so one Dart codebase ships to iOS, macOS,
+  Windows, and Linux. Its codegen layer is a thin dispatcher over per-language templates (curl, HAR,
+  Python/requests, Rust/reqwest, JS fetch/axios, Go net/http, etc.) and its import layer covers
+  Postman, cURL, Insomnia, OpenAPI, and HAR — a breadth most paid clients gate behind collaboration
+  tiers.
+sourceDescription: API Dash is a beautiful AI-powered open-source cross-platform (Desktop & Mobile)
+  API Client built using Flutter which can help you easily create & customize your HTTP & GraphQL
+  API requests, visually inspect responses and generate API integration code. A lightweight
+  alternative to postman/insomnia.
 content: ./content/records/apidash.md
 category: tools
 tags:
-- api
-- api-client
-- api-testing
-- dart
-- developer-tools
-- flutter
-- flutter-apps
-- flutter-desktop
-- graphql
-- graphql-api
-- graphql-client
-- gssoc
-- hacktoberfest
-- http-client
-- http-requests
-- postman
-- rest-api
-- server-sent-events
-- websocket
+  - api
+  - api-client
+  - api-testing
+  - dart
+  - developer-tools
+  - flutter
+  - flutter-apps
+  - flutter-desktop
+  - graphql
+  - graphql-api
+  - graphql-client
+  - gssoc
+  - hacktoberfest
+  - http-client
+  - http-requests
+  - postman
+  - rest-api
+  - server-sent-events
+  - websocket
 stack: flutter
 projectType: real-app
 repoUrl: https://github.com/foss42/apidash
@@ -43,7 +51,7 @@ curation:
   lenses: []
 visibility: keep
 licenses:
-- apache-2.0
+  - apache-2.0
 health:
   status: active
   tier: listed
@@ -51,5 +59,44 @@ health:
   cleanupCandidate: false
   confidence: medium
   reasons:
-  - active-development
-...
+    - active-development
+github:
+  repository:
+    full_name: foss42/apidash
+    stargazers_count: 2875
+    forks_count: 978
+    open_issues_count: 239
+    language: Dart
+    pushed_at: 2026-08-08T14:39:53Z
+    updated_at: 2026-08-10T12:14:28Z
+    archived: false
+    disabled: false
+    default_branch: main
+    license:
+      spdx_id: Apache-2.0
+      name: Apache-2.0
+    topics:
+      - api
+      - api-client
+      - api-testing
+      - dart
+      - developer-tools
+      - flutter
+      - flutter-apps
+      - flutter-desktop
+      - graphql
+      - graphql-api
+      - graphql-client
+      - gssoc
+      - hacktoberfest
+      - http-client
+      - http-requests
+      - postman
+      - rest-api
+      - server-sent-events
+      - websocket
+  latestReleaseAt: 2023-11-29T12:07:18Z
+  homepage: https://apidash.dev
+  sync:
+    syncedAt: 2026-08-11T09:33:49.343Z
+    source: api

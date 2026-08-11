@@ -2,7 +2,11 @@ kind: project
 name: Keybase
 slug: keybase
 description: Keybase Go Library, Client, Service, OS X, iOS, Android, Electron..
-summary: Keybase ties cryptographic identities to public social-media proofs (Twitter, GitHub, Reddit, personal sites) and then layers an end-to-end-encrypted chat protocol and the KBFS encrypted filesystem on top of that verified identity — a model no mainstream messenger replicates. The consumer product was wound down in 2024 after Zoom's 2020 acquisition, but the Go client, chat1 protocol, and KBFS / Stellar libraries remain useful as reference implementations.
+summary: Keybase ties cryptographic identities to public social-media proofs (Twitter, GitHub,
+  Reddit, personal sites) and then layers an end-to-end-encrypted chat protocol and the KBFS
+  encrypted filesystem on top of that verified identity — a model no mainstream messenger
+  replicates. The consumer product was wound down in 2024 after Zoom's 2020 acquisition, but the Go
+  client, chat1 protocol, and KBFS / Stellar libraries remain useful as reference implementations.
 sourceDescription: Keybase Go Library, Client, Service, OS X, iOS, Android, Electron..
 content: ./content/records/keybase.md
 category: communication
@@ -365,7 +369,7 @@ github:
       color: "159818"
       description: null
   sync:
-    syncedAt: 2026-08-09T04:19:04.065Z
+    syncedAt: 2026-08-11T09:34:30.696Z
     source: html
   html:
     license: BSD-3-Clause

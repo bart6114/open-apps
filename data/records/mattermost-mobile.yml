@@ -1,8 +1,12 @@
 kind: project
 name: Mattermost Mobile
 slug: mattermost-mobile
-description: Mattermost Mobile is the official React Native iOS and Android client for the self-hostable Mattermost messaging platform, giving enterprise and dev teams on-device access to channels, threads, calls, and push notifications backed by the same REST and WebSocket API as the web and desktop clients.
-summary: The production-grade React Native client for Mattermost, the open-source, self-hostable Slack alternative used by dev teams and regulated enterprises.
+description: Mattermost Mobile is the official React Native iOS and Android client for the
+  self-hostable Mattermost messaging platform, giving enterprise and dev teams on-device access to
+  channels, threads, calls, and push notifications backed by the same REST and WebSocket API as the
+  web and desktop clients.
+summary: The production-grade React Native client for Mattermost, the open-source, self-hostable
+  Slack alternative used by dev teams and regulated enterprises.
 sourceDescription: Next generation iOS and Android apps for Mattermost in React Native.
 category: communication
 content: ./content/records/mattermost-mobile.md
@@ -339,7 +343,10 @@ github:
 
       \r
 
-      Please see [changelog](https://docs.mattermost.com/administration/mobile-changelog.html) for full release notes. If you're interested in helping beta test upcoming versions before they are released, please see our [documentation](https://github.com/mattermost/mattermost-mobile#testing).\r
+      Please see [changelog](https://docs.mattermost.com/administration/mobile-changelog.html) for
+      full release notes. If you're interested in helping beta test upcoming versions before they
+      are released, please see our
+      [documentation](https://github.com/mattermost/mattermost-mobile#testing).\r
 
       \r
 
@@ -347,17 +354,24 @@ github:
 
       * Android\r
 
-      \    * [Mattermost arm64-v8a](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost-arm64-v8a.apk)\r
+      \    * [Mattermost
+      arm64-v8a](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost-arm64-v8a.\
+      apk)\r
 
-      \    * [Mattermost armeabi-v7a](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost-armeabi-v7a.apk)\r
+      \    * [Mattermost
+      armeabi-v7a](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost-armeabi-\
+      v7a.apk)\r
 
-      \    * [Mattermost x86](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost-x86.apk)\r
+      \    * [Mattermost
+      x86](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost-x86.apk)\r
 
-      \    * [Mattermost x86_64](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost-x86_64.apk)\r
+      \    * [Mattermost
+      x86_64](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost-x86_64.apk)\r
 
       * iOS\r
 
-      \    * [Mattermost](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost.ipa)"
+      \    *
+      [Mattermost](https://releases.mattermost.com/mattermost-mobile/2.42.2/787/Mattermost.ipa)"
   activity:
     monthlyCommits:
       - month: 2026-02
@@ -384,7 +398,7 @@ github:
     pullRequestTemplate: false
   labels: []
   sync:
-    syncedAt: 2026-08-09T04:19:08.867Z
+    syncedAt: 2026-08-11T09:34:39.572Z
     source: html
   html:
     license: Apache-2.0

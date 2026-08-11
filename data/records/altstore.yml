@@ -1,8 +1,12 @@
 kind: project
 name: AltStore
 slug: altstore
-description: AltStore is a sideloading app store for non-jailbroken iOS devices that re-signs installed apps with a personal Apple developer certificate and refreshes them in the background via a desktop companion to bypass Apple's 7-day signing limit.
-summary: A sideloading app store for non-jailbroken iOS that uses a desktop companion to re-sign installed apps with the user's own Apple ID and refresh them in the background, so they keep working past Apple's 7-day certificate expiration.
+description: AltStore is a sideloading app store for non-jailbroken iOS devices that re-signs
+  installed apps with a personal Apple developer certificate and refreshes them in the background
+  via a desktop companion to bypass Apple's 7-day signing limit.
+summary: A sideloading app store for non-jailbroken iOS that uses a desktop companion to re-sign
+  installed apps with the user's own Apple ID and refresh them in the background, so they keep
+  working past Apple's 7-day certificate expiration.
 sourceDescription: AltStore is an alternative app store for non-jailbroken iOS devices.
 category: tools
 tags:
@@ -105,7 +109,7 @@ github:
     releases_url: https://api.github.com/repos/altstoreio/AltStore/releases{/id}
     deployments_url: https://api.github.com/repos/altstoreio/AltStore/deployments
     created_at: 2019-05-10T18:29:53Z
-    updated_at: 2026-08-09T03:19:30Z
+    updated_at: 2026-08-11T04:01:57Z
     pushed_at: 2026-07-14T19:06:27Z
     git_url: git://github.com/altstoreio/AltStore.git
     ssh_url: git@github.com:altstoreio/AltStore.git
@@ -113,7 +117,7 @@ github:
     svn_url: https://github.com/altstoreio/AltStore
     homepage: https://altstore.io
     size: 225987
-    stargazers_count: 14142
+    stargazers_count: 14155
     watchers_count: 14083
     language: Swift
     has_issues: true
@@ -122,11 +126,11 @@ github:
     has_wiki: true
     has_pages: false
     has_discussions: false
-    forks_count: 1373
+    forks_count: 1376
     mirror_url: null
     archived: false
     disabled: false
-    open_issues_count: 671
+    open_issues_count: 672
     license:
       spdx_id: AGPL-3.0
       name: AGPL-3.0
@@ -189,7 +193,7 @@ github:
     openPullRequests: 26
     contributorsKnown: 12
   sync:
-    syncedAt: 2026-08-09T04:18:23.368Z
+    syncedAt: 2026-08-11T09:33:48.407Z
     source: api
   languages:
     Swift: 2109032

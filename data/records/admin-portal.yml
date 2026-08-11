@@ -1,21 +1,27 @@
----
 kind: project
 name: admin-portal
 slug: admin-portal
-description: Invoice Ninja's operator-side admin portal, a single Flutter codebase shipped to Android, iOS, macOS, Windows, Linux, and web that manages the full billing lifecycle — quotes, invoices, recurring invoices, credits, purchase orders, payments, expenses, projects, and time tracking — against a self-hosted or cloud Invoice Ninja v5 server.
-summary: One Flutter/Redux client that Invoice Ninja ships to six platforms, including the Microsoft Store, Mac App Store, Snap, Flatpak, and F-Droid, so a business owner gets the same invoicing console on a desktop as on a phone. Roughly thirty business entities are modelled client-side with built_value immutables, and the settings surface exposes both the payment-gateway matrix and a long list of regional e-invoicing formats.
-sourceDescription: 'Invoice Ninja: Desktop/mobile admin portal built with Flutter'
+description: Invoice Ninja's operator-side admin portal, a single Flutter codebase shipped to
+  Android, iOS, macOS, Windows, Linux, and web that manages the full billing lifecycle — quotes,
+  invoices, recurring invoices, credits, purchase orders, payments, expenses, projects, and time
+  tracking — against a self-hosted or cloud Invoice Ninja v5 server.
+summary: One Flutter/Redux client that Invoice Ninja ships to six platforms, including the Microsoft
+  Store, Mac App Store, Snap, Flatpak, and F-Droid, so a business owner gets the same invoicing
+  console on a desktop as on a phone. Roughly thirty business entities are modelled client-side with
+  built_value immutables, and the settings surface exposes both the payment-gateway matrix and a
+  long list of regional e-invoicing formats.
+sourceDescription: "Invoice Ninja: Desktop/mobile admin portal built with Flutter"
 content: ./content/records/admin-portal.md
 category: tools
 tags:
-- android
-- flutter
-- invoice
-- ios
-- linux
-- macos
-- redux
-- windows
+  - android
+  - flutter
+  - invoice
+  - ios
+  - linux
+  - macos
+  - redux
+  - windows
 stack: flutter
 projectType: real-app
 repoUrl: https://github.com/invoiceninja/admin-portal
@@ -32,7 +38,7 @@ curation:
   lenses: []
 visibility: keep
 licenses:
-- noassertion
+  - noassertion
 health:
   status: active
   tier: listed
@@ -40,5 +46,33 @@ health:
   cleanupCandidate: false
   confidence: medium
   reasons:
-  - active-development
-...
+    - active-development
+github:
+  repository:
+    full_name: invoiceninja/admin-portal
+    stargazers_count: 1747
+    forks_count: 580
+    open_issues_count: 74
+    language: Dart
+    pushed_at: 2026-07-28T18:33:06Z
+    updated_at: 2026-08-09T13:22:41Z
+    archived: false
+    disabled: false
+    default_branch: master
+    license:
+      spdx_id: NOASSERTION
+      name: NOASSERTION
+    topics:
+      - android
+      - flutter
+      - invoice
+      - ios
+      - linux
+      - macos
+      - redux
+      - windows
+  latestReleaseAt: 2026-05-14T04:37:59Z
+  homepage: https://demo.invoiceninja.com
+  sync:
+    syncedAt: 2026-08-11T09:33:46.788Z
+    source: api

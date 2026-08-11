@@ -1,7 +1,8 @@
 kind: project
 name: wger
 slug: wger
-description: A Flutter workout and fitness tracker that syncs with the self-hosted wger server, supporting routines, exercises, and progress logs.
+description: A Flutter workout and fitness tracker that syncs with the self-hosted wger server,
+  supporting routines, exercises, and progress logs.
 category: health-and-fitness
 tags:
   - cross-platform
@@ -194,7 +195,7 @@ github:
     openPullRequests: 39
     contributorsKnown: 336
   sync:
-    syncedAt: 2026-08-09T04:19:59.353Z
+    syncedAt: 2026-08-11T09:35:27.346Z
     source: html
   languages:
     Dart: 3150499
@@ -544,12 +545,17 @@ github:
         browser_download_url: https://github.com/wger-project/flutter/releases/download/2.0.1/windows-x64.zip
     tarball_url: https://api.github.com/repos/wger-project/flutter/tarball/2.0.1
     zipball_url: https://api.github.com/repos/wger-project/flutter/zipball/2.0.1
-    body: |-
+    body: >-
       <!-- Release notes generated using configuration in .github/release.yml at 2.0.1 -->
 
+
       ## What's Changed
+
       ### Features
-      * Refactor/nutrition meals components by @pankaj-basnet in https://github.com/wger-project/flutter/pull/1224
+
+      * Refactor/nutrition meals components by @pankaj-basnet in
+      https://github.com/wger-project/flutter/pull/1224
+
 
 
       **Full Changelog**: https://github.com/wger-project/flutter/compare/2.0.0...2.0.1

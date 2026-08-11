@@ -1,8 +1,9 @@
----
 kind: project
 name: Daily_You
 slug: daily_you
-description: Daily You is a privacy-first, offline-capable journaling app for capturing daily entries with text, mood ratings, photo memories, and Markdown notes — all stored locally with no accounts, ads, or telemetry.
+description: Daily You is a privacy-first, offline-capable journaling app for capturing daily
+  entries with text, mood ratings, photo memories, and Markdown notes — all stored locally with no
+  accounts, ads, or telemetry.
 category: tools
 tags: []
 stack: flutter
@@ -21,7 +22,7 @@ curation:
   lenses: []
 visibility: keep
 licenses:
-- gpl-3.0
+  - gpl-3.0
 health:
   status: active
   tier: listed
@@ -29,7 +30,29 @@ health:
   cleanupCandidate: false
   confidence: medium
   reasons:
-  - active-development
+    - active-development
 content: ./content/records/daily_you.md
-summary: A Flutter-built daily journal that stores entries, mood ratings, photo memories, and Markdown notes in a local SQLite database across six desktop and mobile platforms, with a flashback feature that resurfaces past entries on anniversaries.
+summary: A Flutter-built daily journal that stores entries, mood ratings, photo memories, and
+  Markdown notes in a local SQLite database across six desktop and mobile platforms, with a
+  flashback feature that resurfaces past entries on anniversaries.
 sourceDescription: Daily diary & journaling app
+github:
+  repository:
+    full_name: Demizo/Daily_You
+    stargazers_count: 1243
+    forks_count: 56
+    open_issues_count: 55
+    language: Dart
+    pushed_at: 2026-08-11T03:46:42Z
+    updated_at: 2026-08-11T06:18:57Z
+    archived: false
+    disabled: false
+    default_branch: master
+    license:
+      spdx_id: GPL-3.0
+      name: GPL-3.0
+    topics: []
+  latestReleaseAt: 2026-08-10T15:14:21Z
+  sync:
+    syncedAt: 2026-08-11T09:34:01.570Z
+    source: api

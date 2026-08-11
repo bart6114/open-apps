@@ -1,8 +1,10 @@
 kind: project
 name: ATV-Bilibili-demo
 slug: atv-bilibili-demo
-description: ATV-Bilibili-demo is an open-source Bilibili client demo built for Apple TV and its tvOS focus-driven interface.
-summary: Often described as an early SwiftUI tvOS experiment, this Bilibili client demo now demonstrates a substantial UIKit-based Apple TV experience.
+description: ATV-Bilibili-demo is an open-source Bilibili client demo built for Apple TV and its
+  tvOS focus-driven interface.
+summary: Often described as an early SwiftUI tvOS experiment, this Bilibili client demo now
+  demonstrates a substantial UIKit-based Apple TV experience.
 sourceDescription: BiliBili Client Demo for Apple TV (tvOS).
 content: ./content/records/atv-bilibili-demo.md
 category: entertainment
@@ -105,15 +107,15 @@ github:
     releases_url: https://api.github.com/repos/yichengchen/ATV-Bilibili-demo/releases{/id}
     deployments_url: https://api.github.com/repos/yichengchen/ATV-Bilibili-demo/deployments
     created_at: 2021-03-27T14:05:46Z
-    updated_at: 2026-08-08T08:31:18Z
-    pushed_at: 2026-07-31T12:55:26Z
+    updated_at: 2026-08-10T10:26:22Z
+    pushed_at: 2026-08-10T10:32:47Z
     git_url: git://github.com/yichengchen/ATV-Bilibili-demo.git
     ssh_url: git@github.com:yichengchen/ATV-Bilibili-demo.git
     clone_url: https://github.com/yichengchen/ATV-Bilibili-demo.git
     svn_url: https://github.com/yichengchen/ATV-Bilibili-demo
     homepage: ""
     size: 36892
-    stargazers_count: 3113
+    stargazers_count: 3114
     watchers_count: 3097
     language: Swift
     has_issues: true
@@ -168,7 +170,7 @@ github:
     openPullRequests: 0
     contributorsKnown: 35
   sync:
-    syncedAt: 2026-08-09T04:18:24.594Z
+    syncedAt: 2026-08-11T09:33:51.810Z
     source: api
   languages:
     Swift: 576257

@@ -1,8 +1,12 @@
 kind: project
 name: EhPanda
 slug: ehpanda
-description: EhPanda is an unofficial iOS and iPadOS client for the E-Hentai and ExHentai galleries, written entirely in SwiftUI on top of Point-Free's Composable Architecture, with a Combine/Kanna scraping layer and Core Data persistence.
-summary: One of the most polished SwiftUI-native apps in open source — a full gallery browser, reader, and account client for E-Hentai/ExHentai built with TCA reducers, a Kanna-based HTML scraping layer, and Core Data caching, distributed only as a sideloadable IPA.
+description: EhPanda is an unofficial iOS and iPadOS client for the E-Hentai and ExHentai galleries,
+  written entirely in SwiftUI on top of Point-Free's Composable Architecture, with a Combine/Kanna
+  scraping layer and Core Data persistence.
+summary: One of the most polished SwiftUI-native apps in open source — a full gallery browser,
+  reader, and account client for E-Hentai/ExHentai built with TCA reducers, a Kanna-based HTML
+  scraping layer, and Core Data caching, distributed only as a sideloadable IPA.
 sourceDescription: An unofficial E-Hentai App for iOS built with SwiftUI & TCA.
 content: ./content/records/ehpanda.md
 category: media
@@ -107,15 +111,15 @@ github:
     releases_url: https://api.github.com/repos/EhPanda-Team/EhPanda/releases{/id}
     deployments_url: https://api.github.com/repos/EhPanda-Team/EhPanda/deployments
     created_at: 2020-10-28T14:32:59Z
-    updated_at: 2026-07-21T23:57:23Z
-    pushed_at: 2026-07-22T08:49:20Z
+    updated_at: 2026-08-10T15:08:00Z
+    pushed_at: 2026-08-09T15:44:06Z
     git_url: git://github.com/EhPanda-Team/EhPanda.git
     ssh_url: git@github.com:EhPanda-Team/EhPanda.git
     clone_url: https://github.com/EhPanda-Team/EhPanda.git
     svn_url: https://github.com/EhPanda-Team/EhPanda
     homepage: https://ehpanda.app
     size: 78381
-    stargazers_count: 3907
+    stargazers_count: 3932
     watchers_count: 3907
     language: Swift
     has_issues: true
@@ -124,17 +128,14 @@ github:
     has_wiki: true
     has_pages: false
     has_discussions: true
-    forks_count: 254
+    forks_count: 257
     mirror_url: null
     archived: false
     disabled: false
     open_issues_count: 29
     license:
-      key: mit
-      name: MIT License
       spdx_id: MIT
-      url: https://api.github.com/licenses/mit
-      node_id: MDc6TGljZW5zZTEz
+      name: MIT
     allow_forking: true
     is_template: false
     web_commit_signoff_required: false
@@ -201,8 +202,8 @@ github:
     openPullRequests: 0
     contributorsKnown: 22
   sync:
-    syncedAt: 2026-08-09T04:18:33.594Z
-    source: html
+    syncedAt: 2026-08-11T09:34:02.456Z
+    source: api
   languages:
     Swift: 1188120
   latestRelease:
@@ -302,6 +303,8 @@ github:
     license: MIT
     language: null
     topics: []
+  latestReleaseAt: 2026-07-20T12:12:04Z
+  homepage: https://ehpanda.app
 health:
   status: active
   tier: curated

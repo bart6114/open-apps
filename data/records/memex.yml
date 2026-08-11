@@ -1,9 +1,15 @@
 kind: project
 name: Memex
 slug: memex
-description: Memex is a Flutter-based, local-first AI journal for iOS and Android that captures text, photo, and voice fragments, runs them through a multi-agent skill system on a BYO-LLM, and weaves them into timeline cards, P.A.R.A.-organized Markdown knowledge, and chart-driven insights.
-summary: Open-source PKM/journal built on dart_agent_core where every entry is Markdown on disk, agents are loadable SKILL.md files that can call fetch() in JS sandboxes, and LLM traffic goes phone-to-provider with no Memex-operated server in the middle.
-sourceDescription: An open-source, local-first AI journal for iOS and Android that turns text, photo and voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A. methodology
+description: Memex is a Flutter-based, local-first AI journal for iOS and Android that captures
+  text, photo, and voice fragments, runs them through a multi-agent skill system on a BYO-LLM, and
+  weaves them into timeline cards, P.A.R.A.-organized Markdown knowledge, and chart-driven insights.
+summary: Open-source PKM/journal built on dart_agent_core where every entry is Markdown on disk,
+  agents are loadable SKILL.md files that can call fetch() in JS sandboxes, and LLM traffic goes
+  phone-to-provider with no Memex-operated server in the middle.
+sourceDescription: An open-source, local-first AI journal for iOS and Android that turns text, photo
+  and voice fragments into structured timeline cards and organizes knowledge using the P.A.R.A.
+  methodology
 content: ./content/records/memex.md
 category: productivity
 tags:
@@ -64,7 +70,9 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/memex-lab/memex
-    description: Open-source, local-first AI journal app for iOS and Android. Capture text, photos, and voice — AI agents organize them into timeline cards and insights. Your data stays on your device. Bring your own LLM (OpenAI, Claude, Gemini, Ollama, and more).
+    description: Open-source, local-first AI journal app for iOS and Android. Capture text, photos, and
+      voice — AI agents organize them into timeline cards and insights. Your data stays on your
+      device. Bring your own LLM (OpenAI, Claude, Gemini, Ollama, and more).
     fork: false
     url: https://api.github.com/repos/memex-lab/memex
     forks_url: https://api.github.com/repos/memex-lab/memex/forks
@@ -208,7 +216,7 @@ github:
     openPullRequests: 8
     contributorsKnown: 5
   sync:
-    syncedAt: 2026-08-09T04:19:10.341Z
+    syncedAt: 2026-08-11T09:34:42.667Z
     source: html
   languages:
     Dart: 7264067
@@ -291,15 +299,21 @@ github:
         browser_download_url: https://github.com/memex-lab/memex/releases/download/v1.0.37/app-global-release.apk
     tarball_url: https://api.github.com/repos/memex-lab/memex/tarball/v1.0.37
     zipball_url: https://api.github.com/repos/memex-lab/memex/zipball/v1.0.37
-    body: |-
+    body: >-
       ## English
 
+
       1. Added UI-linked cards to the Agent conversation page.
-      2. Optimized several performance issues, including loading dynamic card images and reading/writing messages on the conversation page.
+
+      2. Optimized several performance issues, including loading dynamic card images and
+      reading/writing messages on the conversation page.
+
 
       ## 简体中文
 
+
       1. Agent 会话页新增 UI 联动卡片。
+
       2. 优化动态卡片图片加载以及会话页消息读写等若干性能问题。
   files:
     readme: true
