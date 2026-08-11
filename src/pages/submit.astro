@@ -166,5 +166,10 @@ const pleaseAvoid = [
     existingFullNames={existingFullNames}
     repoUrl={repoUrl}
     fields={fields}
+    taxonomy={{
+      categoryIds: categories.map((c) => c.id),
+      stackIds: stacks.map((s) => s.id),
+      platformIds: platformOptions.map((p) => p.id),
+    }}
   />
 </BaseLayout>
