@@ -13,6 +13,10 @@ workspaces on the cloud.
 
 ## Three modes, one binary, first-party capture
 
+![Cap's three-recordings menu — Instant, Studio, and Screenshot modes in one Tauri-based desktop binary](/images/cap/three-modes.png)
+
+*Cap's three-recordings menu in one Tauri-based desktop binary: Instant mode for fast share links, Studio mode for local record-then-edit, and Screenshot mode for capture-and-beautify.*
+
 Cap's product is unusual because it ships three distinct screen-
 recording modes in one Tauri-based desktop binary. **Instant Mode**
 records screen + camera + microphone, uploads chunked video to
@@ -192,9 +196,53 @@ AI by adding API keys for AssemblyAI (transcription) and Groq / OpenAI
   succession) is a positive signal. The lesson: welcome external
   audits, treat the findings as a roadmap, ship the fixes publicly.
 
-## More from this profile
+## How Cap compares
 
-The full editorial profile (research summary, comparison matrix with
-Loom / Screen Studio / OBS / ScreenFlow / Camtasia / Tella / Kap /
-Screenity, content opportunities, verified sources) is available in
-the directory maintainer's dossier.
+The screen-recording landscape in 2026 is a long spectrum from "free
+streaming tool" to "professional post-production". The honest
+positioning of Cap is that it is the only Loom-class product that is
+also a serious self-host.
+
+| Project | License | Capture engine | Editor | Self-host | Free self-host usable | Best for |
+|---|---|---|---|---|---|---|
+| **Cap** | AGPL-3.0 (commercial Desktop License required for commercial desktop use) | First-party Rust: ScreenCaptureKit (macOS), DXGI (Windows), PipeWire (Linux) | Built-in Studio editor (zoom, captions, backgrounds, MP4/GIF export) | Yes (Docker Compose with `cap-web`, MySQL, MinIO) | Yes (default credentials must be changed) | A free Loom alternative that you can also self-host, with first-party 4K capture on every desktop OS |
+| **Loom** | Closed-source SaaS | Browser/desktop record | Web editor only | No | N/A | A team that wants zero setup and can pay per-seat |
+| **Screen Studio** | Closed-source, paid (~$30–50 lifetime) | macOS-only, excellent cursor/zoom effects | Built-in post-production | No | N/A | macOS users who want cinematic, share-quality output and are willing to pay once |
+| **OBS Studio** | GPL-2.0 | Cross-platform, scene-based | No built-in editor | N/A (it is a capture tool, not a recorder) | Yes | Live streaming, scene composition, anything that needs to overlay multiple sources |
+| **ScreenFlow** | Closed-source, paid | macOS + iOS | Full non-linear editor | No | N/A | macOS users who need non-linear editing and are willing to pay $169 |
+| **Camtasia** | Closed-source, paid ($300 perpetual) | Windows + macOS | Full non-linear editor + interactive quizzes | No | N/A | Corporate training content with quizzes and LMS integration |
+| **Tella** | Closed-source SaaS | Browser/desktop record | Web editor only | No | N/A | Async team communication without Loom's pricing |
+| **Kap** | MIT | Cross-platform (Electron-based) | Crop / export only | No | Yes (per user) | A simple, free, open-source recorder without instant share |
+| **Screenity** | MPL-2.0 | Chromium web extension | Browser-based trim | No | Yes (free) | Privacy-first browser-only recording |
+
+**Pick Cap** if you want a real Loom alternative with self-hosting and
+first-party capture quality, and you accept the AGPL-3.0 commercial
+licensing terms.
+
+**Pick OBS** if your real goal is streaming or composition, not
+recording.
+
+**Pick Screen Studio** if you are on macOS and produce share-quality
+content professionally — Cinematic zoom-to-click and cursor effects
+remain better there than anywhere else.
+
+**Pick ScreenFlow or Camtasia** if you need a non-linear editor for
+training content. Cap's Studio editor is a recorder-plus-effects
+tool, not a Premiere replacement.
+
+**Pick Kap** if you want a free, open-source recorder for personal use
+and do not need instant share links.
+
+## Verified sources
+
+- Cap GitHub repository: <https://github.com/CapSoftware/Cap>
+- `cap-muxer`, `cap-muxer-protocol`, `scap-*` crate family — directly
+  inspectable in the repo.
+- Re-license commit `522e38c` (Cap Software, Inc.), January 3, 2024 —
+  `git log -- LICENSE` on the repository.
+- Security audit — issue #2033 (DPS0340, July 2026) and follow-up PRs
+  #2029–#2032 and #2039.
+- AGPL-3.0 vs commercial tier pricing — reproduce by cloning
+  `cap-web` and reading the license blocks in `apps/web`.
+- Screen Studio vs ScreenFlow vs Camtasia positioning — based on the
+  publishers' own feature pages (each is a closed-source product).

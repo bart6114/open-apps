@@ -8,6 +8,10 @@ library to anyone. The result feels close to Google Photos while keeping your
 data on a disk you control, under an AGPL-3.0 license that the maintainers
 deliberately cannot relicense more permissively.
 
+![Immich timeline view — grouped photos with date rail](/images/immich/timeline.png)
+
+*Immich's timeline view, the closest implementation of Google Photos' grouped-by-date UX outside of Google itself.*
+
 ## From a side project to a Google-Photos-shaped standard
 
 Immich is the rare self-hosted app whose UX compares favorably to its
@@ -144,9 +148,50 @@ tree is the bytes — and you must back up both.
   was a deliberate "one operational database" choice; the maintenance cost
   is small relative to running a separate vector store.
 
-## More from this profile
+## How Immich compares
 
-The full editorial profile (research summary, comparison matrix with
-PhotoPrism / Ente / Nextcloud Memories / Lychee, content opportunities,
-verified sources) is available in the directory maintainer's dossier. See
-the project repository for the latest version.
+The honest self-hosted photo space in 2026 has four credible answers. Each
+makes a different trade-off; none is "better" in the abstract.
+
+| Project | License | E2EE | ML pipeline | Storage backend | Multi-user | Best for |
+|---|---|---|---|---|---|---|
+| **Immich** | AGPL-3.0 | No (TLS in transit only) | ONNX Runtime; CLIP + face + OCR + duplicates | Filesystem bind mount (no native S3) | Yes (self-hosted multi-user) | The closest Google Photos equivalent for a single user or family that already runs Docker |
+| **PhotoPrism** | AGPL-3.0 | No | TensorFlow-based (older, slower path for image classification) | Local filesystem + optional S3 | Yes (Community edition in 2024 altered the license) | A large existing library that needs ingestion and fast browsing; favorites tagging |
+| **Ente** | AGPL-3.0 + source-available | **Yes** (XChaCha20-Poly1305, libsodium) | On-device in the mobile client; server-side enrichment is optional | S3-compatible (Ente Cloud or self-host) | Yes (paid plan required for self-host multi-user) | Users who want true E2EE before the bytes leave the phone |
+| **Nextcloud Memories** | AGPL-3.0 (Nextcloud) | Whatever Nextcloud provides (server-side encryption with E2EE in Nextcloud 29+) | Optional via the `recognize` app | Nextcloud primary storage | Yes (Nextcloud users) | People already running Nextcloud for files/calendar and who want photos bolted on |
+| **Lychee** | MIT | No | None | Local filesystem or S3 | No (single-user) | The simplest possible photo dump — a Slick carousel viewer, no ML, no timeline curation |
+
+**Pick Immich** if face recognition, CLIP search, and a polished timeline
+are the headline features and a small Docker compose stack is acceptable.
+
+**Pick PhotoPrism** if you have hundreds of thousands of existing photos
+to import, you care about EXIF and favorites, and you do not need E2EE.
+
+**Pick Ente** if the *only* thing that matters is end-to-end encryption
+and you are willing to fund either a subscription or a self-host fee.
+
+**Pick Nextcloud Memories** if Nextcloud is already the substrate for
+your files. The memories app is feature-light compared to Immich but
+inherits Nextcloud's sharing, mobile sync, and admin model.
+
+**Pick Lychee** if you want a photo gallery, not a photo *manager*. No
+ML, no multi-user, no maintenance burden; just a clean web UI for a
+folder of images.
+
+## Verified sources
+
+- Immich GitHub repository: <https://github.com/immich-app/immich>
+- VectorChord / vector search migration tracking (server README,
+  servers image).
+- Security advisories: Immich GitHub Security tab — 10 published
+  advisories in 2026, including GHSA-8244-8vpr-vp9c (XSS-to-account-takeover,
+  June 2026) and GHSA-237r-x578-h5mv (API key privilege escalation,
+  January 2026).
+- License relicensing discussion, February 2024 — GitHub issue thread
+  and r/selfhosted / Hacker News follow-ups.
+- PhotoPrism community edition license change, January 2024 — see
+  PhotoPrism's "Our Journey" blog post.
+- Ente architecture and E2EE design — Ente's open-source documentation
+  at <https://ente.io/architecture>.
+- Nextcloud Memories app — Nextcloud App Store listing.
+- Lychee maintainer docs — <https://lycheeorg.dev>.

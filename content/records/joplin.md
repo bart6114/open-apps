@@ -9,6 +9,10 @@ maintained for nearly a decade by a small lead-contributor team, with a
 public warrant canary, a stable plugin API, and a real cross-platform
 feature surface.
 
+![Joplin desktop client — Markdown editor with renderer split-pane](/images/joplin/editor.png)
+
+*Joplin's desktop client: a Markdown editor on the left, the rendered preview on the right. The same data renders identically on iOS, Android, and the web client.*
+
 ## Plain Markdown is the product
 
 Joplin's most important design decision is also the least visible: a
@@ -152,9 +156,56 @@ enable on multiple devices in parallel.
   and an honest capacity signal.** Joplin has both; the bus factor is
   real and acknowledged.
 
-## More from this profile
+## How Joplin compares
 
-The full editorial profile (research summary, comparison matrix with
-Obsidian / Logseq / Anytype / Standard Notes / Notesnook / Notion, content
-opportunities, verified sources) is available in the directory
-maintainer's dossier.
+The "open notes" market in 2026 splits into two questions: what is the
+file format, and who can read your notes. Joplin's answer — plain
+Markdown files plus optional E2EE — is the most portable of the lot.
+
+| Project | License | File format | E2EE | Multi-target sync | Editor style | Best for |
+|---|---|---|---|---|---|---|
+| **Joplin** | AGPL-3.0 (client) + proprietary "Joplin Server Personal Use License" (server) | Plain Markdown + SQLite | Yes (opt-in, master key, irrecoverable) | Joplin Cloud, Joplin Server, Nextcloud, WebDAV, Dropbox, OneDrive, local FS, S3 (Beta) | WYSIWYG (TinyMCE) or Markdown (CodeMirror 5/6) | A user with an existing WebDAV / Nextcloud / S3 setup who wants encrypted notes on top of storage they already pay for |
+| **Obsidian** | Source-available (free for personal use) | Plain Markdown | N/A (local) | Local + optional paid Sync | Markdown-based | A single user who wants durable Markdown files and the plugin ecosystem |
+| **Logseq** | AGPL-3.0 | Plain Markdown / Org | N/A (local) | Local + optional paid Sync | Outliner + block editor | A knowledge worker who thinks in outliner and queries |
+| **Anytype** | Source-available (Any Source Available License 1.0) | Local-first (Anysync) | Yes (peer-to-peer) | Anytype Hub | Block editor | A user who wants E2EE + local-first + a growing collaboration story |
+| **Standard Notes** | AGPL-3.0 (server) + proprietary (some clients) | Encrypted backups | Yes (XChaCha20-Poly1305, Argon2id) | Standard Notes Cloud (paid) or self-hosted | Plain markdown, rich text via extensions | A user who wants durable E2EE on a free self-host stack |
+| **Notesnook** | AGPL-3.0 + source-available | Encrypted vault (monorepo) | Yes (XChaCha20-Poly1305, Argon2id, Vericrypt) | Notesnook Cloud (paid) or self-hosted | Rich text, markdown | A user who wants externally verifiable E2EE (Vericrypt) more than Markdown durability |
+| **Notion** | Closed-source SaaS | Proprietary | No | Notion Cloud | Block editor | A team that wants collaboration, not a personal note archive |
+
+**Pick Joplin** if you already have a sync target (WebDAV, Nextcloud,
+S3, Dropbox) and want your notes to be plain Markdown files on disk
+that you can still read in 10 years if Joplin disappears.
+
+**Pick Obsidian** if you only need single-device notes and want the
+deepest plugin ecosystem. Trade-off: no real sync story without
+paying.
+
+**Pick Logseq** if your note-taking is journal-style and you want
+outliner + queries. Trade-off: no mobile-first experience.
+
+**Pick Anytype** if E2EE + local-first is the headline feature and you
+can accept alpha-quality collaboration.
+
+**Pick Standard Notes** if you want a free self-hostable E2EE notes
+server and do not care about Markdown durability.
+
+**Pick Notesnook** if you want to be able to prove your E2EE claim
+to a third party (Vericrypt). The trade-off is an encrypted vault
+rather than plain Markdown files.
+
+**Pick Notion** if the real need is collaboration, not a personal
+note archive.
+
+## Verified sources
+
+- Joplin repository: <https://github.com/laurent22/joplin>
+- Joplin Server license — `packages/server/LICENSE.md` (proprietary
+  "Joplin Server Personal Use License" prohibiting commercial hosting).
+- Joplin Server Pricing — <https://joplinapp.org/plans/> (€30–€40 per
+  user per year for Business).
+- Joplin warrant canary — <https://joplinapp.org/canary/> (current
+  statement date 2026-06-19; valid until 2026-08-18).
+- Editor strategy — `NoteEditor.tsx` in the desktop client; mobile
+  ProseMirror editor introduced in Joplin 3.4 (September 2025).
+- Comparison facts about other projects — drawn from each project's
+  own published documentation; not affiliated reviews.

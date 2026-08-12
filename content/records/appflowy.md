@@ -8,6 +8,10 @@ macOS, Windows, Linux, iOS, and Android. The product is genuinely
 local-first, but the open-core split means that a self-hosted multi-seat
 deployment requires a paid commercial license.
 
+![AppFlowy workspace — block editor with a Grid database view](/images/appflowy/workspace.png)
+
+*AppFlowy's Notion-shaped workspace: a block editor on the left, a Grid database view on the right, both running on a local-first Rust+Flutter stack.*
+
 ## What AppFlowy is, and what it isn't trying to be
 
 AppFlowy's pitch is straightforward: build a Notion-shaped workspace that
@@ -125,9 +129,59 @@ daily / 4 weekly retention).
   license at $11.88/month funds the Rust core development. The AGPL-3.0
   client remains free.
 
-## More from this profile
+## How AppFlowy compares
 
-The full editorial profile (research summary, comparison matrix with
-Notion / Obsidian / Anytype / Logseq / AFFiNE / Outline, content
-opportunities, verified sources) is available in the directory
-maintainer's dossier.
+The "Notion-shaped workspace" market is the most crowded open-source
+comparison category, and the honest answer is that the right tool
+depends on which Notion feature you actually need.
+
+| Project | License | Storage model | E2EE | Block editor | Database views | Sync target | Best for |
+|---|---|---|---|---|---|---|---|
+| **AppFlowy** | AGPL-3.0 (client) + commercial self-host license | Local-first SQLite, cloud sync via AppFlowy-Cloud | No (server-side encryption, not E2EE) | First-party block editor (formerly `flutter_quill`) | Grid, Board, Calendar | Self-hosted (per-server commercial fee) or AppFlowy Cloud | A small team that wants a real Notion alternative and is willing to back up the SQLite file |
+| **Notion** | Closed-source SaaS | Hosted only | No | Block editor | Grid, Board, Calendar, Gallery, Timeline, List | Notion Cloud | A team that wants zero setup and the broadest feature set, and can accept the price |
+| **Obsidian** | Source-available (free for personal use) | Local Markdown files | N/A (data is local) | Markdown-based | Dataview plugin (community) | Local file system + optional paid Sync | A single user who wants durable Markdown files and is willing to invest in plugins |
+| **Anytype** | Source-available (Any Source Available License 1.0) | Local-first (Anysync) | Yes (peer-to-peer) | Block editor (some Notion-like features) | Grid, Board, Calendar | Peer-to-peer / self-hosted Anytype Hub | A user who wants E2EE + local-first + block editor, and accepts alpha-quality collaboration |
+| **Logseq** | AGPL-3.0 | Local Markdown / Org files | N/A (local) | Outliner + block editor | Queries, advanced | Local file system + optional paid Sync | A knowledge worker who thinks in outliner and queries rather than databases |
+| **AFFiNE** | MIT (client) | Local-first (CRDT) | No | Block editor + whiteboard | Grid, Board, List | Local + paid AFFiNE Cloud | A user who wants both Notion's database views and Miro's whiteboard in one tool |
+| **Outline** | BSL 1.1 (source-available) | Hosted only | Partial | Block editor | Limited | Outline Cloud / self-hosted | A team that needs a wiki with team permissions, not a personal workspace |
+
+**Pick AppFlowy** if you want Notion-shaped features with local-first
+writes, can stomach the AGPL-3.0 client + commercial self-host license,
+and do not need a self-hosted free-tier for > 4 users.
+
+**Pick Notion** if the team is small enough to pay for the real product
+and you need the broadest feature set. You are paying for the polish,
+not the data ownership.
+
+**Pick Obsidian** if you already think in plain Markdown and want the
+most durable file format. You give up the database views.
+
+**Pick Anytype** if E2EE is the headline feature. The trade is a
+younger collaboration story and the Any Source Available License.
+
+**Pick Logseq** if your work is "thinking on paper" rather than
+project management. The block-level reference graph is the strongest
+in the category.
+
+**Pick AFFiNE** if you need a whiteboard and a database in the same
+canvas. The single-author project is past v1 but the collaboration
+story is still maturing.
+
+**Pick Outline** if your real need is a team wiki with permissions, not
+a personal workspace.
+
+## Verified sources
+
+- AppFlowy repository: <https://github.com/AppFlowy-Cloud/AppFlowy-Cloud>
+- Self-hosting tier and pricing — `SELF_HOST_LICENSE_AGREEMENT.md` in
+  the AppFlowy-Cloud repo.
+- E2EE Reddit thread — r/AppFlowy, "Let's address the elephant in the
+  room: end-to-end encryption". The marketing site claim vs the
+  self-hosting security documentation mismatch is in that thread.
+- Sync and import issues — AppFlowy GitHub issues #8112, #8937,
+  #8862, #8789, #8744 (representative; not exhaustive).
+- Notion import scope — Notion's official export documentation;
+  confirms that Notion does not export Notion databases through the
+  export endpoint.
+- Comparison to Obsidian / Logseq / Anytype — these are positioning
+  summaries, not affiliated reviews.

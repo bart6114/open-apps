@@ -6,6 +6,10 @@ leaves the device. The server only ever sees opaque ciphertext, so a
 Notesnook operator (self-hosted or SaaS) cannot read your notes even
 if they wanted to.
 
+![Notesnook vault — encrypted notes list with notebook sidebar](/images/notesnook/vault.png)
+
+*Notesnook's encrypted vault: the server stores only ciphertext, the client unlocks with an Argon2id-derived key, and the same vault syncs across the web, desktop, and mobile clients.*
+
 ## Why it matters
 
 - **Real end-to-end encryption, not marketing.** Notes are encrypted

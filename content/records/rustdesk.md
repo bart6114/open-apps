@@ -186,9 +186,48 @@ fix.
   expose raw TCP. The Flutter-web build is relay-only, which is why the
   Pro tier exists for it.
 
-## More from this profile
+## How RustDesk compares
 
-The full editorial profile (research summary, comparison matrix with
-TeamViewer / AnyDesk / Parsec / NoMachine / Apache Guacamole /
-MeshCentral, content opportunities, verified sources) is available in
-the directory maintainer's dossier.
+The "remote access" market is dominated by closed-source SaaS.
+RustDesk is the strongest open-source answer for direct TCP/UDP
+remote control across Windows, macOS, Linux, iOS, Android, and the
+browser.
+
+| Project | License | Self-host | Cross-platform | "Direct" connection | Browser client | License | Best for |
+|---|---|---|---|---|---|---|---|
+| **RustDesk** | AGPL-3.0 (server + client) | Yes (one Docker image, hbbs + hbbr) | Windows, macOS, Linux, iOS, Android, Web (Flutter) | Yes (default, with relay fallback) | Yes (Flutter web; Pro adds more features) | Free for personal use; Pro adds audit logs, 2FA, custom branding, advanced web features | A small team or homelab that wants TeamViewer-class control without a SaaS dependency |
+| **TeamViewer** | Closed-source | No (hosted service) | Windows, macOS, Linux, iOS, Android, Web | No (always routed through TeamViewer servers) | Yes | Paid | A large enterprise with vendor support contracts and global compliance needs |
+| **AnyDesk** | Closed-source | No (hosted service) | Windows, macOS, Linux, iOS, Android, Web | No | Yes | Paid | A team that wants a lighter, faster alternative to TeamViewer |
+| **Parsec** | Closed-source | No (hosted service) | Windows, macOS, Linux, Android | Direct P2P with NAT traversal | No | Free for personal use; paid for teams | Low-latency cloud gaming, design work, collaboration on graphically intensive apps |
+| **NoMachine** | Free for personal use / commercial license | No (hosted service) | Windows, macOS, Linux, iOS, Android | Direct | Yes (HTML5) | Free for personal use | A user who wants a polished NX protocol with hardware acceleration |
+| **Apache Guacamole** | Apache-2.0 (server) | Yes (HTML5 + Java) | Browser only (clientless) | Direct through gateway | Yes (browser-only) | Free | A sysadmin who wants a browser-based bastion to RDP/VNC/SSH without per-user clients |
+| **MeshCentral** | Apache-2.0 | Yes (Node.js) | Browser + native agents | Through MeshCentral server | Yes | Free | An admin who wants a self-hosted management console with remote desktop, terminal, and file transfer |
+
+**Pick RustDesk** if you want a TeamViewer-class experience on your
+own hardware with a permissive AGPL-3.0 license and a real self-host
+story.
+
+**Pick TeamViewer / AnyDesk** if your organisation has a vendor
+contract and you need SLA-backed support.
+
+**Pick Parsec** if the workload is graphical (design, video,
+games) and you want the lowest possible latency.
+
+**Pick NoMachine** if you want a polished NX protocol with hardware
+acceleration and do not need self-hosting.
+
+**Pick Apache Guacamole** if the deployment is a browser-only bastion
+that needs to broker RDP, VNC, and SSH sessions centrally.
+
+**Pick MeshCentral** if you want a self-hosted management console
+with remote desktop, terminal, and file transfer in one tool.
+
+## Verified sources
+
+- RustDesk repository: <https://github.com/rustdesk/rustdesk>
+- RustDesk server docs — `hbbs` (relay) and `hbbr` (relay) Docker
+  images at <https://rustdesk.com/docs/en/self-host/>.
+- License — `LICENSE` in the repository (AGPL-3.0).
+- Pro tier features — <https://rustdesk.com/pricing>.
+- Comparison facts about other products — drawn from each vendor's
+  own published feature pages; not affiliated reviews.
