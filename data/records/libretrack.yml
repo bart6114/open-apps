@@ -2,6 +2,7 @@ kind: project
 name: LibreTrack
 slug: libretrack
 description: Private, cross-platform package tracking app
+sourceDescription: Private, cross-platform package tracking app
 category: productivity
 tags:
   - cross-platform

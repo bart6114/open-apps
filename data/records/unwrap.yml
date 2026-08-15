@@ -2,6 +2,7 @@ kind: project
 name: Unwrap
 slug: unwrap
 description: Learn Swift interactively on your iPhone.
+sourceDescription: Learn Swift interactively on your iPhone.
 category: tools
 tags:
   - swift

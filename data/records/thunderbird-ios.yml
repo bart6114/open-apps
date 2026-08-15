@@ -2,6 +2,7 @@ kind: project
 name: thunderbird-ios
 slug: thunderbird-ios
 description: Thunderbird for iOS – Open Source Email App for iOS.
+sourceDescription: Thunderbird for iOS – Open Source Email App for iOS
 category: communication
 tags:
   - swiftui

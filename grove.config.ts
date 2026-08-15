@@ -70,7 +70,9 @@ export default defineConfig({
     ],
   },
 
-  facets: ["category", "stack", "platform", "license", "tags"],
+  browse: {
+    facets: ["category", "stack", "platform", "license", "tags"],
+  },
   routes: { directory: "apps", item: "app" },
   labels: { singular: "app", plural: "apps" },
 
@@ -82,11 +84,6 @@ export default defineConfig({
     density: "comfortable",
     containerWidth: "72rem",
   },
-
-  // Per-user contribution counts are noisy here — the contributors
-  // grid is a community wall, not a leaderboard, so we hide the
-  // "N contributions" label and just show the avatar + handle.
-  contributors: { showContributionCount: false },
 
   audit: {
     baseUrl: "http://127.0.0.1:4321",

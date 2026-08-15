@@ -2,6 +2,7 @@ kind: project
 name: Blink Comparison
 slug: blink-comparison
 description: Simplifies comparing photos of tamper-evident seals and patterns using your eyes
+sourceDescription: Simplifies comparing photos of tamper-evident seals and patterns using your eyes
 category: tools
 tags:
   - cross-platform

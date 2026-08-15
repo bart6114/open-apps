@@ -1,8 +1,8 @@
 kind: project
 name: feed-flow
 slug: feed-flow
-description: FeedFlow is a minimalistic RSS Reader available on Android, iOS, macOS, Windows and
-  Linux. Built with Kotlin Multiplatform, Jetpack Compose and SwiftUI.
+description: FeedFlow is a minimalistic RSS Reader available on Android, iOS, macOS, Windows and Linux. Built with Kotlin Multiplatform, Jetpack Compose and SwiftUI.
+sourceDescription: FeedFlow is a minimalistic RSS Reader available on Android, iOS, macOS, Windows and Linux. Built with Kotlin Multiplatform, Jetpack Compose and SwiftUI.
 category: news
 tags:
   - swift
@@ -65,8 +65,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/prof18/feed-flow
-    description: FeedFlow is a minimalistic RSS Reader available on Android, iOS, macOS, Windows and
-      Linux. Built with Kotlin Multiplatform, Jetpack Compose and SwiftUI.
+    description: FeedFlow is a minimalistic RSS Reader available on Android, iOS, macOS, Windows and Linux. Built with Kotlin Multiplatform, Jetpack Compose and SwiftUI.
     fork: false
     url: https://api.github.com/repos/prof18/feed-flow
     forks_url: https://api.github.com/repos/prof18/feed-flow/forks

@@ -2,6 +2,7 @@ kind: project
 name: Invoice Ninja
 slug: invoice-ninja
 description: Companion app for the Invoice Ninja platform. Invoicing, expenses, time-billing, payments.
+sourceDescription: "Invoice Ninja: Desktop/mobile admin portal built with Flutter"
 category: business
 tags:
   - cross-platform

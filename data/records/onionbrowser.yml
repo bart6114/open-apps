@@ -2,6 +2,7 @@ kind: project
 name: OnionBrowser
 slug: onionbrowser
 description: An open-source, privacy-enhancing web browser for iOS, utilizing the Tor anonymity network
+sourceDescription: An open-source, privacy-enhancing web browser for iOS, utilizing the Tor anonymity network
 category: productivity
 tags:
   - anonymity

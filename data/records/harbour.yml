@@ -2,6 +2,7 @@ kind: project
 name: Harbour
 slug: harbour
 description: Docker/Portainer management app for iOS, iPadOS and macOS.
+sourceDescription: Docker/Portainer management app for iOS, iPadOS and macOS.
 category: productivity
 tags:
   - docker-client

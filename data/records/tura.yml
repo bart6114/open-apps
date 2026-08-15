@@ -2,6 +2,7 @@ kind: project
 name: Tura
 slug: tura
 description: Build agent that uses 80% less token and delivers better results.
+sourceDescription: Across 348 long-horizon benchmark sessions, Tura used up to 83.1% fewer turns on the rewrite benchmark and improved the DeepSWE pass rate by up to 16.7 percentage points compared with Codex CLI.
 category: tools
 tags:
   - coding-agent
@@ -80,9 +81,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/Tura-AI/tura
-    description: Across 348 long-horizon benchmark sessions, Tura used up to 83.1% fewer turns on the
-      rewrite benchmark and improved the DeepSWE pass rate by up to 16.7 percentage points compared
-      with Codex CLI.
+    description: Across 348 long-horizon benchmark sessions, Tura used up to 83.1% fewer turns on the rewrite benchmark and improved the DeepSWE pass rate by up to 16.7 percentage points compared with Codex CLI.
     fork: false
     url: https://api.github.com/repos/Tura-AI/tura
     forks_url: https://api.github.com/repos/Tura-AI/tura/forks

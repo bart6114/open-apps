@@ -2,6 +2,7 @@ kind: project
 name: Ejimo
 slug: ejimo
 description: A cross-platform emoji and symbol picker that goes beyond the system keyboard.
+sourceDescription: Ejimo - Comprehensive emoji and symbol picker.
 category: tools
 tags:
   - cross-platform

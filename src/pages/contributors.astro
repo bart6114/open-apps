@@ -15,8 +15,12 @@ import siteConfig from "@grove/generated/site-config.json";
 import BaseLayout from "@grove-dev/astro/layouts/BaseLayout.astro";
 import { getContributorsPageModel } from "@grove-dev/astro/server";
 
-const { contributors: sorted, total, title, description, contributorsGraphHref, showContributionCount } =
+const { contributors: sorted, total, title, description, contributorsGraphHref } =
   getContributorsPageModel(siteConfig);
+// Per-user contribution counts are noisy here — the contributors grid is a
+// community wall, not a leaderboard, so we hide the "N contributions" label
+// and just show the avatar + handle.
+const showContributionCount = false;
 ---
 
 <BaseLayout title={title} description={description} site={siteConfig}>

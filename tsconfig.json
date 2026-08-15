@@ -1,12 +1,20 @@
 {
-  "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "moduleResolution": "Bundler",
-    "types": ["node"],
+    "jsxImportSource": "astro",
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["node", "astro/astro-jsx"],
     "baseUrl": ".",
     "paths": {
       "@grove/generated/*": ["data/generated/*"]
-    }
+    },
+    "strict": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
