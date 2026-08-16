@@ -27,12 +27,13 @@ source:
   repo: joplin
   url: https://github.com/laurent22/joplin
 curation:
-  reviewed: false
-  reviewedAt: 2026-06-07T23:19:27+08:00
+  reviewed: true
+  reviewedAt: 2026-08-11
   labels:
     - mature
     - hot
   lenses: []
+  reviewedBy: Open Apps curators
 visibility: keep
 github:
   repository:
@@ -187,7 +188,7 @@ github:
     openPullRequests: 15
     contributorsKnown: 813
   sync:
-    syncedAt: 2026-08-16T03:49:45.517Z
+    syncedAt: 2026-08-11T09:34:27.725Z
     source: html
   languages:
     TypeScript: 11526211
@@ -948,3 +949,11 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - noassertion
+content: ./content/records/joplin.md
+summary: An end-to-end encrypted note-taking and to-do application with cross-platform sync via
+  Joplin Cloud, Dropbox, OneDrive, WebDAV, or a local filesystem.
+sourceDescription: Joplin is a free, open source note taking and to-do application. The mobile
+  client is built with React Native and supports full sync via Nextcloud, Dropbox, OneDrive, WebDAV,
+  and Joplin Cloud.

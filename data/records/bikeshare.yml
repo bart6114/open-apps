@@ -1,9 +1,8 @@
 kind: project
 name: BikeShare
 slug: bikeshare
-description: SwiftUI, Jetpack Compose, Compose for Desktop and Compose for Web based Kotlin
-  Multiplatform project (using CityBikes API http://api.citybik.es/v2/). Uses Room for local
-  persistence.
+description: SwiftUI, Jetpack Compose, Compose for Desktop and Compose for Web based Kotlin Multiplatform project (using CityBikes API http://api.citybik.es/v2/). Uses Room for local persistence.
+sourceDescription: SwiftUI, Jetpack Compose, Compose for Desktop and Compose for Web based Kotlin Multiplatform project (using CityBikes API http://api.citybik.es/v2/). Uses Room for local persistence
 category: tools
 tags:
   - swift
@@ -68,9 +67,7 @@ github:
       user_view_type: public
       site_admin: false
     html_url: https://github.com/joreilly/BikeShare
-    description: SwiftUI, Jetpack Compose, Compose for Desktop and Compose for Web based Kotlin
-      Multiplatform project (using CityBikes API http://api.citybik.es/v2/). Uses Room for local
-      persistence
+    description: SwiftUI, Jetpack Compose, Compose for Desktop and Compose for Web based Kotlin Multiplatform project (using CityBikes API http://api.citybik.es/v2/). Uses Room for local persistence
     fork: false
     url: https://api.github.com/repos/joreilly/BikeShare
     forks_url: https://api.github.com/repos/joreilly/BikeShare/forks
@@ -110,8 +107,8 @@ github:
     releases_url: https://api.github.com/repos/joreilly/BikeShare/releases{/id}
     deployments_url: https://api.github.com/repos/joreilly/BikeShare/deployments
     created_at: 2019-11-17T17:37:23Z
-    updated_at: 2026-08-15T15:21:06Z
-    pushed_at: 2026-08-12T23:13:18Z
+    updated_at: 2026-08-09T09:42:09Z
+    pushed_at: 2026-08-09T09:54:26Z
     git_url: git://github.com/joreilly/BikeShare.git
     ssh_url: git@github.com:joreilly/BikeShare.git
     clone_url: https://github.com/joreilly/BikeShare.git
@@ -131,7 +128,7 @@ github:
     mirror_url: null
     archived: false
     disabled: false
-    open_issues_count: 7
+    open_issues_count: 6
     license:
       spdx_id: Apache-2.0
       name: Apache-2.0
@@ -192,7 +189,7 @@ github:
     openPullRequests: 7
     contributorsKnown: 7
   sync:
-    syncedAt: 2026-08-16T03:49:20.233Z
+    syncedAt: 2026-08-11T09:33:55.178Z
     source: api
   languages:
     Jupyter Notebook: 3803892
@@ -224,3 +221,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - apache-2.0

@@ -1,8 +1,15 @@
 kind: project
 name: Artsy
 slug: eigen
-description: The mobile app for artsy.net — discover fine art, browse artists and artworks, follow
-  galleries, and bid in auctions from your phone.
+description: Artsy Eigen is the official iOS and Android client for artsy.net, built as a React
+  Native app with native Swift and Kotlin modules for browsing artworks, following artists and
+  galleries, and participating in live timed auctions.
+summary: Artsy's flagship mobile app for discovering fine art, following artists and galleries, and
+  bidding in live online auctions — a production-grade React Native codebase that talks to Artsy's
+  Metaphysics GraphQL gateway.
+sourceDescription: The mobile app for artsy.net — discover fine art, browse artists and artworks,
+  follow galleries, and bid in auctions from your phone.
+content: ./content/records/eigen.md
 category: shopping
 tags:
   - cross-platform
@@ -101,15 +108,15 @@ github:
     releases_url: https://api.github.com/repos/artsy/eigen/releases{/id}
     deployments_url: https://api.github.com/repos/artsy/eigen/deployments
     created_at: 2015-01-22T21:52:39Z
-    updated_at: 2026-07-22T08:22:11Z
-    pushed_at: 2026-07-22T09:28:11Z
+    updated_at: 2026-08-10T16:22:22Z
+    pushed_at: 2026-08-11T05:31:39Z
     git_url: git://github.com/artsy/eigen.git
     ssh_url: git@github.com:artsy/eigen.git
     clone_url: https://github.com/artsy/eigen.git
     svn_url: https://github.com/artsy/eigen
     homepage: ""
     size: 649601
-    stargazers_count: 3775
+    stargazers_count: 3776
     watchers_count: 3775
     language: TypeScript
     has_issues: true
@@ -122,13 +129,10 @@ github:
     mirror_url: null
     archived: false
     disabled: false
-    open_issues_count: 14
+    open_issues_count: 18
     license:
-      key: mit
-      name: MIT License
       spdx_id: MIT
-      url: https://api.github.com/licenses/mit
-      node_id: MDc6TGljZW5zZTEz
+      name: MIT
     allow_forking: true
     is_template: false
     web_commit_signoff_required: false
@@ -196,8 +200,8 @@ github:
     openPullRequests: 12
     contributorsKnown: 166
   sync:
-    syncedAt: 2026-08-16T03:49:25.518Z
-    source: html
+    syncedAt: 2026-08-11T09:34:03.719Z
+    source: api
   languages:
     TypeScript: 7981588
     Objective-C: 694758
@@ -314,8 +318,11 @@ github:
     license: MIT
     language: null
     topics: []
+  latestReleaseAt: 2026-07-29T06:54:07Z
 health:
   status: active
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - mit

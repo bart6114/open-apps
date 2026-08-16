@@ -1,7 +1,15 @@
 kind: project
 name: Swift-Radio-Pro
 slug: swift-radio-pro
-description: Professional Radio Station App for iOS!
+description: Swift-Radio-Pro is a Swift iOS streaming-audio reference app that plays live radio from
+  a list of stations, surfaces now-playing metadata and album art, and integrates with the lock
+  screen and Control Center.
+summary: A long-standing open-source iOS radio app template that demonstrates the end-to-end
+  streaming-radio pattern (live stream playback, ICY metadata, iTunes album art, lock-screen and
+  CarPlay controls), and is now best treated as a reference / starting point rather than an actively
+  shipped product.
+sourceDescription: A professional radio station app for iOS with streaming, favorites, and live metadata.
+content: ./content/records/swift-radio-pro.md
 category: media
 tags:
   - swift
@@ -183,7 +191,7 @@ github:
     openPullRequests: 0
     contributorsKnown: 25
   sync:
-    syncedAt: 2026-08-16T03:50:38.204Z
+    syncedAt: 2026-08-11T09:35:14.706Z
     source: html
   languages:
     Swift: 161994
@@ -308,3 +316,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - mit

@@ -1,0 +1,10 @@
+<!-- Header mark. Loaded through `<img src>`, so page CSS cannot reach it —
+     the theme swap has to live inside this document, which means it
+     follows the OS colour scheme rather than the site's theme toggle. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <style>
+    rect { fill: #18181b }
+    @media (prefers-color-scheme: dark) { rect { fill: #fafafa } }
+  </style>
+  <rect width="16" height="16" rx="3"/>
+</svg>

@@ -1,8 +1,13 @@
 kind: project
 name: PeopleInSpace
 slug: peopleinspace
-description: Kotlin Multiplatform sample with SwiftUI, Jetpack Compose, Compose for Wear, Compose
-  for Desktop, and Compose for Web clients along with Ktor backend.
+description: PeopleInSpace is a Kotlin Multiplatform reference app that shares architecture and data
+  code across iOS, Android, desktop, web, and wearable clients.
+summary: A long-running KMP reference that demonstrates multi-platform architecture across iOS,
+  Android, desktop, web, and Wear OS from shared Kotlin code.
+sourceDescription: Kotlin Multiplatform sample with SwiftUI, Jetpack Compose, Compose for Wear,
+  Compose for Desktop, and Compose for Web clients along with Ktor backend.
+content: ./content/records/peopleinspace.md
 category: tools
 tags:
   - kmm
@@ -191,7 +196,7 @@ github:
     openPullRequests: 10
     contributorsKnown: 38
   sync:
-    syncedAt: 2026-08-16T03:50:27.558Z
+    syncedAt: 2026-08-11T09:34:57.345Z
     source: html
   languages:
     Kotlin: 198086
@@ -223,3 +228,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - apache-2.0

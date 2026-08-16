@@ -1,7 +1,8 @@
 kind: project
 name: Airdash
 slug: airdash
-description: Share files to any device
+description: AirDrop-style file sharing to nearby devices over Wi-Fi and Bluetooth, no internet required.
+sourceDescription: File sharing flutter webrtc app enabling sending files to any device from anywhere
 category: tools
 tags:
   - cross-platform
@@ -178,7 +179,7 @@ github:
     openPullRequests: 0
     contributorsKnown: 5
   sync:
-    syncedAt: 2026-08-16T03:49:17.712Z
+    syncedAt: 2026-08-11T09:33:47.594Z
     source: api
   languages:
     Dart: 188660
@@ -399,3 +400,5 @@ health:
   tier: curated
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - mit

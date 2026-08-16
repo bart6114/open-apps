@@ -1,8 +1,15 @@
 kind: project
 name: Mattermost Mobile
 slug: mattermost-mobile
-description: Next generation iOS and Android apps for Mattermost in React Native.
+description: Mattermost Mobile is the official React Native iOS and Android client for the
+  self-hostable Mattermost messaging platform, giving enterprise and dev teams on-device access to
+  channels, threads, calls, and push notifications backed by the same REST and WebSocket API as the
+  web and desktop clients.
+summary: The production-grade React Native client for Mattermost, the open-source, self-hostable
+  Slack alternative used by dev teams and regulated enterprises.
+sourceDescription: Next generation iOS and Android apps for Mattermost in React Native.
 category: communication
+content: ./content/records/mattermost-mobile.md
 tags:
   - cross-platform
 stack: react-native
@@ -391,7 +398,7 @@ github:
     pullRequestTemplate: false
   labels: []
   sync:
-    syncedAt: 2026-08-16T03:49:49.840Z
+    syncedAt: 2026-08-11T09:34:39.572Z
     source: html
   html:
     license: Apache-2.0
@@ -402,3 +409,5 @@ health:
   tier: listed
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - apache-2.0

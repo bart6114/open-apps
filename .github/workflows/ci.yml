@@ -17,5 +17,8 @@ jobs:
           node-version: "24"
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Fails when public/icons/ has drifted from the set @grove-dev/astro
+      # ships. Run `pnpm exec grove icons sync --force` to restore it.
+      - run: pnpm exec grove icons sync --check
       - run: pnpm exec grove check
       - run: pnpm build

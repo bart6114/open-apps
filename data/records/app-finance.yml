@@ -1,0 +1,81 @@
+kind: project
+name: app-finance
+slug: app-finance
+description: Fingrom is a Flutter-built, ad-free, multi-currency personal finance app that ships to
+  iOS, Android, macOS, Windows, Linux, and the Web from a single Dart codebase, with P2P device sync
+  and end-to-end encryption.
+summary: An ad-free, inclusive personal finance manager written in Flutter with multi-currency
+  accounts, recurring transactions, budget categories, Monte Carlo forecasting, and P2P device sync
+  over WebDAV or peer-to-peer channels.
+sourceDescription: Fingrom -- open-source platform-agnostic financial accounting application
+content: ./content/records/app-finance.md
+category: finance
+tags:
+  - accounting
+  - budget-app
+  - budget-tracker
+  - finance-app
+  - finance-application
+  - finance-management
+  - finance-tracker
+  - flutter-app
+  - money-manager
+  - open-source
+  - personal-finances
+stack: flutter
+projectType: real-app
+repoUrl: https://github.com/lyskouski/app-finance
+links:
+  github: https://github.com/lyskouski/app-finance
+source:
+  type: github-topic
+  owner: lyskouski
+  repo: app-finance
+  url: https://github.com/lyskouski/app-finance
+curation:
+  reviewed: false
+  labels: []
+  lenses: []
+visibility: keep
+licenses:
+  - noassertion
+health:
+  status: active
+  tier: listed
+  visibility: keep
+  cleanupCandidate: false
+  confidence: medium
+  reasons:
+    - active-development
+github:
+  repository:
+    full_name: lyskouski/app-finance
+    stargazers_count: 130
+    forks_count: 29
+    open_issues_count: 23
+    language: Dart
+    pushed_at: 2026-07-15T11:54:12Z
+    updated_at: 2026-08-08T08:59:11Z
+    archived: false
+    disabled: false
+    default_branch: main
+    license:
+      spdx_id: NOASSERTION
+      name: NOASSERTION
+    topics:
+      - accounting
+      - budget-app
+      - budget-tracker
+      - finance-app
+      - finance-application
+      - finance-management
+      - finance-tracker
+      - flutter-app
+      - money-manager
+      - open-source
+      - personal-finances
+  latestReleaseAt: 2026-07-11T09:52:28Z
+  homepage: https://tercad.com/app/finance/index.html
+  sync:
+    syncedAt: 2026-08-11T09:33:50.155Z
+    source: api

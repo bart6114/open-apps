@@ -2,6 +2,7 @@ kind: project
 name: Unwrap
 slug: unwrap
 description: Learn Swift interactively on your iPhone.
+sourceDescription: Learn Swift interactively on your iPhone.
 category: tools
 tags:
   - swift
@@ -172,7 +173,7 @@ github:
     openPullRequests: 4
     contributorsKnown: 65
   sync:
-    syncedAt: 2026-08-16T03:50:47.549Z
+    syncedAt: 2026-08-11T09:35:23.414Z
     source: html
   languages:
     Swift: 513785
@@ -203,3 +204,5 @@ health:
   visibility: keep
   cleanupCandidate: true
   staleReason: no_commits_365_days
+licenses:
+  - noassertion

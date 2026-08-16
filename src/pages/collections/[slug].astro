@@ -23,15 +23,24 @@ const entries = recordsToCollectionEntries(
   (records as { records: unknown[] }).records as never,
   siteConfig,
 );
-const model = getCollectionPageModel(collection, entries, collections);
+const model = getCollectionPageModel(collection, entries, collections, siteConfig);
+const { seo } = model;
 ---
 <BaseLayout
-  title={model.collection.title}
-  description={model.collection.description}
+  title={seo.title}
+  description={seo.description}
+  image={seo.image}
+  imageAlt={seo.imageAlt}
+  jsonLd={seo.jsonLd}
+  noindex={seo.noindex}
   site={siteConfig}
 >
   <CollectionPage
     model={model}
     eyebrow={model.collection.kind === "curated" ? "Curated collection" : "Generated collection"}
+    countNoun={{
+      singular: siteConfig.blueprintConfig?.labelSingular ?? "item",
+      plural: siteConfig.blueprintConfig?.labelPlural ?? "items",
+    }}
   />
 </BaseLayout>

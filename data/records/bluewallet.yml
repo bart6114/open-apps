@@ -35,13 +35,14 @@ source:
   repo: BlueWallet
   url: https://github.com/BlueWallet/BlueWallet
 curation:
-  reviewed: false
-  reviewedAt: 2026-06-13T00:29:01+08:00
+  reviewed: true
+  reviewedAt: 2026-08-11
   labels:
     - mature
     - hot
   lenses:
     - production-like
+  reviewedBy: Open Apps curators
 visibility: keep
 github:
   repository:
@@ -111,15 +112,15 @@ github:
     releases_url: https://api.github.com/repos/BlueWallet/BlueWallet/releases{/id}
     deployments_url: https://api.github.com/repos/BlueWallet/BlueWallet/deployments
     created_at: 2018-01-14T20:14:02Z
-    updated_at: 2026-08-16T02:51:39Z
-    pushed_at: 2026-08-16T00:24:46Z
+    updated_at: 2026-08-11T04:15:32Z
+    pushed_at: 2026-08-11T08:09:12Z
     git_url: git://github.com/BlueWallet/BlueWallet.git
     ssh_url: git@github.com:BlueWallet/BlueWallet.git
     clone_url: https://github.com/BlueWallet/BlueWallet.git
     svn_url: https://github.com/BlueWallet/BlueWallet
     homepage: https://bluewallet.io
     size: 212697
-    stargazers_count: 3271
+    stargazers_count: 3268
     watchers_count: 3238
     language: TypeScript
     has_issues: true
@@ -132,7 +133,7 @@ github:
     mirror_url: null
     archived: false
     disabled: false
-    open_issues_count: 415
+    open_issues_count: 417
     license:
       spdx_id: MIT
       name: MIT
@@ -687,7 +688,7 @@ github:
       color: d3ccff
       description: Extra attention is needed
   sync:
-    syncedAt: 2026-08-16T03:49:20.643Z
+    syncedAt: 2026-08-11T09:33:57.232Z
     source: api
   html:
     license: MIT
@@ -700,3 +701,9 @@ health:
   tier: listed
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - mit
+content: ./content/records/bluewallet.md
+summary: A Bitcoin wallet focused on privacy with on-chain transactions, Lightning Network payments,
+  and hardware-wallet integration.
+sourceDescription: Bitcoin wallet for iOS & Android. Built with React Native.

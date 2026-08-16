@@ -11,6 +11,12 @@ export default defineConfig({
       "A searchable directory of real open-source applications, organized by stack, category, platform, activity, and maturity.",
     url: "https://open-apps.dev.mn",
     repoUrl: "https://github.com/tortuvshin/open-apps",
+    // Both files carry their own `prefers-color-scheme` swap: an SVG
+    // served through `<img src>` is a separate document, so page CSS
+    // cannot repaint it. That is correct for the favicon (browser
+    // chrome follows the OS) and a known tradeoff for the header mark.
+    logo: "/logo.svg",
+    favicon: "/favicon.svg",
   },
 
   analytics: {
@@ -20,7 +26,8 @@ export default defineConfig({
   nav: [
     { label: "Home", href: "/" },
     { label: "Browse", href: "/apps" },
-    { label: "Recently added", href: "/apps?sort=recently-added" },
+    { label: "Collections", href: "/collections" },
+    { label: "Community", href: "/contributors" },
     { label: "About", href: "/about" },
   ],
 
@@ -69,16 +76,52 @@ export default defineConfig({
     ],
   },
 
-  facets: ["category", "stack", "platform", "tags"],
+  // The contributors grid is a community wall, not a leaderboard —
+  // per-user contribution counts are noisy here, so only the avatar
+  // and handle are shown.
+  contributors: { showContributionCount: false },
+
+  browse: {
+    facets: ["category", "stack", "platform", "license", "tags"],
+  },
   routes: { directory: "apps", item: "app" },
   labels: { singular: "app", plural: "apps" },
 
   integrations: { github: false },
 
+  // No `primaryColor`: buttons and accents fall through to
+  // `--grove-foreground`, the neutral treatment the design system
+  // ships. Set one only to deliberately brand away from that.
   theme: {
-    primaryColor: "#1f6feb",
     radius: "soft",
     density: "comfortable",
     containerWidth: "72rem",
+  },
+
+  audit: {
+    baseUrl: "http://127.0.0.1:4321",
+    pages: [
+      { path: "/", type: "home", label: "Homepage" },
+      { path: "/apps/", type: "directory", label: "Directory index" },
+      { path: "/collections/top-flutter-apps/", type: "collection", label: "Top Flutter Apps collection" },
+      { path: "/apps/immich/", type: "record", label: "Record detail" },
+      { path: "/about/", type: "content", label: "About page" },
+      { path: "/empty/", type: "empty", label: "Empty state" },
+      { path: "/this-page-does-not-exist/", type: "404", label: "404 page" },
+    ],
+  },
+
+  readme: {
+    title: "Open Apps — a directory of real open-source applications",
+    tagline: "Hand-picked apps worth running, studying, and extending.",
+    url: "https://open-apps.dev.mn",
+    browseLabel: "Browse the directory →",
+    intro: [
+      "## Why this list",
+      "",
+      "Each app below is **actively maintained**, **well documented**, and",
+      "**useful in production**. Submit a new entry via the web form or",
+      "by opening a pull request against `data/records/`.",
+    ].join("\n"),
   },
 });

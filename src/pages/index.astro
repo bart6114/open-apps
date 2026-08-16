@@ -1,10 +1,15 @@
 ---
 /**
- * Home page — generic.
+ * Home page.
  *
- * Mirrors the openapps structure: Hero → WhyThisExists → three
- * lens sections (hot / new / mature) → StackGrid → CategoryGrid →
- * ContributorsGrid → OriginalCollection.
+ * Structure: Hero → two lens sections (actively developed / recently
+ * added) → StackGrid → CollectionTeaser → CategoryGrid →
+ * ContributorsGrid → OriginalCollection → FinalCta.
+ *
+ * The two lenses answer the questions a visitor actually has — "is
+ * this alive?" and "what's new?" — so they're derived here rather
+ * than taken from `getHomePageModel`, whose hot / mature lenses are
+ * star-driven and largely echo each other on this directory.
  *
  * All data derives from `data/generated/records.{index,full}.json`
  * and `data/generated/site-config.json`. Nothing here is hardcoded
@@ -13,7 +18,6 @@
  */
 import BaseLayout from "@grove-dev/astro/layouts/BaseLayout.astro";
 import Hero from "@grove-dev/astro/components/Hero.astro";
-import WhyThisExists from "@grove-dev/astro/components/WhyThisExists.astro";
 import RecordSection from "@grove-dev/astro/components/RecordSection.astro";
 import StackGrid from "@grove-dev/astro/components/StackGrid.astro";
 import CategoryGrid from "@grove-dev/astro/components/CategoryGrid.astro";
@@ -28,16 +32,32 @@ import {
   recordsToCollectionEntries,
   loadCollections,
 } from "@grove-dev/astro/server";
+import { applySort } from "@grove-dev/core";
+import type { IndexRecord } from "@grove-dev/core";
 import records from "@grove/generated/records.json";
+import indexPayload from "@grove/generated/records.index.json";
 import siteConfig from "@grove/generated/site-config.json";
 
 const home = getHomePageModel(siteConfig);
 const { slug, itemSingular, itemPlural } = home;
+const { seo } = home;
 
-// ── Lens sectioning (Hot / New / Mature) ────────────────────────
-const hotList = home.hot;
-const newList = home.recentlyAdded;
-const matureList = home.established;
+// ── Lens sectioning (Active / New) ──────────────────────────────
+// "Actively developed" sorts on `github.pushedAt`; "recently added"
+// on `curation.reviewedAt`. Records missing the sort key sink to the
+// bottom rather than vanishing, so both lists always fill.
+const projects = ((indexPayload as { records: unknown[] }).records as IndexRecord[]).filter(
+  (record) => record.kind === "project",
+);
+const activeList = applySort(projects, "recently-updated").slice(0, 6);
+// Dedupe so a single record never renders as two cards on one page.
+// The two axes barely overlap here, so this costs the "new" list
+// nothing but the occasional swap for the next-newest record.
+const activeSlugs = new Set(activeList.map((record) => record.slug));
+const newList = applySort(
+  projects.filter((record) => !activeSlugs.has(record.slug)),
+  "recently-added",
+).slice(0, 6);
 
 const { stacks, categories } = home;
 
@@ -52,13 +72,18 @@ const teaserEntries = recordsToCollectionEntries(
 const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries, 3);
 ---
 
-<BaseLayout title={title} description={description} site={siteConfig}>
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  image={seo.image}
+  jsonLd={seo.jsonLd}
+  site={siteConfig}
+>
   <Hero
-    name={`Find ${itemPlural} you can actually\u00a0`}
+    name={`Find ${itemPlural} you can actually`}
     tagline="run, study, and contribute to."
     description={description}
     eyebrow={`A directory of real curated ${itemPlural}`}
-    eyebrowBadge="Beta"
     stats={{
       totalApps: stats.apps,
       totalCategories: stats.categories,
@@ -72,27 +97,25 @@ const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries,
     searchHref={`/${slug}`}
     searchPlaceholder={`Search ${itemPlural}, stacks, or categories...`}
     quickFilters={[
-      { label: `Trending ${itemPlural}`, href: `/${slug}?label=hot` },
+      { label: "Actively developed", href: `/${slug}?sort=recently-updated` },
       { label: "Recently added", href: `/${slug}?sort=recently-added` },
-      { label: "Established", href: `/${slug}?label=mature` },
+      { label: "Most starred", href: `/${slug}?sort=most-starred` },
     ]}
     ctas={[
       { label: `Browse ${itemPlural}`, href: `/${slug}`, variant: "primary" },
-      { label: `Submit ${itemSingular}`, href: "/submit", variant: "outline" },
     ]}
   />
 
-  <WhyThisExists />
-
   <RecordSection
-    id="hot"
-    title="Trending now"
-    description={`${itemPlural.charAt(0).toUpperCase() + itemPlural.slice(1)} gaining stars, activity, or attention recently.`}
-    eyebrow="Hot"
-    items={hotList}
+    id="active"
+    title="Actively developed"
+    description={`${itemPlural.charAt(0).toUpperCase() + itemPlural.slice(1)} with the most recent commits — still being built, fixed, and shipped.`}
+    eyebrow="Active"
+    items={activeList}
+    limit={6}
     hrefFor={(r) => `/${slug}/${r.slug}`}
-    viewAllHref={`/${slug}?label=hot`}
-    viewAllLabel={`View all trending ${itemPlural}`}
+    viewAllHref={`/${slug}?sort=recently-updated`}
+    viewAllLabel={`View all by activity`}
   />
 
   <RecordSection
@@ -101,31 +124,37 @@ const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries,
     description={`${itemPlural.charAt(0).toUpperCase() + itemPlural.slice(1)} added to the directory in the last few weeks.`}
     eyebrow="New"
     items={newList}
+    limit={6}
     hrefFor={(r) => `/${slug}/${r.slug}`}
     viewAllHref={`/${slug}?sort=recently-added`}
     viewAllLabel={`View all recently added`}
   />
 
-  <RecordSection
-    id="mature"
-    title="Established"
-    description={`Long-running curated ${itemPlural} with strong history, active maintainers, and real-world usage.`}
-    eyebrow="Mature"
-    items={matureList}
-    hrefFor={(r) => `/${slug}/${r.slug}`}
-    viewAllHref={`/${slug}?label=mature`}
-    viewAllLabel={`View all established`}
+  <StackGrid
+    stacks={stacks}
+    pathPrefix={`/${slug}`}
+    itemLabelPlural={itemPlural}
+    itemNoun={{ singular: itemSingular, plural: itemPlural }}
+    hrefFor={(stackSlug: string) => `/stacks/${stackSlug}`}
   />
-
-  <StackGrid stacks={stacks} pathPrefix={`/${slug}`} itemLabelPlural={itemPlural} />
-  <CollectionTeaser model={collectionTeaser} />
-  <CategoryGrid categories={categories} pathPrefix={`/${slug}`} itemLabelPlural={itemPlural} />
+  <CollectionTeaser
+    model={collectionTeaser}
+    countNoun={{ singular: itemSingular, plural: itemPlural }}
+  />
+  <CategoryGrid
+    categories={categories}
+    pathPrefix={`/${slug}`}
+    itemLabelPlural={itemPlural}
+    itemNoun={{ singular: itemSingular, plural: itemPlural }}
+    hrefFor={(categorySlug: string) => `/categories/${categorySlug}`}
+  />
 
   <ContributorsGrid
     contributors={contributors}
     total={contributors.length || undefined}
     viewAllHref={`/contributors`}
     viewAllLabel="Meet the community"
+    showContributionCount={siteConfig.contributors?.showContributionCount ?? true}
   />
 
   {siteConfig.stats?.originalRepo && (

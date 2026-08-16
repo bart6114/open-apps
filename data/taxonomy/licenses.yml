@@ -1,0 +1,71 @@
+- id: mit
+  name: MIT License
+  family: permissive
+  url: https://spdx.org/licenses/MIT.html
+- id: apache-2.0
+  name: Apache License 2.0
+  family: permissive
+  url: https://spdx.org/licenses/Apache-2.0.html
+- id: bsd-3-clause
+  name: BSD 3-Clause License
+  family: permissive
+  url: https://spdx.org/licenses/BSD-3-Clause.html
+- id: gpl-3.0
+  name: GNU GPL v3.0
+  family: copyleft
+  url: https://spdx.org/licenses/GPL-3.0-or-later.html
+- id: gpl-2.0
+  name: GNU GPL v2.0
+  family: copyleft
+  url: https://spdx.org/licenses/GPL-2.0-or-later.html
+- id: lgpl-2.1
+  name: GNU LGPL v2.1
+  family: weak-copyleft
+  url: https://spdx.org/licenses/LGPL-2.1-or-later.html
+- id: lgpl-3.0
+  name: GNU LGPL v3.0
+  family: weak-copyleft
+  url: https://spdx.org/licenses/LGPL-3.0-or-later.html
+- id: mpl-2.0
+  name: Mozilla Public License 2.0
+  family: weak-copyleft
+  url: https://spdx.org/licenses/MPL-2.0.html
+- id: isc
+  name: ISC License
+  family: permissive
+  url: https://spdx.org/licenses/ISC.html
+- id: unlicense
+  name: The Unlicense
+  family: permissive
+  url: https://spdx.org/licenses/Unlicense.html
+- id: cc0-1.0
+  name: Creative Commons Zero v1.0 Universal
+  family: public-domain
+  url: https://spdx.org/licenses/CC0-1.0.html
+- id: cc-by-4.0
+  name: Creative Commons Attribution 4.0
+  family: permissive
+  url: https://spdx.org/licenses/CC-BY-4.0.html
+- id: agpl-3.0
+  name: GNU AGPL v3.0
+  family: copyleft
+  url: https://spdx.org/licenses/AGPL-3.0-or-later.html
+- id: apache
+  name: Apache License (unspecified version)
+  family: permissive
+  url: https://spdx.org/licenses/Apache-2.0.html
+- id: bsd
+  name: BSD License (unspecified clause set)
+  family: permissive
+  url: https://spdx.org/licenses/BSD-3-Clause.html
+# SPDX `NOASSERTION` is what the GitHub API returns when it cannot
+# determine a license. It is not a license itself — it is a
+# placeholder. We surface it as a taxonomy bucket so the 14 records
+# affected are not invisible in the licenses facet, and we tag the
+# family as `unknown` so it never sorts into permissive / copyleft
+# buckets. Curator follow-up: a real SPDX id should replace this
+# entry once the README is read.
+- id: noassertion
+  name: Unknown / undetected
+  family: unknown
+  url: https://spdx.dev/specifications/

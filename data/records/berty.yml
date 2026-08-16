@@ -1,8 +1,15 @@
 kind: project
 name: Berty
 slug: berty
-description: Berty is a secure peer-to-peer messaging app that works with or without internet
+description: Berty is a peer-to-peer messenger that runs entirely over the Wesh protocol on top of
+  libp2p, so peers connect directly via mDNS, Bluetooth Low Energy, or Tor with no central server in
+  the loop.
+summary: An open-source messenger built on the Wesh protocol that runs over libp2p with mDNS, BLE,
+  and Tor transports, letting peers exchange messages directly without any central server or trusted
+  infrastructure.
+sourceDescription: Berty is a secure peer-to-peer messaging app that works with or without internet
   access, cellular data or trust in the network.
+content: ./content/records/berty.md
 category: communication
 tags:
   - cross-platform
@@ -113,8 +120,8 @@ github:
     releases_url: https://api.github.com/repos/berty/berty/releases{/id}
     deployments_url: https://api.github.com/repos/berty/berty/deployments
     created_at: 2018-07-16T05:21:19Z
-    updated_at: 2026-08-14T22:48:27Z
-    pushed_at: 2026-08-14T12:21:46Z
+    updated_at: 2026-08-11T07:36:30Z
+    pushed_at: 2026-08-07T06:28:17Z
     git_url: git://github.com/berty/berty.git
     ssh_url: git@github.com:berty/berty.git
     clone_url: https://github.com/berty/berty.git
@@ -304,7 +311,7 @@ github:
       color: 66f48c
       description: ""
   sync:
-    syncedAt: 2026-08-16T03:49:19.995Z
+    syncedAt: 2026-08-11T09:33:54.263Z
     source: api
   html:
     license: Apache-2.0
@@ -317,3 +324,5 @@ health:
   tier: listed
   visibility: keep
   cleanupCandidate: false
+licenses:
+  - noassertion

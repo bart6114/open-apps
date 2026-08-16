@@ -1,14 +1,19 @@
 slug: top-ios-apps
 kind: curated
 title: Top Open Source iOS Apps
-description: Real iOS applications you can install today, with public source code and active maintenance.
+description: Mature native iOS apps with ≥1,000 GitHub stars and a verifiable license.
 query:
   stacks: [ios]
-  excludeStatuses: [archived]
+  excludeStatuses: [archived, stale]
+  minStars: 1000
 ranking:
   preset: quality
 editorial:
-  selectionNote: Ranked by curation score and recent activity.
+  lastReviewedAt: "2026-08-11"
+  selectionNote: |
+    Stack is `ios`. At least 1,000 GitHub stars. License is detected
+    (i.e. not `NOASSERTION` / `OTHER`). Archived and stale records are
+    excluded. Ranked by curation score.
 seo:
   index: true
   title: Top Open Source iOS Apps in 2026
