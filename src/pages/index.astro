@@ -40,6 +40,7 @@ import siteConfig from "@grove/generated/site-config.json";
 
 const home = getHomePageModel(siteConfig);
 const { slug, itemSingular, itemPlural } = home;
+const { seo } = home;
 
 // ── Lens sectioning (Active / New) ──────────────────────────────
 // "Actively developed" sorts on `github.pushedAt`; "recently added"
@@ -71,7 +72,13 @@ const teaserEntries = recordsToCollectionEntries(
 const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries, 3);
 ---
 
-<BaseLayout title={title} description={description} site={siteConfig}>
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  image={seo.image}
+  jsonLd={seo.jsonLd}
+  site={siteConfig}
+>
   <Hero
     name={`Find ${itemPlural} you can actually`}
     tagline="run, study, and contribute to."

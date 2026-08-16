@@ -4,6 +4,56 @@ All notable changes to Open Apps are documented here.
 
 ## [Unreleased]
 
+### Changed — Grove 0.5.4 → 0.6.0 port
+
+Adopted the Grove 0.6.0 surface — every page model now exposes a `seo: PageSeo`
+block, every page forwards `image`, `imageAlt`, and `jsonLd` to `BaseLayout`,
+and the per-page OG image pipeline ships enabled so each record, collection,
+and taxonomy page emits its own 1200×630 PNG instead of sharing the static
+`/og-image.svg`.
+
+- **Dependencies:** `@grove-dev/{astro,cli,core}` pinned to `0.6.0`.
+- **`siteConfig` propagated to model functions.** `getCollectionIndexModel`,
+  `getCollectionPageModel`, `getTaxonomyPageModel` now receive the site
+  config so they can populate the `seo` block instead of returning a
+  stripped-down model that forces the page to hand-roll titles/descriptions.
+- **`seoTitle` + `titleCaseFirst` for paginated browse titles.** The browse
+  page used to print `Browse apps — page 3 — Open Apps` on every paginated
+  route; the new path uses `seoTitle(...)` and `titleCaseFirst(...)` so
+  page-2+ titles fit the 65-char cap and pass through one helper that
+  already serves the rest of the surface.
+- **`getTaxonomyIndexSeo`** replaces the hand-rolled title/description on
+  `/categories/` and `/stacks/`; both index pages now emit a `collectionSchema`
+  ItemList with each entry as a `ListItem`, so the search-result page link
+  graph matches what the visitor sees.
+- **`/empty/` noindex.** The audit fixture page was the only static page
+  without a `noindex`; now it does, matching `/submit/` and `/404/`.
+- **CI parity:** new `audit` script (`pnpm audit`) and
+  `.github/workflows/readme.yml` mirror the canonical example so the weekly
+  README regen + Lighthouse gate are both wired through Grove's tools
+  instead of bespoke shell scripts.
+- **OG card generation is enabled by default.** `prepareDirectory` now
+  writes `public/og/{home,default}.png`, `og/records/<slug>.png` (76 files),
+  `og/collections/<slug>.png` (4 files), and one PNG per category, stack,
+  and license from the existing taxonomy. The static `public/og-image.svg`
+  is kept as the final fallback when the rasterizer can't load.
+
+UI/UX polish that ships for free with the framework bump (zero consumer
+changes):
+
+- **TOC active state.** The pill background on the active TOC item is
+  gone; a 2px left-rail accent + text-color emphasis reads as navigation.
+- **Search `/` hint.** The shortcut hint now anchors `right-2` to match
+  the clear button, and the input reserves `pr-10` so the placeholder
+  extends up to the chip without pushing the layout.
+- **Card / record-header logo `onerror` fallback** reveals the initials
+  for any record whose GitHub owner URL is dead or renamed, instead of
+  rendering the browser's broken-image glyph.
+- **Disabled pagination contrast** is now WCAG-safe against the dark
+  surface.
+
+## [Unreleased]
+
 ### Grove rebuild context (PR #212)
 
 The directory was rebuilt as a consumer-owned Astro application powered by

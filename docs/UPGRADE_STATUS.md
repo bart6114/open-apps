@@ -1,5 +1,11 @@
 # Grove 0.5.0 Upgrade Status
 
+> **Note:** This document tracks the 0.5.0-next.2 → 0.5.4 adoption work and is
+> now **superseded** by the 0.5.4 → 0.6.0 port that completes the SEO surface
+> (per-page OG images, `seo.*` block on every page, BreadcrumbList JSON-LD on
+> every collection/taxonomy/record detail). See
+> [`../CHANGELOG.md`](../CHANGELOG.md) for the current state of the consumer.
+
 ## Current State
 
 open-apps has been upgraded to Grove `0.5.0-next.2` with all data/configuration fixes applied and documentation updated. This document tracks what's complete, what's deferred, and what patterns are ready to adopt.

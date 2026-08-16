@@ -10,6 +10,7 @@ const {
   singular,
   title,
   description,
+  seo,
   repoUrl,
   copy,
   fields,
@@ -39,7 +40,14 @@ const pleaseAvoid = [
 ];
 ---
 
-<BaseLayout title={title} description={description} site={siteConfig} noindex>
+<BaseLayout
+  title={title}
+  description={description}
+  jsonLd={seo.jsonLd}
+  noindex={seo.noindex}
+  site={siteConfig}
+  submitHref="/submit"
+>
   <Container>
     <section class="py-10 sm:py-14">
       <div class="max-w-3xl">
