@@ -124,11 +124,11 @@ github:
     has_wiki: true
     has_pages: false
     has_discussions: true
-    forks_count: 515
+    forks_count: 517
     mirror_url: null
     archived: false
     disabled: false
-    open_issues_count: 14
+    open_issues_count: 13
     license:
       spdx_id: GPL-2.0
       name: GPL-2.0

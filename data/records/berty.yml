@@ -128,7 +128,7 @@ github:
     svn_url: https://github.com/berty/berty
     homepage: https://berty.tech
     size: 274467
-    stargazers_count: 9270
+    stargazers_count: 9273
     watchers_count: 9248
     language: TypeScript
     has_issues: true
@@ -141,7 +141,7 @@ github:
     mirror_url: null
     archived: false
     disabled: false
-    open_issues_count: 90
+    open_issues_count: 92
     license:
       spdx_id: NOASSERTION
       name: NOASSERTION
