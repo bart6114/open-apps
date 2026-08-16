@@ -12,14 +12,14 @@ importers:
         specifier: ^0.9.9
         version: 0.9.10(prettier@3.9.6)(typescript@5.9.3)
       '@grove-dev/astro':
-        specifier: 0.5.1
-        version: 0.5.1(astro@7.2.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.9.5)(jiti@2.7.0)(yaml@2.9.0))
+        specifier: 0.5.3
+        version: 0.5.3(astro@7.2.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.9.5)(jiti@2.7.0)(yaml@2.9.0))
       '@grove-dev/cli':
-        specifier: 0.5.1
-        version: 0.5.1
+        specifier: 0.5.3
+        version: 0.5.3
       '@grove-dev/core':
-        specifier: 0.5.1
-        version: 0.5.1
+        specifier: 0.5.3
+        version: 0.5.3
       '@tailwindcss/vite':
         specifier: ^4.3.0
         version: 4.3.3(vite@8.2.1(@types/node@25.9.5)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.0))
@@ -416,19 +416,19 @@ packages:
   '@formatjs/intl-localematcher@0.6.2':
     resolution: {integrity: sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA==}
 
-  '@grove-dev/astro@0.5.1':
-    resolution: {integrity: sha512-uEM3mQf6DAHtdN3r8Uyb+/ozcXTBbDZ2svPoo0qdO/9aMRDzZg40WdBDL+5BXKSQclIQN92WcU+xsDzbSo2boA==}
+  '@grove-dev/astro@0.5.3':
+    resolution: {integrity: sha512-wCCFdzNeH4uPrYT5+xIk1vlP4ZSr93yUJ2SAsGOgRvqnNJ2WxFTo9Hnr+yMt6oEpBW43DBLB46bxN1n6hIuTxg==}
     engines: {node: '>=22.12.0'}
     peerDependencies:
       astro: ^6.0.0 || ^7.0.0
 
-  '@grove-dev/cli@0.5.1':
-    resolution: {integrity: sha512-+EUTXq84YgAeKCQv0dDiHVgBNX4H7BaGw4P3I2DFjw2Shw/3zsm0gbl3G8E7+LgG/crI5Epliu8ABw1z+ChGjA==}
+  '@grove-dev/cli@0.5.3':
+    resolution: {integrity: sha512-K6/fGYD5GHli5AnHvJEeoFHqexvpbN0WNksj+b0lum/4wdljSYQzrKdRpKDcCdZBjjWrTtnAR6C4kl+JKGWSow==}
     engines: {node: '>=22.12.0'}
     hasBin: true
 
-  '@grove-dev/core@0.5.1':
-    resolution: {integrity: sha512-Db7iUnBB+vKqwfJ0/OmRrJARJkJWRuLcGHAAeClUTM1ZNdWfJhwpXz6DFl1bZHqyALsF5wHUAlXvtE24EFtDuA==}
+  '@grove-dev/core@0.5.3':
+    resolution: {integrity: sha512-t+EeF/6vQ+pSDrsqOH7WbBA8g2TUuWdSIIZq7nZtFZabp4TlYzejh7JmW2jNQD8rS7RCW8SQlM5e5Bvv/fp7Cw==}
     engines: {node: '>=22.12.0'}
 
   '@img/colour@1.1.0':
@@ -3168,18 +3168,18 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@grove-dev/astro@0.5.1(astro@7.2.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.9.5)(jiti@2.7.0)(yaml@2.9.0))':
+  '@grove-dev/astro@0.5.3(astro@7.2.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.9.5)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
-      '@grove-dev/core': 0.5.1
+      '@grove-dev/core': 0.5.3
       astro: 7.2.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.9.5)(jiti@2.7.0)(yaml@2.9.0)
       marked: 18.0.9
       sanitize-html: 2.17.7
       shiki: 1.29.2
       yaml: 2.9.0
 
-  '@grove-dev/cli@0.5.1':
+  '@grove-dev/cli@0.5.3':
     dependencies:
-      '@grove-dev/core': 0.5.1
+      '@grove-dev/core': 0.5.3
       chrome-launcher: 1.2.1
       commander: 15.0.0
       lighthouse: 12.8.2
@@ -3193,7 +3193,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@grove-dev/core@0.5.1':
+  '@grove-dev/core@0.5.3':
     dependencies:
       jiti: 2.7.0
       yaml: 2.9.0
