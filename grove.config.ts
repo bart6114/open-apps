@@ -11,6 +11,12 @@ export default defineConfig({
       "A searchable directory of real open-source applications, organized by stack, category, platform, activity, and maturity.",
     url: "https://open-apps.dev.mn",
     repoUrl: "https://github.com/tortuvshin/open-apps",
+    // Both files carry their own `prefers-color-scheme` swap: an SVG
+    // served through `<img src>` is a separate document, so page CSS
+    // cannot repaint it. That is correct for the favicon (browser
+    // chrome follows the OS) and a known tradeoff for the header mark.
+    logo: "/logo.svg",
+    favicon: "/favicon.svg",
   },
 
   analytics: {

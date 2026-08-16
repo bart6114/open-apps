@@ -1,0 +1,9 @@
+<!-- Same mark as /logo.svg. Browser chrome follows the OS colour scheme,
+     so `prefers-color-scheme` is the correct signal here. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <style>
+    rect { fill: #18181b }
+    @media (prefers-color-scheme: dark) { rect { fill: #fafafa } }
+  </style>
+  <rect width="16" height="16" rx="3"/>
+</svg>
