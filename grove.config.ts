@@ -70,6 +70,11 @@ export default defineConfig({
     ],
   },
 
+  // The contributors grid is a community wall, not a leaderboard —
+  // per-user contribution counts are noisy here, so only the avatar
+  // and handle are shown.
+  contributors: { showContributionCount: false },
+
   browse: {
     facets: ["category", "stack", "platform", "license", "tags"],
   },
@@ -78,8 +83,10 @@ export default defineConfig({
 
   integrations: { github: false },
 
+  // No `primaryColor`: buttons and accents fall through to
+  // `--grove-foreground`, the neutral treatment the design system
+  // ships. Set one only to deliberately brand away from that.
   theme: {
-    primaryColor: "#1f6feb",
     radius: "soft",
     density: "comfortable",
     containerWidth: "72rem",

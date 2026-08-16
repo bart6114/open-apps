@@ -1,14 +1,10 @@
 @import "tailwindcss";
 
 /*
- * Grove V1 design tokens. Theme is overridable from `grove.config.ts`
- * at scaffold time; we expose the same names as CSS variables so
- * consumers can layer their own brand colors in without forking.
- *
- * The package owns the Starlight-aligned palette, semantic theme tokens,
- * font stacks, and light/dark base styles. This consumer sheet contains
- * only scaffold-level overrides so those foundations cannot drift when
- * the package theme changes.
+ * Grove V1 scaffold overrides. The package's `@grove-dev/astro/styles.css`
+ * owns the full design system (`.grove-prose`, sidebar, table wrap,
+ * task list, details, kbd, activity-tone selectors, etc.). This file
+ * only ships brand-level overrides and theme remap.
  *
  * NOTE: do NOT add `@custom-variant dark` here. `@grove-dev/astro`'s
  * `styles.css` already declares the `.dark`-class variant, and
@@ -16,18 +12,10 @@
  * second one in this consumer file has been observed to confuse
  * the variant resolution and produce utilities that key off
  * `prefers-color-scheme` instead of the `.dark` class on <html>.
- * The net effect: `<html class="dark">` is set but the page stays
- * in light mode because the `dark:` utilities never match.
  */
-@theme {
-  --color-grove-primary: var(--color-foreground);
-}
-
-@layer base {
-  :root {
-    --grove-color-primary: var(--color-grove-primary);
-    --grove-radius: 0.5rem;
-    --grove-container-width: 72rem;
-
-  }
-}
+/*
+ * Brand color, radius, density, and container width all come from
+ * `theme` in grove.config.ts — BaseLayout resolves them into
+ * `--grove-*` custom properties on <html>. Add page-level overrides
+ * here only when a token needs to differ from the config.
+ */

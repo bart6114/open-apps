@@ -23,20 +23,19 @@ const entries = recordsToCollectionEntries(
   (records as { records: unknown[] }).records as never,
   siteConfig,
 );
-const model = getCollectionPageModel(collection, entries, collections, {
-  name: siteConfig.name,
-  url: (siteConfig as { url?: string }).url,
-});
-const jsonLd = model.jsonLd as Record<string, unknown> | Record<string, unknown>[] | undefined;
+const model = getCollectionPageModel(collection, entries, collections);
 ---
 <BaseLayout
   title={model.collection.title}
   description={model.collection.description}
   site={siteConfig}
-  jsonLd={jsonLd}
 >
   <CollectionPage
     model={model}
     eyebrow={model.collection.kind === "curated" ? "Curated collection" : "Generated collection"}
+    countNoun={{
+      singular: siteConfig.blueprintConfig?.labelSingular ?? "item",
+      plural: siteConfig.blueprintConfig?.labelPlural ?? "items",
+    }}
   />
 </BaseLayout>

@@ -13,7 +13,6 @@
  */
 import BaseLayout from "@grove-dev/astro/layouts/BaseLayout.astro";
 import Hero from "@grove-dev/astro/components/Hero.astro";
-import WhyThisExists from "@grove-dev/astro/components/WhyThisExists.astro";
 import RecordSection from "@grove-dev/astro/components/RecordSection.astro";
 import StackGrid from "@grove-dev/astro/components/StackGrid.astro";
 import CategoryGrid from "@grove-dev/astro/components/CategoryGrid.astro";
@@ -54,11 +53,10 @@ const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries,
 
 <BaseLayout title={title} description={description} site={siteConfig}>
   <Hero
-    name={`Find ${itemPlural} you can actually\u00a0`}
+    name={`Find ${itemPlural} you can actually`}
     tagline="run, study, and contribute to."
     description={description}
     eyebrow={`A directory of real curated ${itemPlural}`}
-    eyebrowBadge="Beta"
     stats={{
       totalApps: stats.apps,
       totalCategories: stats.categories,
@@ -78,11 +76,8 @@ const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries,
     ]}
     ctas={[
       { label: `Browse ${itemPlural}`, href: `/${slug}`, variant: "primary" },
-      { label: `Submit ${itemSingular}`, href: "/submit", variant: "outline" },
     ]}
   />
-
-  <WhyThisExists />
 
   <RecordSection
     id="hot"
@@ -90,6 +85,7 @@ const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries,
     description={`${itemPlural.charAt(0).toUpperCase() + itemPlural.slice(1)} gaining stars, activity, or attention recently.`}
     eyebrow="Hot"
     items={hotList}
+    limit={6}
     hrefFor={(r) => `/${slug}/${r.slug}`}
     viewAllHref={`/${slug}?label=hot`}
     viewAllLabel={`View all trending ${itemPlural}`}
@@ -101,6 +97,7 @@ const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries,
     description={`${itemPlural.charAt(0).toUpperCase() + itemPlural.slice(1)} added to the directory in the last few weeks.`}
     eyebrow="New"
     items={newList}
+    limit={6}
     hrefFor={(r) => `/${slug}/${r.slug}`}
     viewAllHref={`/${slug}?sort=recently-added`}
     viewAllLabel={`View all recently added`}
@@ -112,20 +109,37 @@ const collectionTeaser = getCollectionTeaserModel(allCollections, teaserEntries,
     description={`Long-running curated ${itemPlural} with strong history, active maintainers, and real-world usage.`}
     eyebrow="Mature"
     items={matureList}
+    limit={6}
     hrefFor={(r) => `/${slug}/${r.slug}`}
     viewAllHref={`/${slug}?label=mature`}
     viewAllLabel={`View all established`}
   />
 
-  <StackGrid stacks={stacks} pathPrefix={`/${slug}`} itemLabelPlural={itemPlural} />
-  <CollectionTeaser model={collectionTeaser} />
-  <CategoryGrid categories={categories} pathPrefix={`/${slug}`} itemLabelPlural={itemPlural} />
+  <StackGrid
+    stacks={stacks}
+    pathPrefix={`/${slug}`}
+    itemLabelPlural={itemPlural}
+    itemNoun={{ singular: itemSingular, plural: itemPlural }}
+    hrefFor={(stackSlug: string) => `/stacks/${stackSlug}`}
+  />
+  <CollectionTeaser
+    model={collectionTeaser}
+    countNoun={{ singular: itemSingular, plural: itemPlural }}
+  />
+  <CategoryGrid
+    categories={categories}
+    pathPrefix={`/${slug}`}
+    itemLabelPlural={itemPlural}
+    itemNoun={{ singular: itemSingular, plural: itemPlural }}
+    hrefFor={(categorySlug: string) => `/categories/${categorySlug}`}
+  />
 
   <ContributorsGrid
     contributors={contributors}
     total={contributors.length || undefined}
     viewAllHref={`/contributors`}
     viewAllLabel="Meet the community"
+    showContributionCount={siteConfig.contributors?.showContributionCount ?? true}
   />
 
   {siteConfig.stats?.originalRepo && (

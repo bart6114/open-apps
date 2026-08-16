@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@grove-dev/astro/layouts/BaseLayout.astro";
 import { filterRecords } from "@grove-dev/core";
+import { itemLabelPlural } from "@grove-dev/astro/server";
 import indexPayload from "@grove/generated/records.index.json";
 import siteConfig from "@grove/generated/site-config.json";
 import TaxonomyList from "../../components/TaxonomyList.astro";
@@ -15,8 +16,11 @@ export function getStaticPaths() {
 
 const { displayName } = Astro.props;
 const name = Astro.params.name;
+const items = itemLabelPlural();
 const indexRecords = (indexPayload as { records: unknown[] }).records as never;
-const categoryRecords = filterRecords(indexRecords, { categories: [name] }) as Array<{
+const categoryRecords = filterRecords(indexRecords, {
+  categories: [name],
+}) as Array<{
   slug: string;
   name?: string;
   title?: string;
@@ -26,14 +30,14 @@ const categoryRecords = filterRecords(indexRecords, { categories: [name] }) as A
 ---
 
 <BaseLayout
-  title={`${displayName} apps`}
-  description={`Open-source apps in the ${displayName} category.`}
+  title={`${displayName} ${items}`}
+  description={`Open-source ${items} in the ${displayName} category.`}
   site={siteConfig}
 >
   <TaxonomyList
     eyebrow="Category"
     displayName={displayName}
-    lede={`Browse open-source apps in this directory under the ${displayName} category.`}
+    lede={`Browse open-source ${items} in this directory in the ${displayName} category.`}
     records={categoryRecords}
   />
 </BaseLayout>
