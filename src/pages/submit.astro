@@ -1,10 +1,21 @@
 ---
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { parse } from "yaml";
 import siteConfig from "@grove/generated/site-config.json";
 import { getSubmissionPageModel } from "@grove-dev/astro/server";
 import BaseLayout from "@grove-dev/astro/layouts/BaseLayout.astro";
 import Container from "@grove-dev/astro/layouts/Container.astro";
-import SubmissionClient from "@grove-dev/astro/components/SubmissionClient.astro";
+import SubmissionClient from "../components/SubmissionClient.astro";
 import { buttonClass } from "@grove-dev/astro/ui/button";
+
+// The submission model does not expose the distribution-channel
+// taxonomy, so read it straight from the source of truth.
+// Resolved from the project root: the prerender bundle relocates this
+// module, so `import.meta.url`-relative paths would break at build time.
+const channelOptions = parse(
+  readFileSync(resolve("data/taxonomy/distribution-channels.yml"), "utf8"),
+) as { id: string; name: string; platforms: string[] }[];
 
 const {
   singular,
@@ -90,6 +101,7 @@ const pleaseAvoid = [
             ["1", "Paste a GitHub URL"],
             ["2", "Review the draft"],
             ["3", "Open a pull request"],
+            ["4", "Add the notes file"],
           ].map(([number, heading]) => (
             <li class="flex items-center gap-1.5">
               <span class="inline-flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full border border-border font-mono text-[10px] font-semibold text-foreground">
@@ -293,6 +305,50 @@ const pleaseAvoid = [
                 class="min-h-10 rounded-[var(--radius)] border border-input bg-background px-3 py-2 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/35"
               /></label
             >
+            <fieldset class="grid gap-2">
+              <legend
+                class="text-2xs font-medium uppercase tracking-[.05em] text-muted-foreground"
+              >
+                Store links
+              </legend>
+              <p class="m-0 text-2xs text-muted-foreground">
+                Where users install the app — pick a channel and paste its
+                URL (App Store, Play Store, F-Droid, releases page, …).
+              </p>
+              <div id="channel-rows" class="grid gap-2"></div>
+              <button
+                id="add-channel"
+                type="button"
+                class={buttonClass("secondary", "sm", "justify-self-start whitespace-nowrap")}
+                >+ Add store link</button
+              >
+              <template id="channel-row-template">
+                <div class="channel-row flex flex-col gap-2 sm:flex-row">
+                  <select
+                    data-channel-type
+                    class="min-h-10 rounded-[var(--radius)] border border-input bg-background px-3 py-2 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/35 sm:w-44"
+                  >
+                    <option value="">Channel</option>
+                    {channelOptions.map((channel) => (
+                      <option value={channel.id}>{channel.name}</option>
+                    ))}
+                  </select>
+                  <input
+                    data-channel-url
+                    type="url"
+                    placeholder="https://apps.apple.com/…"
+                    class="min-h-10 flex-1 rounded-[var(--radius)] border border-input bg-background px-3 py-2 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/35"
+                  />
+                  <button
+                    type="button"
+                    data-remove-channel
+                    class={buttonClass("secondary", "sm", "whitespace-nowrap")}
+                    >Remove</button
+                  >
+                </div>
+              </template>
+            </fieldset>
+
             <label class="grid gap-1.5"
               ><span
                 class="text-2xs font-medium uppercase tracking-[.05em] text-muted-foreground"
@@ -303,6 +359,28 @@ const pleaseAvoid = [
                 class="min-h-10 resize-y rounded-[var(--radius)] border border-input bg-background px-3 py-2 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/35"
                 placeholder="One use case per line"></textarea></label
             >
+
+            <label
+              class="flex items-start gap-2 rounded-md border border-ink-200 px-3 py-2.5 text-sm dark:border-ink-800"
+            >
+              <input
+                id="include-notes"
+                type="checkbox"
+                checked
+                class="mt-0.5 h-4 w-4"
+              />
+              <span class="grid gap-0.5">
+                <span class="font-medium text-foreground"
+                  >Include long-form notes</span
+                >
+                <span class="text-2xs text-muted-foreground"
+                  >Adds <code>content: ./content/records/&lt;slug&gt;.md</code>
+                  to the record. Your PR must then also add that Markdown
+                  file — a skeleton is generated for you in the panel on the
+                  right.</span
+                >
+              </span>
+            </label>
           </div>
         </form>
 
@@ -399,6 +477,36 @@ const pleaseAvoid = [
                 >
               </div>
             </div>
+            <div
+              class="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-3"
+            >
+              <span class="text-2xs font-medium text-muted-foreground"
+                >Notes file (<code>content/records/…</code>)</span
+              >
+              <div class="flex items-center gap-2">
+                <button
+                  id="copy-notes"
+                  type="button"
+                  class={buttonClass(
+                    "secondary",
+                    "sm",
+                    "whitespace-nowrap pointer-events-none opacity-50",
+                  )}
+                  disabled>Copy skeleton</button
+                >
+                <a
+                  id="open-notes-link"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={buttonClass(
+                    "secondary",
+                    "sm",
+                    "whitespace-nowrap pointer-events-none opacity-50",
+                  )}>Create file</a
+                >
+              </div>
+            </div>
             <pre
               class="mt-4 min-h-0 flex-1 overflow-auto rounded-md border border-ink-200 bg-ink-50 p-3 text-xs leading-relaxed text-ink-800 dark:border-ink-800 dark:bg-ink-900/60 dark:text-ink-200"><code id="yaml-preview">Paste a GitHub URL to generate a draft.</code></pre>
             <p
@@ -419,5 +527,6 @@ const pleaseAvoid = [
     repoUrl={repoUrl}
     fields={fields}
     taxonomy={taxonomy}
+    channelOptions={channelOptions}
   />
 </BaseLayout>

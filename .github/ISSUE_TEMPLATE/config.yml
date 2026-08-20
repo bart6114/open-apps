@@ -1,0 +1,7 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Submit an app — web form (fastest path)
+    url: https://openappscout.com/submit
+    about: >-
+      Generates a ready-to-PR YAML record and notes file from a public
+      GitHub URL. An issue alone does not add an app to the directory.

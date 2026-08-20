@@ -38,7 +38,8 @@ All fields are **optional** unless otherwise noted.
 | `platforms` | array of strings | human | Target platforms (e.g., `["ios", "android", "web", "macos", "windows", "linux"]`). Must exist in `data/taxonomy/platforms.yml`. |
 | `licenses` | array of strings | human | SPDX license IDs (e.g., `["MIT", "Apache-2.0"]`). Optional; `github` sync can populate from GitHub. |
 | `links` | object | human | Additional project links: `{ github, website, docs, source }` (all URLs). |
-| `distribution.channels` | array of strings | human | Where users can download/install (e.g., `["app-store", "play-store", "fdroid", "github-releases"]`). |
+| `distribution.channels` | array of objects | human | Where users can download/install. Each entry: `{ type (channel ID from data/taxonomy/distribution-channels.yml, e.g. "play-store"), url (required store/download URL), platform?, label?, verified?, notes? }`. |
+| `content` | string | human | Path to the record's long-form Markdown notes, e.g. `./content/records/<slug>.md`. The referenced file is rendered on the detail page and should ship in the same PR as the record. |
 | `screenshots` | array of objects | human | **NEW (0.5.0):** Curated screenshots for the detail page. Each entry: `{ src (URL), alt (string), source? (URL), width? (number), height? (number) }`. Currently optional/deferred; schema-ready but not yet populated in the catalog. |
 
 ### Curation & Context
@@ -157,7 +158,12 @@ links:
   website: https://immich.app
 
 distribution:
-  channels: []
+  channels:
+    - type: play-store
+      platform: android
+      label: Play Store
+      url: https://play.google.com/store/apps/details?id=app.alextran.immich
+      verified: false
 
 bestFor:
   - Personal photo/video backup

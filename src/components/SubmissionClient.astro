@@ -1,0 +1,378 @@
+---
+/**
+ * Local replacement for `@grove-dev/astro/components/SubmissionClient.astro`.
+ *
+ * The packaged client (0.6.1) predates several schema realities this
+ * directory depends on: `distribution.channels` entries are objects with
+ * a required store URL, records carry a `sourceDescription` distinct
+ * from the curator-written `description`, `source.type: submit` exists
+ * for form submissions, and long-form notes live in
+ * `content/records/<slug>.md` referenced by the record's `content`
+ * field. This client emits that full record shape and reports every
+ * validation issue instead of only the first.
+ */
+interface Props {
+  existingSlugs: string[];
+  existingFullNames: string[];
+  repoUrl: string;
+  fields: { category: boolean; stack: boolean; platforms: boolean; tags: boolean; license?: boolean };
+  taxonomy?: {
+    categoryIds?: string[];
+    stackIds?: string[];
+    platformIds?: string[];
+  };
+  /** Channel taxonomy: ids, display names, and platform hints. */
+  channelOptions: { id: string; name: string; platforms: string[] }[];
+}
+const {
+  existingSlugs,
+  existingFullNames,
+  repoUrl,
+  fields,
+  taxonomy,
+  channelOptions,
+} = Astro.props;
+---
+
+<script is:inline define:vars={{ existingSlugs, existingFullNames, repoUrl, fields, taxonomy, channelOptions }}>
+  /** @typedef {{ name: string; description: string | null; html_url: string; homepage: string | null; language: string | null; private: boolean; topics: string[] }} GitHubRepo */
+  /** @type {GitHubRepo | null} */
+  let repository = null;
+
+  const $ = (selector) => document.querySelector(selector);
+  const inputs = {
+    repo: $("#repo-url"),
+    name: $("#item-name"),
+    slug: $("#item-slug"),
+    description: $("#item-description"),
+    category: $("#item-category"),
+    stack: $("#primary-stack"),
+    tags: $("#item-tags"),
+    license: $("#item-license"),
+    website: $("#item-website"),
+    bestFor: $("#best-for"),
+    includeNotes: $("#include-notes"),
+  };
+  const fetchButton = $("#fetch-repo");
+  const preview = $("#yaml-preview");
+  const status = $("#submit-status");
+  const copyButton = $("#copy-yaml");
+  const openPrLink = $("#open-pr-link");
+  const copyNotesButton = $("#copy-notes");
+  const openNotesLink = $("#open-notes-link");
+  const channelRowsBox = $("#channel-rows");
+  const channelTemplate = $("#channel-row-template");
+  const addChannelButton = $("#add-channel");
+  const slugSet = new Set(existingSlugs);
+  const repoSet = new Set(existingFullNames);
+  const categoryIds = new Set(taxonomy?.categoryIds ?? []);
+  const stackIds = new Set(taxonomy?.stackIds ?? []);
+  const platformIds = new Set(taxonomy?.platformIds ?? []);
+  const channelById = new Map(channelOptions.map((c) => [c.id, c]));
+
+  const slugify = (value) =>
+    String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  const parseRepo = (value) => {
+    const match = String(value ?? "").match(/github\.com\/([^/]+)\/([^/?#]+)/);
+    return match ? { owner: match[1], repo: match[2].replace(/\.git$/, "") } : null;
+  };
+  const quote = (value) =>
+    `"${String(value ?? "").replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
+  const lines = (values, indent = 2) =>
+    values.map((value) => `${" ".repeat(indent)}- ${value}`).join("\n");
+  const selectedPlatforms = () =>
+    [...document.querySelectorAll("input[name=platform]:checked")].map((input) => input.value);
+  const isHttpUrl = (value) => {
+    try {
+      const parsed = new URL(String(value));
+      return parsed.protocol === "http:" || parsed.protocol === "https:";
+    } catch {
+      return false;
+    }
+  };
+  const setStatus = (text, tone = "muted") => {
+    if (!status) return;
+    status.textContent = text;
+    status.className = `mt-3 min-h-5 text-2xs whitespace-pre-line ${tone === "error" ? "text-danger" : tone === "warn" ? "text-warning" : tone === "success" ? "text-success" : "text-muted-foreground"}`;
+  };
+  const inferStack = (repo) => {
+    const language = String(repo.language || "").toLowerCase();
+    const topics = (repo.topics || []).map((topic) => String(topic).toLowerCase());
+    if (topics.includes("flutter") || language === "dart") return "flutter";
+    if (topics.includes("react-native")) return "react-native";
+    if (language === "swift" || language === "objective-c") return "ios";
+    if (language === "kotlin" || language === "java") return "android";
+    return language;
+  };
+
+  const channelEntries = () =>
+    [...(channelRowsBox?.querySelectorAll(".channel-row") ?? [])]
+      .map((row) => {
+        const select = row.querySelector("[data-channel-type]");
+        const url = row.querySelector("[data-channel-url]");
+        const meta = channelById.get(select?.value ?? "");
+        const platforms = meta?.platforms ?? [];
+        return {
+          type: select?.value ?? "",
+          label: meta?.name ?? "",
+          // Only stamp `platform` when the channel maps to exactly one
+          // (e.g. play-store → android); ambiguous channels omit it.
+          platform: platforms.length === 1 ? platforms[0] : "",
+          url: String(url?.value ?? "").trim(),
+        };
+      })
+      .filter((entry) => entry.type || entry.url);
+
+  const currentSlug = () => slugify(inputs.slug?.value ?? repository?.name ?? "");
+  const notesPath = () => `content/records/${currentSlug()}.md`;
+  const includeNotes = () => Boolean(inputs.includeNotes?.checked);
+
+  const generateYaml = () => {
+    if (!repository) return "";
+    const parsed = parseRepo(inputs.repo?.value ?? "");
+    if (!parsed) return "";
+    const tags = String(inputs.tags?.value ?? "").split(",").map((tag) => tag.trim()).filter(Boolean);
+    const platforms = selectedPlatforms();
+    const bestFor = String(inputs.bestFor?.value ?? "").split("\n").map((item) => item.trim()).filter(Boolean);
+    const description = String(inputs.description?.value ?? "").trim();
+    const sourceDescription = String(repository.description ?? "").trim();
+    const channels = channelEntries().filter((entry) => entry.type && entry.url);
+    return [
+      "kind: project",
+      `slug: ${currentSlug()}`,
+      `name: ${quote(inputs.name?.value ?? "")}`,
+      `description: ${quote(description)}`,
+      // Preserve GitHub's own description separately so curators can
+      // rewrite `description` without losing what the project says.
+      ...(sourceDescription && sourceDescription !== description
+        ? [`sourceDescription: ${quote(sourceDescription)}`]
+        : []),
+      ...(fields.category && inputs.category?.value ? [`category: ${inputs.category.value}`] : []),
+      "projectType: real-app",
+      ...(fields.stack && inputs.stack?.value ? [`stack: ${inputs.stack.value}`] : []),
+      ...(fields.platforms ? ["platforms:", platforms.length ? lines(platforms) : "  []"] : []),
+      ...(fields.tags ? ["tags:", tags.length ? lines(tags) : "  []"] : []),
+      ...(fields.license && inputs.license?.value ? ["licenses:", lines([inputs.license.value])] : []),
+      `repoUrl: ${repository.html_url}`,
+      "links:",
+      `  github: ${repository.html_url}`,
+      ...(inputs.website?.value ? [`  website: ${inputs.website.value}`] : []),
+      ...(includeNotes() ? [`content: ./${notesPath()}`] : []),
+      "distribution:",
+      ...(channels.length
+        ? [
+            "  channels:",
+            ...channels.flatMap((entry) => [
+              `    - type: ${entry.type}`,
+              ...(entry.platform ? [`      platform: ${entry.platform}`] : []),
+              ...(entry.label ? [`      label: ${entry.label}`] : []),
+              `      url: ${entry.url}`,
+              "      verified: false",
+            ]),
+          ]
+        : ["  channels: []"]),
+      "bestFor:", bestFor.length ? lines(bestFor) : "  []",
+      "whyListed: []",
+      "caveats: []",
+      "source:",
+      "  type: submit",
+      "  provider: github",
+      `  owner: ${parsed.owner}`,
+      `  repo: ${parsed.repo}`,
+      `  url: ${repository.html_url}`,
+      "curation:",
+      "  reviewed: false",
+      "  labels: []",
+      "  lenses: []",
+      "visibility: keep",
+      "",
+    ].join("\n");
+  };
+
+  const generateNotes = () => {
+    if (!repository) return "";
+    const name = String(inputs.name?.value ?? repository.name ?? "").trim();
+    const description = String(inputs.description?.value ?? "").trim();
+    return [
+      `# ${name}`,
+      "",
+      description || "What the app does, in two to four sentences.",
+      "",
+      "<!--",
+      "Expand this file into a short review before opening the PR:",
+      "what the app does, why the codebase is worth reading, notable",
+      "architecture decisions, and any caveats. See",
+      "content/records/joplin.md for a strong example.",
+      "-->",
+      "",
+    ].join("\n");
+  };
+
+  const validationIssues = () => {
+    const issues = [];
+    if (inputs.slug && slugSet.has(slugify(inputs.slug.value))) {
+      issues.push("A record with that slug already exists — update the existing one instead of opening a duplicate PR.");
+    }
+    const description = String(inputs.description?.value ?? "");
+    if (description.trim().length < 40) {
+      issues.push("Description must be at least 40 characters.");
+    }
+    if (fields.category && inputs.category) {
+      const value = inputs.category.value;
+      if (!value || (categoryIds.size > 0 && !categoryIds.has(value))) {
+        issues.push("Choose a category from the taxonomy.");
+      }
+    }
+    if (fields.stack && inputs.stack) {
+      const value = inputs.stack.value;
+      if (!value || (stackIds.size > 0 && !stackIds.has(value))) {
+        issues.push("Choose a primary stack from the taxonomy.");
+      }
+    }
+    if (fields.platforms && selectedPlatforms().length === 0) {
+      issues.push("Select at least one platform.");
+    } else if (fields.platforms && platformIds.size > 0) {
+      const bad = selectedPlatforms().find((platform) => !platformIds.has(platform));
+      if (bad) issues.push(`Platform "${bad}" is not in the taxonomy.`);
+    }
+    for (const entry of channelEntries()) {
+      if (!entry.type) {
+        issues.push("Every store link needs a channel — pick one or remove the row.");
+      } else if (!isHttpUrl(entry.url)) {
+        issues.push(`Add a valid https:// URL for the ${entry.label || entry.type} link.`);
+      }
+    }
+    return issues;
+  };
+
+  const disable = (element) => {
+    if (!element) return;
+    element.classList.add("pointer-events-none", "opacity-50");
+    if ("disabled" in element) element.disabled = true;
+  };
+  const enable = (element) => {
+    if (!element) return;
+    element.classList.remove("pointer-events-none", "opacity-50");
+    if ("disabled" in element) element.disabled = false;
+  };
+
+  const refresh = () => {
+    const yaml = generateYaml();
+    if (preview) preview.textContent = yaml || "Paste a GitHub URL to generate a draft.";
+    if (!yaml) return;
+    const issues = validationIssues();
+    if (issues.length > 0) {
+      setStatus(issues.map((issue) => `• ${issue}`).join("\n"), "error");
+      [openPrLink, copyButton, copyNotesButton, openNotesLink].forEach(disable);
+      return;
+    }
+    const yamlParams = new URLSearchParams({ filename: `data/records/${currentSlug()}.yml`, value: yaml });
+    if (openPrLink) openPrLink.href = `${repoUrl}/new/main?${yamlParams}`;
+    enable(openPrLink);
+    enable(copyButton);
+    if (includeNotes()) {
+      const notesParams = new URLSearchParams({ filename: notesPath(), value: generateNotes() });
+      if (openNotesLink) openNotesLink.href = `${repoUrl}/new/main?${notesParams}`;
+      enable(copyNotesButton);
+      enable(openNotesLink);
+      setStatus(`Draft is valid. Open the PR with the YAML record, then add ${notesPath()} in the same branch.`, "success");
+    } else {
+      [copyNotesButton, openNotesLink].forEach(disable);
+      setStatus("Draft is valid. Open the PR with the YAML record.", "success");
+    }
+  };
+
+  const addChannelRow = () => {
+    if (!channelTemplate || !channelRowsBox) return;
+    const row = channelTemplate.content.firstElementChild?.cloneNode(true);
+    if (!row) return;
+    row.querySelector("[data-remove-channel]")?.addEventListener("click", () => {
+      row.remove();
+      refresh();
+    });
+    channelRowsBox.appendChild(row);
+  };
+  addChannelButton?.addEventListener("click", () => {
+    addChannelRow();
+    refresh();
+  });
+
+  fetchButton?.addEventListener("click", async () => {
+    const parsed = parseRepo(inputs.repo?.value ?? "");
+    if (!parsed) return setStatus("Enter a valid GitHub repository URL.", "error");
+    const fullName = `${parsed.owner}/${parsed.repo}`.toLowerCase();
+    if (repoSet.has(fullName)) setStatus("This repository is already listed. The draft can update its record.", "warn");
+    if (fetchButton) fetchButton.disabled = true;
+    setStatus("Fetching GitHub metadata...");
+    try {
+      // Static-build default — the visitor's browser calls
+      // api.github.com directly (60 unauthenticated requests/hour/IP).
+      const response = await fetch(
+        `https://api.github.com/repos/${encodeURIComponent(parsed.owner)}/${encodeURIComponent(parsed.repo)}`,
+        { headers: { Accept: "application/vnd.github+json" } },
+      );
+      if (response.status === 404) {
+        throw new Error("Repository not found or not public.");
+      }
+      if (response.status === 403 || response.status === 429) {
+        throw new Error(
+          "GitHub rate limit reached (60 requests/hour per visitor). Try again later or fill the fields manually.",
+        );
+      }
+      if (!response.ok) {
+        throw new Error(`GitHub returned ${response.status}.`);
+      }
+      const data = await response.json();
+      repository = {
+        name: data.name,
+        description: data.description ?? null,
+        html_url: data.html_url,
+        homepage: data.homepage ?? null,
+        language: data.language ?? null,
+        private: Boolean(data.private),
+        topics: Array.isArray(data.topics) ? data.topics : [],
+      };
+      if (repository.private) throw new Error("Private repositories cannot be submitted.");
+      if (inputs.name) inputs.name.value = repository.name || parsed.repo;
+      if (inputs.slug) inputs.slug.value = slugify(repository.name || parsed.repo);
+      if (inputs.description) inputs.description.value = repository.description || "";
+      if (inputs.stack) {
+        // Only apply the inferred stack when it is a real taxonomy id;
+        // assigning an unknown value would silently blank the select.
+        const inferred = inferStack(repository);
+        inputs.stack.value = stackIds.size === 0 || stackIds.has(inferred) ? inferred : "";
+      }
+      if (inputs.tags) inputs.tags.value = (repository.topics || []).slice(0, 8).join(", ");
+      if (inputs.website) inputs.website.value = repository.homepage || "";
+      const duplicate = inputs.slug ? slugSet.has(inputs.slug.value) : false;
+      setStatus(
+        duplicate ? "That slug already exists. Choose another or update the existing record." : "Draft generated. Edit any field and the YAML will refresh.",
+        duplicate ? "warn" : "success",
+      );
+      refresh();
+    } catch (error) {
+      repository = null;
+      setStatus(error instanceof Error ? error.message : "Unable to fetch repository metadata.", "error");
+    } finally {
+      if (fetchButton) fetchButton.disabled = false;
+    }
+  });
+  $("#submit-form")?.addEventListener("input", refresh);
+  $("#submit-form")?.addEventListener("change", refresh);
+  copyButton?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(generateYaml());
+      setStatus("Copied YAML to clipboard.", "success");
+    } catch {
+      setStatus("Couldn't copy automatically. Select the YAML and copy it.", "error");
+    }
+  });
+  copyNotesButton?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(generateNotes());
+      setStatus(`Copied the notes skeleton. Save it as ${notesPath()} in your PR.`, "success");
+    } catch {
+      setStatus("Couldn't copy automatically. Use the create-file link instead.", "error");
+    }
+  });
+</script>
