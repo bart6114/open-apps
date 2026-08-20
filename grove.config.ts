@@ -112,16 +112,23 @@ export default defineConfig({
   },
 
   readme: {
-    title: "Open Apps — a directory of real open-source applications",
-    tagline: "Hand-picked apps worth running, studying, and extending.",
+    title: "Open Apps",
+    tagline:
+      "A hand-picked directory of real open-source applications — apps worth running, studying, and extending.",
     url: "https://openappscout.com",
     browseLabel: "Browse the directory →",
     intro: [
       "## Why this list",
       "",
-      "Each app below is **actively maintained**, **well documented**, and",
-      "**useful in production**. Submit a new entry via the web form or",
-      "by opening a pull request against `data/records/`.",
+      "GitHub search works when you already know what you are looking for.",
+      "This list is for the other case: discovering **real, production-grade",
+      "apps** — not tutorials, boilerplates, or package-only libraries — and",
+      "understanding what each one is worth your time for.",
+      "",
+      "Every entry is a human-curated YAML record in `data/records/`, kept",
+      "fresh by weekly GitHub metadata syncs. To add an app, use the",
+      "[submission form](https://openappscout.com/submit) or open a pull",
+      "request — see [CONTRIBUTING.md](CONTRIBUTING.md).",
     ].join("\n"),
   },
 });

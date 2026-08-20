@@ -20,3 +20,4 @@ public/robots.txt
 .wrangler/
 
 *.log
+.claude/
