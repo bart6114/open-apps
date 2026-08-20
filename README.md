@@ -3,13 +3,13 @@
 > A curated directory of real open-source applications you can run, study,
 > compare, and contribute to.
 
-[![Website](https://img.shields.io/badge/explore-open--apps.dev.mn-111827?style=flat-square)](https://open-apps.dev.mn)
+[![Website](https://img.shields.io/badge/explore-openappscout.com-111827?style=flat-square)](https://openappscout.com)
 [![Validate app data](https://img.shields.io/github/actions/workflow/status/tortuvshin/open-apps/validate-data.yml?branch=main&style=flat-square&label=data)](https://github.com/tortuvshin/open-apps/actions/workflows/validate-data.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22c55e?style=flat-square)](LICENSE)
 [![Astro](https://img.shields.io/badge/built%20with-Astro-ff5d01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 
-[Explore the directory](https://open-apps.dev.mn/apps) ·
-[Submit an app](https://open-apps.dev.mn/submit) ·
+[Explore the directory](https://openappscout.com/apps) ·
+[Submit an app](https://openappscout.com/submit) ·
 [Read the contribution guide](CONTRIBUTING.md)
 
 ![Open Apps — discover open-source apps worth studying](public/og-image.svg)
@@ -157,7 +157,7 @@ and is configured for deployment with Cloudflare Wrangler.
 ## Add or update an app
 
 The fastest submission path is the
-[web form](https://open-apps.dev.mn/submit). It drafts a YAML record from a
+[web form](https://openappscout.com/submit). It drafts a YAML record from a
 public GitHub URL; you review the metadata and open a pull request.
 
 For a manual contribution:
@@ -188,8 +188,8 @@ remove catalog entries.
 
 The deployed site publishes:
 
-- [`llms.txt`](https://open-apps.dev.mn/llms.txt) — a compact guide to the site;
-- [`llms-full.txt`](https://open-apps.dev.mn/llms-full.txt) — the expanded
+- [`llms.txt`](https://openappscout.com/llms.txt) — a compact guide to the site;
+- [`llms-full.txt`](https://openappscout.com/llms-full.txt) — the expanded
   catalog for AI assistants and retrieval tools.
 
 These files are generated from the same source data as the website.
@@ -209,7 +209,7 @@ structured, searchable, multi-stack directory.
 
 Hand-picked apps worth running, studying, and extending.
 
-Browse the directory → https://open-apps.dev.mn
+Browse the directory → https://openappscout.com
 
 ## Why this list
 

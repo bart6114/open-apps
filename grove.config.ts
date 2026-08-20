@@ -9,7 +9,7 @@ export default defineConfig({
     tagline: "Discover real open-source apps and the stacks behind them.",
     description:
       "A searchable directory of real open-source applications, organized by stack, category, platform, activity, and maturity.",
-    url: "https://open-apps.dev.mn",
+    url: "https://openappscout.com",
     repoUrl: "https://github.com/tortuvshin/open-apps",
     // Both files carry their own `prefers-color-scheme` swap: an SVG
     // served through `<img src>` is a separate document, so page CSS
@@ -114,7 +114,7 @@ export default defineConfig({
   readme: {
     title: "Open Apps — a directory of real open-source applications",
     tagline: "Hand-picked apps worth running, studying, and extending.",
-    url: "https://open-apps.dev.mn",
+    url: "https://openappscout.com",
     browseLabel: "Browse the directory →",
     intro: [
       "## Why this list",
